@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Core.Domain.Entites.Questions
 {
-    abstract class BaseQuestion
+    public abstract class BaseQuestion
     {
         public int Id { get; protected set; }
         public string Question { get; protected set; }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Core.Domain.Entites.Questions
 {
-    class MultipleChoiceQuestion : BaseQuestion
+    public class MultipleChoiceQuestion : BaseQuestion
     {
         public bool Answer { get; private set; }
 
