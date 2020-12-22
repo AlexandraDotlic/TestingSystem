@@ -10,13 +10,13 @@ namespace Core.Domain.Entites
         public short Id { get; private set; }
         public string Title { get; private set; }
         public ICollection<BaseQuestion> Questions { get; private set; }
+        public short GroupId { get; private set;}
 
-        // GroupId to be added
-
-        public Test(short _Id, string _Title, ICollection<BaseQuestion> _Questions) 
+        public Test(short _Id, string _Title, short _GroupId, ICollection<BaseQuestion> _Questions) 
         {
             Id = _Id;
             Title = _Title;
+            GroupId = _GroupId;
             Questions = _Questions;
         }
 
