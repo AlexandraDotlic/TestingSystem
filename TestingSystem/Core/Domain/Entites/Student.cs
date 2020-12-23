@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Domain.Entites.Student
+namespace Core.Domain.Entites
 {
-    class Student
+    public class Student
     {
 
         public int Id { get; private set; }
