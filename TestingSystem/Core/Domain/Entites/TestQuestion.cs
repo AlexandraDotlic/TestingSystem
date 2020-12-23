@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Core.Domain.Entites
 {
-    class TestQuestion
+    public class TestQuestion
     {
-        public int TestId { get; private set; }
+        public short TestId { get; private set; }
         public int QuestionId { get; private set; }
 
         public TestQuestion() { }
