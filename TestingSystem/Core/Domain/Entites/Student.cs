@@ -7,7 +7,7 @@ namespace Core.Domain.Entites
     public class Student
     {
 
-        public int Id { get; private set; }
+        public int Id { get; protected set; }
     
         public string FirstName { get; protected set; }
 
@@ -19,9 +19,8 @@ namespace Core.Domain.Entites
         { }
 
         
-        public Student(int id, string firstname, string lastname)
+        public Student(string firstname, string lastname)
         {
-            Id = id;
             FirstName = firstname;
             LastName = lastname;
         }
