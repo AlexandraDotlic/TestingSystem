@@ -22,6 +22,7 @@ namespace Core.Domain.Entites
         private Test()
         {
             Questions = new List<BaseQuestion>();
+            Groups = new List<Group>();
         }
     }
 }
