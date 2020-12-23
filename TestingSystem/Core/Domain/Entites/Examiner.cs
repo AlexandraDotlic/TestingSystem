@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Domain.Entites.Examiner
+namespace Core.Domain.Entites
 {
-    class Examiner
+    public class Examiner
     {
         public int Id { get; private set; }
 

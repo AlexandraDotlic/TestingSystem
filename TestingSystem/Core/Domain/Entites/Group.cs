@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Core.Domain.Entites;
+﻿using System.Collections.Generic;
 
 namespace Core.Domain.Entites
 {
@@ -11,14 +8,14 @@ namespace Core.Domain.Entites
         public string Title { get; private set; }
         public short ExaminerId { get; private set; }
         public short TestId { get; private set; }
-        public ICollection<Student.Student> Students { get; private set; }
+        public ICollection<Student> Students { get; private set; }
 
         public Group()
         {
 
         }
 
-        public Group(short _Id, string _Title, short _ExaminerId, short _TestId, ICollection<Student.Student> _Students)
+        public Group(short _Id, string _Title, short _ExaminerId, short _TestId, ICollection<Student> _Students)
         {
             Id = _Id;
             Title = _Title;
