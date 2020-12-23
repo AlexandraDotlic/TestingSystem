@@ -12,17 +12,16 @@ namespace Core.Domain.Entites
         public ICollection<BaseQuestion> Questions { get; private set; }
         public ICollection<Group> Groups { get; private set; }
 
-        public Test(short id, string title) 
+        public Test(string title) 
         {
-            Id = id;
             Title = title;
-            Questions = new List<BaseQuestion> { };
-            Groups = new List<Group> { };
+            Questions = new List<BaseQuestion>();
+            Groups = new List<Group>();
         }
 
         private Test()
         {
-            Questions = new List<BaseQuestion> { };
+            Questions = new List<BaseQuestion>();
         }
     }
 }

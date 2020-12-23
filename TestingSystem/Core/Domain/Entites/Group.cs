@@ -14,16 +14,15 @@ namespace Core.Domain.Entites
 
         private Group()
         {
-            Students = new List<Student> { };
+            Students = new List<Student>();
         }
 
-        public Group(short id, string title, short examinerId, short testId)
+        public Group(string title, short examinerId, short testId)
         {
-            Id = id;
             Title = title;
             ExaminerId = examinerId;
             TestId = testId;
-            Students = new List<Student> { };
+            Students = new List<Student>();
         }
 
     }
