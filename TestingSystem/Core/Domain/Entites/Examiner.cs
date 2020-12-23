@@ -6,18 +6,18 @@ namespace Core.Domain.Entites
 {
     public class Examiner
     {
-        public int Id { get; private set; }
+        public int Id { get; protected set; }
 
         public string FirstName { get; protected set; }
 
         public string LastName { get; protected set; }
 
         public Examiner()
-        { }
-
-        public Examiner(int id, string firstname, string lastname)
         {
-            Id = id;
+        }
+
+        public Examiner(string firstname, string lastname)
+        {
             FirstName = firstname;
             LastName = lastname;
         }
