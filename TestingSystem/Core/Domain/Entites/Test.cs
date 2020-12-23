@@ -5,24 +5,24 @@ using Core.Domain.Entites.Questions;
 
 namespace Core.Domain.Entites
 {
-    class Test
+    public class Test
     {
         public short Id { get; private set; }
         public string Title { get; private set; }
         public ICollection<BaseQuestion> Questions { get; private set; }
-        public short GroupId { get; private set;}
+        public ICollection<Group> Groups { get; private set; }
 
-        public Test(short _Id, string _Title, short _GroupId, ICollection<BaseQuestion> _Questions) 
+        public Test(short id, string title) 
         {
-            Id = _Id;
-            Title = _Title;
-            GroupId = _GroupId;
-            Questions = _Questions;
+            Id = id;
+            Title = title;
+            Questions = new List<BaseQuestion> { };
+            Groups = new List<Group> { };
         }
 
-        public Test()
+        private Test()
         {
-
+            Questions = new List<BaseQuestion> { };
         }
     }
 }
