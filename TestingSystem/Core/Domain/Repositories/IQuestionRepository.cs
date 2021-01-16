@@ -1,8 +1,5 @@
 ﻿using Common.Utils;
-using Core.Domain.Entites.Questions;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Core.Domain.Entites;
 
 namespace Core.Domain.Repositories
 {

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Core.Domain.Entites.Questions;
+﻿using System.Collections.Generic;
 
 namespace Core.Domain.Entites
 {

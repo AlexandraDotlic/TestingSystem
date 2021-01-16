@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Domain.Entites.Questions
+namespace Core.Domain.Entites
 {
-    public abstract class Question
+    public class Question
     {
         public int Id { get; protected set; }
         public string QuestionText { get; protected set; }
+        public string Answer { get; private set; }
 
         protected Question()
         { }
 
-        protected Question(string questionText): this()
+        protected Question(string questionText, string answer)
         {
             QuestionText = questionText;
+            Answer = answer;
         }
     }
 }
