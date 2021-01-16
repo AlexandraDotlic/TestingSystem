@@ -6,19 +6,19 @@ namespace Core.Domain.Entites
     {
         public short Id { get; private set; }
         public string Title { get; private set; }
-        public ICollection<Question> Questions { get; private set; }
+        public ICollection<TestQuestion> TestQuestions { get; private set; }
         public ICollection<Group> Groups { get; private set; }
 
         public Test(string title) 
         {
             Title = title;
-            Questions = new List<Question>();
+            TestQuestions = new List<TestQuestion>();
             Groups = new List<Group>();
         }
 
         private Test()
         {
-            Questions = new List<Question>();
+            TestQuestions = new List<TestQuestion>();
             Groups = new List<Group>();
         }
     }

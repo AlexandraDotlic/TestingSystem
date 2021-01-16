@@ -9,9 +9,8 @@ namespace Core.Domain.Entites
         public short ExaminerId { get; private set; }
         public Examiner Examiner { get; private set; }
         public short TestId { get; private set; }
-        public ICollection<StudentGroup> StudentGroups { get; private set; }
         public Test Test { get; private set; }
-
+        public ICollection<StudentGroup> StudentGroups { get; private set; }
 
         private Group()
         {
