@@ -6,12 +6,12 @@ namespace Core.Domain.Entites.Questions
 {
     public class MultipleChoiceQuestion : Question
     {
-        public bool Answer { get; private set; }
+        public string Answer { get; private set; }
 
         public MultipleChoiceQuestion() : base()
         { }
 
-        public MultipleChoiceQuestion(string question, bool answer) : base(question)
+        public MultipleChoiceQuestion(string question, string answer) : base(question)
         {
             Answer = answer;
         }
