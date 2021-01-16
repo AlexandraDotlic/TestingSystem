@@ -21,6 +21,7 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess
         public DbSet<Question> Questions { get; set; }
         public DbSet<Test> Tests { get; set; }
         public DbSet<Group> Groups { get; set; }
+        public DbSet<StudentGroup> StudentGroups { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
