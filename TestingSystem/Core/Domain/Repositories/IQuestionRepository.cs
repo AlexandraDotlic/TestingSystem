@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Core.Domain.Repositories
 {
-    public interface IBaseQuestionRepository: IRepository<BaseQuestion>
+    public interface IQuestionRepository: IRepository<Question>
     {
     }
 }
