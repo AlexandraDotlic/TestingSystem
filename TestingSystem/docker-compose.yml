@@ -1,0 +1,22 @@
+version: '2.4'
+
+services:
+    mssql:
+        image: mcr.microsoft.com/mssql/server:latest
+        container_name: testingsystem_mssql
+        hostname: testingsystem_mssql
+        ports:
+            - "1433:1433"
+        environment: 
+            SA_PASSWORD: RazvojSoftvera2!
+            ACCEPT_EULA: "Y"
+        volumes: 
+            - "mssqldata:/var/lib/mssql"
+        networks:
+            - testingsystem_network
+
+volumes:
+    mssqldata:       
+
+networks: 
+    testingsystem_network:

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Core.Domain.Entites.Questions;
+﻿using System.Collections.Generic;
 
 namespace Core.Domain.Entites
 {
@@ -9,19 +6,19 @@ namespace Core.Domain.Entites
     {
         public short Id { get; private set; }
         public string Title { get; private set; }
-        public ICollection<BaseQuestion> Questions { get; private set; }
+        public ICollection<TestQuestion> TestQuestions { get; private set; }
         public ICollection<Group> Groups { get; private set; }
 
         public Test(string title) 
         {
             Title = title;
-            Questions = new List<BaseQuestion>();
+            TestQuestions = new List<TestQuestion>();
             Groups = new List<Group>();
         }
 
         private Test()
         {
-            Questions = new List<BaseQuestion>();
+            TestQuestions = new List<TestQuestion>();
             Groups = new List<Group>();
         }
     }
