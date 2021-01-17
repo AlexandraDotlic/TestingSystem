@@ -9,7 +9,7 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess
 {
     public class CoreEfCoreUnitOfWork : EfCoreUnitOfWork, ICoreUnitOfWork
     {
-        public CoreEfCoreUnitOfWork(EfCoreDbContext context) : base(context)
+        public CoreEfCoreUnitOfWork(CoreEfCoreDbContext context) : base(context)
         {
             ExaminerRepository = new ExaminerRepository(context);
             StudentRepository = new StudentRepository(context);

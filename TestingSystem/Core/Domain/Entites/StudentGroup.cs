@@ -6,7 +6,7 @@ namespace Core.Domain.Entites
 {
     public class StudentGroup
     {
-        public int GroupId { get; private set; }
+        public short GroupId { get; private set; }
         public Group Group { get; private set; }
         public int StudentId { get; private set; }
         public Student Student { get; private set; }
