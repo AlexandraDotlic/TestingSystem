@@ -1,3 +1,4 @@
+using Core.ApplicationServices;
 using Core.Domain.Repositories;
 using Core.Infrastructure.DataAccess.EfCoreDataAccess;
 using Microsoft.AspNetCore.Builder;
@@ -30,8 +31,9 @@ namespace WebClient
             {
                 options.UseSqlServer(Configuration.GetConnectionString("TestingSystemDevConnection"));
             });
-
+            services.AddControllers();
             services.AddScoped<ICoreUnitOfWork, CoreEfCoreUnitOfWork>();
+            services.AddScoped<TestService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,14 +44,14 @@ namespace WebClient
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseHttpsRedirection();
             app.UseRouting();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllers();
             });
         }
     }
