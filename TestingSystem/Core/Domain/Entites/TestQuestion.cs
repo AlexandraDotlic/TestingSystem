@@ -13,5 +13,13 @@ namespace Core.Domain.Entites
 
         public TestQuestion() { }
 
+        public TestQuestion(Test test, Question question)
+        {
+            Test = test;
+            TestId = test.Id;
+            Question = question;
+            QuestionId = question.Id;
+        }
+
     }
 }

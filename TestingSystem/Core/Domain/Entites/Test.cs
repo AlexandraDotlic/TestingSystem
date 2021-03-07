@@ -8,7 +8,7 @@ namespace Core.Domain.Entites
         public string Title { get; private set; }
         public ICollection<TestQuestion> TestQuestions { get; private set; }
         public ICollection<Group> Groups { get; private set; }
-
+        
         public Test(string title) 
         {
             Title = title;
@@ -20,6 +20,10 @@ namespace Core.Domain.Entites
         {
             TestQuestions = new List<TestQuestion>();
             Groups = new List<Group>();
+        }
+        public void AddTestQuestion(TestQuestion testQuestion)
+        {
+            TestQuestions.Add(testQuestion);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Core.Domain.Entites
             TestQuestions = new List<TestQuestion>();
         }
 
-        protected Question(string questionText, string answer)
+        public Question(string questionText, string answer)
         {
             TestQuestions = new List<TestQuestion>();
             QuestionText = questionText;
