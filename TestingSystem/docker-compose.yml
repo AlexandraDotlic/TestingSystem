@@ -8,7 +8,7 @@ services:
         ports:
             - "1433:1433"
         environment: 
-            SA_PASSWORD: RazvojSoftvera2!
+            SA_PASSWORD: Beograd011!
             ACCEPT_EULA: "Y"
         volumes: 
             - "mssqldata:/var/lib/mssql"
