@@ -23,7 +23,11 @@ namespace Core.Domain.Entites
             ExaminerId = examinerId;
             TestId = testId;
             StudentGroups = new List<StudentGroup>();
+        }
 
+        public void AddStudentGroup(StudentGroup studentGroup)
+        {
+            StudentGroups.Add(studentGroup);
         }
 
     }
