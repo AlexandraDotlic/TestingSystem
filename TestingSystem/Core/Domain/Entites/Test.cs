@@ -27,9 +27,5 @@ namespace Core.Domain.Entites
             TestQuestions.Add(testQuestion);
         }
 
-        public void AddTestGroup(Group group)
-        {
-            Groups.Add(group);
-        }
     }
 }
