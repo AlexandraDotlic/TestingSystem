@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Core.Domain.Entites
 {
@@ -24,6 +25,11 @@ namespace Core.Domain.Entites
         public void AddTestQuestion(TestQuestion testQuestion)
         {
             TestQuestions.Add(testQuestion);
+        }
+
+        public void AddTestGroup(Group group)
+        {
+            Groups.Add(group);
         }
     }
 }
