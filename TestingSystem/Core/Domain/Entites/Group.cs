@@ -30,5 +30,10 @@ namespace Core.Domain.Entites
             StudentGroups.Add(studentGroup);
         }
 
+        public void AddTestGroup(Test test)
+        {
+            TestId = test.Id;
+            Test Test = test;
+        }
     }
 }
