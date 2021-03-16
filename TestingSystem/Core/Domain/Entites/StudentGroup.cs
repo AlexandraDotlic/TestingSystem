@@ -13,12 +13,14 @@ namespace Core.Domain.Entites
         public string StudentResponse { get; private set; }
 
         public StudentGroup() 
-        { 
-        }
+        { }
 
-        public StudentGroup(string studentResponse)
+        public StudentGroup(Group group, Student student)
         {
-            StudentResponse = studentResponse;
+            Group = group;
+            GroupId = group.Id;
+            Student = student;
+            StudentId = student.Id;
         }
 
     }
