@@ -17,7 +17,19 @@ namespace Core.ApplicationServices
 
         public async Task<short> CreateGroup(string title, int examinerId, short testId)
         {
-            Group group = new Group(title, examinerId, testId);
+            Examiner examiner = await UnitOfWork.ExaminerRepository.GetById(examinerId);
+            Test test = await UnitOfWork.TestRepository.GetById(testId);
+            if (examiner == null)
+            {
+                throw new ArgumentNullException($"{nameof(Examiner)} with Id {examinerId} not exist");
+            }
+            if (test == null)
+            {
+                throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
+            }
+
+            Group group = new Group(title, examiner, test);
+ 
             await UnitOfWork.GroupRepository.Insert(group);
             await UnitOfWork.SaveChangesAsync();
             return group.Id;
@@ -43,21 +55,28 @@ namespace Core.ApplicationServices
             }
             Test test = new Test(title);
 
-            group.AddTestGroup(test);
             await UnitOfWork.GroupRepository.Update(group);
             await UnitOfWork.SaveChangesAsync();
         }
 
 
-        public async Task AddStudentToGroup(short groupId, string firstname, string lastname, string studentResponse)
+        public async Task AddStudentToGroup(short groupId, short studentId)
         {
             Group group = await UnitOfWork.GroupRepository.GetFirstOrDefaultWithIncludes(g => g.Id == groupId, g => g.StudentGroups);
+            Student student = await UnitOfWork.StudentRepository.GetById(studentId);
+
             if (group == null)
             {
                 throw new ArgumentNullException($"{nameof(Group)} with Id {groupId} not exist");
             }
-            Student student = new Student(firstname, lastname);
-            StudentGroup studentGroup = new StudentGroup(studentResponse);
+
+            if (student == null)
+            {
+                throw new ArgumentNullException($"{nameof(Student)} with Id {studentId} not exist");
+            }
+
+            //Student student = new Student(firstname, lastname);
+            StudentGroup studentGroup = new StudentGroup(group, student);
             group.AddStudentGroup(studentGroup);
             await UnitOfWork.GroupRepository.Update(group);
             await UnitOfWork.SaveChangesAsync();
