@@ -31,6 +31,7 @@ namespace Core.ApplicationServices
                 throw new ArgumentNullException($"{nameof(Group)} with Id {groupId} not exist");
             }
             await UnitOfWork.GroupRepository.Delete(group);
+            await UnitOfWork.SaveChangesAsync();
         }
 
         public async Task AddTestToGroup(short testId, string title)
