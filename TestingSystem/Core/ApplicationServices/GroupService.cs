@@ -46,20 +46,6 @@ namespace Core.ApplicationServices
             await UnitOfWork.SaveChangesAsync();
         }
 
-        public async Task AddTestToGroup(short testId, string title)
-        {
-            Group group = await UnitOfWork.GroupRepository.GetFirstOrDefaultWithIncludes(g => g.TestId == testId, g => g.Test);
-            if (group == null)
-            {
-                throw new ArgumentNullException($"{nameof(Group)} with Test Id {testId} not exist");
-            }
-            Test test = new Test(title);
-
-            await UnitOfWork.GroupRepository.Update(group);
-            await UnitOfWork.SaveChangesAsync();
-        }
-
-
         public async Task AddStudentToGroup(short groupId, short studentId)
         {
             Group group = await UnitOfWork.GroupRepository.GetFirstOrDefaultWithIncludes(g => g.Id == groupId, g => g.StudentGroups);
