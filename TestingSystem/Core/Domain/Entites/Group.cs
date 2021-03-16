@@ -17,11 +17,13 @@ namespace Core.Domain.Entites
             StudentGroups = new List<StudentGroup>();
         }
 
-        public Group(string title, int examinerId, short testId)
+        public Group(string title, Examiner examiner, Test test)
         {
             Title = title;
-            ExaminerId = examinerId;
-            TestId = testId;
+            Examiner = examiner;
+            ExaminerId = examiner.Id;
+            Test = test;
+            TestId = test.Id;
             StudentGroups = new List<StudentGroup>();
         }
 
@@ -30,10 +32,5 @@ namespace Core.Domain.Entites
             StudentGroups.Add(studentGroup);
         }
 
-        public void AddTestGroup(Test test)
-        {
-            TestId = test.Id;
-            Test Test = test;
-        }
     }
 }
