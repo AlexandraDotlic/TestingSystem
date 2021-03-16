@@ -31,6 +31,8 @@ namespace Core.ApplicationServices
                 throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
             }
             await UnitOfWork.TestRepository.Delete(test);
+            await UnitOfWork.SaveChangesAsync();
+
         }
 
         public async Task AddQuestionToTest(short testId, string questionText, string questionAnswer)
