@@ -33,6 +33,8 @@ namespace Core.ApplicationServices
                 throw new ArgumentNullException($"{nameof(Question)} with Id {questionId} not exist");
             }
             await UnitOfWork.QuestionRepository.Delete(question);
+            await UnitOfWork.SaveChangesAsync();
+
         }
 
 

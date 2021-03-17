@@ -32,6 +32,7 @@ namespace Core.ApplicationServices
                 throw new ArgumentNullException($"{nameof(Examiner)} with Id {examinerId} not exist");
             }
             await UnitOfWork.ExaminerRepository.Delete(examiner);
+            await UnitOfWork.SaveChangesAsync();
         }
     }
 }
