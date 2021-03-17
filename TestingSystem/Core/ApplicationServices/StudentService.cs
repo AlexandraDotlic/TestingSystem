@@ -32,6 +32,7 @@ namespace Core.ApplicationServices
                 throw new ArgumentNullException($"Student with Id {studentId} doesn't exist.");
             }
             await unitOfWork.StudentRepository.Delete(studentForDelete);
+            await unitOfWork.SaveChangesAsync();
         }
     }
 }
