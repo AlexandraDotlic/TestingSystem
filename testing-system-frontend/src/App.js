@@ -1,8 +1,10 @@
+import Header from './template/header.js'
+
 
 function App() {
   return (
     <div className="App">
-      Hello World
+      <Header></Header>
     </div>
   );
 }
