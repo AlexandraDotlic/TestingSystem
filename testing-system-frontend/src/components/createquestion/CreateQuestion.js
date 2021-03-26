@@ -62,6 +62,10 @@ class CreateQuestion extends React.Component {
                 </div>
 
                 {answer}
+
+                <div className="text-center mb-2">
+                    <button type="submit" className="btn btn-success">Submit</button>
+                </div>
             </form>
         </div>
         );
