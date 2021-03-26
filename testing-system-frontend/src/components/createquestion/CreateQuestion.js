@@ -25,18 +25,18 @@ class CreateQuestion extends React.Component {
         if(this.state.answerType === "yesNo") {
             answer = (
                 <div>
-                    <Answer orderNumber={"0answer"}></Answer>
-                    <Answer orderNumber={"1answer"}></Answer>
+                    <Answer logo={"radio"} orderNumber={"0answer"} labelText={"Yes:"}></Answer>
+                    <Answer logo={"radio"} orderNumber={"1answer"} labelText={"No:"}></Answer>
                 </div>
             );
         }
         else if(this.state.answerType === "multiple") {
             answer = (
                 <div>
-                    <Answer orderNumber={"0answer"}></Answer>
-                    <Answer orderNumber={"1answer"}></Answer>
-                    <Answer orderNumber={"2answer"}></Answer>
-                    <Answer orderNumber={"3answer"}></Answer>
+                    <Answer logo={"checkbox"} orderNumber={"0answer"} labelText={"Option 1:"}></Answer>
+                    <Answer logo={"checkbox"} orderNumber={"1answer"} labelText={"Option 2:"}></Answer>
+                    <Answer logo={"checkbox"} orderNumber={"2answer"} labelText={"Option 3:"}></Answer>
+                    <Answer logo={"checkbox"} orderNumber={"3answer"} labelText={"Option 4:"}></Answer>
                 </div>
             );
         }
@@ -46,6 +46,7 @@ class CreateQuestion extends React.Component {
 
         return (
         <div className="w-50 mx-auto pt-4">
+            <h3 className="text-center"> Create new question </h3>
             <form>
                 <div className="form-group">
                     <label for="questionText">Question text: </label>
