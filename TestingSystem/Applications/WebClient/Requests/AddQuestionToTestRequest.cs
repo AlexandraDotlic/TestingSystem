@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Applications.WebClient.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -12,6 +13,8 @@ namespace Applications.WebClient.Requests
         [DataMember]
         public short TestId { get; set; }
         [DataMember]
-        public int QuestionId { get; set; }
+        public string QuestionTest { get; set; }
+        [DataMember]
+        public ICollection<AnswerOptionDTO> AnswerOptions { get; set; }
     }
 }
