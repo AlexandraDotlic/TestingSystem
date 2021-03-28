@@ -27,7 +27,7 @@ namespace Core.Domain.Entites
             Students = new List<Student>();
         }
 
-        public Group(string title, Examiner examiner, Test test)
+        public Group(string title, Examiner examiner)
         {
             Title = title;
             Examiner = examiner;
@@ -36,9 +36,9 @@ namespace Core.Domain.Entites
             Students = new List<Student>();
         }
 
-        public void AddStudentGroup(StudentTestQuestion studentGroup)
+        public void AddStudentToGroup(Student student)
         {
-            Students = new List<Student>();
+            Students.Add(student);
         }
 
     }

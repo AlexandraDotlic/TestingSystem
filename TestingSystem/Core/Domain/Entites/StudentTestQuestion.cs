@@ -15,7 +15,7 @@ namespace Core.Domain.Entites
         public short TestId { get; private set; }
         public Test Test { get; private set; }
         public ICollection<StudentTestQuestionResponse> Responses { get; private set; }
-        public int Score => Responses.Sum(r => r.ResponseScore);
+        public int Score { get; private set; }
 
         public StudentTestQuestion() 
         {
@@ -31,6 +31,7 @@ namespace Core.Domain.Entites
             Test = test;
             TestId = test.Id;
             Responses = responses;
+            Score = Responses == null || Responses.Count == 0 ? 0 : Responses.Sum(r => r.ResponseScore); 
         }
 
     }
