@@ -15,6 +15,7 @@ namespace Applications.WebClient.Controllers
     {
         private readonly TestService TestService;
         private readonly ILogger<TestController> Logger;
+        private readonly int examinerId = 1; //temp
 
         public TestController(
             TestService testService,
@@ -30,7 +31,7 @@ namespace Applications.WebClient.Controllers
         {
             try
             {
-                var result = await TestService.CreateTest(createTestRequest.Title, createTestRequest.StartDate, createTestRequest.EndDate);
+                var result = await TestService.CreateTest(examinerId, createTestRequest.Title, createTestRequest.StartDate, createTestRequest.EndDate);
                 return Ok(result);
             }
             catch (Exception e)

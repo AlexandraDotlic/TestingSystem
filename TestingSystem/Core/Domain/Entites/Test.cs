@@ -39,9 +39,11 @@ namespace Core.Domain.Entites
         public DateTime StartDate { get; private set; }
 
 
-        public Test(string title, DateTime startDate, DateTime? endDate = null)
+        public Test(Examiner examiner, string title, DateTime startDate, DateTime? endDate = null)
         {
             Title = title;
+            Examiner = examiner;
+            ExaminerId = examiner.Id;
             Questions = new List<Question>();
             if (startDate >= DateTime.Now
                 && (endDate == null || endDate >= startDate)

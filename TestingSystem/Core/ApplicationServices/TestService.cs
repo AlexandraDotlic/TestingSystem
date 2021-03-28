@@ -15,9 +15,14 @@ namespace Core.ApplicationServices
             UnitOfWork = unitOfWork;
         }
 
-        public async Task<short> CreateTest(string title, DateTime startDate, DateTime? endDate = null)
+        public async Task<short> CreateTest(int examinerId, string title, DateTime startDate, DateTime? endDate = null)
         {
-            Test test = new Test(title, startDate, endDate);
+            Examiner examiner = await UnitOfWork.ExaminerRepository.GetById(examinerId);
+            if (examiner == null)
+            {
+                throw new ArgumentNullException($"{nameof(Examiner)} with Id {examinerId} not exist");
+            }
+            Test test = new Test(examiner, title, startDate, endDate);
             await UnitOfWork.TestRepository.Insert(test);
             await UnitOfWork.SaveChangesAsync();
             return test.Id;
