@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.EfCoreDataAccess", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{E3D62D1E-297D-4820-964F-87F1F50B1FC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebClient", "Applications\WebClient\WebClient.csproj", "{1961F0B2-A9A5-4FD6-82F5-74B2411BDCC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Applications.WebClient", "Applications\WebClient\Applications.WebClient.csproj", "{1961F0B2-A9A5-4FD6-82F5-74B2411BDCC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
