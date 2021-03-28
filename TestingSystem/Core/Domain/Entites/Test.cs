@@ -44,9 +44,11 @@ namespace Core.Domain.Entites
             Title = title;
             Examiner = examiner;
             ExaminerId = examiner.Id;
+            StartDate = startDate;
+            EndDate = endDate;
             Questions = new List<Question>();
-            if (startDate >= DateTime.Now
-                && (endDate == null || endDate >= startDate)
+            if (StartDate >= DateTime.Now
+                && (EndDate == null || EndDate >= StartDate)
                 )
             {
                 IsActive = true;
