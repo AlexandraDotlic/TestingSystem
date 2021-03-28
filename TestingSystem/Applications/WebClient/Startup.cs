@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -46,6 +47,8 @@ namespace WebClient
 
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseSerilogRequestLogging();
+
 
             app.UseAuthorization();
 
