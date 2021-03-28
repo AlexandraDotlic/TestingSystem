@@ -37,14 +37,14 @@ namespace Core.ApplicationServices
 
         public async Task AddQuestionToTest(short testId, int questionId)
         {
-            Test test = await UnitOfWork.TestRepository.GetFirstOrDefaultWithIncludes(t => t.Id == testId, t => t.TestQuestions);
+            Test test = await UnitOfWork.TestRepository.GetFirstOrDefaultWithIncludes(t => t.Id == testId, t => t.Questions);
             if (test == null)
             {
                 throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
             }
             Question question = await UnitOfWork.QuestionRepository.GetById(questionId);
-            TestQuestion testQuestion = new TestQuestion(test, question);
-            test.AddTestQuestion(testQuestion);
+            //TestQuestion testQuestion = new TestQuestion(test, question);
+           // test.AddTestQuestion(testQuestion);
             await UnitOfWork.TestRepository.Update(test);
             await UnitOfWork.SaveChangesAsync();
         }

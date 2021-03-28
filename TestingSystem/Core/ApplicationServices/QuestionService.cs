@@ -17,9 +17,14 @@ namespace Core.ApplicationServices
         }
 
         
-        public async Task<int> CreateQuestion(string questionText, string answer)
+        public async Task<int> CreateQuestion(string questionText, ICollection<Tuple<string, bool>> answerOptions)
         {
-            Question question = new Question(questionText, answer);
+            List<AnswerOption> options = new List<AnswerOption>();
+            foreach (var option in answerOptions)
+            {
+                options.Add(new AnswerOption(option.Item1, option.Item2));
+            }
+            Question question = new Question(questionText, options);
             await UnitOfWork.QuestionRepository.Insert(question);
             await UnitOfWork.SaveChangesAsync();
             return question.Id;

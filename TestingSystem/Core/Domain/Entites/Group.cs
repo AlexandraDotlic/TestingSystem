@@ -4,17 +4,27 @@ namespace Core.Domain.Entites
 {
     public class Group
     {
+        /// <summary>
+        /// Id
+        /// </summary>
         public short Id { get; private set; }
+        /// <summary>
+        /// Naziv
+        /// </summary>
         public string Title { get; private set; }
+        /// <summary>
+        /// Referenca na ispitivaca koji je napravio grupu
+        /// </summary>
         public int ExaminerId { get; private set; }
         public Examiner Examiner { get; private set; }
-        public short TestId { get; private set; }
-        public Test Test { get; private set; }
-        public ICollection<StudentGroup> StudentGroups { get; private set; }
+        /// <summary>
+        /// Kolekcija studenata koji pripadaju datoj grupi
+        /// </summary>
+        public ICollection<Student> Students { get; private set; }
 
         private Group()
         {
-            StudentGroups = new List<StudentGroup>();
+            Students = new List<Student>();
         }
 
         public Group(string title, Examiner examiner, Test test)
@@ -22,14 +32,13 @@ namespace Core.Domain.Entites
             Title = title;
             Examiner = examiner;
             ExaminerId = examiner.Id;
-            Test = test;
-            TestId = test.Id;
-            StudentGroups = new List<StudentGroup>();
+        
+            Students = new List<Student>();
         }
 
-        public void AddStudentGroup(StudentGroup studentGroup)
+        public void AddStudentGroup(StudentTestQuestion studentGroup)
         {
-            StudentGroups.Add(studentGroup);
+            Students = new List<Student>();
         }
 
     }

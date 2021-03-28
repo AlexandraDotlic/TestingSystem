@@ -5,26 +5,37 @@ namespace Core.Domain.Entites
 {
     public class Test
     {
+        /// <summary>
+        /// Id
+        /// </summary>
         public short Id { get; private set; }
+        /// <summary>
+        /// Naziv
+        /// </summary>
         public string Title { get; private set; }
-        public ICollection<TestQuestion> TestQuestions { get; private set; }
-        public ICollection<Group> Groups { get; private set; }
-        
+        /// <summary>
+        /// Kolekcija pitanja
+        /// </summary>
+        public ICollection<Question> Questions { get; private set; }
+      
+        public int ExaminerId { get; private set; }
+        public Examiner Examiner { get; private set; }
+        public short TestScore { get; private set; }
+
         public Test(string title) 
         {
             Title = title;
-            TestQuestions = new List<TestQuestion>();
-            Groups = new List<Group>();
+            Questions = new List<Question>();
         }
 
         private Test()
         {
-            TestQuestions = new List<TestQuestion>();
-            Groups = new List<Group>();
+            Questions = new List<Question>();
         }
-        public void AddTestQuestion(TestQuestion testQuestion)
+        public void AddTestQuestion(Question testQuestion)
         {
-            TestQuestions.Add(testQuestion);
+            Questions.Add(testQuestion);
+            TestScore += testQuestion.QuestionScore; 
         }
 
     }

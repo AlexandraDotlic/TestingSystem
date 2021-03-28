@@ -13,7 +13,6 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.EntityConfigurations
         {
             builder.Property(tq => tq.Id).ValueGeneratedOnAdd();
             builder.Property(tq => tq.QuestionText).HasMaxLength(1000);
-            builder.Property(tq => tq.Answer).HasMaxLength(5000);
         }
     }
 }
