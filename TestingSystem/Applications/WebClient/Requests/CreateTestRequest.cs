@@ -11,5 +11,9 @@ namespace Applications.WebClient.Requests
     {
         [DataMember]
         public string Title { get; set; }
+        [DataMember]
+        public DateTime StartDate { get; set; }
+        [DataMember]
+        public DateTime? EndDate { get; set; }
     }
 }

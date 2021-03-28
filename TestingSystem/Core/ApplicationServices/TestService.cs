@@ -15,9 +15,14 @@ namespace Core.ApplicationServices
             UnitOfWork = unitOfWork;
         }
 
-        public async Task<short> CreateTest(string title)
+        public async Task<short> CreateTest(int examinerId, string title, DateTime startDate, DateTime? endDate = null)
         {
-            Test test = new Test(title);
+            Examiner examiner = await UnitOfWork.ExaminerRepository.GetById(examinerId);
+            if (examiner == null)
+            {
+                throw new ArgumentNullException($"{nameof(Examiner)} with Id {examinerId} not exist");
+            }
+            Test test = new Test(examiner, title, startDate, endDate);
             await UnitOfWork.TestRepository.Insert(test);
             await UnitOfWork.SaveChangesAsync();
             return test.Id;
@@ -35,16 +40,24 @@ namespace Core.ApplicationServices
 
         }
 
-        public async Task AddQuestionToTest(short testId, int questionId)
+        public async Task AddQuestionToTest(short testId, string questionText, ICollection<Tuple<string, bool>> answerOptionTuples)
         {
-            Test test = await UnitOfWork.TestRepository.GetFirstOrDefaultWithIncludes(t => t.Id == testId, t => t.TestQuestions);
+            Test test = await UnitOfWork.TestRepository.GetFirstOrDefaultWithIncludes(t => t.Id == testId, t => t.Questions);
             if (test == null)
             {
                 throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
             }
-            Question question = await UnitOfWork.QuestionRepository.GetById(questionId);
-            TestQuestion testQuestion = new TestQuestion(test, question);
-            test.AddTestQuestion(testQuestion);
+            ICollection<AnswerOption> answerOptionsCollection = new List<AnswerOption>();
+            if(answerOptionTuples == null || answerOptionTuples.Count == 0)
+            {
+                throw new ArgumentNullException($"{nameof(answerOptionTuples)}");
+            }
+            foreach (var option in answerOptionTuples)
+            {
+                answerOptionsCollection.Add(new AnswerOption(option.Item1, option.Item2));
+            }
+            Question question = new Question(questionText, answerOptionsCollection);
+            test.AddTestQuestion(question);
             await UnitOfWork.TestRepository.Update(test);
             await UnitOfWork.SaveChangesAsync();
         }

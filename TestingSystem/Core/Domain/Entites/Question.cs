@@ -6,21 +6,43 @@ namespace Core.Domain.Entites
 {
     public class Question
     {
+        /// <summary>
+        /// Id
+        /// </summary>
         public int Id { get; protected set; }
+        /// <summary>
+        /// Tekst pitanja
+        /// </summary>
         public string QuestionText { get; protected set; }
-        public string Answer { get; private set; }
-        public ICollection<TestQuestion> TestQuestions { get; private set; }
+        /// <summary>
+        /// Ponudjeni odgovori
+        /// </summary>
+        public ICollection<AnswerOption> AnswerOptions { get; private set; }
+        /// <summary>
+        /// Test kome pitanje pripada
+        /// </summary>
+        public Test Test { get; private set; }
+        public short TestId { get; private set; }
+
+        public byte QuestionScore { get; private set; }
 
         protected Question()
         {
-            TestQuestions = new List<TestQuestion>();
+            AnswerOptions = new List<AnswerOption>();
         }
 
-        public Question(string questionText, string answer)
+        public Question(string questionText, ICollection<AnswerOption> answerOptions)
         {
-            TestQuestions = new List<TestQuestion>();
             QuestionText = questionText;
-            Answer = answer;
+            AnswerOptions = answerOptions;
+            foreach (var option in AnswerOptions)
+            {
+                if(option.IsCorrect == true)
+                {
+                    QuestionScore++;
+                }
+                
+            }
         }
     }
 }

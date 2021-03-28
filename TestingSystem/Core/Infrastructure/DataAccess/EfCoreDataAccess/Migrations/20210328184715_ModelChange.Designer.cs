@@ -4,14 +4,16 @@ using Core.Infrastructure.DataAccess.EfCoreDataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.Migrations
 {
     [DbContext(typeof(CoreEfCoreDbContext))]
-    partial class CoreEfCoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210328184715_ModelChange")]
+    partial class ModelChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -144,9 +146,6 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.Migrations
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Score")
-                        .HasColumnType("int");
-
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
@@ -195,20 +194,11 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.Migrations
                         .HasColumnType("smallint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("EndDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("ExaminerId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("TestScore")
-                        .HasColumnType("int");
+                    b.Property<short>("TestScore")
+                        .HasColumnType("smallint");
 
                     b.Property<string>("Title")
                         .HasMaxLength(50)

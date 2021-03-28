@@ -7,12 +7,11 @@ using System.Text;
 
 namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.EntityConfigurations
 {
-    public class QuestionConfiguration : IEntityTypeConfiguration<Question>
+    public class AnsweOptionConfiguration : IEntityTypeConfiguration<AnswerOption>
     {
-        public void Configure(EntityTypeBuilder<Question> builder)
+        public void Configure(EntityTypeBuilder<AnswerOption> builder)
         {
-            builder.Property(tq => tq.Id).ValueGeneratedOnAdd();
-            builder.Property(tq => tq.QuestionText).HasMaxLength(1000);
+            builder.Property(ao => ao.OptionText).HasMaxLength(256);
         }
     }
 }

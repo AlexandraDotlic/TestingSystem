@@ -16,10 +16,11 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess
         public DbSet<Student> Students { get; set; }
         public DbSet<Examiner> Examiners { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<AnswerOption> AnswerOptions { get; set; }
         public DbSet<Test> Tests { get; set; }
         public DbSet<Group> Groups { get; set; }
-        public DbSet<StudentGroup> StudentGroups { get; set; }
-        public DbSet<TestQuestion> TestQuestions { get; set; }
+        public DbSet<StudentTestQuestion> StudentTestQuestions { get; set; }
+        public DbSet<StudentTestQuestionResponse> StudentTestQuestionResponses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,8 +29,10 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess
             modelBuilder.ApplyConfiguration(new GroupConfiguration());
             modelBuilder.ApplyConfiguration(new TestConfiguration());
             modelBuilder.ApplyConfiguration(new QuestionConfiguration());
-            modelBuilder.ApplyConfiguration(new TestQuestionConfiguration());
-            modelBuilder.ApplyConfiguration(new StudentGroupConfiguration());
+            modelBuilder.ApplyConfiguration(new AnsweOptionConfiguration());
+            modelBuilder.ApplyConfiguration(new StudentTestQuestionConfiguration());
+            modelBuilder.ApplyConfiguration(new StudentTestQuestionResponseConfiguration());
+
 
             base.OnModelCreating(modelBuilder);
         }

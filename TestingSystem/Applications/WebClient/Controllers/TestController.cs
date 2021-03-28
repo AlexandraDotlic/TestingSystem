@@ -4,6 +4,7 @@ using Core.ApplicationServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Applications.WebClient.Controllers
@@ -14,6 +15,7 @@ namespace Applications.WebClient.Controllers
     {
         private readonly TestService TestService;
         private readonly ILogger<TestController> Logger;
+        private readonly int examinerId = 1; //temp
 
         public TestController(
             TestService testService,
@@ -29,7 +31,7 @@ namespace Applications.WebClient.Controllers
         {
             try
             {
-                var result = await TestService.CreateTest(createTestRequest.Title);
+                var result = await TestService.CreateTest(examinerId, createTestRequest.Title, createTestRequest.StartDate, createTestRequest.EndDate);
                 return Ok(result);
             }
             catch (Exception e)
@@ -45,7 +47,12 @@ namespace Applications.WebClient.Controllers
         {
             try
             {
-                await TestService.AddQuestionToTest(addQuestionToTestRequest.TestId, addQuestionToTestRequest.QuestionId);
+                ICollection<Tuple<string, bool>> answerOptions = new List<Tuple<string, bool>>();
+                foreach (var item in addQuestionToTestRequest.AnswerOptions)
+                {
+                    answerOptions.Add(new Tuple<string, bool>(item.OptionText, item.IsCorrect));
+                }
+                await TestService.AddQuestionToTest(addQuestionToTestRequest.TestId, addQuestionToTestRequest.QuestionTest, answerOptions);
                 return Ok();
             }
             catch (Exception e)

@@ -13,6 +13,7 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.EntityConfigurations
         {
             builder.Property(t => t.Id).ValueGeneratedOnAdd();
             builder.Property(t => t.Title).HasMaxLength(50);
+            builder.HasMany(t => t.Questions).WithOne(q => q.Test).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
