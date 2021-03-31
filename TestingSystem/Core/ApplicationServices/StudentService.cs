@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.ApplicationServices
 {
-    class StudentService
+    public class StudentService
     {
         private readonly ICoreUnitOfWork unitOfWork;
 
@@ -16,9 +16,9 @@ namespace Core.ApplicationServices
             unitOfWork = _unitOfWork;
         }
 
-        public async Task<int> CreateStudent(string firstName, string lastName)
+        public async Task<int> CreateStudent(string firstName, string lastName, int accountId)
         {
-            Student newStudent = new Student(firstName, lastName);
+            Student newStudent = new Student(firstName, lastName, accountId);
             await unitOfWork.StudentRepository.Insert(newStudent);
             await unitOfWork.SaveChangesAsync();
             return newStudent.Id;

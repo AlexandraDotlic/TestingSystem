@@ -16,9 +16,9 @@ namespace Core.ApplicationServices
             UnitOfWork = unitOfWork;
         }
 
-        public async Task<int> CreateExaminer(string firstName, string lastName)
+        public async Task<int> CreateExaminer(string firstName, string lastName, int accountId)
         {
-            Examiner examiner = new Examiner(firstName, lastName);
+            Examiner examiner = new Examiner(firstName, lastName, accountId);
             await UnitOfWork.ExaminerRepository.Insert(examiner);
             await UnitOfWork.SaveChangesAsync();
             return examiner.Id;

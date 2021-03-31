@@ -27,6 +27,11 @@ namespace Core.Domain.Entites
         /// </summary>
         public ICollection<Test> Tests { get; private set; }
 
+        /// <summary>
+        /// Id Account-a
+        /// </summary>
+        public int AccountId { get; private set; }
+
 
         public Examiner()
         {
@@ -34,12 +39,13 @@ namespace Core.Domain.Entites
             Tests = new List<Test>();
         }
 
-        public Examiner(string firstname, string lastname)
+        public Examiner(string firstname, string lastname, int accountId)
         {
             Groups = new List<Group>();
             Tests = new List<Test>();
             FirstName = firstname;
             LastName = lastname;
+            AccountId = accountId;
         }
     }
 }
