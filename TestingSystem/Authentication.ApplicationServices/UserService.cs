@@ -24,11 +24,23 @@ namespace Authentication.ApplicationServices
             RoleManager = roleManager;
         }
 
-        public async Task CreateUserAsync(string email, string password, UserRoleType userRole)
+        public async Task<int> CreateUserAsync(string email, string password, UserRoleType userRole)
         {
-            var brasidasIdentityUser = new User(email);
-            IdentityResult result = await UserManager.CreateAsync(brasidasIdentityUser, password);
+            var user = new User(email);
+            IdentityResult result = await UserManager.CreateAsync(user, password);
             CheckFalseIdentityResult(result);
+
+            string roleName = Enum.GetName(typeof(UserRoleType), userRole);
+            IdentityRole role = await RoleManager.FindByNameAsync(roleName);
+            if (role == null)
+            {
+                throw new ArgumentNullException($"Role is null");
+            }
+            result = await UserManager.AddToRoleAsync(user, roleName);
+            CheckFalseIdentityResult(result);
+
+            return user.UserAccountId;
+
         }
 
         public async Task UpdateUserAccountIdAsync(string userId, int userAccountId)
