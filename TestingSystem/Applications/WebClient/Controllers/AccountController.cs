@@ -3,6 +3,7 @@ using Applications.WebClient.Requests;
 using Authentication.ApplicationServices;
 using Authentication.Domain.Entities;
 using Core.ApplicationServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -14,6 +15,7 @@ namespace Applications.WebClient.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class AccountController: ControllerBase
     {
         private readonly UserService UserService;
@@ -76,6 +78,39 @@ namespace Applications.WebClient.Controllers
                     return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
                 }
           
+            }
+        }
+        [HttpPost]
+        [Route("LogIn")]
+        [AllowAnonymous]
+        public async Task<IActionResult> LogIn(LogInUserRequest logInUserRequest)
+        {
+            try
+            {
+                await UserService.CheckEmailAndPasswordAsync(logInUserRequest.Email, logInUserRequest.Password);
+                await UserService.SignInUserAsync(logInUserRequest.Email, logInUserRequest.RememberMe);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+
+        }
+        [HttpGet]
+        [Route("LogOut")]
+        public async Task<IActionResult> LogOut()
+        {
+            try
+            {
+                await UserService.SignOutCurrentUserAsync();
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
             }
         }
     }
