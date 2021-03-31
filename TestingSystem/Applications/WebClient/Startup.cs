@@ -1,3 +1,4 @@
+using Authentication.ApplicationServices;
 using Authentication.Domain.Entities;
 using Authentication.Infrastructure.DataAccess.EfCoreDataAccess;
 using Core.ApplicationServices;
@@ -54,6 +55,10 @@ namespace WebClient
             services.AddControllers();
             services.AddScoped<ICoreUnitOfWork, CoreEfCoreUnitOfWork>();
             services.AddScoped<TestService>();
+            services.AddScoped<StudentService>();
+            services.AddScoped<ExaminerService>();
+            services.AddScoped<UserService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

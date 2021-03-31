@@ -38,7 +38,7 @@ namespace Applications.WebClient.Controllers
         public async Task<IActionResult> Register(RegisterUserRequest registerUserRequest)
         {
             UserRoleType userRoleType = (UserRoleType)registerUserRequest.UserRoleType;
-            int accountId;
+            string accountId;
             try
             {
                 accountId = await UserService.CreateUserAsync(registerUserRequest.Email, registerUserRequest.Password, userRoleType);

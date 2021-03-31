@@ -18,6 +18,6 @@ namespace Applications.WebClient.Requests
         [DataMember]
         public string Password { get; set; }
         [DataMember]
-        public byte UserRoleType { get; set; }
+        public short UserRoleType { get; set; }
     }
 }
