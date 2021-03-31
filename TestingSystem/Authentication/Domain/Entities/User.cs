@@ -8,13 +8,6 @@ namespace Authentication.Domain.Entities
     public class User : IdentityUser
     {
 
-        #region Properties
-
-        public int UserAccountId { get; private set; }
-
-
-        #endregion
-
         #region Constructors
 
         public User()
@@ -31,11 +24,6 @@ namespace Authentication.Domain.Entities
 
 
         #region Methods
-
-        public void SetUserAccountId(int userAccountId)
-        {
-            UserAccountId = userAccountId;
-        }
 
         public void UpdateUserName(string userName)
         {

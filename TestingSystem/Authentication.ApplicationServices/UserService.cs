@@ -24,7 +24,7 @@ namespace Authentication.ApplicationServices
             RoleManager = roleManager;
         }
 
-        public async Task<int> CreateUserAsync(string email, string password, UserRoleType userRole)
+        public async Task<string> CreateUserAsync(string email, string password, UserRoleType userRole)
         {
             var user = new User(email);
             IdentityResult result = await UserManager.CreateAsync(user, password);
@@ -39,20 +39,10 @@ namespace Authentication.ApplicationServices
             result = await UserManager.AddToRoleAsync(user, roleName);
             CheckFalseIdentityResult(result);
 
-            return user.UserAccountId;
+            return user.Id;
 
         }
 
-        public async Task UpdateUserAccountIdAsync(string userId, int userAccountId)
-        {
-            User user = await UserManager.FindByIdAsync(userId);
-            if (user == null)
-            {
-                throw new ArgumentNullException($"{nameof(User)}");
-            }
-            user.SetUserAccountId(userAccountId);
-            await UserManager.UpdateAsync(user);
-        }
 
         public async Task UpdateUserEmailAsync(string userId, string email)
         {
@@ -66,16 +56,6 @@ namespace Authentication.ApplicationServices
         }
 
        
-        public async Task ChangeUserAccountIdAsync(string userId, int userAccountId)
-        {
-            User user = await UserManager.FindByIdAsync(userId);
-            if (user == null)
-            {
-                throw new ArgumentNullException($"{nameof(User)}");
-            }
-            user.SetUserAccountId(userAccountId);
-            await UserManager.UpdateAsync(user);
-        }
 
         public async Task ResetPasswordByUserIdAsync(string userId, string newPassword)
         {
@@ -142,10 +122,8 @@ namespace Authentication.ApplicationServices
             }
             IdentityResult result = await UserManager.DeleteAsync(user);
             CheckFalseIdentityResult(result);
-            if (user.UserAccountId == 0)
-            {
-                return;
-            }
+        
+
             //TODO: Delete Student or Examiner according to role
         }
 
