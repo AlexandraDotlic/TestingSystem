@@ -28,19 +28,19 @@ namespace Core.Domain.Entites
         /// <summary>
         /// Id Account-a
         /// </summary>
-        public int AccountId { get; private set; }
+        public string ExternalId { get; private set; }
         public Student()
         {
             StudentTestQuestions = new List<StudentTestQuestion>();
         }
 
         
-        public Student(string firstname, string lastname, int accountId)
+        public Student(string firstname, string lastname, string externalId)
         {
             FirstName = firstname;
             LastName = lastname;
             StudentTestQuestions = new List<StudentTestQuestion>();
-            AccountId = accountId;
+            ExternalId = externalId;
         }
     }
 }

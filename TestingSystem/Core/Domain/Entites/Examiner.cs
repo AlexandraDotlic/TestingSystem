@@ -30,7 +30,7 @@ namespace Core.Domain.Entites
         /// <summary>
         /// Id Account-a
         /// </summary>
-        public int AccountId { get; private set; }
+        public string ExternalId { get; private set; }
 
 
         public Examiner()
@@ -39,13 +39,13 @@ namespace Core.Domain.Entites
             Tests = new List<Test>();
         }
 
-        public Examiner(string firstname, string lastname, int accountId)
+        public Examiner(string firstname, string lastname, string externalId)
         {
             Groups = new List<Group>();
             Tests = new List<Test>();
             FirstName = firstname;
             LastName = lastname;
-            AccountId = accountId;
+            ExternalId = externalId;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Core.ApplicationServices
             unitOfWork = _unitOfWork;
         }
 
-        public async Task<int> CreateStudent(string firstName, string lastName, int accountId)
+        public async Task<int> CreateStudent(string firstName, string lastName, string accountId)
         {
             Student newStudent = new Student(firstName, lastName, accountId);
             await unitOfWork.StudentRepository.Insert(newStudent);
