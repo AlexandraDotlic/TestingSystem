@@ -24,17 +24,23 @@ namespace Core.Domain.Entites
         public int GroupId { get; private set; }
         public Group Group { get; private set; }
         public ICollection<StudentTestQuestion> StudentTestQuestions { get; private set; }
+
+        /// <summary>
+        /// Id Account-a
+        /// </summary>
+        public string ExternalId { get; private set; }
         public Student()
         {
             StudentTestQuestions = new List<StudentTestQuestion>();
         }
 
         
-        public Student(string firstname, string lastname)
+        public Student(string firstname, string lastname, string externalId)
         {
             FirstName = firstname;
             LastName = lastname;
             StudentTestQuestions = new List<StudentTestQuestion>();
+            ExternalId = externalId;
         }
     }
 }

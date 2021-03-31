@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Authentication\Domain\Authentication.Domain.csproj" />
+    <ProjectReference Include="..\Common\EfCoreDataAccess\Common.EfCoreDataAccess.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,9 +1,14 @@
+using Authentication.ApplicationServices;
+using Authentication.Domain.Entities;
+using Authentication.Infrastructure.DataAccess.EfCoreDataAccess;
 using Core.ApplicationServices;
 using Core.Domain.Repositories;
 using Core.Infrastructure.DataAccess.EfCoreDataAccess;
+using Infrastructure.DataAccess.EfCoreDataAccess.Seeds;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,18 +37,38 @@ namespace WebClient
             {
                 options.UseSqlServer(Configuration.GetConnectionString("TestingSystemDevConnection"));
             });
+            services.AddDbContextPool<AuthenticationEfCoreDbContext>(options =>
+               options.UseSqlServer(Configuration.GetConnectionString("AuthenticationDevConnection"))
+           );
+
+            #region Identity
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 5;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+            })
+            .AddEntityFrameworkStores<AuthenticationEfCoreDbContext>()
+            .AddDefaultTokenProviders();
+
+            #endregion
             services.AddControllers();
             services.AddScoped<ICoreUnitOfWork, CoreEfCoreUnitOfWork>();
             services.AddScoped<TestService>();
+            services.AddScoped<StudentService>();
+            services.AddScoped<ExaminerService>();
+            services.AddScoped<UserService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment  env, RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            UserRolesDatabaseSeed.Seed(roleManager);
 
             app.UseHttpsRedirection();
             app.UseRouting();
@@ -51,6 +76,8 @@ namespace WebClient
 
 
             app.UseAuthorization();
+
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
