@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <Header></Header>
-      <CreateTestForm></CreateTestForm>
+      {/* <CreateTestForm></CreateTestForm> */}
       <CreateQuestion></CreateQuestion>
       <CreateGroupForm />
       <QuestionList></QuestionList>

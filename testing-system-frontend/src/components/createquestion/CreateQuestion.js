@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react'
 import Answer from './Answer'
 
@@ -5,11 +6,13 @@ class CreateQuestion extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            testId: 1,
             answerType: "yesNo",
             questionText: ""
         };
         this.questionTextChanged = this.questionTextChanged.bind(this);
         this.answerTypeChanged = this.answerTypeChanged.bind(this);
+        this.submit = this.submit.bind(this);
     }
 
     questionTextChanged(event) {
@@ -18,6 +21,29 @@ class CreateQuestion extends React.Component {
 
     answerTypeChanged(event) {
         this.setState({answerType: event.target.value});
+    }
+
+    submit(event) {
+        let answers = {}
+
+        if(this.state.answerType === "yesNo") {
+            
+        }
+        if(this.state.answerType === "multiple") {
+            
+        }
+
+        let dataObject = {
+            testId: this.state.testId,
+            questionTest: this.state.questionText,
+            answerOptions: answers
+        }
+
+        axios({ 
+            method: 'post',
+            url: 'https://localhost:44329/Test/AddQuestionToTest',
+            data: dataObject
+        });
     }
 
     render() {
@@ -47,7 +73,7 @@ class CreateQuestion extends React.Component {
         return (
         <div className="w-50 mx-auto pt-4">
             <h3 className="text-center"> Create new question </h3>
-            <form>
+            <form onSubmit={this.submit}>
                 <div className="form-group">
                     <label htmlFor="questionText">Question text: </label>
                     <textarea id="questionText" value={this.state.questionText} onChange={this.questionTextChanged} className="form-control" placeholder="Enter question text"></textarea>
