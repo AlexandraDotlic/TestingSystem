@@ -49,13 +49,13 @@ class CreateQuestion extends React.Component {
             <h3 className="text-center"> Create new question </h3>
             <form>
                 <div className="form-group">
-                    <label for="questionText">Question text: </label>
+                    <label htmlFor="questionText">Question text: </label>
                     <textarea id="questionText" value={this.state.questionText} onChange={this.questionTextChanged} className="form-control" placeholder="Enter question text"></textarea>
                 </div>
 
-                <div class="form-group">
-                    <label for="questionType">Select answer type:</label>
-                    <select class="form-control" id="questionType" value={this.state.answerType} onChange={this.answerTypeChanged}>
+                <div className="form-group">
+                    <label htmlFor="questionType">Select answer type:</label>
+                    <select className="form-control" id="questionType" value={this.state.answerType} onChange={this.answerTypeChanged}>
                         <option value="yesNo">Yes / No answer</option>
                         <option value="multiple">Multiple answers</option>
                     </select>

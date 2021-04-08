@@ -18,10 +18,10 @@ class Answer extends React.Component {
     render() {
         return (
         <div className="form-group">
-            <label for={this.props.orderNumber}> {this.props.labelText} </label>
+            <label htmlFor={this.props.orderNumber}> {this.props.labelText} </label>
             <div className="input-group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
+                <div className="input-group-prepend">
+                    <div className="input-group-text">
                         <input type={this.props.logo} checked disabled></input>
                     </div>
                 </div>
