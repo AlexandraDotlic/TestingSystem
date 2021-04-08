@@ -33,6 +33,11 @@ namespace WebClient
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy(name: "LocalhostPolicy", builder => { builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); });
+            });
+
             services.AddDbContextPool<CoreEfCoreDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("TestingSystemDevConnection"));
@@ -73,7 +78,7 @@ namespace WebClient
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseSerilogRequestLogging();
-
+            app.UseCors("LocalhostPolicy");
 
             app.UseAuthorization();
 
