@@ -28,7 +28,7 @@ namespace Core.ApplicationServices
             return examiner.Id;
         }
 
-        public async Task DeleteExaminer(short examinerId)
+        public async Task DeleteExaminer(int examinerId)
         {
             Examiner examiner = await UnitOfWork.ExaminerRepository.GetById(examinerId);
             if (examiner == null)
