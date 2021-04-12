@@ -57,6 +57,7 @@ namespace WebClient
             services.AddScoped<TestService>();
             services.AddScoped<StudentService>();
             services.AddScoped<ExaminerService>();
+            services.AddScoped<QuestionService>();
             services.AddScoped<UserService>();
 
         }

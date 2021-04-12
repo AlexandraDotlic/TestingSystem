@@ -13,7 +13,7 @@ namespace Applications.WebClient.Requests
         [DataMember]
         public short TestId { get; set; }
         [DataMember]
-        public string QuestionTest { get; set; }
+        public string QuestionText { get; set; }
         [DataMember]
         public ICollection<AnswerOptionDTO> AnswerOptions { get; set; }
     }
