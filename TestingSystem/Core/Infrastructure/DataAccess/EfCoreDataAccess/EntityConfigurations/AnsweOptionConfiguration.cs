@@ -12,6 +12,8 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.EntityConfigurations
         public void Configure(EntityTypeBuilder<AnswerOption> builder)
         {
             builder.Property(ao => ao.OptionText).HasMaxLength(256);
+            builder.Property(e => e.Id).ValueGeneratedOnAdd();
+
         }
     }
 }

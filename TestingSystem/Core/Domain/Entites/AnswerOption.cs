@@ -6,7 +6,7 @@ namespace Core.Domain.Entites
 {
     public class AnswerOption
     {
-        public byte Id { get; private set; }
+        public int Id { get; private set; }
         public string OptionText { get; private set; }
         public bool IsCorrect { get; private set; }
         public int QuestionId { get; private set; }

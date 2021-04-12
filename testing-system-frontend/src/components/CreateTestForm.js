@@ -51,7 +51,7 @@ class CreateTestForm extends React.Component {
     render(){
         return (
         <div class = "container-fluid w-50 mx-auto pt-4"> 
-            <h3 className="text-center"> Create a new group</h3>
+            <h3 className="text-center"> Create a new test</h3>
             <form onSubmit={this.submitButton}>
                 <div class="form-group">
                     <label for="testName">Test Name:</label>
