@@ -16,6 +16,8 @@ namespace Tests.CoreApplicationServicesTests
         private ICoreUnitOfWork CoreUnitOfWork;
         private CoreEfCoreDbContext DbContext;
         private StudentService StudentService;
+        private ExaminerService ExaminerService;
+        private GroupService GroupService;
 
         [TestInitialize]
         public void Setup()
@@ -24,23 +26,13 @@ namespace Tests.CoreApplicationServicesTests
             DbContext = dbContextFactory.CreateDbContext(new string[] { });
             CoreUnitOfWork = new CoreEfCoreUnitOfWork(DbContext);
             StudentService = new StudentService(CoreUnitOfWork);
+            ExaminerService = new ExaminerService(CoreUnitOfWork);
+            GroupService = new GroupService(CoreUnitOfWork);
         }
 
         [TestCleanup()]
         public async Task Cleanup()
         {
-            CoreUnitOfWork.ClearTracker();
-            IReadOnlyCollection<Student> students = await CoreUnitOfWork.StudentRepository.GetAllList();
-
-            if (students != null && students.Count != 0)
-            {
-                foreach (var item in students)
-                {
-                    await CoreUnitOfWork.StudentRepository.Delete(item);
-                    await CoreUnitOfWork.SaveChangesAsync();
-                }
-
-            }
 
             await DbContext.DisposeAsync();
             DbContext = null;
@@ -51,13 +43,31 @@ namespace Tests.CoreApplicationServicesTests
         public async Task TestDeleteStudentSuccess()
         {
             int id  = await StudentService.CreateStudent("Ime", "Prezime", "123");
+            
 
             await StudentService.DeleteStudent(id);
-            var student = await CoreUnitOfWork.ExaminerRepository.GetById(id);
+            var student = await CoreUnitOfWork.StudentRepository.GetById(id);
 
             Assert.AreEqual(student, null);
 
         }
+        [TestMethod]
+        public async Task TestDeleteStudentWithGroupSuccess()
+        {
+            int studentId = await StudentService.CreateStudent("Ime", "Prezime", "123");
+            int examinerId = await ExaminerService.CreateExaminer("Ime2", "Prezime2", "1234");
+            var groupId = await GroupService.CreateGroup("grupa", examinerId);
+            var group = await CoreUnitOfWork.GroupRepository.GetById(groupId);
+            await GroupService.AddStudentToGroup(groupId, studentId);
+            await StudentService.DeleteStudent(studentId);
+
+            var student = await CoreUnitOfWork.StudentRepository.GetById(studentId);
+
+            Assert.AreEqual(student, null);
+            Assert.AreNotEqual(group, null);
+
+        }
+
 
         [TestMethod]
         public async Task TestDeleteStudentFail()

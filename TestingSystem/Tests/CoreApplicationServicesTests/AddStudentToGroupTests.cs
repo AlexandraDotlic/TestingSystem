@@ -11,12 +11,13 @@ using System.Threading.Tasks;
 namespace Tests.CoreApplicationServicesTests
 {
     [TestClass]
-    public class CreateGroupTests
+    public class AddStudentToGroupTests
     {
         private ICoreUnitOfWork CoreUnitOfWork;
         private CoreEfCoreDbContext DbContext;
         private GroupService GroupService;
         private ExaminerService ExaminerService;
+        private StudentService StudentService;
 
         [TestInitialize]
         public void Setup()
@@ -26,6 +27,7 @@ namespace Tests.CoreApplicationServicesTests
             CoreUnitOfWork = new CoreEfCoreUnitOfWork(DbContext);
             GroupService = new GroupService(CoreUnitOfWork);
             ExaminerService = new ExaminerService(CoreUnitOfWork);
+            StudentService = new StudentService(CoreUnitOfWork);
         }
 
         [TestCleanup()]
@@ -37,23 +39,28 @@ namespace Tests.CoreApplicationServicesTests
         }
 
         [TestMethod]
-        public async Task TestCreateGroupSuccess()
+        public async Task TestAddStudentToGroupSuccess()
         {
             int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
+            int studentId = await StudentService.CreateStudent("StudentIme", "StudentPrezime", "1234");
             var groupId = await GroupService.CreateGroup("grupa", examinerId);
-            var group = await CoreUnitOfWork.GroupRepository.GetById(groupId);
+            var group = await CoreUnitOfWork.GroupRepository.GetFirstOrDefaultWithIncludes(g => g.Id == groupId, g => g.Students);
+            var student = await CoreUnitOfWork.StudentRepository.GetFirstOrDefaultWithIncludes(s => s.Id == studentId, s => s.Group);
+            await GroupService.AddStudentToGroup(groupId, studentId);
 
-            Assert.AreEqual(groupId, group.Id);
-            Assert.AreEqual("grupa", group.Title);
-            Assert.AreEqual(examinerId, group.ExaminerId);
+            Assert.AreEqual(1, group.Students.Count);
+            Assert.AreEqual(student.Group.Id, group.Id);
+            Assert.AreEqual(true, group.Students.Contains(student));
 
         }
 
         [TestMethod]
-        public async Task TestCreateGroupFail()
+        public async Task TestAddStudentToGroupFail()
         {
-
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await GroupService.CreateGroup("grupa", 1000), $"Examiner with id = {1000} not exist");
+            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
+            int studentId = await StudentService.CreateStudent("StudentIme", "StudentPrezime", "1234");
+            var groupId = await GroupService.CreateGroup("grupa", examinerId);
+            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await GroupService.AddStudentToGroup(groupId, 123), $"Student with Id 123 does not exist");
         }
 
     }

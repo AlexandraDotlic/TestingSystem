@@ -29,19 +29,6 @@ namespace Tests.CoreApplicationServicesTests
         [TestCleanup()]
         public async Task Cleanup()
         {
-            CoreUnitOfWork.ClearTracker();
-            IReadOnlyCollection<Student> students = await CoreUnitOfWork.StudentRepository.GetAllList();
-
-            if (students != null && students.Count != 0)
-            {
-                foreach (var item in students)
-                {
-                    await CoreUnitOfWork.StudentRepository.Delete(item);
-                    await CoreUnitOfWork.SaveChangesAsync();
-                }
-                
-            }
-
             await DbContext.DisposeAsync();
             DbContext = null;
             

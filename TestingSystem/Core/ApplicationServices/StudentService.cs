@@ -9,11 +9,11 @@ namespace Core.ApplicationServices
 {
     public class StudentService
     {
-        private readonly ICoreUnitOfWork unitOfWork;
+        private readonly ICoreUnitOfWork UnitOfWork;
 
-        public StudentService(ICoreUnitOfWork _unitOfWork)
+        public StudentService(ICoreUnitOfWork unitOfWork)
         {
-            unitOfWork = _unitOfWork;
+            UnitOfWork = unitOfWork;
         }
 
         public async Task<int> CreateStudent(string firstName, string lastName, string accountId)
@@ -23,20 +23,30 @@ namespace Core.ApplicationServices
                 throw new ArgumentNullException($"AccountId must not be null");
             }
             Student newStudent = new Student(firstName, lastName, accountId);
-            await unitOfWork.StudentRepository.Insert(newStudent);
-            await unitOfWork.SaveChangesAsync();
+            await UnitOfWork.StudentRepository.Insert(newStudent);
+            await UnitOfWork.SaveChangesAsync();
             return newStudent.Id;
         }
 
         public async Task DeleteStudent(int studentId)
         {
-            Student studentForDelete = await unitOfWork.StudentRepository.GetById(studentId);
-            if(studentForDelete == null)
+            Student student = await UnitOfWork.StudentRepository.GetById(studentId);
+            if(student == null)
             {
                 throw new ArgumentNullException($"Student with Id {studentId} doesn't exist.");
             }
-            await unitOfWork.StudentRepository.Delete(studentForDelete);
-            await unitOfWork.SaveChangesAsync();
+            await UnitOfWork.BeginTransactionAsync();
+            if(student.GroupId != null)
+            {
+                Group group = await UnitOfWork.GroupRepository.GetById(student.GroupId);
+                group.RemoveStudentFromGroup(student);
+                await UnitOfWork.GroupRepository.Update(group);
+                await UnitOfWork.SaveChangesAsync();
+
+            }
+            await UnitOfWork.StudentRepository.Delete(student);
+            await UnitOfWork.SaveChangesAsync();
+            await UnitOfWork.CommitTransactionAsync();
         }
     }
 }
