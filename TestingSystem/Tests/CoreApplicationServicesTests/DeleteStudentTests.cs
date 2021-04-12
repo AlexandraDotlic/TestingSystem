@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 namespace Tests.CoreApplicationServicesTests
 {
     [TestClass]
-    public class DeleteExaminerTests
+    public class DeleteStudentTests
     {
         private ICoreUnitOfWork CoreUnitOfWork;
         private CoreEfCoreDbContext DbContext;
-        private ExaminerService ExaminerService;
+        private StudentService StudentService;
 
         [TestInitialize]
         public void Setup()
@@ -23,23 +23,23 @@ namespace Tests.CoreApplicationServicesTests
             var dbContextFactory = new SampleDbContextFactory();
             DbContext = dbContextFactory.CreateDbContext(new string[] { });
             CoreUnitOfWork = new CoreEfCoreUnitOfWork(DbContext);
-            ExaminerService = new ExaminerService(CoreUnitOfWork);
+            StudentService = new StudentService(CoreUnitOfWork);
         }
 
         [TestCleanup()]
         public async Task Cleanup()
         {
             CoreUnitOfWork.ClearTracker();
-            IReadOnlyCollection<Examiner> examiners = await CoreUnitOfWork.ExaminerRepository.GetAllList();
+            IReadOnlyCollection<Student> students = await CoreUnitOfWork.StudentRepository.GetAllList();
 
-            if (examiners != null && examiners.Count != 0)
+            if (students != null && students.Count != 0)
             {
-                foreach (var item in examiners)
+                foreach (var item in students)
                 {
-                    await CoreUnitOfWork.ExaminerRepository.Delete(item);
+                    await CoreUnitOfWork.StudentRepository.Delete(item);
                     await CoreUnitOfWork.SaveChangesAsync();
                 }
-                
+
             }
 
             await DbContext.DisposeAsync();
@@ -48,23 +48,23 @@ namespace Tests.CoreApplicationServicesTests
         }
 
         [TestMethod]
-        public async Task TestDeleteExaminerSuccess()
+        public async Task TestDeleteStudentSuccess()
         {
-            int id  = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
+            int id  = await StudentService.CreateStudent("Ime", "Prezime", "123");
 
-            await ExaminerService.DeleteExaminer(id);
-            var examiner = await CoreUnitOfWork.ExaminerRepository.GetById(id);
+            await StudentService.DeleteStudent(id);
+            var student = await CoreUnitOfWork.ExaminerRepository.GetById(id);
 
-            Assert.AreEqual(examiner, null);
+            Assert.AreEqual(student, null);
 
         }
 
         [TestMethod]
-        public async Task TestDeleteExaminerFail()
+        public async Task TestDeleteStudentFail()
         {
             var examiner = await CoreUnitOfWork.ExaminerRepository.GetById(100);
 
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await ExaminerService.DeleteExaminer(100), $"Examiner with Id={100} doesn't exist");
+            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await StudentService.DeleteStudent(100), $"Student with Id={100} doesn't exist");
 
 
 

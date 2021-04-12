@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 namespace Tests.CoreApplicationServicesTests
 {
     [TestClass]
-    public class CreateExaminerTests
+    public class CreateStudentTests
     {
         private ICoreUnitOfWork CoreUnitOfWork;
         private CoreEfCoreDbContext DbContext;
-        private ExaminerService ExaminerService;
+        private StudentService StudentService;
 
         [TestInitialize]
         public void Setup()
@@ -23,20 +23,20 @@ namespace Tests.CoreApplicationServicesTests
             var dbContextFactory = new SampleDbContextFactory();
             DbContext = dbContextFactory.CreateDbContext(new string[] { });
             CoreUnitOfWork = new CoreEfCoreUnitOfWork(DbContext);
-            ExaminerService = new ExaminerService(CoreUnitOfWork);
+            StudentService = new StudentService(CoreUnitOfWork);
         }
 
         [TestCleanup()]
         public async Task Cleanup()
         {
             CoreUnitOfWork.ClearTracker();
-            IReadOnlyCollection<Examiner> examiners = await CoreUnitOfWork.ExaminerRepository.GetAllList();
+            IReadOnlyCollection<Student> students = await CoreUnitOfWork.StudentRepository.GetAllList();
 
-            if (examiners != null && examiners.Count != 0)
+            if (students != null && students.Count != 0)
             {
-                foreach (var item in examiners)
+                foreach (var item in students)
                 {
-                    await CoreUnitOfWork.ExaminerRepository.Delete(item);
+                    await CoreUnitOfWork.StudentRepository.Delete(item);
                     await CoreUnitOfWork.SaveChangesAsync();
                 }
                 
@@ -48,25 +48,25 @@ namespace Tests.CoreApplicationServicesTests
         }
 
         [TestMethod]
-        public async Task TestCreateExaminerSuccess()
+        public async Task TestCreateStudentSuccess()
         {
-            int id  = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
-            var examiner = await CoreUnitOfWork.ExaminerRepository.GetById(id);
+            int id  = await StudentService.CreateStudent("Ime", "Prezime", "1234");
+            var student = await CoreUnitOfWork.StudentRepository.GetById(id);
 
-            Assert.AreEqual(id, examiner.Id);
-            Assert.AreEqual("Ime", examiner.FirstName);
-            Assert.AreEqual("Prezime", examiner.LastName);
-            Assert.AreEqual("123", examiner.ExternalId);
+            Assert.AreEqual(id, student.Id);
+            Assert.AreEqual("Ime", student.FirstName);
+            Assert.AreEqual("Prezime", student.LastName);
+            Assert.AreEqual("1234", student.ExternalId);
 
         }
 
         [TestMethod]
-        public async Task TestCreateExaminerFail()
+        public async Task TestCreateStudentFail()
         {
-            int id = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
+            int id = await StudentService.CreateStudent("Ime", "Prezime", "1234");
             var examiner = await CoreUnitOfWork.ExaminerRepository.GetById(id);
 
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await ExaminerService.CreateExaminer("Ime", "Prezime", null), $"AccountId must not be null");
+            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await StudentService.CreateStudent("Ime", "Prezime", null), $"AccountId must not be null");
 
 
 

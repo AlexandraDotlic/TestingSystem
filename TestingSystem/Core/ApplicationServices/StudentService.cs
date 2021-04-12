@@ -18,6 +18,10 @@ namespace Core.ApplicationServices
 
         public async Task<int> CreateStudent(string firstName, string lastName, string accountId)
         {
+            if (string.IsNullOrEmpty(accountId))
+            {
+                throw new ArgumentNullException($"AccountId must not be null");
+            }
             Student newStudent = new Student(firstName, lastName, accountId);
             await unitOfWork.StudentRepository.Insert(newStudent);
             await unitOfWork.SaveChangesAsync();
