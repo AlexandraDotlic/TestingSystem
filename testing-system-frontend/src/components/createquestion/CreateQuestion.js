@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { data } from 'jquery';
 import React from 'react'
 import Answer from './Answer'
 
@@ -10,9 +11,13 @@ class CreateQuestion extends React.Component {
             answerType: "yesNo",
             questionText: ""
         };
+        this.answersMap = new Map();
+        this.correctAnswer = [];
         this.questionTextChanged = this.questionTextChanged.bind(this);
         this.answerTypeChanged = this.answerTypeChanged.bind(this);
         this.submit = this.submit.bind(this);
+        this.getAnswerText = this.getAnswerText.bind(this);
+        this.setCorrectAnswer = this.setCorrectAnswer.bind(this);
     }
 
     questionTextChanged(event) {
@@ -23,21 +28,46 @@ class CreateQuestion extends React.Component {
         this.setState({answerType: event.target.value});
     }
 
-    submit(event) {
-        let answers = {}
+    getAnswerText(data) {
+        this.answersMap.set(data.obj, data.val);
+    }
 
+    setCorrectAnswer(data) {
         if(this.state.answerType === "yesNo") {
-            
+            this.correctAnswer = [];
+            this.correctAnswer.push(data);
         }
         if(this.state.answerType === "multiple") {
-            
+            if(this.correctAnswer.includes(data)) {
+                let i = this.correctAnswer.indexOf(data);
+                this.correctAnswer.splice(i, 1);
+            }
+            else {
+                this.correctAnswer.push(data);
+            }
         }
+    }
 
+    submit(event) {
+        let answers = [];
+        for(let answer of this.answersMap) {
+            let correctCurrent = false;
+            if(this.correctAnswer.includes(answer[0])) {
+                correctCurrent = true;
+            }
+            answers.push({
+                optionText: answer[1],
+                isCorrect: correctCurrent
+            });
+        }
+        
         let dataObject = {
             testId: this.state.testId,
             questionTest: this.state.questionText,
             answerOptions: answers
         }
+        console.log(dataObject);
+        debugger;
 
         axios({ 
             method: 'post',
@@ -51,18 +81,18 @@ class CreateQuestion extends React.Component {
         if(this.state.answerType === "yesNo") {
             answer = (
                 <div>
-                    <Answer logo={"radio"} orderNumber={"0answer"} labelText={"Yes:"}></Answer>
-                    <Answer logo={"radio"} orderNumber={"1answer"} labelText={"No:"}></Answer>
+                    <Answer callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"radio"} orderNumber={"0answer"} labelText={"Yes:"}></Answer>
+                    <Answer callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"radio"} orderNumber={"1answer"} labelText={"No:"}></Answer>
                 </div>
             );
         }
         else if(this.state.answerType === "multiple") {
             answer = (
                 <div>
-                    <Answer logo={"checkbox"} orderNumber={"0answer"} labelText={"Option 1:"}></Answer>
-                    <Answer logo={"checkbox"} orderNumber={"1answer"} labelText={"Option 2:"}></Answer>
-                    <Answer logo={"checkbox"} orderNumber={"2answer"} labelText={"Option 3:"}></Answer>
-                    <Answer logo={"checkbox"} orderNumber={"3answer"} labelText={"Option 4:"}></Answer>
+                    <Answer callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"checkbox"} orderNumber={"0answer"} labelText={"Option 1:"}></Answer>
+                    <Answer callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"checkbox"} orderNumber={"1answer"} labelText={"Option 2:"}></Answer>
+                    <Answer callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"checkbox"} orderNumber={"2answer"} labelText={"Option 3:"}></Answer>
+                    <Answer callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"checkbox"} orderNumber={"3answer"} labelText={"Option 4:"}></Answer>
                 </div>
             );
         }
