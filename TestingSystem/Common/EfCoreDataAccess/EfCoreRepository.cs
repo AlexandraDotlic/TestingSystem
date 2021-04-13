@@ -67,15 +67,6 @@ namespace Common.EfCoreDataAccess
         {
             return await DbSet.Where(filter).ToListAsync();
         }
-        public virtual async Task<IReadOnlyCollection<TEntity>> GetAllWithIncludesAsList(params Expression<Func<TEntity, object>>[] includes)
-        {
-            IQueryable<TEntity> result = DbSet.Where(i => true);
-
-            foreach (Expression<Func<TEntity, object>> includeExpression in includes)
-                result = result.Include(includeExpression);
-
-            return await result.ToListAsync();
-        }
 
         public async Task<TEntity> GetFirstOrDefaultWithIncludes(Expression<Func<TEntity, bool>> filter, params Expression<Func<TEntity, object>>[] includePropertyExpressions)
         {

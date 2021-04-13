@@ -12,6 +12,7 @@ namespace Core.Domain.Repositories
         public IGroupRepository GroupRepository { get; }
         public ITestRepository TestRepository { get; }
         public IQuestionRepository QuestionRepository { get; }
+        public IAnswerOptionRepository AnswerOptionRepository { get; }
 
     }
 }

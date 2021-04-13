@@ -4,14 +4,16 @@ using Core.Infrastructure.DataAccess.EfCoreDataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.Migrations
 {
     [DbContext(typeof(CoreEfCoreDbContext))]
-    partial class CoreEfCoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210412123020_Updated_AnswerOption_table_removed_Id")]
+    partial class Updated_AnswerOption_table_removed_Id
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,11 +23,6 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.Migrations
 
             modelBuilder.Entity("Core.Domain.Entites.AnswerOption", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<bool>("IsCorrect")
                         .HasColumnType("bit");
 
@@ -35,8 +32,6 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.Migrations
 
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
-
-                    b.HasKey("Id");
 
                     b.HasIndex("QuestionId");
 
@@ -232,7 +227,7 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.Migrations
             modelBuilder.Entity("Core.Domain.Entites.AnswerOption", b =>
                 {
                     b.HasOne("Core.Domain.Entites.Question", "Question")
-                        .WithMany("AnswerOptions")
+                        .WithMany()
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -330,11 +325,6 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.Migrations
             modelBuilder.Entity("Core.Domain.Entites.Group", b =>
                 {
                     b.Navigation("Students");
-                });
-
-            modelBuilder.Entity("Core.Domain.Entites.Question", b =>
-                {
-                    b.Navigation("AnswerOptions");
                 });
 
             modelBuilder.Entity("Core.Domain.Entites.Student", b =>
