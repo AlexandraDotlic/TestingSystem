@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import 'bootstrap'
 
 class CreateTestForm extends React.Component {
@@ -6,10 +7,10 @@ class CreateTestForm extends React.Component {
         super(props);
         this.state = {
             testName: "",
-            startDate: null,
-            startTime: null,
-            endDate: null,
-            endTime: null
+            startDate: "",
+            startTime: "",
+            endDate: "",
+            endTime: ""
         };
 
         this.testNameChange = this.testNameChange.bind(this);
@@ -44,37 +45,65 @@ class CreateTestForm extends React.Component {
     }
 
     submitButton = (event) => {
-        alert("Saved")
+        // Parse date from startDate and add hours and minutes converted to miliseconds
+        let startDateParsed = Date.parse(this.state.startDate);
+        startDateParsed += parseInt(this.state.startTime.substring(0, 2)) * 3600000;
+        startDateParsed += parseInt(this.state.startTime.substring(3)) * 60000;
+        // Recombine it back to Date object
+        let startDateCombined = new Date(startDateParsed);
+
+        // Parse date from endDate and add hours and minutes converted to miliseconds
+        // Also check if end date is setted
+        let endDateCombined;
+        let endDateParsed = Date.parse(this.state.endDate);
+        if(endDateParsed !== NaN) {
+            endDateParsed += parseInt(this.state.endTime.substring(0, 2)) * 3600000;
+            endDateParsed += parseInt(this.state.endTime.substring(3)) * 60000;
+            endDateCombined = new Date(endDateParsed);
+        } else {
+            endDateCombined = null;
+        }
+
+        axios({
+            method: 'post',
+            url: 'https://localhost:44329/Test/CreateTest',
+            data: {
+              title: this.state.testName,
+              startDate: startDateCombined,
+              endDate: endDateCombined
+            }
+          });
+        
         event.preventDefault();
     }
 
     render(){
         return (
-        <div class = "container-fluid w-50 mx-auto pt-4"> 
+        <div className = "container-fluid w-50 mx-auto pt-4"> 
             <h3 className="text-center"> Create a new test</h3>
             <form onSubmit={this.submitButton}>
-                <div class="form-group">
-                    <label for="testName">Test Name:</label>
-                    <input id="testName" value={this.state.testName} onChange={this.testNameChange} class="form-control" placeholder="Enter test name"></input>
+                <div className="form-group">
+                    <label htmlFor="testName">Test Name:</label>
+                    <input id="testName" value={this.state.testName} onChange={this.testNameChange} className="form-control" placeholder="Enter test name"></input>
                 </div>
-                <div class="form-group">
-                    <label for="startDate">Start Date:</label>
-                    <input id="startDate" value={this.state.startDate} onChange={this.startDateChange} class="form-control" type="date"></input>
+                <div className="form-group">
+                    <label htmlFor="startDate">Start Date:</label>
+                    <input id="startDate" value={this.state.startDate} onChange={this.startDateChange} className="form-control" type="date"></input>
                 </div>
-                <div class="form-group">
-                    <label for="startTime">Start Time</label>
-                    <input id="startTime" value={this.state.startTime} onChange={this.startTimeChange} class="form-control" type="time" ></input>
+                <div className="form-group">
+                    <label htmlFor="startTime">Start Time</label>
+                    <input id="startTime" value={this.state.startTime} onChange={this.startTimeChange} className="form-control" type="time" ></input>
                 </div>
-                <div class="form-group">
-                    <label for="endDate">End Date:</label>
-                    <input id="endDate" value={this.state.endDate} onChange={this.endDateChange} class="form-control" type="date"></input>
+                <div className="form-group">
+                    <label htmlFor="endDate">End Date:</label>
+                    <input id="endDate" value={this.state.endDate} onChange={this.endDateChange} className="form-control" type="date"></input>
                 </div>
-                <div class="form-group">
-                    <label for="endTime">End Time</label>
-                    <input id="endTime" value={this.state.endTime} onChange={this.endTimeChange} class="form-control" type="time" ></input>
+                <div className="form-group">
+                    <label htmlFor="endTime">End Time</label>
+                    <input id="endTime" value={this.state.endTime} onChange={this.endTimeChange} className="form-control" type="time" ></input>
                 </div>
-                <div class="text-center mb-2">
-                    <button class="btn btn-success" type="submit" onClick={this.submitButton}>Submit </button>
+                <div className="text-center mb-2">
+                    <button className="btn btn-success" type="submit" onClick={this.submitButton}>Submit </button>
                 </div>
             </form>
         </div>
