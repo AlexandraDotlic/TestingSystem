@@ -23,15 +23,15 @@ class CreateGroupForm extends React.Component{
 
     render (){  
         return (
-            <div class = "container-fluid w-50 mx-auto pt-4"> 
+            <div className= "container-fluid w-50 mx-auto pt-4"> 
             <h3 className="text-center"> Create a new group</h3>
                 <form onSubmit={this.submitButton}>
-                    <div class="form-group">
-                        <label for="groupName">Group Name:</label>
-                        <input id="groupName" value={this.state.groupName} onChange={this.groupNameChange} class="form-control" placeholder="Enter group name"></input>
+                    <div className="form-group">
+                        <label htmlFor="groupName">Group Name:</label>
+                        <input id="groupName" value={this.state.groupName} onChange={this.groupNameChange} className="form-control" placeholder="Enter group name"></input>
                     </div>
-                    <div class="text-center mb-2">
-                            <button class="btn btn-success" type="submit" onClick={this.submitButton}>Submit</button>
+                    <div className="text-center mb-2">
+                            <button className="btn btn-success" type="submit" onClick={this.submitButton}>Submit</button>
                     </div>
                 </form>
             </div>
