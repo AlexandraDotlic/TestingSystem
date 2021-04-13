@@ -43,5 +43,9 @@ namespace Core.Domain.Entites
             ExternalId = externalId;
         }
 
+        public void AddStudentTestQuestions(StudentTestQuestion studentTestQuestion)
+        {
+            StudentTestQuestions.Add(studentTestQuestion);
+        }
     }
 }

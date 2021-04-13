@@ -2,6 +2,7 @@
 using Core.Domain.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -60,6 +61,59 @@ namespace Core.ApplicationServices
             test.AddTestQuestion(question);
             await UnitOfWork.TestRepository.Update(test);
             await UnitOfWork.SaveChangesAsync();
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="testId"></param>
+        /// <param name="studentId"></param>
+        /// <param name="questonResponsesCollection">Kolekcija odgovora za svako pitanje</param>
+        /// <returns></returns>
+        public async Task TakeTheTest(short testId, int studentId, ICollection<Tuple<int, ICollection<string>>> questonResponsesCollection)
+        {
+            Test test = await UnitOfWork.TestRepository.GetById(testId);
+            if (test == null)
+            {
+                throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
+            }
+            Student student = await UnitOfWork.StudentRepository.GetById(studentId);
+            if (student == null)
+            {
+                throw new ArgumentNullException($"{nameof(Student)} with Id {studentId} not exist");
+            }
+
+            if (questonResponsesCollection == null || questonResponsesCollection.Count == 0)
+            {
+                throw new ArgumentNullException($"{nameof(questonResponsesCollection)} is null or empty");
+
+            }
+            IReadOnlyCollection<Question> testQuestions = await UnitOfWork.QuestionRepository
+                .SearchByWithIncludes(q => q.TestId == testId, q => q.AnswerOptions);
+
+            ICollection<StudentTestQuestion> studentTestQuestions = new List<StudentTestQuestion>();
+           
+            foreach (var questionResponse in questonResponsesCollection)
+            {
+                var question = testQuestions.Where(q => q.Id == questionResponse.Item1).FirstOrDefault();
+                ICollection<StudentTestQuestionResponse> studentTestQuestionResponses = new List<StudentTestQuestionResponse>();
+                foreach (var response in questionResponse.Item2)
+                {
+                    AnswerOption answer = question.AnswerOptions.Where(ao => ao.OptionText == response).FirstOrDefault();
+                    var studentTestQuestionResponse = new StudentTestQuestionResponse(answer.OptionText, answer.IsCorrect ? 1 : 0);
+                    studentTestQuestionResponses.Add(studentTestQuestionResponse);
+
+                }
+                var studentTestQuestion = new StudentTestQuestion(student, question, studentTestQuestionResponses);
+                studentTestQuestions.Add(studentTestQuestion);
+            }
+            await UnitOfWork.BeginTransactionAsync();
+            foreach (var studentTestQuestion in studentTestQuestions)
+            {
+                student.AddStudentTestQuestions(studentTestQuestion);
+            }
+            await UnitOfWork.StudentRepository.Update(student);
+            await UnitOfWork.SaveChangesAsync();
+            await UnitOfWork.CommitTransactionAsync();
         }
     }
 }
