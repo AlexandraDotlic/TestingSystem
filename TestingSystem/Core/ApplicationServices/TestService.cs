@@ -1,4 +1,5 @@
-﻿using Core.Domain.Entites;
+﻿using Core.ApplicationServices.DTOs;
+using Core.Domain.Entites;
 using Core.Domain.Repositories;
 using System;
 using System.Collections.Generic;
@@ -69,7 +70,7 @@ namespace Core.ApplicationServices
         /// <param name="studentId"></param>
         /// <param name="questonResponsesCollection">Kolekcija odgovora za svako pitanje</param>
         /// <returns></returns>
-        public async Task TakeTheTest(short testId, int studentId, ICollection<Tuple<int, ICollection<string>>> questonResponsesCollection)
+        public async Task<StudentTestScoreDTO> TakeTheTest(short testId, int studentId, ICollection<Tuple<int, ICollection<string>>> questonResponsesCollection)
         {
             Test test = await UnitOfWork.TestRepository.GetById(testId);
             if (test == null)
@@ -114,6 +115,13 @@ namespace Core.ApplicationServices
             await UnitOfWork.StudentRepository.Update(student);
             await UnitOfWork.SaveChangesAsync();
             await UnitOfWork.CommitTransactionAsync();
+            return new StudentTestScoreDTO
+            {
+                StudentId = studentId,
+                TestId = testId,
+                TotalTestScore = test.TestScore,
+                StudentTestScore = studentTestQuestions.Sum(stq => stq.Score)
+            };
         }
     }
 }

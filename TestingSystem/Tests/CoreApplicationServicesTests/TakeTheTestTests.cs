@@ -78,7 +78,7 @@ namespace Tests.CoreApplicationServicesTests
             var question1Response = new Tuple<int, ICollection<string>>(question1Id, new List<string> { "opcija 1" });
             var question2Response = new Tuple<int, ICollection<string>>(question2Id, new List<string> { "opcija 2", "opcija 3" });
 
-            await TestService.TakeTheTest(testId, studentId, new List<Tuple<int, ICollection<string>>> { question1Response, question2Response });
+            var studentTestScore = await TestService.TakeTheTest(testId, studentId, new List<Tuple<int, ICollection<string>>> { question1Response, question2Response });
 
             IReadOnlyCollection<StudentTestQuestion> studentTestQuestons = await CoreUnitOfWork.StudentTestQuestionRepository
                 .SearchByWithIncludes(stq => stq.StudentId == studentId
@@ -86,7 +86,7 @@ namespace Tests.CoreApplicationServicesTests
                 , stq => stq.Responses);
 
             Assert.AreEqual(2, studentTestQuestons.Count);
-            Assert.AreEqual(2, studentTestQuestons.Sum(stq => stq.Score));
+            Assert.AreEqual(2, studentTestScore.StudentTestScore);
 
         }
 
