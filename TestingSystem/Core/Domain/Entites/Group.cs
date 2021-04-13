@@ -32,13 +32,18 @@ namespace Core.Domain.Entites
             Title = title;
             Examiner = examiner;
             ExaminerId = examiner.Id;
-        
+
             Students = new List<Student>();
         }
 
         public void AddStudentToGroup(Student student)
         {
             Students.Add(student);
+        }
+
+        public void RemoveStudentFromGroup(Student student)
+        {
+            Students.Remove(student);
         }
 
     }

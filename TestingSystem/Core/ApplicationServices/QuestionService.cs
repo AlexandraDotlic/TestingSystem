@@ -20,7 +20,10 @@ namespace Core.ApplicationServices
         public async Task<ICollection<QuestionDTO>> GetAllQuestionsForTest(short testId)
         {
             IReadOnlyCollection<Question> questions = await UnitOfWork.QuestionRepository.SearchByWithIncludes(q => q.TestId == testId, q => q.AnswerOptions);
-            List<QuestionDTO> questionDTOs = questions.Select(q => new QuestionDTO(q.Id, q.QuestionText, q.TestId, q.QuestionScore, q.AnswerOptions)).ToList();
+           
+            List<QuestionDTO> questionDTOs = questions == null || questions.Count == 0 
+                ? null 
+                : questions.Select(q => new QuestionDTO(q.Id, q.QuestionText, q.TestId, q.QuestionScore, q.AnswerOptions)).ToList();
             return questionDTOs;
         }
     }

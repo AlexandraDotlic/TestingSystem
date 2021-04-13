@@ -125,10 +125,7 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("GroupId")
-                        .HasColumnType("int");
-
-                    b.Property<short?>("GroupId1")
+                    b.Property<short?>("GroupId")
                         .HasColumnType("smallint");
 
                     b.Property<string>("LastName")
@@ -137,7 +134,7 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GroupId1");
+                    b.HasIndex("GroupId");
 
                     b.ToTable("Students");
                 });
@@ -166,8 +163,6 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.Migrations
                     b.HasIndex("QuestionId");
 
                     b.HasIndex("StudentId");
-
-                    b.HasIndex("TestId");
 
                     b.ToTable("StudentTestQuestions");
                 });
@@ -256,7 +251,7 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.Migrations
                     b.HasOne("Core.Domain.Entites.Test", "Test")
                         .WithMany("Questions")
                         .HasForeignKey("TestId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Test");
@@ -266,7 +261,7 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.Migrations
                 {
                     b.HasOne("Core.Domain.Entites.Group", "Group")
                         .WithMany("Students")
-                        .HasForeignKey("GroupId1");
+                        .HasForeignKey("GroupId");
 
                     b.Navigation("Group");
                 });
@@ -285,17 +280,9 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Core.Domain.Entites.Test", "Test")
-                        .WithMany()
-                        .HasForeignKey("TestId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Question");
 
                     b.Navigation("Student");
-
-                    b.Navigation("Test");
                 });
 
             modelBuilder.Entity("Core.Domain.Entites.StudentTestQuestionResponse", b =>

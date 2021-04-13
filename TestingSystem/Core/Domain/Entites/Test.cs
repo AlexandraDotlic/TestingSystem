@@ -19,6 +19,7 @@ namespace Core.Domain.Entites
         /// </summary>
         public ICollection<Question> Questions { get; private set; }
 
+
         public int ExaminerId { get; private set; }
         public Examiner Examiner { get; private set; }
         /// <summary>
@@ -62,6 +63,7 @@ namespace Core.Domain.Entites
         private Test()
         {
             Questions = new List<Question>();
+
             IsActive = true;
         }
         public void AddTestQuestion(Question testQuestion)
