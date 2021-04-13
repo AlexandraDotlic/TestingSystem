@@ -20,6 +20,7 @@ namespace Applications.WebClient.Controllers
         private readonly QuestionService QuestionService;
         private readonly ILogger<TestController> Logger;
         private readonly int examinerId = 1; //temp
+        private readonly int studentId = 1;
 
         public TestController(
             TestService testService,
@@ -81,6 +82,29 @@ namespace Applications.WebClient.Controllers
                 };
                 return response;
 
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+        }
+
+
+        [HttpPost]
+        [Route("TakeTheTest")]
+        public async Task<ActionResult<TakeTheTestResponse>> TakeTheTest(TakeTheTestRequest takeTheTestRequest)
+        {
+            try
+            {
+                List<Tuple<int, ICollection<string>>> testResponse = takeTheTestRequest.Response.Select(r => new Tuple<int, ICollection<string>>(r.QuestionId, r.Responses)).ToList();
+                Core.ApplicationServices.DTOs.StudentTestScoreDTO studentTestScore = await TestService.TakeTheTest(takeTheTestRequest.TestId, studentId, testResponse);
+                var response = new TakeTheTestResponse
+                {
+                    StudentScore = studentTestScore.StudentTestScore,
+                    TotalTestScore = studentTestScore.TotalTestScore
+                };
+                return Ok(response);
             }
             catch (Exception e)
             {
