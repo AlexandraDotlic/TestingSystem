@@ -4,14 +4,16 @@ using Core.Infrastructure.DataAccess.EfCoreDataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.Migrations
 {
     [DbContext(typeof(CoreEfCoreDbContext))]
-    partial class CoreEfCoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210415132123_Added_StudentTest_manyToMany_Relation_table")]
+    partial class Added_StudentTest_manyToMany_Relation_table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -170,13 +172,21 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.Migrations
                     b.Property<int>("Score")
                         .HasColumnType("int");
 
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
                     b.Property<int?>("StudentTestStudentId")
                         .HasColumnType("int");
 
                     b.Property<short?>("StudentTestTestId")
                         .HasColumnType("smallint");
 
+                    b.Property<short>("TestId")
+                        .HasColumnType("smallint");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
 
                     b.HasIndex("StudentTestStudentId", "StudentTestTestId");
 
@@ -303,9 +313,17 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.Migrations
 
             modelBuilder.Entity("Core.Domain.Entites.StudentTestQuestion", b =>
                 {
+                    b.HasOne("Core.Domain.Entites.Question", "Question")
+                        .WithMany()
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Core.Domain.Entites.StudentTest", "StudentTest")
                         .WithMany("Questions")
                         .HasForeignKey("StudentTestStudentId", "StudentTestTestId");
+
+                    b.Navigation("Question");
 
                     b.Navigation("StudentTest");
                 });
