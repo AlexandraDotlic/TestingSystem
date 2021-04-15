@@ -119,7 +119,7 @@ namespace Core.ApplicationServices
                 StudentId = studentId,
                 TestId = testId,
                 TotalTestScore = test.TestScore,
-                StudentTestScore = studentTestQuestions.Sum(stq => stq.Score)
+                StudentTestScore = studentTest.Score
             };
         }
     }
