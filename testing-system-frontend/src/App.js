@@ -8,10 +8,10 @@ function App() {
   return (
     <div className="App">
       <Header></Header>
-      {/* <CreateQuestion></CreateQuestion>
-      <CreateGroupForm /> */}
-      <CreateTestForm></CreateTestForm>
-      {/* <QuestionList></QuestionList> */}
+      {/* <CreateTestForm></CreateTestForm> */}
+      <CreateQuestion></CreateQuestion>
+      <CreateGroupForm />
+      <QuestionList></QuestionList>
     </div>
   );
 }

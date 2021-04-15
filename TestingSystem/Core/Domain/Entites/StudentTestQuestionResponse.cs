@@ -11,5 +11,11 @@ namespace Core.Domain.Entites
         public int ResponseScore { get; private set; }
         public int StudentTestQuestionId { get; private set; }
         public StudentTestQuestion StudentTestQuestion { get; private set; }
+
+        public StudentTestQuestionResponse(string response, int responseScore)
+        {
+            Response = response;
+            ResponseScore = responseScore;
+        }
     }
 }

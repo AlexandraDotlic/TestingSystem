@@ -21,7 +21,7 @@ namespace Core.Domain.Entites
         /// <summary>
         /// Grupa kojoj pripada
         /// </summary>
-        public int GroupId { get; private set; }
+        public short? GroupId { get; private set; }
         public Group Group { get; private set; }
         public ICollection<StudentTestQuestion> StudentTestQuestions { get; private set; }
 
@@ -41,6 +41,11 @@ namespace Core.Domain.Entites
             LastName = lastname;
             StudentTestQuestions = new List<StudentTestQuestion>();
             ExternalId = externalId;
+        }
+
+        public void AddStudentTestQuestions(StudentTestQuestion studentTestQuestion)
+        {
+            StudentTestQuestions.Add(studentTestQuestion);
         }
     }
 }

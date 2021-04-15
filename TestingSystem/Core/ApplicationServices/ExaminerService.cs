@@ -18,13 +18,17 @@ namespace Core.ApplicationServices
 
         public async Task<int> CreateExaminer(string firstName, string lastName, string accountId)
         {
+            if (string.IsNullOrEmpty(accountId))
+            {
+                throw new ArgumentNullException($"AccountId must not be null");
+            }
             Examiner examiner = new Examiner(firstName, lastName, accountId);
             await UnitOfWork.ExaminerRepository.Insert(examiner);
             await UnitOfWork.SaveChangesAsync();
             return examiner.Id;
         }
 
-        public async Task DeleteExaminer(short examinerId)
+        public async Task DeleteExaminer(int examinerId)
         {
             Examiner examiner = await UnitOfWork.ExaminerRepository.GetById(examinerId);
             if (examiner == null)

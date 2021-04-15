@@ -41,7 +41,7 @@ namespace Core.ApplicationServices
             await UnitOfWork.SaveChangesAsync();
         }
 
-        public async Task AddStudentToGroup(short groupId, short studentId)
+        public async Task AddStudentToGroup(short groupId, int studentId)
         {
             Group group = await UnitOfWork.GroupRepository.GetFirstOrDefaultWithIncludes(g => g.Id == groupId, g => g.Students);
             Student student = await UnitOfWork.StudentRepository.GetById(studentId);

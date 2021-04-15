@@ -50,6 +50,11 @@ namespace Common.EfCoreDataAccess
             }
         }
 
+        public void ClearTracker()
+        {
+            Context.ChangeTracker.Clear();
+        }
+
         #region IDisposable implementation
 
         private bool disposedValue = false; // To detect redundant calls
