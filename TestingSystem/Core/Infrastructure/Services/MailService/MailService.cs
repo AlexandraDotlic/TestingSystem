@@ -8,7 +8,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace MailService
+namespace Core.Infrastructure.Services.MailService
 {
     public class MailService : IMailService
     {
