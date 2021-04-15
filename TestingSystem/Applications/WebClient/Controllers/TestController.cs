@@ -78,7 +78,7 @@ namespace Applications.WebClient.Controllers
                 ICollection<Core.ApplicationServices.DTOs.QuestionDTO> questions = await QuestionService.GetAllQuestionsForTest(testId);
                 var response = new GetAllQuestionsForTestResponse
                 {
-                    Questions = questions.Select(q => new QuestionDTO(q.TestId, q.QuestionText, q.QuestionScore, q.AnswerOptions)).ToList()
+                    Questions = questions.Select(q => new QuestionDTO(q.Id, q.QuestionText, q.QuestionScore, q.AnswerOptions)).ToList()
                 };
                 return response;
 

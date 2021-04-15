@@ -19,6 +19,7 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess
         public DbSet<AnswerOption> AnswerOptions { get; set; }
         public DbSet<Test> Tests { get; set; }
         public DbSet<Group> Groups { get; set; }
+        public DbSet<StudentTest> StudentTests { get; set; }
         public DbSet<StudentTestQuestion> StudentTestQuestions { get; set; }
         public DbSet<StudentTestQuestionResponse> StudentTestQuestionResponses { get; set; }
 
@@ -29,7 +30,8 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess
             modelBuilder.ApplyConfiguration(new GroupConfiguration());
             modelBuilder.ApplyConfiguration(new TestConfiguration());
             modelBuilder.ApplyConfiguration(new QuestionConfiguration());
-            modelBuilder.ApplyConfiguration(new AnsweOptionConfiguration());
+            modelBuilder.ApplyConfiguration(new AnswerOptionConfiguration());
+            modelBuilder.ApplyConfiguration(new StudentTestConfiguration());
             modelBuilder.ApplyConfiguration(new StudentTestQuestionConfiguration());
             modelBuilder.ApplyConfiguration(new StudentTestQuestionResponseConfiguration());
 

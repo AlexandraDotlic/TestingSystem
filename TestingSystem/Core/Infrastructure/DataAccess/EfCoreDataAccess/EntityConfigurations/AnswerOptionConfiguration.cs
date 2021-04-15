@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.EntityConfigurations
 {
-    public class AnsweOptionConfiguration : IEntityTypeConfiguration<AnswerOption>
+    public class AnswerOptionConfiguration : IEntityTypeConfiguration<AnswerOption>
     {
         public void Configure(EntityTypeBuilder<AnswerOption> builder)
         {
