@@ -120,7 +120,24 @@ namespace Core.ApplicationServices
                 TestId = testId,
                 TotalTestScore = test.TestScore,
                 StudentTestScore = studentTest.Score
-            };
+         
+            
+           };
         }
+
+        public async Task<ICollection<TestDTO>> GetAllTestsForExaminer(short examinerId)
+        {
+            IReadOnlyCollection<Test> tests = await UnitOfWork.TestRepository.SearchByWithIncludes(t => t.ExaminerId == examinerId);
+
+            List<TestDTO> testDTOs = tests == null || tests.Count == 0
+                ? null
+                : tests.Select(t => new TestDTO(t.Id, t.Title, t.ExaminerId, t.StartDate, t.EndDate, t.IsActive, t.TestScore)).ToList();
+            return testDTOs;
+
+        }
+
+       
+
+
     }
 }
