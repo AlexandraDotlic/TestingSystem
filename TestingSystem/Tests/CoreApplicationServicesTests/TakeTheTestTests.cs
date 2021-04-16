@@ -81,9 +81,9 @@ namespace Tests.CoreApplicationServicesTests
             var studentTestScore = await TestService.TakeTheTest(testId, studentId, new List<Tuple<int, ICollection<string>>> { question1Response, question2Response });
 
             IReadOnlyCollection<StudentTestQuestion> studentTestQuestons = await CoreUnitOfWork.StudentTestQuestionRepository
-                .SearchByWithIncludes(stq => stq.StudentId == studentId
-                && stq.TestId == testId
-                , stq => stq.Responses);
+                .SearchByWithIncludes(stq => stq.StudentTest.StudentId == studentId
+                && stq.StudentTest.TestId == testId
+                , stq => stq.Responses, stq => stq.StudentTest);
 
             Assert.AreEqual(2, studentTestQuestons.Count);
             Assert.AreEqual(2, studentTestScore.StudentTestScore);

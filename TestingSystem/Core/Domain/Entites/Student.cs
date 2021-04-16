@@ -23,7 +23,7 @@ namespace Core.Domain.Entites
         /// </summary>
         public short? GroupId { get; private set; }
         public Group Group { get; private set; }
-        public ICollection<StudentTestQuestion> StudentTestQuestions { get; private set; }
+        public ICollection<StudentTest> StudentTests { get; private set; }
 
         /// <summary>
         /// Id Account-a
@@ -31,7 +31,7 @@ namespace Core.Domain.Entites
         public string ExternalId { get; private set; }
         public Student()
         {
-            StudentTestQuestions = new List<StudentTestQuestion>();
+            StudentTests = new List<StudentTest>();
         }
 
         
@@ -39,13 +39,13 @@ namespace Core.Domain.Entites
         {
             FirstName = firstname;
             LastName = lastname;
-            StudentTestQuestions = new List<StudentTestQuestion>();
+            StudentTests = new List<StudentTest>();
             ExternalId = externalId;
         }
 
-        public void AddStudentTestQuestions(StudentTestQuestion studentTestQuestion)
+        public void AddStudentTest(StudentTest studentTest)
         {
-            StudentTestQuestions.Add(studentTestQuestion);
+            StudentTests.Add(studentTest);
         }
     }
 }
