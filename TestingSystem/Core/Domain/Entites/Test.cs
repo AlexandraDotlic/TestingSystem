@@ -69,6 +69,11 @@ namespace Core.Domain.Entites
 
             IsActive = true;
         }
+
+        public void Activate() {
+            IsActive = true;
+        }
+
         public void AddQuestion(Question testQuestion)
         {
             Questions.Add(testQuestion);
