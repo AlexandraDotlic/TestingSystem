@@ -122,5 +122,19 @@ namespace Core.ApplicationServices
                 StudentTestScore = studentTest.Score
             };
         }
+
+        public async Task ActivateTest(short testId)
+        {
+            Test test = await UnitOfWork.TestRepository.GetFirstOrDefaultWithIncludes(t => t.Id == testId);
+            if (test == null)
+            {
+                throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
+            }
+
+            test.Activate();
+            await UnitOfWork.TestRepository.Update(test);
+        }
+
+
     }
 }
