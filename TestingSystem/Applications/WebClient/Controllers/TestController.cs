@@ -129,6 +129,21 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("DectivateTest")]
+        public async Task<IActionResult> DectivateTest(short testId)
+        {
+            try
+            {
+                await TestService.DectivateTest(testId);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+        }
 
     }
 }
