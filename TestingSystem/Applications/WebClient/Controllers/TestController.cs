@@ -113,6 +113,22 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("ActivateTest/{testId}")]
+        public async Task<IActionResult> ActivateTest(short testId)
+        {
+            try
+            {
+                await TestService.ActivateTest(testId);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+        }
+
 
     }
 }
