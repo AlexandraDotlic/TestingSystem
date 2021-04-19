@@ -8,5 +8,6 @@ namespace Core.Domain.Services.External.MailService
     public interface IMailService
     {
         Task SendEmailAsync(MailRequest mailRequest);
+        Task SendWelcomeEmailAsync(WelcomeMailRequest welcomeMailRequest);
     }
 }
