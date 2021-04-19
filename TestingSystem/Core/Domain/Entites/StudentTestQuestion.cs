@@ -8,11 +8,8 @@ namespace Core.Domain.Entites
     public class StudentTestQuestion
     {
         public int Id { get; private set; }
-        public int StudentId { get; private set; }
-        public Student Student { get; private set; }
         public int QuestionId { get; private set; }
-        public Question Question { get; private set; }
-        public short TestId { get; private set; }
+        public StudentTest StudentTest { get; private set; }
         public ICollection<StudentTestQuestionResponse> Responses { get; private set; }
         public int Score { get; private set; }
 
@@ -21,13 +18,9 @@ namespace Core.Domain.Entites
             Responses = new List<StudentTestQuestionResponse>();
         }
 
-        public StudentTestQuestion(Student student, Question question, ICollection<StudentTestQuestionResponse> responses)
+        public StudentTestQuestion(int questionId, ICollection<StudentTestQuestionResponse> responses)
         {
-            Student = student;
-            StudentId = student.Id;
-            Question = question;
-            QuestionId = question.Id;
-            TestId = question.Test.Id;
+            QuestionId = questionId;
             Responses = responses;
             Score = Responses == null || Responses.Count == 0 ? 0 : Responses.Sum(r => r.ResponseScore); 
         }

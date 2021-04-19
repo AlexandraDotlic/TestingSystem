@@ -78,7 +78,7 @@ namespace Applications.WebClient.Controllers
                 ICollection<Core.ApplicationServices.DTOs.QuestionDTO> questions = await QuestionService.GetAllQuestionsForTest(testId);
                 var response = new GetAllQuestionsForTestResponse
                 {
-                    Questions = questions.Select(q => new QuestionDTO(q.TestId, q.QuestionText, q.QuestionScore, q.AnswerOptions)).ToList()
+                    Questions = questions.Select(q => new QuestionDTO(q.Id, q.QuestionText, q.QuestionScore, q.AnswerOptions)).ToList()
                 };
                 return response;
 
@@ -105,6 +105,22 @@ namespace Applications.WebClient.Controllers
                     TotalTestScore = studentTestScore.TotalTestScore
                 };
                 return Ok(response);
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+        }
+
+        [HttpPost]
+        [Route("ActivateTest/{testId}")]
+        public async Task<IActionResult> ActivateTest(short testId)
+        {
+            try
+            {
+                await TestService.ActivateTest(testId);
+                return Ok();
             }
             catch (Exception e)
             {

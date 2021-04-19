@@ -59,7 +59,7 @@ namespace Core.ApplicationServices
                 answerOptionsCollection.Add(new AnswerOption(option.Item1, option.Item2));
             }
             Question question = new Question(questionText, answerOptionsCollection);
-            test.AddTestQuestion(question);
+            test.AddQuestion(question);
             await UnitOfWork.TestRepository.Update(test);
             await UnitOfWork.SaveChangesAsync();
         }
@@ -104,14 +104,13 @@ namespace Core.ApplicationServices
                     studentTestQuestionResponses.Add(studentTestQuestionResponse);
 
                 }
-                var studentTestQuestion = new StudentTestQuestion(student, question, studentTestQuestionResponses);
+                var studentTestQuestion = new StudentTestQuestion(question.Id, studentTestQuestionResponses);
                 studentTestQuestions.Add(studentTestQuestion);
             }
             await UnitOfWork.BeginTransactionAsync();
-            foreach (var studentTestQuestion in studentTestQuestions)
-            {
-                student.AddStudentTestQuestions(studentTestQuestion);
-            }
+            StudentTest studentTest = new StudentTest(student, test, studentTestQuestions);
+            student.AddStudentTest(studentTest);
+
             await UnitOfWork.StudentRepository.Update(student);
             await UnitOfWork.SaveChangesAsync();
             await UnitOfWork.CommitTransactionAsync();
@@ -120,8 +119,23 @@ namespace Core.ApplicationServices
                 StudentId = studentId,
                 TestId = testId,
                 TotalTestScore = test.TestScore,
-                StudentTestScore = studentTestQuestions.Sum(stq => stq.Score)
+                StudentTestScore = studentTest.Score
             };
         }
+
+        public async Task ActivateTest(short testId)
+        {
+            Test test = await UnitOfWork.TestRepository.GetById(testId);
+            if (test == null)
+            {
+                throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
+            }
+
+            test.Activate();
+            await UnitOfWork.TestRepository.Update(test);
+            await UnitOfWork.SaveChangesAsync();
+        }
+
+
     }
 }
