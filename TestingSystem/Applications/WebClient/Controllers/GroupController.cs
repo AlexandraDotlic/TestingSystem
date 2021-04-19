@@ -1,12 +1,14 @@
-﻿using Applications.WebClient.Helpers;
+﻿using Applications.WebClient.DTOs;
+using Applications.WebClient.Helpers;
 using Applications.WebClient.Requests;
+using Applications.WebClient.Responses;
 using Core.ApplicationServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-
 
 namespace Applications.WebClient.Controllers
 {
@@ -17,14 +19,17 @@ namespace Applications.WebClient.Controllers
     {
 
         private readonly GroupService GroupService;
+        private readonly StudentService StudentService;
         private readonly ILogger<GroupController> Logger;
         private readonly int examinerId = 1; //temp
 
         public GroupController(
             GroupService groupService,
+            StudentService studentService,
             ILogger<GroupController> logger)
         {
             GroupService = groupService;
+            StudentService = studentService;
             Logger = logger;
         }
 
@@ -53,6 +58,27 @@ namespace Applications.WebClient.Controllers
             {
                 await GroupService.AddStudentToGroup(addStudentToGroupRequest.GroupId, addStudentToGroupRequest.StudentId);
                 return Ok();
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+        }
+
+        [HttpGet]
+        [Route("GetAllStudentsForGroup/{groupId}")]
+        public async Task<ActionResult<GetAllStudentsForGroupResponse>> GetAllStudents(short groupId)
+        {
+            try
+            {
+                ICollection<Core.ApplicationServices.DTOs.StudentDTO> students = await StudentService.GetAllStudentsForGroup(groupId);
+                var response = new GetAllStudentsForGroupResponse
+                {
+                    Students = students.Select(s => new StudentDTO(s.Id, s.FirstName, s.LastName, s.GroupId)).ToList()
+                };
+                return response;
+
             }
             catch (Exception e)
             {
