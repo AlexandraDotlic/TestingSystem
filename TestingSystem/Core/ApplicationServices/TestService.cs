@@ -125,7 +125,7 @@ namespace Core.ApplicationServices
            };
         }
 
-        public async Task<ICollection<TestDTO>> GetAllTestsForExaminer(short examinerId)
+        public async Task<ICollection<TestDTO>> GetAllTestsForExaminer(int examinerId)
         {
             IReadOnlyCollection<Test> tests = await UnitOfWork.TestRepository.SearchByWithIncludes(t => t.ExaminerId == examinerId);
 
@@ -135,8 +135,6 @@ namespace Core.ApplicationServices
             return testDTOs;
 
         }
-
-       
 
 
     }
