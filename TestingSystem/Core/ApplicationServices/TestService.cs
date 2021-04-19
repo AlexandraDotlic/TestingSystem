@@ -138,7 +138,7 @@ namespace Core.ApplicationServices
 
         public async Task DectivateTest(short testId)
         {
-            Test test = await UnitOfWork.TestRepository.GetFirstOrDefaultWithIncludes(t => t.Id == testId);
+            Test test = await UnitOfWork.TestRepository.GetById(testId);
             if (test == null)
             {
                 throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
