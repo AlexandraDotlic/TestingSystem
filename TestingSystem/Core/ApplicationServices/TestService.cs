@@ -63,6 +63,26 @@ namespace Core.ApplicationServices
             await UnitOfWork.TestRepository.Update(test);
             await UnitOfWork.SaveChangesAsync();
         }
+
+        public async Task RemoveQuestionFromTest(short testId, int questionId)
+        {
+            Test test = await UnitOfWork.TestRepository.GetFirstOrDefaultWithIncludes(t => t.Id == testId, t => t.Questions);
+            Question question = await UnitOfWork.QuestionRepository.GetById(questionId);
+
+            if (test == null)
+            {
+                throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
+            }
+
+            if (question == null)
+            {
+                throw new ArgumentNullException($"{nameof(Question)} with Id {questionId} not exist");
+            }
+
+            test.RemoveQuestion(question);
+            await UnitOfWork.TestRepository.Update(test);
+            await UnitOfWork.SaveChangesAsync();
+        }
         /// <summary>
         /// 
         /// </summary>
