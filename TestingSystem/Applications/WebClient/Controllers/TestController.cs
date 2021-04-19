@@ -114,7 +114,7 @@ namespace Applications.WebClient.Controllers
         }
 
         [HttpPost]
-        [Route("ActivateTest")]
+        [Route("ActivateTest/{testId}")]
         public async Task<IActionResult> ActivateTest(short testId)
         {
             try
