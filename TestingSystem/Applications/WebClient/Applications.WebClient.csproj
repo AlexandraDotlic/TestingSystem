@@ -21,6 +21,7 @@
     <ProjectReference Include="..\..\Authentication\Domain\Authentication.Domain.csproj" />
     <ProjectReference Include="..\..\Core\ApplicationServices\Core.ApplicationServices.csproj" />
     <ProjectReference Include="..\..\Core\Infrastructure\DataAccess\EfCoreDataAccess\Core.Infrastructure.DataAccess.EfCoreDataAccess.csproj" />
+    <ProjectReference Include="..\..\Core\Infrastructure\Services\MailService\Core.Infrastructure.Services.MailService.csproj" />
     <ProjectReference Include="..\..\EfCoreDataAccess\Authentication.Infrastructure.DataAccess.EfCoreDataAccess.csproj" />
   </ItemGroup>
 
@@ -28,6 +29,12 @@
     <Content Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Templates\WelcomeTemplate.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
