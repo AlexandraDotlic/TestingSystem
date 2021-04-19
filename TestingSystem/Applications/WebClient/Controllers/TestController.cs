@@ -130,7 +130,7 @@ namespace Applications.WebClient.Controllers
         }
 
         [HttpPost]
-        [Route("DectivateTest")]
+        [Route("DectivateTest/{testId}")]
         public async Task<IActionResult> DectivateTest(short testId)
         {
             try
