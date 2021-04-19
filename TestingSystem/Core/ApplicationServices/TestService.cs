@@ -33,7 +33,7 @@ namespace Core.ApplicationServices
         public async Task DeleteTest(short testId)
         {
             Test test = await UnitOfWork.TestRepository.GetById(testId);
-            if(test == null)
+            if (test == null)
             {
                 throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
             }
@@ -50,7 +50,7 @@ namespace Core.ApplicationServices
                 throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
             }
             ICollection<AnswerOption> answerOptionsCollection = new List<AnswerOption>();
-            if(answerOptionTuples == null || answerOptionTuples.Count == 0)
+            if (answerOptionTuples == null || answerOptionTuples.Count == 0)
             {
                 throw new ArgumentNullException($"{nameof(answerOptionTuples)}");
             }
@@ -92,7 +92,7 @@ namespace Core.ApplicationServices
                 .SearchByWithIncludes(q => q.TestId == testId, q => q.AnswerOptions);
 
             ICollection<StudentTestQuestion> studentTestQuestions = new List<StudentTestQuestion>();
-           
+
             foreach (var questionResponse in questonResponsesCollection)
             {
                 var question = testQuestions.Where(q => q.Id == questionResponse.Item1).FirstOrDefault();
@@ -120,10 +120,11 @@ namespace Core.ApplicationServices
                 TestId = testId,
                 TotalTestScore = test.TestScore,
                 StudentTestScore = studentTest.Score
-         
-            
-           };
+
+
+            };
         }
+
 
         public async Task<ICollection<TestDTO>> GetAllTestsForExaminer(int examinerId)
         {
@@ -135,7 +136,20 @@ namespace Core.ApplicationServices
             return testDTOs;
 
         }
+         public async Task ActivateTest(short testId)
+         {
+                Test test = await UnitOfWork.TestRepository.GetById(testId);
+                if (test == null)
+                {
+                    throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
+                }
+
+                test.Activate();
+                await UnitOfWork.TestRepository.Update(test);
+                await UnitOfWork.SaveChangesAsync();
+
+         }
 
 
+        }
     }
-}
