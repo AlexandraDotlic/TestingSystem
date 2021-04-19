@@ -55,7 +55,6 @@ namespace Core.Infrastructure.Services.MailService
 
         public async Task SendWelcomeEmailAsync(WelcomeMailRequest request)
         {
-            string FilePath = Directory.GetCurrentDirectory() + "\\Templates\\WelcomeTemplate.html";
             StreamReader str = new StreamReader(WelcomeMailTemplatePath);
             string MailText = str.ReadToEnd();
             str.Close();
