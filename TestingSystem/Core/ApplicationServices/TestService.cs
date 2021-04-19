@@ -150,6 +150,19 @@ namespace Core.ApplicationServices
 
          }
 
+        public async Task DectivateTest(short testId)
+        {
+            Test test = await UnitOfWork.TestRepository.GetById(testId);
+            if (test == null)
+            {
+                throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
+            }
+
+            test.Dectivate();
+            await UnitOfWork.TestRepository.Update(test);
+            await UnitOfWork.SaveChangesAsync();
+        }
+
 
         }
     }
