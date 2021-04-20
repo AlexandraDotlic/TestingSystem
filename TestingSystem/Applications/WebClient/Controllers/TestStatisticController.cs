@@ -32,7 +32,6 @@ namespace Applications.WebClient.Controllers
             Logger = logger;
         }
 
-        //Create statistic for test
         [HttpPost]
         [Route("CreateTestStatistic")]
         public async Task<IActionResult> CreateTestStatistic(CreateTestStatisticRequest createTestStatisticRequest)
@@ -49,7 +48,6 @@ namespace Applications.WebClient.Controllers
             }
         }
 
-        //Create statistic for test with delay
         [HttpPost]
         [Route("ScheduleTestStatisticCreation")]
         public async Task<IActionResult> ScheduleTestStatisticCreation(CreateTestStatisticRequest createTestStatisticRequest)
@@ -71,7 +69,6 @@ namespace Applications.WebClient.Controllers
             }
         }
 
-        //Schedule creating statistics periodicly???
 
         [HttpPost]
         [Route("ScheduleMonthlyTestStatisticCreation")]
