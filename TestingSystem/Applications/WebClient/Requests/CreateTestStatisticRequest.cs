@@ -13,5 +13,6 @@ namespace Applications.WebClient.Requests
         public short TestId { get; set; }
         [DataMember]
         public int? GroupId { get; set; }
+        public DateTime? CreationDate { get; set; }
     }
 }
