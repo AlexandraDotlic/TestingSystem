@@ -9,6 +9,7 @@ namespace Core.Domain.Entites
     {
         public int StudentId { get; private set; }
         public Student Student { get; private set; }
+        public short? StudentGroupId { get; private set; }
         public short TestId { get; private set; }
         public Test Test { get; private set; }
         public ICollection<StudentTestQuestion> Questions { get; private set; }
@@ -22,6 +23,7 @@ namespace Core.Domain.Entites
         {
             Student = student;
             StudentId = student.Id;
+            StudentGroupId = student.GroupId;
             Test = test;
             TestId = test.Id;
             Questions = questions;

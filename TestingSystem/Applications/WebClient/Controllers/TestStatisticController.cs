@@ -39,7 +39,7 @@ namespace Applications.WebClient.Controllers
         {
             try
             {
-                await JobService.EnqueueJob<TestStatisticService>(ts => ts.CreateStatisticForTest(createTestStatisticRequest.TestId, examinerId));
+                await JobService.EnqueueJob<TestStatisticService>(ts => ts.CreateStatisticForTest(createTestStatisticRequest.TestId, examinerId, createTestStatisticRequest.GroupId));
                 return Ok();
             }
             catch (Exception e)
@@ -61,7 +61,7 @@ namespace Applications.WebClient.Controllers
                 {
                     throw new InvalidOperationException("Creation date cannot be erlier than today");
                 }
-                await JobService.ScheduleJob<TestStatisticService>(ts => ts.CreateStatisticForTest(createTestStatisticRequest.TestId, examinerId), delay);
+                await JobService.ScheduleJob<TestStatisticService>(ts => ts.CreateStatisticForTest(createTestStatisticRequest.TestId, examinerId, createTestStatisticRequest.GroupId), delay);
                 return Ok();
             }
             catch (Exception e)
@@ -80,7 +80,7 @@ namespace Applications.WebClient.Controllers
             try
             {
                
-                await JobService.CreateMonthlyRecurringJob<TestStatisticService>(ts => ts.CreateStatisticForTest(createTestStatisticRequest.TestId, examinerId));
+                await JobService.CreateMonthlyRecurringJob<TestStatisticService>(ts => ts.CreateStatisticForTest(createTestStatisticRequest.TestId, examinerId, createTestStatisticRequest.GroupId));
                 return Ok();
             }
             catch (Exception e)

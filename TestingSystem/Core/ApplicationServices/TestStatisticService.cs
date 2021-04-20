@@ -2,6 +2,7 @@
 using Core.Domain.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,14 +16,16 @@ namespace Core.ApplicationServices
             UnitOfWork = unitOfWork;
         }
 
-        public async Task<long> CreateStatisticForTest(short testId, int examinerId)
+        public async Task<long> CreateStatisticForTest(short testId, int examinerId, short? groupId = null)
         {
             Examiner examiner = await UnitOfWork.ExaminerRepository.GetById(examinerId);
             if (examiner == null)
             {
                 throw new ArgumentNullException($"{nameof(Examiner)} with Id {examinerId} not exist");
             }
-            Test test = await UnitOfWork.TestRepository.GetFirstOrDefaultWithIncludes(t => t.Id == testId, t => t.StudentTests);
+            Test test = await UnitOfWork.TestRepository.GetFirstOrDefaultWithIncludes(t => t.Id == testId,
+                    t => t.StudentTests.Where(st => st.StudentGroupId == groupId));
+           
             if (test == null)
             {
                 throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
