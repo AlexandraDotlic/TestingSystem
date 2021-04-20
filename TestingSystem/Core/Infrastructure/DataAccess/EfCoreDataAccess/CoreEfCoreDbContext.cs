@@ -22,7 +22,7 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess
         public DbSet<StudentTest> StudentTests { get; set; }
         public DbSet<StudentTestQuestion> StudentTestQuestions { get; set; }
         public DbSet<StudentTestQuestionResponse> StudentTestQuestionResponses { get; set; }
-        public DbSet<TestStatistic> MyProperty { get; set; }
+        public DbSet<TestStatistic> TestStatistics { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
