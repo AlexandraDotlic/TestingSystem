@@ -11,7 +11,7 @@ namespace Applications.WebClient.DTOs
     public class GroupDTO
     {
         [DataMember]
-        public int Id { get; set; }
+        public short Id { get; set; }
         [DataMember]
         public string Title { get; set; }
         [DataMember]
@@ -21,7 +21,7 @@ namespace Applications.WebClient.DTOs
         {
 
         }
-        public GroupDTO(int id, string title, int examinerId)
+        public GroupDTO(short id, string title, int examinerId)
         {
             Id = id;
             Title = title;

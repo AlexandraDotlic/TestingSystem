@@ -8,7 +8,7 @@ namespace Core.ApplicationServices.DTOs
 {
     public class GroupDTO
     {
-        public int Id { get; set; }
+        public short Id { get; set; }
         public string Title { get; set; }
         public int ExaminerId { get; set; }
         
@@ -17,7 +17,7 @@ namespace Core.ApplicationServices.DTOs
 
         }
 
-        public GroupDTO(int id, string title, int examinerId)
+        public GroupDTO(short id, string title, int examinerId)
         {
             Id = id;
             Title = title;
