@@ -13,6 +13,7 @@ namespace Core.Domain.Entites
         public Test Test { get; private set; }
         public ICollection<StudentTestQuestion> Questions { get; private set; }
         public int Score { get; private set; }
+        public bool IsTestPassed { get; private set; }
         public StudentTest()
         {
 
@@ -25,6 +26,14 @@ namespace Core.Domain.Entites
             TestId = test.Id;
             Questions = questions;
             Score = questions.Sum(q => q.Score);
+            if((test.TestScore / 2) > Score)
+            {
+                IsTestPassed = false;
+            }
+            else
+            {
+                IsTestPassed = true;
+            }
         }
     }
 }

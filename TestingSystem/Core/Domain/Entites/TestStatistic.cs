@@ -7,32 +7,31 @@ namespace Core.Domain.Entites
     public class TestStatistic
     {
         public long Id { get; private set; }
-        public int TestId { get; private set; }
+        public short TestId { get; private set; }
+        public string TestTitle { get; private set; }
         public int ExaminerId { get; private set; }
         public int PercentageOfStudentsWhoPassedTheTest { get; private set; }
         public int NumberOfStudentsWhoTookTheTest { get; private set; }
-        public DateTime? FromDate { get; private set; }
-        public DateTime? ToDate { get; private set; }
+        public DateTime Date { get; private set; }
         public TestStatistic()
         {
                 
         }
 
         public TestStatistic(
-            int testId, 
+            short testId, 
+            string testTitle,
             int examinerId, 
             int percentageOfStudentsWhoPassedTheTest, 
-            int numberOfStudentsWhoTookTheTest,
-            DateTime? fromDate = null, 
-            DateTime? toDate = null
+            int numberOfStudentsWhoTookTheTest
             )
         {
             TestId = testId;
+            TestTitle = testTitle;
             ExaminerId = examinerId;
             PercentageOfStudentsWhoPassedTheTest = percentageOfStudentsWhoPassedTheTest;
             NumberOfStudentsWhoTookTheTest = numberOfStudentsWhoTookTheTest;
-            FromDate = fromDate;
-            ToDate = toDate;
+            Date = DateTime.Now;
         }
     }
 }
