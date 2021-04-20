@@ -4,14 +4,16 @@ using Core.Infrastructure.DataAccess.EfCoreDataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.Migrations
 {
     [DbContext(typeof(CoreEfCoreDbContext))]
-    partial class CoreEfCoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210420203133_Updated_StudentTest_with_StudentGroupId")]
+    partial class Updated_StudentTest_with_StudentGroupId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
