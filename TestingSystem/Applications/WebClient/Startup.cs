@@ -3,8 +3,10 @@ using Authentication.Domain.Entities;
 using Authentication.Infrastructure.DataAccess.EfCoreDataAccess;
 using Core.ApplicationServices;
 using Core.Domain.Repositories;
+using Core.Domain.Services.External.JobService;
 using Core.Domain.Services.External.MailService;
 using Core.Infrastructure.DataAccess.EfCoreDataAccess;
+using Core.Infrastructure.Services.HangfireJobService;
 using Core.Infrastructure.Services.MailService;
 using Core.Infrastructure.Services.MailService.Settings;
 using Hangfire;
@@ -64,6 +66,8 @@ namespace WebClient
             services.AddScoped<ExaminerService>();
             services.AddScoped<QuestionService>();
             services.AddScoped<UserService>();
+            services.AddScoped<TestStatisticService>();
+            services.AddScoped<IJobService, HangfireJobService>();
 
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             services.AddTransient<IMailService, MailService>();
@@ -86,6 +90,8 @@ namespace WebClient
             app.UseCors("LocalhostPolicy");
 
             app.UseAuthorization();
+
+            app.UseHangfireDashboard("/mydashboard");
 
             app.UseAuthentication();
 

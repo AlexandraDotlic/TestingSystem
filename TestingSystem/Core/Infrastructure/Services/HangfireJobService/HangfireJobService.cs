@@ -4,7 +4,7 @@ using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace HangfireJobService
+namespace Core.Infrastructure.Services.HangfireJobService
 {
     public class HangfireJobService : IJobService
     {
