@@ -18,15 +18,18 @@ namespace Applications.WebClient.Controllers
     {
         private readonly ExaminerService ExaminerService;
         private readonly TestService TestService;
+        private readonly GroupService GroupService;
         private readonly ILogger<ExaminerController> Logger;
 
         public ExaminerController(
            ExaminerService examinerService,
            TestService testService,
+           GroupService groupsService,
            ILogger<ExaminerController> logger)
         {
             ExaminerService = examinerService;
             TestService = testService;
+            GroupService = groupsService;
             Logger = logger;
         }
 
@@ -52,9 +55,31 @@ namespace Applications.WebClient.Controllers
                 return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
             }
         }
+
+
+        [HttpGet]
+        [Route("GetAllGroupsForExaminer/{examinerId}")]
+        public async Task<ActionResult<GetAllGroupsForExaminerResponse>> GetAllGroupsForExaminer(int examinerId)
+        {
+            try
+            {
+                ICollection<Core.ApplicationServices.DTOs.GroupDTO> groups = await GroupService.GetAllGroupsForExaminer(examinerId);
+
+                var response = new GetAllGroupsForExaminerResponse
+                {
+                    Groups = groups.Select(g => new GroupDTO(g.Id, g.Title, g.ExaminerId)).ToList()
+
+                };
+                return response;
+
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+        }
+
     }
-
-
-
 
 }
