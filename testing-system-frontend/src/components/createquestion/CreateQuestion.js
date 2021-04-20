@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { data } from 'jquery';
 import React from 'react'
 import Answer from './Answer'
 
@@ -63,21 +62,16 @@ class CreateQuestion extends React.Component {
         
         let dataObject = {
         testId: this.state.testId,
-        questionTest: this.state.questionText,
+        questionText: this.state.questionText,
         answerOptions: answers
         }
-        console.log(dataObject);
 
         debugger;
-        axios.post('https://localhost:44329/Test/AddQuestionToTest', 
-            {}
-            )
-            .then(function (response) {
-                console.log("Success: " + response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        axios.defaults.headers.post['Content-Type'] = 'application/json';
+        axios.post(
+            "https://localhost:44329/Test/AddQuestionToTest", 
+            JSON.stringify(dataObject)
+        );
     }
 
     render() {
