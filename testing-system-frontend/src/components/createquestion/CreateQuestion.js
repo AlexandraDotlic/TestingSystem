@@ -62,18 +62,22 @@ class CreateQuestion extends React.Component {
         }
         
         let dataObject = {
-            testId: this.state.testId,
-            questionTest: this.state.questionText,
-            answerOptions: answers
+        testId: this.state.testId,
+        questionTest: this.state.questionText,
+        answerOptions: answers
         }
         console.log(dataObject);
-        debugger;
 
-        axios({ 
-            method: 'post',
-            url: 'https://localhost:44329/Test/AddQuestionToTest',
-            data: dataObject
-        });
+        debugger;
+        axios.post('https://localhost:44329/Test/AddQuestionToTest', 
+            {}
+            )
+            .then(function (response) {
+                console.log("Success: " + response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     render() {
