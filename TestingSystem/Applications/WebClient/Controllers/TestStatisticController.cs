@@ -2,12 +2,9 @@
 using Applications.WebClient.Requests;
 using Core.ApplicationServices;
 using Core.Domain.Services.External.JobService;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Applications.WebClient.Controllers
@@ -54,15 +51,15 @@ namespace Applications.WebClient.Controllers
 
         //Create statistic for test with delay
         [HttpPost]
-        [Route("CreateTestStatisticWithDelay")]
-        public async Task<IActionResult> CreateTestStatisticWithDelay(CreateTestStatisticRequest createTestStatisticRequest)
+        [Route("ScheduleTestStatisticCreation")]
+        public async Task<IActionResult> ScheduleTestStatisticCreation(CreateTestStatisticRequest createTestStatisticRequest)
         {
             try
             {
                 var delay = (TimeSpan)createTestStatisticRequest.CreationDate?.Subtract(DateTime.Now);
                 if(delay.TotalSeconds < 0)
                 {
-                    throw new InvalidOperationException("Creation date must be later than today");
+                    throw new InvalidOperationException("Creation date cannot be erlier than today");
                 }
                 await JobService.ScheduleJob<TestStatisticService>(ts => ts.CreateStatisticForTest(createTestStatisticRequest.TestId, examinerId), delay);
                 return Ok();
@@ -75,5 +72,23 @@ namespace Applications.WebClient.Controllers
         }
 
         //Schedule creating statistics periodicly???
+
+        [HttpPost]
+        [Route("ScheduleMonthlyTestStatisticCreation")]
+        public async Task<IActionResult> ScheduleMonthlyTestStatisticCreation(CreateTestStatisticRequest createTestStatisticRequest)
+        {
+            try
+            {
+               
+                await JobService.CreateMonthlyRecurringJob<TestStatisticService>(ts => ts.CreateStatisticForTest(createTestStatisticRequest.TestId, examinerId));
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+        }
+
     }
 }

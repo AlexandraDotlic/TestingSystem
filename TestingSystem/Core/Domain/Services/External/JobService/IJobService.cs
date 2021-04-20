@@ -10,7 +10,7 @@ namespace Core.Domain.Services.External.JobService
     {
         Task<string> EnqueueJob<T>(Expression<Action<T>> methodCall);
         Task<string> ScheduleJob<T>(Expression<Action<T>> methodCall, TimeSpan delay);
-        Task CreateRecurringJob<T>(Expression<Action<T>> methodCall, Func<string> cronExpression);
+        Task CreateMonthlyRecurringJob<T>(Expression<Action<T>> methodCall);
 
     }
 }

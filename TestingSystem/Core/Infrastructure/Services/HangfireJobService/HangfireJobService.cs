@@ -8,9 +8,9 @@ namespace Core.Infrastructure.Services.HangfireJobService
 {
     public class HangfireJobService : IJobService
     {
-        public async Task CreateRecurringJob<T>(Expression<Action<T>> methodCall, Func<string> cronExpression)
+        public async Task CreateMonthlyRecurringJob<T>(Expression<Action<T>> methodCall)
         {
-            RecurringJob.AddOrUpdate(methodCall, cronExpression);
+            RecurringJob.AddOrUpdate(methodCall, Cron.Monthly);
         }
 
         public async Task<string> EnqueueJob<T>(Expression<Action<T>> methodCall)
