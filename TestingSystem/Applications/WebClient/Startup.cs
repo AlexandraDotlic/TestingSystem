@@ -7,6 +7,7 @@ using Core.Domain.Services.External.MailService;
 using Core.Infrastructure.DataAccess.EfCoreDataAccess;
 using Core.Infrastructure.Services.MailService;
 using Core.Infrastructure.Services.MailService.Settings;
+using Hangfire;
 using Infrastructure.DataAccess.EfCoreDataAccess.Seeds;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -42,6 +43,8 @@ namespace WebClient
             services.AddDbContextPool<AuthenticationEfCoreDbContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("AuthenticationDevConnection"))
            );
+            services.AddHangfire(x => x.UseSqlServerStorage(Configuration.GetConnectionString("HangfireDevConnection")));
+            services.AddHangfireServer();
 
             #region Identity
             services.AddIdentity<User, IdentityRole>(options =>
