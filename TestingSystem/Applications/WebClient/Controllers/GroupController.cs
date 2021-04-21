@@ -68,7 +68,7 @@ namespace Applications.WebClient.Controllers
 
         [HttpGet]
         [Route("GetAllStudentsForGroup/{groupId}")]
-        public async Task<ActionResult<GetAllStudentsForGroupResponse>> GetAllStudents(short groupId)
+        public async Task<ActionResult<GetAllStudentsForGroupResponse>> GetAllStudentsForGroup(short groupId)
         {
             try
             {
