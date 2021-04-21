@@ -93,7 +93,7 @@ namespace Core.ApplicationServices
             TestStatistic testStatistic = await UnitOfWork.TestStatisticRepository
                 .GetFirstOrDefaultWithIncludes(ts => ts.TestId == testId 
                                 && ts.ExaminerId == examinerId
-                                && ts.Date == date);
+                                && ts.Date.Date == date.Date);
             var testStatisticDTO = testStatistic != null
                 ? new TestStatisticDTO(
                     testStatistic.Id,

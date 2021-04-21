@@ -97,10 +97,33 @@ namespace Applications.WebClient.Controllers
             try
             {
                 System.Collections.Generic.ICollection<Core.ApplicationServices.DTOs.TestStatisticDTO> testStatistics = await TestStatisticService.GetAllStatisticsForTest(testId, examinerId);
-                var response = new GetAllStatisticsForTestResponse
+                var response = testStatistics == null 
+                    ? null
+                    : new GetAllStatisticsForTestResponse
                 {
                     TestStatistics = testStatistics.Select(ts => new TestStatisticDTO(ts.Id, ts.TestId, ts.TestTitle, ts.PercentageOfStudentsWhoPassedTheTest, ts.NumberOfStudentsWhoTookTheTest, ts.Date)).ToList()
                 };
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+        }
+
+        [HttpGet]
+        [Route("GetStatisticForTestByDate")]
+        public async Task<ActionResult<TestStatisticDTO>> GetStatisticForTestByDate(short testId, DateTime date)
+        {
+            try
+            {
+                Core.ApplicationServices.DTOs.TestStatisticDTO testStatistic = await TestStatisticService.GetStatisticForTestbyDate(testId, examinerId, date);
+
+                var response = testStatistic == null 
+                    ? null
+                    : new TestStatisticDTO(testStatistic.Id, testStatistic.TestId, testStatistic.TestTitle, testStatistic.PercentageOfStudentsWhoPassedTheTest, testStatistic.NumberOfStudentsWhoTookTheTest, testStatistic.Date);
+
                 return Ok(response);
             }
             catch (Exception e)
