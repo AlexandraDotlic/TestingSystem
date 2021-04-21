@@ -1,4 +1,5 @@
-﻿using Core.Domain.Entites;
+﻿using Core.ApplicationServices.DTOs;
+using Core.Domain.Entites;
 using Core.Domain.Repositories;
 using System;
 using System.Collections.Generic;
@@ -51,5 +52,28 @@ namespace Core.ApplicationServices
 
             return testStatistic.Id;
         }
+
+        public async Task<ICollection<TestStatisticDTO>> GetAllStatisticsForTest(short testId, int examinerId)
+        {
+            Examiner examiner = await UnitOfWork.ExaminerRepository.GetById(examinerId);
+            if (examiner == null)
+            {
+                throw new ArgumentNullException($"{nameof(Examiner)} with Id {examinerId} not exist");
+            }
+            Test test = await UnitOfWork.TestRepository.GetById(testId);
+
+            if (test == null)
+            {
+                throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
+            }
+
+            IReadOnlyCollection<TestStatistic> testStatistics = await UnitOfWork.TestStatisticRepository.SearchByWithIncludes(ts => ts.TestId == testId && ts.ExaminerId == examinerId);
+            ICollection<TestStatisticDTO> testStatisticDTOs = testStatistics
+                .Select(ts => new TestStatisticDTO(ts.Id, ts.TestId, ts.TestTitle, ts.ExaminerId, ts.PercentageOfStudentsWhoPassedTheTest, ts.NumberOfStudentsWhoTookTheTest, ts.Date))
+                .OrderByDescending(ts => ts.Date)
+                .ToList();
+            return testStatisticDTOs;
+        }
+
     }
 }
