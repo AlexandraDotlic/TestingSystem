@@ -68,8 +68,9 @@ namespace Core.ApplicationServices
             }
 
             IReadOnlyCollection<TestStatistic> testStatistics = await UnitOfWork.TestStatisticRepository.SearchByWithIncludes(ts => ts.TestId == testId && ts.ExaminerId == examinerId);
-            ICollection<TestStatisticDTO> testStatisticDTOs = testStatistics
-                .Select(ts => new TestStatisticDTO(ts.Id, ts.TestId, ts.TestTitle, ts.ExaminerId, ts.PercentageOfStudentsWhoPassedTheTest, ts.NumberOfStudentsWhoTookTheTest, ts.Date))
+            ICollection<TestStatisticDTO> testStatisticDTOs = testStatistics == null || testStatistics.Count == 0 
+                ? null
+                : testStatistics.Select(ts => new TestStatisticDTO(ts.Id, ts.TestId, ts.TestTitle, ts.ExaminerId, ts.PercentageOfStudentsWhoPassedTheTest, ts.NumberOfStudentsWhoTookTheTest, ts.Date))
                 .OrderByDescending(ts => ts.Date)
                 .ToList();
             return testStatisticDTOs;
