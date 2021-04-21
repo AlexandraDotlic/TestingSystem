@@ -76,5 +76,38 @@ namespace Core.ApplicationServices
             return testStatisticDTOs;
         }
 
+        public async Task<TestStatisticDTO> GetStatisticForTestbyDate(short testId, int examinerId, DateTime date)
+        {
+            Examiner examiner = await UnitOfWork.ExaminerRepository.GetById(examinerId);
+            if (examiner == null)
+            {
+                throw new ArgumentNullException($"{nameof(Examiner)} with Id {examinerId} not exist");
+            }
+            Test test = await UnitOfWork.TestRepository.GetById(testId);
+
+            if (test == null)
+            {
+                throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
+            }
+
+            TestStatistic testStatistic = await UnitOfWork.TestStatisticRepository
+                .GetFirstOrDefaultWithIncludes(ts => ts.TestId == testId 
+                                && ts.ExaminerId == examinerId
+                                && ts.Date == date);
+            var testStatisticDTO = testStatistic != null
+                ? new TestStatisticDTO(
+                    testStatistic.Id,
+                    testStatistic.TestId,
+                    testStatistic.TestTitle,
+                    testStatistic.ExaminerId,
+                    testStatistic.PercentageOfStudentsWhoPassedTheTest,
+                    testStatistic.NumberOfStudentsWhoTookTheTest,
+                    testStatistic.Date
+                    )
+                : null;
+            return testStatisticDTO;
+
+        }
+
     }
 }
