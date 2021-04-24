@@ -52,8 +52,7 @@ namespace Core.Domain.Entites
             Questions = new List<Question>();
             StudentTests = new List<StudentTest>();
             if (StartDate >= DateTime.Now
-                && (EndDate == null || EndDate >= StartDate)
-                )
+                && (EndDate == null || EndDate >= StartDate))
             {
                 IsActive = true;
             }
@@ -77,6 +76,17 @@ namespace Core.Domain.Entites
         public void Dectivate()
         {
             IsActive = false;
+        }
+
+        public void ChangeStartDate(DateTime startDate) {
+            StartDate = startDate;
+            if (startDate >= DateTime.Now & (EndDate == null || EndDate >= startDate))
+            {
+                IsActive = true;
+            }
+            else {
+                IsActive = false;
+            }
         }
 
         public void AddQuestion(Question testQuestion)
