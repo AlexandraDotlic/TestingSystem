@@ -145,5 +145,22 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+    
+        [HttpPost]
+        [Route("ChangeStartDate")]
+        public async Task<IActionResult> ChangeStartDate(ChangeStartDateRequest changeStartDateRequest)
+        {
+            try
+            {
+                await TestService.ChangeStartDate(changeStartDateRequest.TestId, changeStartDateRequest.StartDate);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+        }
+      
     }
 }
