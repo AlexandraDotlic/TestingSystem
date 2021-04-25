@@ -1,8 +1,9 @@
 import Header from './template/header.js'
-import CreateQuestion from './components/createquestion/CreateQuestion'
-import CreateTestForm from './components/CreateTestForm'
-import CreateGroupForm from './components/CreateGroupForm'
-import QuestionList from './components/questionlist/QuestionList.js'
+// import CreateQuestion from './components/createquestion/CreateQuestion'
+// import CreateTestForm from './components/CreateTestForm'
+// import CreateGroupForm from './components/CreateGroupForm'
+// import QuestionList from './components/questionlist/QuestionList.js'
+import Register from './components/register/Register.js'
 
 function App() {
   return (
@@ -10,8 +11,9 @@ function App() {
       <Header></Header>
       {/* <CreateTestForm></CreateTestForm>
       <CreateQuestion></CreateQuestion>
-      <CreateGroupForm /> */}
-      <QuestionList></QuestionList>
+      <CreateGroupForm />
+      <QuestionList></QuestionList> */}
+      <Register></Register>
     </div>
   );
 }
