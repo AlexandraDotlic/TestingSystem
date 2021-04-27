@@ -60,5 +60,19 @@ namespace Core.ApplicationServices
             await UnitOfWork.SaveChangesAsync();
         }
 
+        public async Task SetGroupTitle(short groupId, string title)
+        {
+            Group group = await UnitOfWork.GroupRepository.GetById(groupId);
+            if (group == null)
+            {
+                throw new ArgumentNullException($"{nameof(Group)} with Id {groupId} not exist");
+            }
+
+            group.SetTitle(title);
+            await UnitOfWork.GroupRepository.Update(group);
+            await UnitOfWork.SaveChangesAsync();
+
+        }
+
     }
 }
