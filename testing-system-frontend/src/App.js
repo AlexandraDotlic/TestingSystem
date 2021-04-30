@@ -3,7 +3,7 @@ import Header from './template/header.js'
 // import CreateTestForm from './components/CreateTestForm'
 // import CreateGroupForm from './components/CreateGroupForm'
 // import QuestionList from './components/questionlist/QuestionList.js'
-import Register from './components/register/Register.js'
+// import Register from './components/register/Register.js'
 
 function App() {
   return (
@@ -12,8 +12,8 @@ function App() {
       {/* <CreateTestForm></CreateTestForm>
       <CreateQuestion></CreateQuestion>
       <CreateGroupForm />
-      <QuestionList></QuestionList> */}
-      <Register></Register>
+      <QuestionList></QuestionList>
+      <Register></Register> */}
     </div>
   );
 }
