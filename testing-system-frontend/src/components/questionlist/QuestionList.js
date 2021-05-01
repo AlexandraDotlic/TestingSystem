@@ -31,6 +31,7 @@ class QuestionList extends React.Component {
 
     deleteClicked(event) {
         let questionIdDelete = parseInt(event.target.value);
+        debugger;
         this.setState({deleteQuestionId: questionIdDelete});
     }
 
@@ -62,7 +63,7 @@ class QuestionList extends React.Component {
         }
         else if(this.state.deleteQuestionId != null) {
             return (
-                <h2> Treba da obirsem pitanje sa IDom: {this.state.editQuestionId}</h2> 
+                <h2> Treba da obirsem pitanje sa IDom: {this.state.deleteQuestionId}</h2> 
             )
         }
         else {
