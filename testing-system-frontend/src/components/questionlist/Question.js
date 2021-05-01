@@ -13,14 +13,14 @@ class Question extends React.Component {
         return (
             <div className="container">
                 <div className="row p-1">
-                    <div className="col-lg align-baseline">
+                    <div className="col-lg text-center">
                         { this.state.questionText}
                     </div>
-                    <div className="col-sm">
-                        <button className="btn btn-info"> Edit </button>
+                    <div className="col-sm text-center">
+                        <button className="btn btn-info" onClick={this.props.editCallback} value={this.state.questionId}> Edit </button>
                     </div>
-                    <div className="col-sm">
-                        <button className="btn btn-info"> Delete </button>
+                    <div className="col-sm text-center">
+                        <button className="btn btn-info" onClick={this.props.deleteCallback} value={this.state.questionId}> Delete </button>
                     </div>
                 </div>
             </div>
