@@ -12,12 +12,15 @@ class Question extends React.Component {
     render() {
         return (
             <div className="container">
-                <div className="row">
-                    <div className="col-sm">
-                        { this.state.questionId}
+                <div className="row p-1">
+                    <div className="col-lg align-baseline">
+                        { this.state.questionText}
                     </div>
                     <div className="col-sm">
-                        { this.state.questionText}
+                        <button className="btn btn-info"> Edit </button>
+                    </div>
+                    <div className="col-sm">
+                        <button className="btn btn-info"> Delete </button>
                     </div>
                 </div>
             </div>

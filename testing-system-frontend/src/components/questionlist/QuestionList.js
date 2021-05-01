@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react'
 import Question from './Question'
+import TableHeader from './TableHeader'
 
 class QuestionList extends React.Component {
     constructor(props) {
@@ -27,6 +28,8 @@ class QuestionList extends React.Component {
         return (
             <div className="w-50 mx-auto pt-3">
                 <h5> Questions for test: <em>{this.state.testTitle}</em> </h5>
+                <TableHeader></TableHeader>
+                <hr></hr>
                 <ul>
                     {questions}
                 </ul>
