@@ -2,6 +2,8 @@ import axios from 'axios';
 import React from 'react'
 import Question from './Question'
 import TableHeader from './TableHeader'
+import EditQuestion from './EditQuestion'
+import DeleteQuestion from './DeleteQuestion'
 
 class QuestionList extends React.Component {
     constructor(props) {
@@ -31,7 +33,6 @@ class QuestionList extends React.Component {
 
     deleteClicked(event) {
         let questionIdDelete = parseInt(event.target.value);
-        debugger;
         this.setState({deleteQuestionId: questionIdDelete});
     }
 
@@ -58,12 +59,12 @@ class QuestionList extends React.Component {
         }
         else if(this.state.editQuestionId != null) {
             return (
-                <h2> Treba da editujem pitanje sa IDom: {this.state.editQuestionId}</h2> 
+                <EditQuestion id={this.state.editQuestionId} testId={this.state.testId}></EditQuestion>
             )
         }
         else if(this.state.deleteQuestionId != null) {
             return (
-                <h2> Treba da obirsem pitanje sa IDom: {this.state.deleteQuestionId}</h2> 
+                <DeleteQuestion id={this.state.deleteQuestionId}></DeleteQuestion>
             )
         }
         else {
