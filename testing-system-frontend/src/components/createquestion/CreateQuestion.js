@@ -65,8 +65,7 @@ class CreateQuestion extends React.Component {
         questionText: this.state.questionText,
         answerOptions: answers
         }
-
-        debugger;
+        
         axios.defaults.headers.post['Content-Type'] = 'application/json';
         axios.post(
             "https://localhost:44329/Test/AddQuestionToTest", 

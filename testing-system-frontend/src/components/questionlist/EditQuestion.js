@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-import Answer from '../createquestion/Answer';
+import Answer from '../createquestion/Answer'
 
 class EditQuestion extends React.Component {
     constructor(props) {
@@ -9,7 +9,8 @@ class EditQuestion extends React.Component {
             questionId: this.props.id,
             testId: this.props.testId,
             answerType: "multiple",
-            questionText: ""
+            questionText: "",
+            answers: undefined
         };
         this.answersMap = new Map();
         this.correctAnswer = [];
@@ -20,27 +21,19 @@ class EditQuestion extends React.Component {
     }
 
     componentDidMount() {
-        // axios.get("https://localhost:44329/Test/GetAllQuestionsForTest/" + this.state.testId)
-        // .then(response => {
-        //     let questions = response.data.questions;
-        //     let questionTitle = "";
-
-        //     for(let question of questions) {
-        //         if(question.id === this.state.questionId) {
-        //             questionTitle = question.questionText;
-        //         }
-        //     }
-        //     // Treba getovati AnswerOptions ovde i setovati ostale stvari
-        //     // Setovati i answerType
-
-        //     this.setState({questionText: questionTitle});
-        // });
-        let objectT = {testId: 1, questionId: 1};
-        axios.get("https://localhost:44329/Test/GetQuestionAndAnswers/", {
-            data: objectT
+        axios({
+            type: 'GET',
+            url: 'https://localhost:44329/Test/GetQuestionAndAnswers/',
+            params: {
+                testId: this.props.testId,
+                questionId: this.props.id
+            }
         }).then(response => {
-            let x = response;
-            debugger;
+            this.setState({questionText: response.data.questionText});
+            if(response.data.answerOptions.length == 2) {
+                this.setState({answerType: "yesNo"});
+            }
+            this.setState({answers: response.data.answerOptions})
         });
     }
 
@@ -97,26 +90,29 @@ class EditQuestion extends React.Component {
 
     render() {
         let answer;
-        if(this.state.answerType === "yesNo") {
-            answer = (
-                <div>
-                    <Answer callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"radio"} orderNumber={"0answer"} labelText={"Yes:"}></Answer>
-                    <Answer callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"radio"} orderNumber={"1answer"} labelText={"No:"}></Answer>
-                </div>
-            );
-        }
-        else if(this.state.answerType === "multiple") {
-            answer = (
-                <div>
-                    <Answer callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"checkbox"} orderNumber={"0answer"} labelText={"Option 1:"}></Answer>
-                    <Answer callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"checkbox"} orderNumber={"1answer"} labelText={"Option 2:"}></Answer>
-                    <Answer callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"checkbox"} orderNumber={"2answer"} labelText={"Option 3:"}></Answer>
-                    <Answer callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"checkbox"} orderNumber={"3answer"} labelText={"Option 4:"}></Answer>
-                </div>
-            );
-        }
-        else {
-            answer = <p>ERROR WRONG TYPE</p>
+        if(this.state.answers !== undefined) {
+            let data = this.state.answers;
+            if(this.state.answerType === "yesNo") {
+                answer = (
+                    <div>
+                        <Answer value={data[0].optionText} isCorrect={data[0].isCorrect} callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"radio"} orderNumber={"0answer"} labelText={"Yes:"}></Answer>
+                        <Answer value={data[1].optionText} isCorrect={data[1].isCorrect} callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"radio"} orderNumber={"1answer"} labelText={"No:"}></Answer>
+                    </div>
+                );
+            }
+            else if(this.state.answerType === "multiple") {
+                answer = (
+                    <div>
+                        <Answer value={data[0].optionText} isCorrect={data[0].isCorrect} callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"checkbox"} orderNumber={"0answer"} labelText={"Option 1:"}></Answer>
+                        <Answer value={data[1].optionText} isCorrect={data[1].isCorrect} callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"checkbox"} orderNumber={"1answer"} labelText={"Option 2:"}></Answer>
+                        <Answer value={data[2].optionText} isCorrect={data[2].isCorrect} callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"checkbox"} orderNumber={"2answer"} labelText={"Option 3:"}></Answer>
+                        <Answer value={data[3].optionText} isCorrect={data[3].isCorrect} callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"checkbox"} orderNumber={"3answer"} labelText={"Option 4:"}></Answer>
+                    </div>
+                );
+            }
+            else {
+                answer = <p>ERROR WRONG TYPE</p>
+            }
         }
 
         return (
