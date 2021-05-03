@@ -54,8 +54,6 @@ namespace Tests.CoreApplicationServicesTests
             Assert.AreEqual("Test1", test.Title);
             Assert.AreEqual(examinerId, test.ExaminerId);
             Assert.AreEqual(dateTime, test.StartDate);
-            Assert.AreEqual(null, test.EndDate);
-
         }
 
         [TestMethod]
