@@ -20,20 +20,27 @@ class EditQuestion extends React.Component {
     }
 
     componentDidMount() {
-        axios.get("https://localhost:44329/Test/GetAllQuestionsForTest/" + this.state.testId)
-        .then(response => {
-            let questions = response.data.questions;
-            let questionTitle = "";
+        // axios.get("https://localhost:44329/Test/GetAllQuestionsForTest/" + this.state.testId)
+        // .then(response => {
+        //     let questions = response.data.questions;
+        //     let questionTitle = "";
 
-            for(let question of questions) {
-                if(question.id === this.state.questionId) {
-                    questionTitle = question.questionText;
-                }
-            }
-            // Treba getovati AnswerOptions ovde i setovati ostale stvari
-            // Setovati i answerType
+        //     for(let question of questions) {
+        //         if(question.id === this.state.questionId) {
+        //             questionTitle = question.questionText;
+        //         }
+        //     }
+        //     // Treba getovati AnswerOptions ovde i setovati ostale stvari
+        //     // Setovati i answerType
 
-            this.setState({questionText: questionTitle});
+        //     this.setState({questionText: questionTitle});
+        // });
+        let objectT = {testId: 1, questionId: 1};
+        axios.get("https://localhost:44329/Test/GetQuestionAndAnswers/", {
+            data: objectT
+        }).then(response => {
+            let x = response;
+            debugger;
         });
     }
 
