@@ -163,6 +163,20 @@ namespace Core.ApplicationServices
             await UnitOfWork.SaveChangesAsync();
         }
 
+        public async Task ChangeStartDate(short testId, DateTime startDate)
+        {
+            Test test = await UnitOfWork.TestRepository.GetById(testId);
+            if (test == null)
+            {
+                throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
+            }
+
+            test.ChangeStartDate(startDate);
+            await UnitOfWork.TestRepository.Update(test);
+            await UnitOfWork.SaveChangesAsync();
 
         }
+
+
+    }
     }
