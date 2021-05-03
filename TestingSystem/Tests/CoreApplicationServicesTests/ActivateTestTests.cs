@@ -41,7 +41,7 @@ namespace Tests.CoreApplicationServicesTests
             DateTime dateTime = DateTime.Now;
             short testId = await TestService.CreateTest(examinerId, "Test1", dateTime);
 
-            var test = await CoreUnitOfWork.TestRepository.GetFirstOrDefaultWithIncludes(t => t.Id == testId);
+            var test = await CoreUnitOfWork.TestRepository.GetById(testId);
             await TestService.ActivateTest(testId);
 
             Assert.AreEqual(true, test.IsActive);
@@ -54,7 +54,7 @@ namespace Tests.CoreApplicationServicesTests
             DateTime dateTime = DateTime.Now;
             short testId = await TestService.CreateTest(examinerId, "Test1", dateTime);
 
-            var test = await CoreUnitOfWork.TestRepository.GetFirstOrDefaultWithIncludes(t => t.Id == testId);
+            var test = await CoreUnitOfWork.TestRepository.GetById(testId);
             await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await TestService.ActivateTest(1000), $"Test with Id 1000 does not exist");
 
         }
