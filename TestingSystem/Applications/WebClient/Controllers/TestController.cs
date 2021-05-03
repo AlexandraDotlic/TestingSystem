@@ -38,7 +38,7 @@ namespace Applications.WebClient.Controllers
         {
             try
             {
-                var result = await TestService.CreateTest(examinerId, createTestRequest.Title, createTestRequest.StartDate, createTestRequest.EndDate);
+                var result = await TestService.CreateTest(examinerId, createTestRequest.Title, createTestRequest.StartDate);
                 return Ok(result);
             }
             catch (Exception e)
@@ -130,12 +130,12 @@ namespace Applications.WebClient.Controllers
         }
 
         [HttpPost]
-        [Route("DectivateTest/{testId}")]
-        public async Task<IActionResult> DectivateTest(short testId)
+        [Route("DeactivateTest/{testId}")]
+        public async Task<IActionResult> DeactivateTest(short testId)
         {
             try
             {
-                await TestService.DectivateTest(testId);
+                await TestService.DeactivateTest(testId);
                 return Ok();
             }
             catch (Exception e)
