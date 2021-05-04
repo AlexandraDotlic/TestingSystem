@@ -40,7 +40,7 @@ namespace Applications.WebClient.Controllers
 
                 var response = new GetAllTestsForExaminerResponse
                 {
-                    Tests = tests.Select(t => new TestDTO(t.Id, t.Title, t.ExaminerId, t.StartDate, t.EndDate, t.IsActive, t.TestScore)).ToList()
+                    Tests = tests.Select(t => new TestDTO(t.Id, t.Title, t.ExaminerId, t.StartDate, t.IsActive, t.TestScore)).ToList()
 
                 };
                 return response;

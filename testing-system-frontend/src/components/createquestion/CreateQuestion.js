@@ -6,7 +6,7 @@ class CreateQuestion extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            testId: 1,
+            testId: 1, 
             answerType: "yesNo",
             questionText: ""
         };
@@ -65,8 +65,7 @@ class CreateQuestion extends React.Component {
         questionText: this.state.questionText,
         answerOptions: answers
         }
-
-        debugger;
+        
         axios.defaults.headers.post['Content-Type'] = 'application/json';
         axios.post(
             "https://localhost:44329/Test/AddQuestionToTest", 

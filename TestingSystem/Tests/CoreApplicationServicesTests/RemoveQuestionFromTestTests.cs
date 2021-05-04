@@ -1,18 +1,18 @@
-﻿
-using Core.ApplicationServices;
+﻿using Core.ApplicationServices;
 using Core.Domain.Entites;
 using Core.Domain.Repositories;
 using Core.Infrastructure.DataAccess.EfCoreDataAccess;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Tests.CoreApplicationServicesTests
 {
     [TestClass]
-    public class CreateTestTests
+    public class RemoveQuestionFromTestTests
     {
         private ICoreUnitOfWork CoreUnitOfWork;
         private CoreEfCoreDbContext DbContext;
@@ -42,29 +42,40 @@ namespace Tests.CoreApplicationServicesTests
         }
 
         [TestMethod]
-        public async Task CreateTestSuccess()
+        public async Task RemoveQuestionFromTestSuccess()
         {
             int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
             DateTime dateTime = DateTime.Now;
             short testId = await TestService.CreateTest(examinerId, "Test1", dateTime);
 
-            Test test = await CoreUnitOfWork.TestRepository.GetById(testId);
+            Test test = await CoreUnitOfWork.TestRepository
+                .GetFirstOrDefaultWithIncludes(t => t.Id == testId, t => t.Questions);
 
-            Assert.AreEqual(testId, test.Id);
-            Assert.AreEqual("Test1", test.Title);
-            Assert.AreEqual(examinerId, test.ExaminerId);
-            Assert.AreEqual(dateTime, test.StartDate);
+            string questionText1 = "Pitanje 1";
+            ICollection<Tuple<string, bool>> answerOptionTuples1 = new List<Tuple<string, bool>>
+            {
+                new Tuple<string, bool>("opcija 1", true),
+                new Tuple<string, bool>("opcija 2", false)
+            };
+
+            string questionText2= "Pitanje 2";
+            ICollection<Tuple<string, bool>> answerOptionTuples2 = new List<Tuple<string, bool>>
+            {
+                new Tuple<string, bool>("opcija 1", true),
+                new Tuple<string, bool>("opcija 2", false)
+            };
+
+            await TestService.AddQuestionToTest(testId, questionText1, answerOptionTuples1);
+            await TestService.AddQuestionToTest(testId, questionText2, answerOptionTuples2);
+
+            Question question = test.Questions.FirstOrDefault();
+            await TestService.RemoveQuestionFromTest(testId, question.Id);
+
+            Assert.AreEqual(1, test.Questions.Count);
+            Assert.AreEqual(questionText2, test.Questions.FirstOrDefault().QuestionText);
+
         }
 
-        [TestMethod]
-        public async Task CreateTestFail()
-        {
-            DateTime dateTime = DateTime.Now;
 
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await TestService.CreateTest(100, "Test", dateTime), $"Examiner does not exist");
-
-
-
-        }
     }
 }

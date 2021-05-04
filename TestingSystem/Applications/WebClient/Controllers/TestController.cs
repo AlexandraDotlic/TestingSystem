@@ -38,7 +38,7 @@ namespace Applications.WebClient.Controllers
         {
             try
             {
-                var result = await TestService.CreateTest(examinerId, createTestRequest.Title, createTestRequest.StartDate, createTestRequest.EndDate);
+                var result = await TestService.CreateTest(examinerId, createTestRequest.Title, createTestRequest.StartDate);
                 return Ok(result);
             }
             catch (Exception e)
@@ -61,6 +61,39 @@ namespace Applications.WebClient.Controllers
                 }
                 await TestService.AddQuestionToTest(addQuestionToTestRequest.TestId, addQuestionToTestRequest.QuestionText, answerOptions);
                 return Ok();
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+        }
+
+        [HttpPost]
+        [Route("RemoveQuestionFromTest")]
+        public async Task<IActionResult> RemoveQuestionFromTest(RemoveQuestionFromTestRequest removeQuestionFromTestRequest)
+        {
+            try
+            {
+                await TestService.RemoveQuestionFromTest(removeQuestionFromTestRequest.TestId, removeQuestionFromTestRequest.QuestionId);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+        }
+
+        [HttpGet]
+        [Route("GetQuestionAndAnswers")]
+        public async Task<IActionResult> GetQuestionAndAnswers(short questionId, short testId)
+        {
+            try
+            {
+                ICollection<Core.ApplicationServices.DTOs.QuestionDTO> questions = await QuestionService.GetAllQuestionsForTest(testId);
+                var response = questions.Where(e => e.Id == questionId).FirstOrDefault();
+                return Ok(response);
             }
             catch (Exception e)
             {
@@ -130,12 +163,12 @@ namespace Applications.WebClient.Controllers
         }
 
         [HttpPost]
-        [Route("DectivateTest/{testId}")]
-        public async Task<IActionResult> DectivateTest(short testId)
+        [Route("DeactivateTest/{testId}")]
+        public async Task<IActionResult> DeactivateTest(short testId)
         {
             try
             {
-                await TestService.DectivateTest(testId);
+                await TestService.DeactivateTest(testId);
                 return Ok();
             }
             catch (Exception e)
@@ -145,5 +178,22 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+    
+        [HttpPost]
+        [Route("ChangeStartDate")]
+        public async Task<IActionResult> ChangeStartDate(ChangeStartDateRequest changeStartDateRequest)
+        {
+            try
+            {
+                await TestService.ChangeStartDate(changeStartDateRequest.TestId, changeStartDateRequest.StartDate);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+        }
+      
     }
 }

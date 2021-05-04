@@ -1,6 +1,4 @@
-﻿
-using Core.ApplicationServices;
-using Core.Domain.Entites;
+﻿using Core.ApplicationServices;
 using Core.Domain.Repositories;
 using Core.Infrastructure.DataAccess.EfCoreDataAccess;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -12,13 +10,11 @@ using System.Threading.Tasks;
 namespace Tests.CoreApplicationServicesTests
 {
     [TestClass]
-    public class CreateTestTests
+    public class ChangeStartDateTest
     {
         private ICoreUnitOfWork CoreUnitOfWork;
         private CoreEfCoreDbContext DbContext;
-        private GroupService GroupService;
         private ExaminerService ExaminerService;
-        private StudentService StudentService;
         private TestService TestService;
 
         [TestInitialize]
@@ -27,44 +23,47 @@ namespace Tests.CoreApplicationServicesTests
             var dbContextFactory = new SampleDbContextFactory();
             DbContext = dbContextFactory.CreateDbContext(new string[] { });
             CoreUnitOfWork = new CoreEfCoreUnitOfWork(DbContext);
-            GroupService = new GroupService(CoreUnitOfWork);
             ExaminerService = new ExaminerService(CoreUnitOfWork);
-            StudentService = new StudentService(CoreUnitOfWork);
             TestService = new TestService(CoreUnitOfWork);
         }
 
-        [TestCleanup()]
+        [TestCleanup]
         public async Task Cleanup()
         {
             await DbContext.DisposeAsync();
             DbContext = null;
-
         }
 
         [TestMethod]
-        public async Task CreateTestSuccess()
+        public async Task ChangeStartDateTestSuccess()
         {
             int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
-            DateTime dateTime = DateTime.Now;
+            DateTime dateTime = DateTime.Parse("2021-04-25 08:00:00.0000000");
             short testId = await TestService.CreateTest(examinerId, "Test1", dateTime);
 
-            Test test = await CoreUnitOfWork.TestRepository.GetById(testId);
+            var test = await CoreUnitOfWork.TestRepository.GetById(testId);
+            DateTime changedDateTime = DateTime.Parse("2021-04-30 16:00:00.0000000");
 
-            Assert.AreEqual(testId, test.Id);
-            Assert.AreEqual("Test1", test.Title);
-            Assert.AreEqual(examinerId, test.ExaminerId);
-            Assert.AreEqual(dateTime, test.StartDate);
+            await TestService.ChangeStartDate(testId, changedDateTime);
+
+
+            Assert.AreEqual(true, test.IsActive);
+            Assert.AreEqual(changedDateTime, test.StartDate);
         }
 
         [TestMethod]
-        public async Task CreateTestFail()
+        public async Task ChangeStartDateTestFail()
         {
-            DateTime dateTime = DateTime.Now;
+            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
+            DateTime dateTime = DateTime.Parse("2021-04-25 08:00:00.0000000");
+            short testId = await TestService.CreateTest(examinerId, "Test1", dateTime);
 
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await TestService.CreateTest(100, "Test", dateTime), $"Examiner does not exist");
+            var test = await CoreUnitOfWork.TestRepository.GetById(testId);
+            DateTime changedDateTime = DateTime.Parse("2021-04-30 16:00:00.0000000");
 
-
+            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await TestService.ChangeStartDate(100,changedDateTime), $"Test with Id 100 does not exist");
 
         }
+
     }
 }

@@ -12,12 +12,12 @@ namespace Tests.CoreApplicationServicesTests
 {
 
     [TestClass]
-    public class DeactivateTestTests
+    public class SetGroupTitleTests
     {
         private ICoreUnitOfWork CoreUnitOfWork;
         private CoreEfCoreDbContext DbContext;
         private ExaminerService ExaminerService;
-        private TestService TestService;
+        private GroupService GroupService;
 
         [TestInitialize]
         public void Setup()
@@ -26,7 +26,7 @@ namespace Tests.CoreApplicationServicesTests
             DbContext = dbContextFactory.CreateDbContext(new string[] { });
             CoreUnitOfWork = new CoreEfCoreUnitOfWork(DbContext);
             ExaminerService = new ExaminerService(CoreUnitOfWork);
-            TestService = new TestService(CoreUnitOfWork);
+
         }
 
         [TestCleanup]
@@ -37,27 +37,22 @@ namespace Tests.CoreApplicationServicesTests
         }
 
         [TestMethod]
-        public async Task DectivateTestSuccess()
+        public async Task SetGroupTitleSuccess()
         {
             int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
-            DateTime dateTime = DateTime.Now;
-            short testId = await TestService.CreateTest(examinerId, "Test1", dateTime);
+            short groupId = await GroupService.CreateGroup("Grupa", examinerId);
+            
+            var group = await CoreUnitOfWork.GroupRepository.GetById(groupId);
+            await GroupService.SetGroupTitle(groupId, "Novi naziv" );
 
-            var test = await CoreUnitOfWork.TestRepository.GetById(testId);
-            await TestService.DeactivateTest(testId);
-
-            Assert.AreEqual(false, test.IsActive);
+            Assert.AreEqual(group.Title, "Novi naziv");
         }
 
         [TestMethod]
-        public async Task DeactivateTestFail()
+        public async Task SetGroupTitleFail()
         {
-            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
-            DateTime dateTime = DateTime.Now;
-            short testId = await TestService.CreateTest(examinerId, "Test1", dateTime);
-
-            var test = await CoreUnitOfWork.TestRepository.GetById(testId);
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await TestService.DeactivateTest(1000), $"Test with Id 1000 does not exist");
+            var group = await CoreUnitOfWork.GroupRepository.GetById(100);
+            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await GroupService.SetGroupTitle(1000, "Naziv"), $"Group with with Id={100} doesn't existt");
         }
     }
 }

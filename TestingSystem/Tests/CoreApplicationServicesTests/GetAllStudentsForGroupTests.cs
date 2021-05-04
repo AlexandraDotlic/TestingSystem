@@ -1,18 +1,18 @@
-﻿
-using Core.ApplicationServices;
+﻿using Core.ApplicationServices;
 using Core.Domain.Entites;
 using Core.Domain.Repositories;
 using Core.Infrastructure.DataAccess.EfCoreDataAccess;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Tests.CoreApplicationServicesTests
 {
     [TestClass]
-    public class CreateTestTests
+    public class GetAllStudentsForGroupTests
     {
         private ICoreUnitOfWork CoreUnitOfWork;
         private CoreEfCoreDbContext DbContext;
@@ -20,6 +20,7 @@ namespace Tests.CoreApplicationServicesTests
         private ExaminerService ExaminerService;
         private StudentService StudentService;
         private TestService TestService;
+        private QuestionService QuestionService;
 
         [TestInitialize]
         public void Setup()
@@ -31,6 +32,7 @@ namespace Tests.CoreApplicationServicesTests
             ExaminerService = new ExaminerService(CoreUnitOfWork);
             StudentService = new StudentService(CoreUnitOfWork);
             TestService = new TestService(CoreUnitOfWork);
+            QuestionService = new QuestionService(CoreUnitOfWork);
         }
 
         [TestCleanup()]
@@ -42,29 +44,25 @@ namespace Tests.CoreApplicationServicesTests
         }
 
         [TestMethod]
-        public async Task CreateTestSuccess()
+        public async Task GetAllStudentsForGroupSuccess()
         {
             int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
-            DateTime dateTime = DateTime.Now;
-            short testId = await TestService.CreateTest(examinerId, "Test1", dateTime);
+            int studentId1 = await StudentService.CreateStudent("Marko","Markovic","01");
+            int studentId2 = await StudentService.CreateStudent("Petar", "Petrovic", "02");
 
-            Test test = await CoreUnitOfWork.TestRepository.GetById(testId);
+            short groupId = await GroupService.CreateGroup("Grupa",examinerId);
+            Group group = await CoreUnitOfWork.GroupRepository.GetFirstOrDefaultWithIncludes(g => g.Id == groupId, g => g.Students);
 
-            Assert.AreEqual(testId, test.Id);
-            Assert.AreEqual("Test1", test.Title);
-            Assert.AreEqual(examinerId, test.ExaminerId);
-            Assert.AreEqual(dateTime, test.StartDate);
-        }
+            await GroupService.AddStudentToGroup(groupId, studentId1);
+            await GroupService.AddStudentToGroup(groupId, studentId2);
 
-        [TestMethod]
-        public async Task CreateTestFail()
-        {
-            DateTime dateTime = DateTime.Now;
+            ICollection<Core.ApplicationServices.DTOs.StudentDTO> studentDtos = await StudentService.GetAllStudentsForGroup(groupId);
 
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await TestService.CreateTest(100, "Test", dateTime), $"Examiner does not exist");
-
-
+            Assert.AreEqual(group.Students.Count, studentDtos.Count);
+            Assert.AreEqual(group.Students.FirstOrDefault().FirstName, studentDtos.FirstOrDefault().FirstName);
+            Assert.AreEqual(group.Students.FirstOrDefault().LastName, studentDtos.FirstOrDefault().LastName);
 
         }
+
     }
 }
