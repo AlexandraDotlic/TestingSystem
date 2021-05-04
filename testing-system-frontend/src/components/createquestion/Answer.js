@@ -3,11 +3,28 @@ import React from 'react'
 class Answer extends React.Component {
     constructor(props) {
         super(props);
+
+        let sValue;
+        if(this.props.value !== undefined) {
+            sValue = this.props.value;
+        }
+        else {
+            sValue = "";
+        }
+
+        let sIsCorrect;
+        if(this.props.isCorrect !== undefined) {
+            sIsCorrect = this.props.isCorrect;
+        }
+        else {
+            sIsCorrect = false;
+        }
+
         this.state = {
             orderNumber: this.props.orderNumber,
-            value: "",
+            value: sValue,
             logo: this.props.logo,
-            isCorrect: false
+            isCorrect: sIsCorrect
         }
         this.valueChanged = this.valueChanged.bind(this);
         this.correctChanged = this.correctChanged.bind(this);
@@ -23,13 +40,14 @@ class Answer extends React.Component {
     }
 
     render() {
+
         return (
         <div className="form-group">
             <label htmlFor={this.props.orderNumber}> {this.props.labelText} </label>
             <div className="input-group">
                 <div className="input-group-prepend">
                     <div className="input-group-text">
-                        <input type={this.props.logo} name={"group"} value={this.state.orderNumber} onChange={this.correctChanged}></input>
+                        <input defaultChecked={this.state.isCorrect} type={this.props.logo} name={"group"} value={this.state.orderNumber} onChange={this.correctChanged}></input>
                     </div>
                 </div>
                 <input id={this.props.orderNumber} className="form-control" placeholder="Enter answer text" value={this.state.value} onChange={this.valueChanged}></input>

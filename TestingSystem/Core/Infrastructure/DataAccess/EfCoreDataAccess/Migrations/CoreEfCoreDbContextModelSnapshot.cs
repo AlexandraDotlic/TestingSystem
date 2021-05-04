@@ -147,8 +147,14 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.Migrations
                     b.Property<short>("TestId")
                         .HasColumnType("smallint");
 
+                    b.Property<bool>("IsTestPassed")
+                        .HasColumnType("bit");
+
                     b.Property<int>("Score")
                         .HasColumnType("int");
+
+                    b.Property<short?>("StudentGroupId")
+                        .HasColumnType("smallint");
 
                     b.HasKey("StudentId", "TestId");
 
@@ -238,6 +244,36 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.Migrations
                     b.HasIndex("ExaminerId");
 
                     b.ToTable("Tests");
+                });
+
+            modelBuilder.Entity("Core.Domain.Entites.TestStatistic", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ExaminerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfStudentsWhoTookTheTest")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PercentageOfStudentsWhoPassedTheTest")
+                        .HasColumnType("int");
+
+                    b.Property<short>("TestId")
+                        .HasColumnType("smallint");
+
+                    b.Property<string>("TestTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TestStatistics");
                 });
 
             modelBuilder.Entity("Core.Domain.Entites.AnswerOption", b =>

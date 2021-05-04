@@ -87,5 +87,21 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("SetGroupTitle/{groupId}")]
+        public async Task<IActionResult> SetGroupTitle(short groupId, string title)
+        {
+            try
+            {
+                await GroupService.SetGroupTitle(groupId, title);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+        }
+
     }
 }
