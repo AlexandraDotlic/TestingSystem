@@ -52,6 +52,33 @@ namespace Core.ApplicationServices
             await UnitOfWork.CommitTransactionAsync();
         }
 
+        public async Task SetStudentFirstName(int studentId, string firstName)
+        {
+            Student student = await UnitOfWork.StudentRepository.GetById(studentId);
+            if (student == null)
+            {
+                throw new ArgumentNullException($"{nameof(Student)} with Id {studentId} not exist");
+            }
+
+            student.SetFirstName(firstName);
+            await UnitOfWork.StudentRepository.Update(student);
+            await UnitOfWork.SaveChangesAsync();
+        }
+
+        public async Task SetStudentLastName(int studentId, string lastName)
+        {
+            Student student = await UnitOfWork.StudentRepository.GetById(studentId);
+            if (student == null)
+            {
+                throw new ArgumentNullException($"{nameof(Student)} with Id {studentId} not exist");
+            }
+
+            student.SetLastName(lastName);
+            await UnitOfWork.StudentRepository.Update(student);
+            await UnitOfWork.SaveChangesAsync();
+
+        }
+
         public async Task<ICollection<StudentDTO>> GetAllStudentsForGroup(short groupId)
         {
             IReadOnlyCollection<Student> students = await UnitOfWork.StudentRepository.SearchByWithIncludes(s => s.GroupId == groupId);
@@ -60,6 +87,7 @@ namespace Core.ApplicationServices
                 ? null
                 : students.Select(s => new StudentDTO(s.Id, s.FirstName, s.LastName, s.GroupId)).ToList();
             return studentDTOs;
+
         }
     }
 }

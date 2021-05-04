@@ -47,5 +47,18 @@ namespace Core.Domain.Entites
             LastName = lastname;
             ExternalId = externalId;
         }
+
+        public void SetFirstName(string firstName)
+        {
+            FirstName = firstName;
+        }
+
+        public void SetLastName(string lastName)
+        {
+            LastName = lastName;
+        }
+
+
+
     }
 }
