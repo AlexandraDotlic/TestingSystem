@@ -59,6 +59,27 @@ namespace Applications.WebClient.Controllers
                 return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
             }
         }
+
+        [HttpGet]
+        [Route("GetAllStudents")]
+        public async Task<ActionResult<GetAllStudentsResponse>> GetAllStudents()
+        {
+            try
+            {
+                ICollection<Core.ApplicationServices.DTOs.StudentDTO> students = await StudentService.GetAllStudents();
+                var response = new GetAllStudentsResponse
+                {
+                    Students = students.Select(s => new StudentDTO(s.Id, s.FirstName, s.LastName, s.GroupId)).ToList()
+                };
+                return response;
+
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+        }
     }
 
 
