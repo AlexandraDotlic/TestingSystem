@@ -70,6 +70,23 @@ namespace Applications.WebClient.Controllers
         }
 
         [HttpGet]
+        [Route("GetQuestionAndAnswers")]
+        public async Task<IActionResult> GetQuestionAndAnswers(short questionId, short testId)
+        {
+            try
+            {
+                ICollection<Core.ApplicationServices.DTOs.QuestionDTO> questions = await QuestionService.GetAllQuestionsForTest(testId);
+                var response = questions.Where(e => e.Id == questionId).FirstOrDefault();
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+        }
+
+        [HttpGet]
         [Route("GetAllQuestionsForTest/{testId}")]
         public async Task<ActionResult<GetAllQuestionsForTestResponse>> GetAllQuestionsForTest(short testId)
         {
