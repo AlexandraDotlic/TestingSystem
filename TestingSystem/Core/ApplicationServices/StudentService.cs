@@ -89,5 +89,17 @@ namespace Core.ApplicationServices
             return studentDTOs;
 
         }
+
+        public async Task<ICollection<StudentDTO>> GetAllStudents()
+        {
+            IReadOnlyCollection<Student> students = await UnitOfWork.StudentRepository.GetAllList();
+
+
+            List<StudentDTO> studentDTOs = students == null || students.Count == 0
+                ? null
+                : students.Select(s => new StudentDTO(s.Id, s.FirstName, s.LastName, s.GroupId)).ToList();
+            return studentDTOs;
+
+        }
     }
 }
