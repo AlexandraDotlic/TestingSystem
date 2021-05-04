@@ -1,9 +1,12 @@
-﻿using Core.Domain.Entites;
+﻿using Core.ApplicationServices.DTOs;
+using Core.Domain.Entites;
 using Core.Domain.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace Core.ApplicationServices
 {
@@ -47,6 +50,16 @@ namespace Core.ApplicationServices
             await UnitOfWork.StudentRepository.Delete(student);
             await UnitOfWork.SaveChangesAsync();
             await UnitOfWork.CommitTransactionAsync();
+        }
+
+        public async Task<ICollection<StudentDTO>> GetAllStudentsForGroup(short groupId)
+        {
+            IReadOnlyCollection<Student> students = await UnitOfWork.StudentRepository.SearchByWithIncludes(s => s.GroupId == groupId);
+
+            List<StudentDTO> studentDTOs = students == null || students.Count == 0
+                ? null
+                : students.Select(s => new StudentDTO(s.Id, s.FirstName, s.LastName, s.GroupId)).ToList();
+            return studentDTOs;
         }
     }
 }
