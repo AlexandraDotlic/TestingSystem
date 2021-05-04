@@ -17,14 +17,14 @@ namespace Core.ApplicationServices
             UnitOfWork = unitOfWork;
         }
 
-        public async Task<short> CreateTest(int examinerId, string title, DateTime startDate, DateTime? endDate = null)
+        public async Task<short> CreateTest(int examinerId, string title, DateTime startDate)
         {
             Examiner examiner = await UnitOfWork.ExaminerRepository.GetById(examinerId);
             if (examiner == null)
             {
                 throw new ArgumentNullException($"{nameof(Examiner)} with Id {examinerId} not exist");
             }
-            Test test = new Test(examiner, title, startDate, endDate);
+            Test test = new Test(examiner, title, startDate);
             await UnitOfWork.TestRepository.Insert(test);
             await UnitOfWork.SaveChangesAsync();
             return test.Id;
@@ -33,7 +33,7 @@ namespace Core.ApplicationServices
         public async Task DeleteTest(short testId)
         {
             Test test = await UnitOfWork.TestRepository.GetById(testId);
-            if(test == null)
+            if (test == null)
             {
                 throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
             }
@@ -50,7 +50,7 @@ namespace Core.ApplicationServices
                 throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
             }
             ICollection<AnswerOption> answerOptionsCollection = new List<AnswerOption>();
-            if(answerOptionTuples == null || answerOptionTuples.Count == 0)
+            if (answerOptionTuples == null || answerOptionTuples.Count == 0)
             {
                 throw new ArgumentNullException($"{nameof(answerOptionTuples)}");
             }
@@ -112,7 +112,7 @@ namespace Core.ApplicationServices
                 .SearchByWithIncludes(q => q.TestId == testId, q => q.AnswerOptions);
 
             ICollection<StudentTestQuestion> studentTestQuestions = new List<StudentTestQuestion>();
-           
+
             foreach (var questionResponse in questonResponsesCollection)
             {
                 var question = testQuestions.Where(q => q.Id == questionResponse.Item1).FirstOrDefault();
@@ -140,7 +140,63 @@ namespace Core.ApplicationServices
                 TestId = testId,
                 TotalTestScore = test.TestScore,
                 StudentTestScore = studentTest.Score
+
+
             };
         }
+
+
+        public async Task<ICollection<TestDTO>> GetAllTestsForExaminer(int examinerId)
+        {
+            IReadOnlyCollection<Test> tests = await UnitOfWork.TestRepository.SearchByWithIncludes(t => t.ExaminerId == examinerId);
+
+            List<TestDTO> testDTOs = tests == null || tests.Count == 0
+                ? null
+                : tests.Select(t => new TestDTO(t.Id, t.Title, t.ExaminerId, t.StartDate, t.IsActive, t.TestScore)).ToList();
+            return testDTOs;
+
+        }
+         public async Task ActivateTest(short testId)
+         {
+                Test test = await UnitOfWork.TestRepository.GetById(testId);
+                if (test == null)
+                {
+                    throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
+                }
+
+                test.Activate();
+                await UnitOfWork.TestRepository.Update(test);
+                await UnitOfWork.SaveChangesAsync();
+
+         }
+
+        public async Task DeactivateTest(short testId)
+        {
+            Test test = await UnitOfWork.TestRepository.GetById(testId);
+            if (test == null)
+            {
+                throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
+            }
+
+            test.Deactivate();
+            await UnitOfWork.TestRepository.Update(test);
+            await UnitOfWork.SaveChangesAsync();
+        }
+
+        public async Task ChangeStartDate(short testId, DateTime startDate)
+        {
+            Test test = await UnitOfWork.TestRepository.GetById(testId);
+            if (test == null)
+            {
+                throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
+            }
+
+            test.ChangeStartDate(startDate);
+            await UnitOfWork.TestRepository.Update(test);
+            await UnitOfWork.SaveChangesAsync();
+
+        }
+
+
     }
-}
+    }

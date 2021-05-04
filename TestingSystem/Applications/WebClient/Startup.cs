@@ -3,22 +3,22 @@ using Authentication.Domain.Entities;
 using Authentication.Infrastructure.DataAccess.EfCoreDataAccess;
 using Core.ApplicationServices;
 using Core.Domain.Repositories;
+using Core.Domain.Services.External.JobService;
+using Core.Domain.Services.External.MailService;
 using Core.Infrastructure.DataAccess.EfCoreDataAccess;
+using Core.Infrastructure.Services.HangfireJobService;
+using Core.Infrastructure.Services.MailService;
+using Core.Infrastructure.Services.MailService.Settings;
+using Hangfire;
 using Infrastructure.DataAccess.EfCoreDataAccess.Seeds;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebClient
 {
@@ -45,6 +45,8 @@ namespace WebClient
             services.AddDbContextPool<AuthenticationEfCoreDbContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("AuthenticationDevConnection"))
            );
+            services.AddHangfire(x => x.UseSqlServerStorage(Configuration.GetConnectionString("HangfireDevConnection")));
+            services.AddHangfireServer();
 
             #region Identity
             services.AddIdentity<User, IdentityRole>(options =>
@@ -64,6 +66,12 @@ namespace WebClient
             services.AddScoped<ExaminerService>();
             services.AddScoped<QuestionService>();
             services.AddScoped<UserService>();
+            services.AddScoped<TestStatisticService>();
+            services.AddScoped<IJobService, HangfireJobService>();
+
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+            services.AddTransient<IMailService, MailService>();
+
 
         }
 
@@ -82,6 +90,8 @@ namespace WebClient
             app.UseCors("LocalhostPolicy");
 
             app.UseAuthorization();
+
+            app.UseHangfireDashboard("/mydashboard");
 
             app.UseAuthentication();
 

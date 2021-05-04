@@ -8,4 +8,12 @@
     <ProjectReference Include="..\..\Common\Utils\Common.Utils.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\Internal\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.5" />
+  </ItemGroup>
+
 </Project>

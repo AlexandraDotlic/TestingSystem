@@ -31,10 +31,6 @@ namespace Core.Domain.Entites
         /// </summary>
         public int TestScore { get; private set; }
         /// <summary>
-        /// Krajnji datum vazenja testa
-        /// </summary>
-        public DateTime? EndDate { get; private set; }
-        /// <summary>
         /// Pocetni datum vazenja testa
         /// </summary>
         public DateTime StartDate { get; private set; }
@@ -42,18 +38,15 @@ namespace Core.Domain.Entites
 
 
 
-        public Test(Examiner examiner, string title, DateTime startDate, DateTime? endDate = null)
+        public Test(Examiner examiner, string title, DateTime startDate)
         {
             Title = title;
             Examiner = examiner;
             ExaminerId = examiner.Id;
             StartDate = startDate;
-            EndDate = endDate;
             Questions = new List<Question>();
             StudentTests = new List<StudentTest>();
-            if (StartDate >= DateTime.Now
-                && (EndDate == null || EndDate >= StartDate)
-                )
+            if (StartDate <= DateTime.Now)
             {
                 IsActive = true;
             }
@@ -69,6 +62,28 @@ namespace Core.Domain.Entites
 
             IsActive = true;
         }
+
+        public void Activate() {
+            IsActive = true;
+        }
+
+        public void Deactivate()
+        {
+            IsActive = false;
+        }
+
+        public void ChangeStartDate(DateTime startDate) {
+            StartDate = startDate;
+            if (startDate <= DateTime.Now)
+            {
+                IsActive = true;
+            }
+            else 
+            {
+                IsActive = false;
+            }
+        }
+
         public void AddQuestion(Question testQuestion)
         {
             Questions.Add(testQuestion);
