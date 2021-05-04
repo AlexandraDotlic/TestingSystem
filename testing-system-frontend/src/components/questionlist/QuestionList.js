@@ -4,6 +4,7 @@ import Question from './Question'
 import TableHeader from './TableHeader'
 import EditQuestion from './EditQuestion'
 import DeleteQuestion from './DeleteQuestion'
+import CreateQuestion from '../createquestion/CreateQuestion'
 
 class QuestionList extends React.Component {
     constructor(props) {
@@ -13,10 +14,12 @@ class QuestionList extends React.Component {
             testTitle: "TestName", //should be getted 
             allQuestions: [],
             editQuestionId: null,
-            deleteQuestionId: null
+            deleteQuestionId: null,
+            addQuestion: null,
         }
         this.editClicked = this.editClicked.bind(this);
         this.deleteClicked = this.deleteClicked.bind(this);
+        this.addClicked = this.addClicked.bind(this);
     }
 
     componentDidMount() {
@@ -36,12 +39,17 @@ class QuestionList extends React.Component {
         this.setState({deleteQuestionId: questionIdDelete});
     }
 
+    addClicked(event) {
+        console.log("CLicked");
+        this.setState({addQuestion: true})
+    }
+
     render() {
         let questions = this.state.allQuestions.map(question => {
             return <Question key={question.id} questionId={question.id} questionText={question.questionText} editCallback={this.editClicked} deleteCallback={this.deleteClicked}></Question>
         })
 
-        if(this.state.editQuestionId == null && this.state.deleteQuestionId == null) {
+        if(this.state.editQuestionId == null && this.state.deleteQuestionId == null && this.state.addQuestion == null) {
             return (
                 <div className="w-50 mx-auto pt-3">
                     <h5> Questions for test: <em>{this.state.testTitle}</em> </h5>
@@ -52,6 +60,10 @@ class QuestionList extends React.Component {
                     <ul>
                         {questions}
                     </ul>
+                    <hr></hr>
+                    <div className="text-center">
+                        <button className="btn btn-success" onClick={this.addClicked}> Add new question </button>
+                    </div>
     
                 </div>
     
@@ -65,6 +77,12 @@ class QuestionList extends React.Component {
         else if(this.state.deleteQuestionId != null) {
             return (
                 <DeleteQuestion id={this.state.deleteQuestionId}></DeleteQuestion>
+            )
+        }
+        else if(this.state.addQuestion != null) {
+            debugger;
+            return (
+                <CreateQuestion></CreateQuestion>
             )
         }
         else {
