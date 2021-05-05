@@ -22,7 +22,6 @@ class Home extends React.Component {
     }
 
     clicked(value) {
-        debugger;
         this.setState({clicked: value})
     }
 

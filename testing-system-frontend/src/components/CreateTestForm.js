@@ -73,8 +73,9 @@ class CreateTestForm extends React.Component {
               endDate: endDateCombined
             }
           });
-        
-        event.preventDefault();
+
+        debugger;
+        //event.preventDefault();
     }
 
     render(){
