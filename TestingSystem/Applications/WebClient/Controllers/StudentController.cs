@@ -14,34 +14,62 @@ namespace Applications.WebClient.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class ExaminerController : ControllerBase
+    public class StudentController : ControllerBase
     {
-        private readonly ExaminerService ExaminerService;
-        private readonly TestService TestService;
+        private readonly StudentService StudentService;
         private readonly ILogger<ExaminerController> Logger;
 
-        public ExaminerController(
-           ExaminerService examinerService,
-           TestService testService,
+        public StudentController(
+           StudentService studentService,
            ILogger<ExaminerController> logger)
         {
-            ExaminerService = examinerService;
-            TestService = testService;
+            StudentService = studentService;
             Logger = logger;
         }
 
-        [HttpGet]
-        [Route("GetAllTestsForExaminer/{examinerId}")]
-        public async Task<ActionResult<GetAllTestsForExaminerResponse>> GetAllTestsForExaminer(int examinerId)
+
+        [HttpPost]
+        [Route("SetStudentFirstName/{studentId}")]
+        public async Task<IActionResult> SetStudentFirstName(int studentId, string firstName)
         {
             try
             {
-                ICollection<Core.ApplicationServices.DTOs.TestDTO> tests = await TestService.GetAllTestsForExaminer(examinerId);
+                await StudentService.SetStudentFirstName(studentId, firstName);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+        }
 
-                var response = new GetAllTestsForExaminerResponse
+        [HttpPost]
+        [Route("SetStudentLastName/{studentId}")]
+        public async Task<IActionResult> SetStudentLastName(int studentId, string lastName)
+        {
+            try
+            {
+                await StudentService.SetStudentLastName(studentId, lastName);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+        }
+
+        [HttpGet]
+        [Route("GetAllStudents")]
+        public async Task<ActionResult<GetAllStudentsResponse>> GetAllStudents()
+        {
+            try
+            {
+                ICollection<Core.ApplicationServices.DTOs.StudentDTO> students = await StudentService.GetAllStudents();
+                var response = new GetAllStudentsResponse
                 {
-                    Tests = tests.Select(t => new TestDTO(t.Id, t.Title, t.ExaminerId, t.StartDate, t.IsActive, t.TestScore)).ToList()
-
+                    Students = students.Select(s => new StudentDTO(s.Id, s.FirstName, s.LastName, s.GroupId)).ToList()
                 };
                 return response;
 
@@ -52,41 +80,7 @@ namespace Applications.WebClient.Controllers
                 return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
             }
         }
-
-        [HttpPost]
-        [Route("SetExaminerFirstName/{examinerId}")]
-        public async Task<IActionResult> SetExaminerFirstName(int examinerId, string firstName)
-        {
-            try
-            {
-                await ExaminerService.SetExaminerFirstName(examinerId, firstName);
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                Logger.LogError(e, e.Message);
-                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
-            }
-        }
-
-        [HttpPost]
-        [Route("SetExaminerLastName/{examinerId}")]
-        public async Task<IActionResult> SetExaminerLastName(int examinerId, string lastName)
-        {
-            try
-            {
-                await ExaminerService.SetExaminerLastName(examinerId, lastName);
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                Logger.LogError(e, e.Message);
-                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
-            }
-        }
     }
-
-
 
 
 }

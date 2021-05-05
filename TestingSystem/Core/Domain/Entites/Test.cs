@@ -90,5 +90,11 @@ namespace Core.Domain.Entites
             TestScore += testQuestion.QuestionScore;
         }
 
+        public void RemoveQuestion(Question testQuestion)
+        {
+            Questions.Remove(testQuestion);
+            TestScore -= testQuestion.QuestionScore;
+        }
+
     }
 }

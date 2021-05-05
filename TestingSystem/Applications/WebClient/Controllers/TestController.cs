@@ -69,6 +69,22 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("RemoveQuestionFromTest")]
+        public async Task<IActionResult> RemoveQuestionFromTest(RemoveQuestionFromTestRequest removeQuestionFromTestRequest)
+        {
+            try
+            {
+                await TestService.RemoveQuestionFromTest(removeQuestionFromTestRequest.TestId, removeQuestionFromTestRequest.QuestionId);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+        }
+
         [HttpGet]
         [Route("GetQuestionAndAnswers")]
         public async Task<IActionResult> GetQuestionAndAnswers(short questionId, short testId)
