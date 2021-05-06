@@ -15,7 +15,6 @@ namespace Applications.WebClient.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize]
     public class AccountController: ControllerBase
     {
         private readonly UserService UserService;

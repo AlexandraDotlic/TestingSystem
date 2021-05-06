@@ -12,7 +12,7 @@ namespace Tests.CoreApplicationServicesTests
 {
 
     [TestClass]
-    public class DectivateTestTests
+    public class DeactivateTestTests
     {
         private ICoreUnitOfWork CoreUnitOfWork;
         private CoreEfCoreDbContext DbContext;
@@ -43,22 +43,21 @@ namespace Tests.CoreApplicationServicesTests
             DateTime dateTime = DateTime.Now;
             short testId = await TestService.CreateTest(examinerId, "Test1", dateTime);
 
-            var test = await CoreUnitOfWork.TestRepository.GetFirstOrDefaultWithIncludes(t => t.Id == testId);
-            await TestService.DectivateTest(testId);
+            var test = await CoreUnitOfWork.TestRepository.GetById(testId);
+            await TestService.DeactivateTest(testId);
 
             Assert.AreEqual(false, test.IsActive);
         }
 
         [TestMethod]
-        public async Task DectivateTestFail()
+        public async Task DeactivateTestFail()
         {
             int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
             DateTime dateTime = DateTime.Now;
             short testId = await TestService.CreateTest(examinerId, "Test1", dateTime);
 
-            var test = await CoreUnitOfWork.TestRepository.GetFirstOrDefaultWithIncludes(t => t.Id == testId);
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await TestService.DectivateTest(1000), $"Test with Id 1000 does not exist");
-
+            var test = await CoreUnitOfWork.TestRepository.GetById(testId);
+            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await TestService.DeactivateTest(1000), $"Test with Id 1000 does not exist");
         }
     }
 }

@@ -14,8 +14,6 @@ namespace Applications.WebClient.DTOs
         public int Id { get; set; }
         [DataMember]
         public string Title { get; set; }
-        [DataMember]
-        public DateTime? EndDate { get; set; }
         [DataMember] 
         public DateTime StartDate { get; set; }
         [DataMember] 
@@ -30,12 +28,11 @@ namespace Applications.WebClient.DTOs
 
         }
 
-        public TestDTO(int id, string title, int examinerId, DateTime startDate, DateTime? endDate, bool isActive, int score)
+        public TestDTO(int id, string title, int examinerId, DateTime startDate, bool isActive, int score)
         {
             Id = id;
             Title = title;
             StartDate = startDate;
-            EndDate = endDate;
             ExaminerId = examinerId;
             IsActive = isActive;
             TestScore = score;

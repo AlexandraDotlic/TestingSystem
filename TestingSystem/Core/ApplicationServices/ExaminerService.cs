@@ -38,5 +38,33 @@ namespace Core.ApplicationServices
             await UnitOfWork.ExaminerRepository.Delete(examiner);
             await UnitOfWork.SaveChangesAsync();
         }
+
+
+        public async Task SetExaminerFirstName(int examinerId, string firstName)
+        {
+            Examiner examiner = await UnitOfWork.ExaminerRepository.GetById(examinerId);
+            if (examiner == null)
+            {
+                throw new ArgumentNullException($"{nameof(Examiner)} with Id {examinerId} not exist");
+            }
+
+            examiner.SetFirstName(firstName);
+            await UnitOfWork.ExaminerRepository.Update(examiner);
+            await UnitOfWork.SaveChangesAsync();
+        }
+
+        public async Task SetExaminerLastName(int examinerId, string lastName)
+        {
+            Examiner examiner = await UnitOfWork.ExaminerRepository.GetById(examinerId);
+            if (examiner == null)
+            {
+                throw new ArgumentNullException($"{nameof(Examiner)} with Id {examinerId} not exist");
+            }
+
+            examiner.SetLastName(lastName);
+            await UnitOfWork.ExaminerRepository.Update(examiner);
+            await UnitOfWork.SaveChangesAsync();
+        }
+
     }
 }

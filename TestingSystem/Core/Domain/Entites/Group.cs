@@ -46,5 +46,10 @@ namespace Core.Domain.Entites
             Students.Remove(student);
         }
 
+        public void SetTitle(string title)
+        {
+            Title = title;
+        }
+
     }
 }

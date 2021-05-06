@@ -43,7 +43,7 @@ namespace Applications.WebClient.Controllers
 
                 var response = new GetAllTestsForExaminerResponse
                 {
-                    Tests = tests.Select(t => new TestDTO(t.Id, t.Title, t.ExaminerId, t.StartDate, t.EndDate, t.IsActive, t.TestScore)).ToList()
+                    Tests = tests.Select(t => new TestDTO(t.Id, t.Title, t.ExaminerId, t.StartDate, t.IsActive, t.TestScore)).ToList()
 
                 };
                 return response;
@@ -55,6 +55,40 @@ namespace Applications.WebClient.Controllers
                 return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
             }
         }
+
+
+        [HttpPost]
+        [Route("SetExaminerFirstName/{examinerId}")]
+        public async Task<IActionResult> SetExaminerFirstName(int examinerId, string firstName)
+        {
+            try
+            {
+                await ExaminerService.SetExaminerFirstName(examinerId, firstName);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+        }
+
+        [HttpPost]
+        [Route("SetExaminerLastName/{examinerId}")]
+        public async Task<IActionResult> SetExaminerLastName(int examinerId, string lastName)
+        {
+            try
+            {
+                await ExaminerService.SetExaminerLastName(examinerId, lastName);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+        }
+    
 
 
         [HttpGet]

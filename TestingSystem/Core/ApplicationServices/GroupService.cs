@@ -62,6 +62,7 @@ namespace Core.ApplicationServices
             await UnitOfWork.SaveChangesAsync();
         }
 
+
         public async Task<ICollection<GroupDTO>> GetAllGroupsForExaminer(int examinerId)
         {
             IReadOnlyCollection<Group> groups = await UnitOfWork.GroupRepository.SearchByWithIncludes(g => g.ExaminerId == examinerId);
@@ -70,6 +71,21 @@ namespace Core.ApplicationServices
                 ? null
                 : groups.Select(g => new GroupDTO(g.Id, g.Title, g.ExaminerId)).ToList();
             return groupDTOs;
+        }
+
+
+        public async Task SetGroupTitle(short groupId, string title)
+        {
+            Group group = await UnitOfWork.GroupRepository.GetById(groupId);
+            if (group == null)
+            {
+                throw new ArgumentNullException($"{nameof(Group)} with Id {groupId} not exist");
+            }
+
+            group.SetTitle(title);
+            await UnitOfWork.GroupRepository.Update(group);
+            await UnitOfWork.SaveChangesAsync();
+
         }
 
 
