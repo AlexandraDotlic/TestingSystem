@@ -10,7 +10,8 @@ class CreateTestForm extends React.Component {
             startDate: "",
             startTime: "",
             endDate: "",
-            endTime: ""
+            endTime: "",
+            isSubmitted: false
         };
 
         this.testNameChange = this.testNameChange.bind(this);
@@ -64,18 +65,19 @@ class CreateTestForm extends React.Component {
             endDateCombined = null;
         }
 
-        axios({
-            method: 'post',
-            url: 'https://localhost:44329/Test/CreateTest',
-            data: {
-              title: this.state.testName,
-              startDate: startDateCombined,
-              endDate: endDateCombined
-            }
-          });
+        if(this.state.isSubmitted === false) {
+            axios({
+                method: 'post',
+                url: 'https://localhost:44329/Test/CreateTest',
+                data: {
+                  title: this.state.testName,
+                  startDate: startDateCombined,
+                  endDate: endDateCombined
+                }
+              });
+            this.setState({isSubmitted: true});
+        }
 
-        debugger;
-        //event.preventDefault();
     }
 
     render(){
