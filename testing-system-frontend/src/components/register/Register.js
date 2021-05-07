@@ -53,17 +53,14 @@ class Register extends React.Component {
             userRoleType: this.state.type
         };
 
-        debugger;
         axios.defaults.headers.post['Content-Type'] = 'application/json';
         axios.post(
             "https://localhost:44329/Account/Register", 
             dataObject
         ).then(response => {
-            debugger;
             console.log("User successfuly registered.");
         }
         ).catch(error => {
-            debugger;
             console.log(error);
         });
 
