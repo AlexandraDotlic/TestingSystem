@@ -15,8 +15,8 @@ class Student extends React.Component {
 
     checkChange() {
         let isChecked = this.state.checked ? false : true;
-        this.setState({checked: isChecked})
-        // Inform somebody that state is changed
+        this.setState({checked: isChecked});
+        this.props.checked({id: this.state.id, val: isChecked});
     }
 
     render() {
