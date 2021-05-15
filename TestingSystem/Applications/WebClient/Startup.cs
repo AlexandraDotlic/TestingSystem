@@ -1,6 +1,6 @@
-using Authentication.ApplicationServices;
-using Authentication.Domain.Entities;
-using Authentication.Infrastructure.DataAccess.EfCoreDataAccess;
+using Auth.ApplicationServices;
+using Auth.Domain.Entities;
+using Auth.Infrastructure.DataAccess.EfCoreDataAccess;
 using Core.ApplicationServices;
 using Core.Domain.Repositories;
 using Core.Domain.Services.External.JobService;

@@ -1,14 +1,12 @@
 ﻿using Applications.WebClient.Helpers;
 using Applications.WebClient.Requests;
-using Authentication.ApplicationServices;
-using Authentication.Domain.Entities;
+using Auth.ApplicationServices;
+using Auth.Domain.Entities;
 using Core.ApplicationServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Applications.WebClient.Controllers

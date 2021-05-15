@@ -9,7 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Authentication\Domain\Authentication.Domain.csproj" />
+    <ProjectReference Include="..\Domain\Auth.Domain.csproj" />
+    <ProjectReference Include="..\Infrastructure\DataAccess\EfCoreDataAccess\Auth.Infrastructure.DataAccess.EfCoreDataAccess.csproj" />
   </ItemGroup>
 
 </Project>
