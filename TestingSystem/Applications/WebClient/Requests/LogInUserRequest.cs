@@ -13,7 +13,5 @@ namespace Applications.WebClient.Requests
         public string Email { get; set; }
         [DataMember]
         public string Password { get; set; }
-        [DataMember]
-        public bool RememberMe { get; set; }
     }
 }
