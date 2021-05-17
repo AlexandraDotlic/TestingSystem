@@ -37,21 +37,25 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task TestCreateStudentSuccess()
         {
-            int id  = await StudentService.CreateStudent("Ime", "Prezime", "1234");
+            string externalSId = Guid.NewGuid().ToString();
+
+            int id  = await StudentService.CreateStudent("Ime", "Prezime", externalSId);
             var student = await CoreUnitOfWork.StudentRepository.GetById(id);
 
             Assert.AreEqual(id, student.Id);
             Assert.AreEqual("Ime", student.FirstName);
             Assert.AreEqual("Prezime", student.LastName);
-            Assert.AreEqual("1234", student.ExternalId);
+            Assert.AreEqual(externalSId, student.ExternalId);
 
         }
 
         [TestMethod]
         public async Task TestCreateStudentFail()
         {
-            int id = await StudentService.CreateStudent("Ime", "Prezime", "1234");
-            var examiner = await CoreUnitOfWork.ExaminerRepository.GetById(id);
+            string externalSId = Guid.NewGuid().ToString();
+
+            int id = await StudentService.CreateStudent("Ime", "Prezime", externalSId);
+            var student = await CoreUnitOfWork.StudentRepository.GetById(id);
 
             await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await StudentService.CreateStudent("Ime", "Prezime", null), $"AccountId must not be null");
 

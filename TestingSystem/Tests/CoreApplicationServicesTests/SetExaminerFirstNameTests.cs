@@ -24,6 +24,8 @@ namespace Tests.CoreApplicationServicesTests
             var dbContextFactory = new SampleDbContextFactory();
             DbContext = dbContextFactory.CreateDbContext(new string[] { });
             CoreUnitOfWork = new CoreEfCoreUnitOfWork(DbContext);
+            ExaminerService = new ExaminerService(CoreUnitOfWork);
+
 
         }
 
@@ -37,9 +39,11 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task SetExaminerFirstNameSuccess()
         {
-            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
+            string externalEId = Guid.NewGuid().ToString();
+
+            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
             var examiner = await CoreUnitOfWork.ExaminerRepository.GetById(examinerId);
-            await ExaminerService.SetExaminerFirstName(examinerId, "Marko");
+            await ExaminerService.SetExaminerFirstName(externalEId, "Marko");
 
             Assert.AreEqual(examiner.FirstName, "Marko");
         }
@@ -48,7 +52,7 @@ namespace Tests.CoreApplicationServicesTests
         public async Task SetExaminerFirstNameFail()
         {
             var examiner = await CoreUnitOfWork.ExaminerRepository.GetById(100);
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await ExaminerService.SetExaminerFirstName(1000, "Marko"), $"Examiner with with Id={100} doesn't existt");
+            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await ExaminerService.SetExaminerFirstName("1000", "Marko"), $"Examiner with with Id={100} doesn't existt");
         }
     }
 }

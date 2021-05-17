@@ -2,12 +2,16 @@
 using Applications.WebClient.Helpers;
 using Applications.WebClient.Requests;
 using Applications.WebClient.Responses;
+using Auth.Domain.Entities;
 using Core.ApplicationServices;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Applications.WebClient.Controllers
@@ -19,8 +23,7 @@ namespace Applications.WebClient.Controllers
         private readonly TestService TestService;
         private readonly QuestionService QuestionService;
         private readonly ILogger<TestController> Logger;
-        private readonly int examinerId = 1; //temp
-        private readonly int studentId = 1;
+
 
         public TestController(
             TestService testService,
@@ -34,11 +37,13 @@ namespace Applications.WebClient.Controllers
 
         [HttpPost]
         [Route("CreateTest")]
+        [Authorize(Policy = "IsExaminer")]
         public async Task<IActionResult> CreateTest(CreateTestRequest createTestRequest)
         {
+            var currentUserId = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
             try
             {
-                var result = await TestService.CreateTest(examinerId, createTestRequest.Title, createTestRequest.StartDate);
+                var result = await TestService.CreateTest(currentUserId, createTestRequest.Title, createTestRequest.StartDate);
                 return Ok(result);
             }
             catch (Exception e)
@@ -50,6 +55,7 @@ namespace Applications.WebClient.Controllers
 
         [HttpPost]
         [Route("AddQuestionToTest")]
+        [Authorize(Policy = "IsExaminer")]
         public async Task<IActionResult> AddQuestionToTest(AddQuestionToTestRequest addQuestionToTestRequest)
         {
             try
@@ -71,6 +77,7 @@ namespace Applications.WebClient.Controllers
 
         [HttpPost]
         [Route("RemoveQuestionFromTest")]
+        [Authorize(Policy = "IsExaminer")]
         public async Task<IActionResult> RemoveQuestionFromTest(RemoveQuestionFromTestRequest removeQuestionFromTestRequest)
         {
             try
@@ -87,6 +94,7 @@ namespace Applications.WebClient.Controllers
 
         [HttpGet]
         [Route("GetQuestionAndAnswers")]
+        [Authorize]
         public async Task<IActionResult> GetQuestionAndAnswers(short questionId, short testId)
         {
             try
@@ -104,6 +112,7 @@ namespace Applications.WebClient.Controllers
 
         [HttpGet]
         [Route("GetAllQuestionsForTest/{testId}")]
+        [Authorize]
         public async Task<ActionResult<GetAllQuestionsForTestResponse>> GetAllQuestionsForTest(short testId)
         {
             try
@@ -126,12 +135,14 @@ namespace Applications.WebClient.Controllers
 
         [HttpPost]
         [Route("TakeTheTest")]
+        [Authorize(Policy = "IsStudent")]
         public async Task<ActionResult<TakeTheTestResponse>> TakeTheTest(TakeTheTestRequest takeTheTestRequest)
         {
             try
             {
+                var currentUserId = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
                 List<Tuple<int, ICollection<string>>> testResponse = takeTheTestRequest.Response.Select(r => new Tuple<int, ICollection<string>>(r.QuestionId, r.Responses)).ToList();
-                Core.ApplicationServices.DTOs.StudentTestScoreDTO studentTestScore = await TestService.TakeTheTest(takeTheTestRequest.TestId, studentId, testResponse);
+                Core.ApplicationServices.DTOs.StudentTestScoreDTO studentTestScore = await TestService.TakeTheTest(takeTheTestRequest.TestId, currentUserId, testResponse);
                 var response = new TakeTheTestResponse
                 {
                     StudentScore = studentTestScore.StudentTestScore,
@@ -148,6 +159,7 @@ namespace Applications.WebClient.Controllers
 
         [HttpPost]
         [Route("ActivateTest/{testId}")]
+        [Authorize(Policy = "IsExaminer")]
         public async Task<IActionResult> ActivateTest(short testId)
         {
             try
@@ -164,6 +176,7 @@ namespace Applications.WebClient.Controllers
 
         [HttpPost]
         [Route("DeactivateTest/{testId}")]
+        [Authorize(Policy = "IsExaminer")]
         public async Task<IActionResult> DeactivateTest(short testId)
         {
             try
@@ -181,6 +194,7 @@ namespace Applications.WebClient.Controllers
     
         [HttpPost]
         [Route("ChangeStartDate")]
+        [Authorize(Policy = "IsExaminer")]
         public async Task<IActionResult> ChangeStartDate(ChangeStartDateRequest changeStartDateRequest)
         {
             try

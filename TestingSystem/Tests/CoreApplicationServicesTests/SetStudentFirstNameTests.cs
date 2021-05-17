@@ -24,6 +24,7 @@ namespace Tests.CoreApplicationServicesTests
             var dbContextFactory = new SampleDbContextFactory();
             DbContext = dbContextFactory.CreateDbContext(new string[] { });
             CoreUnitOfWork = new CoreEfCoreUnitOfWork(DbContext);
+            StudentService = new StudentService(CoreUnitOfWork);
 
         }
 
@@ -37,9 +38,11 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task SetStudentFirstNameSuccess()
         {
-            int studentId = await StudentService.CreateStudent("Ime", "Prezime", "123");
+            string externalSId = Guid.NewGuid().ToString();
+
+            int studentId = await StudentService.CreateStudent("Ime", "Prezime", externalSId);
             var student = await CoreUnitOfWork.StudentRepository.GetById(studentId);
-            await StudentService.SetStudentFirstName(studentId, "Marko");
+            await StudentService.SetStudentFirstName(externalSId, "Marko");
 
             Assert.AreEqual(student.FirstName, "Marko");
         }
@@ -48,7 +51,7 @@ namespace Tests.CoreApplicationServicesTests
         public async Task SetStudentFirstNameFail()
         {
             var student = await CoreUnitOfWork.StudentRepository.GetById(100);
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await StudentService.SetStudentFirstName(1000, "Marko"), $"Student with with Id={100} doesn't existt");
+            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await StudentService.SetStudentFirstName("1000", "Marko"), $"Student with with Id={100} doesn't existt");
         }
     }
 }

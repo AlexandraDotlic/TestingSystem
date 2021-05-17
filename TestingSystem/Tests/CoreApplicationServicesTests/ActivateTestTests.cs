@@ -37,9 +37,10 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task ActivateTestSuccess()
         {
-            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
+            string externalId = Guid.NewGuid().ToString();
+            await ExaminerService.CreateExaminer("Ime", "Prezime", externalId);
             DateTime dateTime = DateTime.Now;
-            short testId = await TestService.CreateTest(examinerId, "Test1", dateTime);
+            short testId = await TestService.CreateTest(externalId, "Test1", dateTime);
 
             var test = await CoreUnitOfWork.TestRepository.GetById(testId);
             await TestService.ActivateTest(testId);
@@ -50,9 +51,10 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task ActivateTestFail()
         {
-            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
+            string externalId = Guid.NewGuid().ToString();
+            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalId);
             DateTime dateTime = DateTime.Now;
-            short testId = await TestService.CreateTest(examinerId, "Test1", dateTime);
+            short testId = await TestService.CreateTest(externalId, "Test1", dateTime);
 
             var test = await CoreUnitOfWork.TestRepository.GetById(testId);
             await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await TestService.ActivateTest(1000), $"Test with Id 1000 does not exist");

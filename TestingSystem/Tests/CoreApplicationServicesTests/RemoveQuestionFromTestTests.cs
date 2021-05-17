@@ -44,9 +44,11 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task RemoveQuestionFromTestSuccess()
         {
-            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
+            string externalEId = Guid.NewGuid().ToString();
+
+            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
             DateTime dateTime = DateTime.Now;
-            short testId = await TestService.CreateTest(examinerId, "Test1", dateTime);
+            short testId = await TestService.CreateTest(externalEId, "Test1", dateTime);
 
             Test test = await CoreUnitOfWork.TestRepository
                 .GetFirstOrDefaultWithIncludes(t => t.Id == testId, t => t.Questions);

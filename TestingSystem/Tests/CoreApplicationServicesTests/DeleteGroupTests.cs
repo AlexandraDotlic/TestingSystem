@@ -39,8 +39,10 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task TestDeleteGroupSuccess()
         {
-            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
-            var groupId = await GroupService.CreateGroup("grupa", examinerId);
+            string externalEId = Guid.NewGuid().ToString();
+
+            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
+            var groupId = await GroupService.CreateGroup("grupa", externalEId);
             await GroupService.DeleteGroup(groupId);
             var group = await CoreUnitOfWork.GroupRepository.GetById(groupId);
 
