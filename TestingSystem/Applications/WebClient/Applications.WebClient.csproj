@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Auth\ApplicationServices\Auth.ApplicationServices.csproj" />
     <ProjectReference Include="..\..\Auth\Domain\Auth.Domain.csproj" />
     <ProjectReference Include="..\..\Auth\Infrastructure\DataAccess\EfCoreDataAccess\Auth.Infrastructure.DataAccess.EfCoreDataAccess.csproj" />
     <ProjectReference Include="..\..\Core\ApplicationServices\Core.ApplicationServices.csproj" />

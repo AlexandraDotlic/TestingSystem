@@ -1,4 +1,3 @@
-using Auth.ApplicationServices;
 using Auth.Domain.Entities;
 using Auth.Infrastructure.DataAccess.EfCoreDataAccess;
 using Core.ApplicationServices;
@@ -73,7 +72,6 @@ namespace WebClient
             services.AddScoped<ExaminerService>();
             services.AddScoped<QuestionService>();
             services.AddScoped<GroupService>();
-            services.AddScoped<UserService>();
             services.AddScoped<TestStatisticService>();
             services.AddScoped<IJobService, HangfireJobService>();
 

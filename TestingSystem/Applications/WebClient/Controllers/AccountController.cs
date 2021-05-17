@@ -1,6 +1,5 @@
 ﻿using Applications.WebClient.Helpers;
 using Applications.WebClient.Requests;
-using Auth.ApplicationServices;
 using Auth.Domain.Entities;
 using Core.ApplicationServices;
 using Microsoft.AspNetCore.Authorization;
@@ -22,7 +21,6 @@ namespace Applications.WebClient.Controllers
     [ApiController]
     public class AccountController: ControllerBase
     {
-        private readonly UserService UserService;
         private readonly StudentService StudentService;
         private readonly ExaminerService ExaminerService;
         private readonly ILogger Logger;
@@ -36,7 +34,6 @@ namespace Applications.WebClient.Controllers
         private readonly SymmetricSecurityKey _signingKey;
 
         public AccountController(
-            UserService userService,
             StudentService studentService,
             ExaminerService examinerService,
             ILogger<AccountController> logger,
@@ -45,7 +42,6 @@ namespace Applications.WebClient.Controllers
             RoleManager<IdentityRole> roleManager,
             IConfiguration configuration)
         {
-            UserService = userService;
             Logger = logger;
             StudentService = studentService;
             ExaminerService = examinerService;
