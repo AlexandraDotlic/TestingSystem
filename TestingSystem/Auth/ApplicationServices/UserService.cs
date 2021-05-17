@@ -1,11 +1,10 @@
-﻿using Authentication.Domain.Entities;
+﻿using Auth.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Authentication.ApplicationServices
+namespace Auth.ApplicationServices
 {
     public class UserService
     {

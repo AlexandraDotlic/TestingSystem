@@ -1,12 +1,8 @@
-﻿using Authentication.Domain.Entities;
-using Common.EfCoreDataAccess;
+﻿using Auth.Domain.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Authentication.Infrastructure.DataAccess.EfCoreDataAccess
+namespace Auth.Infrastructure.DataAccess.EfCoreDataAccess
 {
     public class AuthenticationEfCoreDbContext : IdentityDbContext<User>
     {

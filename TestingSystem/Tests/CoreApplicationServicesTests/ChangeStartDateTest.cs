@@ -37,9 +37,11 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task ChangeStartDateTestSuccess()
         {
-            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
+            string externalEId = Guid.NewGuid().ToString();
+
+            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
             DateTime dateTime = DateTime.Parse("2021-04-25 08:00:00.0000000");
-            short testId = await TestService.CreateTest(examinerId, "Test1", dateTime);
+            short testId = await TestService.CreateTest(externalEId, "Test1", dateTime);
 
             var test = await CoreUnitOfWork.TestRepository.GetById(testId);
             DateTime changedDateTime = DateTime.Parse("2021-04-30 16:00:00.0000000");
@@ -54,9 +56,11 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task ChangeStartDateTestFail()
         {
-            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
+            string externalEId = Guid.NewGuid().ToString();
+
+            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
             DateTime dateTime = DateTime.Parse("2021-04-25 08:00:00.0000000");
-            short testId = await TestService.CreateTest(examinerId, "Test1", dateTime);
+            short testId = await TestService.CreateTest(externalEId, "Test1", dateTime);
 
             var test = await CoreUnitOfWork.TestRepository.GetById(testId);
             DateTime changedDateTime = DateTime.Parse("2021-04-30 16:00:00.0000000");

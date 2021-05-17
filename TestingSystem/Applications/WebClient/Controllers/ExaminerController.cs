@@ -3,6 +3,7 @@ using Applications.WebClient.Helpers;
 using Applications.WebClient.Requests;
 using Applications.WebClient.Responses;
 using Core.ApplicationServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -34,16 +35,21 @@ namespace Applications.WebClient.Controllers
         }
 
         [HttpGet]
-        [Route("GetAllTestsForExaminer/{examinerId}")]
-        public async Task<ActionResult<GetAllTestsForExaminerResponse>> GetAllTestsForExaminer(int examinerId)
+        [Route("GetAllTestsForExaminer")]
+        [Authorize(Policy = "IsExaminer")]
+        public async Task<ActionResult<GetAllTestsForExaminerResponse>> GetAllTestsForExaminer()
         {
             try
             {
-                ICollection<Core.ApplicationServices.DTOs.TestDTO> tests = await TestService.GetAllTestsForExaminer(examinerId);
+                var currentUserId = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+
+                ICollection<Core.ApplicationServices.DTOs.TestDTO> tests = await TestService.GetAllTestsForExaminer(currentUserId);
 
                 var response = new GetAllTestsForExaminerResponse
                 {
-                    Tests = tests.Select(t => new TestDTO(t.Id, t.Title, t.ExaminerId, t.StartDate, t.IsActive, t.TestScore)).ToList()
+                    Tests = tests == null || tests.Count == 0 
+                    ?  new List<TestDTO>()
+                    : tests.Select(t => new TestDTO(t.Id, t.Title, t.ExaminerId, t.StartDate, t.IsActive, t.TestScore)).ToList()
 
                 };
                 return response;
@@ -58,12 +64,15 @@ namespace Applications.WebClient.Controllers
 
 
         [HttpPost]
-        [Route("SetExaminerFirstName/{examinerId}")]
-        public async Task<IActionResult> SetExaminerFirstName(int examinerId, string firstName)
+        [Route("SetExaminerFirstName")]
+        [Authorize(Policy = "IsExaminer")]
+        public async Task<IActionResult> SetExaminerFirstName(string firstName)
         {
             try
             {
-                await ExaminerService.SetExaminerFirstName(examinerId, firstName);
+                var currentUserId = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+
+                await ExaminerService.SetExaminerFirstName(currentUserId, firstName);
                 return Ok();
             }
             catch (Exception e)
@@ -74,12 +83,15 @@ namespace Applications.WebClient.Controllers
         }
 
         [HttpPost]
-        [Route("SetExaminerLastName/{examinerId}")]
-        public async Task<IActionResult> SetExaminerLastName(int examinerId, string lastName)
+        [Route("SetExaminerLastName")]
+        [Authorize(Policy = "IsExaminer")]
+        public async Task<IActionResult> SetExaminerLastName(string lastName)
         {
             try
             {
-                await ExaminerService.SetExaminerLastName(examinerId, lastName);
+                var currentUserId = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+
+                await ExaminerService.SetExaminerLastName(currentUserId, lastName);
                 return Ok();
             }
             catch (Exception e)
@@ -92,16 +104,21 @@ namespace Applications.WebClient.Controllers
 
 
         [HttpGet]
-        [Route("GetAllGroupsForExaminer/{examinerId}")]
-        public async Task<ActionResult<GetAllGroupsForExaminerResponse>> GetAllGroupsForExaminer(int examinerId)
+        [Route("GetAllGroupsForExaminer")]
+        [Authorize(Policy = "IsExaminer")]
+        public async Task<ActionResult<GetAllGroupsForExaminerResponse>> GetAllGroupsForExaminer()
         {
             try
             {
-                ICollection<Core.ApplicationServices.DTOs.GroupDTO> groups = await GroupService.GetAllGroupsForExaminer(examinerId);
+                var currentUserId = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+
+                ICollection<Core.ApplicationServices.DTOs.GroupDTO> groups = await GroupService.GetAllGroupsForExaminer(currentUserId);
 
                 var response = new GetAllGroupsForExaminerResponse
                 {
-                    Groups = groups.Select(g => new GroupDTO(g.Id, g.Title, g.ExaminerId)).ToList()
+                    Groups = groups == null || groups.Count == 0
+                    ? new List<GroupDTO>()
+                    : groups.Select(g => new GroupDTO(g.Id, g.Title, g.ExaminerId)).ToList()
 
                 };
                 return response;

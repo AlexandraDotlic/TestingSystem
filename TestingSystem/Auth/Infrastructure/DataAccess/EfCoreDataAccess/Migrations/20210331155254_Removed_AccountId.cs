@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Authentication.Infrastructure.DataAccess.EfCoreDataAccess.Migrations
+namespace Auth.Infrastructure.DataAccess.EfCoreDataAccess.Migrations
 {
     public partial class Removed_AccountId : Migration
     {

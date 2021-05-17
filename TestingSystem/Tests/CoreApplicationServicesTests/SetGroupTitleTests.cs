@@ -26,6 +26,7 @@ namespace Tests.CoreApplicationServicesTests
             DbContext = dbContextFactory.CreateDbContext(new string[] { });
             CoreUnitOfWork = new CoreEfCoreUnitOfWork(DbContext);
             ExaminerService = new ExaminerService(CoreUnitOfWork);
+            GroupService = new GroupService(CoreUnitOfWork);
 
         }
 
@@ -39,8 +40,10 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task SetGroupTitleSuccess()
         {
-            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
-            short groupId = await GroupService.CreateGroup("Grupa", examinerId);
+            string externalEId = Guid.NewGuid().ToString();
+
+            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
+            short groupId = await GroupService.CreateGroup("Grupa", externalEId);
             
             var group = await CoreUnitOfWork.GroupRepository.GetById(groupId);
             await GroupService.SetGroupTitle(groupId, "Novi naziv" );
@@ -51,8 +54,9 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task SetGroupTitleFail()
         {
-            var group = await CoreUnitOfWork.GroupRepository.GetById(100);
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await GroupService.SetGroupTitle(1000, "Naziv"), $"Group with with Id={100} doesn't existt");
+            short id = 1000;
+            var group = await CoreUnitOfWork.GroupRepository.GetById(id);
+            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await GroupService.SetGroupTitle(id, "Naziv"), $"Group with with Id={id} doesn't existt");
         }
     }
 }

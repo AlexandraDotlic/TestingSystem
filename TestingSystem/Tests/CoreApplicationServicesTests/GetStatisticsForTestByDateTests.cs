@@ -47,10 +47,10 @@ namespace Tests.CoreApplicationServicesTests
 
         }
 
-        public async Task<Tuple<short, int, int>> CreateTestWithQuestions(int examinerId, string testTitle)
+        public async Task<Tuple<short, int, int>> CreateTestWithQuestions(string externalExaminerId, string testTitle)
         {
             DateTime dateTime = DateTime.Now;
-            short testId = await TestService.CreateTest(examinerId, "Test1", dateTime);
+            short testId = await TestService.CreateTest(externalExaminerId, "Test1", dateTime);
             string questionText1 = "Pitanje 1";
             ICollection<Tuple<string, bool>> answeOptionTuples1 = new List<Tuple<string, bool>>
             {
@@ -79,19 +79,23 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task GetStatisticsForTestByDateTestsSuccess()
         {
-            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
-            int studentId1 = await StudentService.CreateStudent("student1", "Prezimes", "12345");
-            int studentId2 = await StudentService.CreateStudent("student2", "Prezimes", "123456");
-            int studentId3 = await StudentService.CreateStudent("student3", "Prezimes", "123256");
+            string externalEId = Guid.NewGuid().ToString();
+            string externalSId1 = Guid.NewGuid().ToString();
+            string externalSId2 = Guid.NewGuid().ToString();
+            string externalSId3 = Guid.NewGuid().ToString();
 
+            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
+            int studentId1 = await StudentService.CreateStudent("student1", "Prezimes", externalSId1);
+            int studentId2 = await StudentService.CreateStudent("student2", "Prezimes", externalSId2);
+            int studentId3 = await StudentService.CreateStudent("student3", "Prezimes", externalSId3);
 
-            var (testId, question1Id, question2Id) = await CreateTestWithQuestions(examinerId, "Title test");
+            var (testId, question1Id, question2Id) = await CreateTestWithQuestions(externalEId, "Title test");
 
             //student 1
             var s1question1Response = new Tuple<int, ICollection<string>>(question1Id, new List<string> { "opcija 1" });
             var s1question2Response = new Tuple<int, ICollection<string>>(question2Id, new List<string> { "opcija 2", "opcija 3" });
 
-            var student1TestScore = await TestService.TakeTheTest(testId, studentId1, new List<Tuple<int, ICollection<string>>> { s1question1Response, s1question2Response });
+            var student1TestScore = await TestService.TakeTheTest(testId, externalSId1, new List<Tuple<int, ICollection<string>>> { s1question1Response, s1question2Response });
 
             IReadOnlyCollection<StudentTestQuestion> student1TestQuestons = await CoreUnitOfWork.StudentTestQuestionRepository
                 .SearchByWithIncludes(stq => stq.StudentTest.StudentId == studentId1
@@ -103,7 +107,7 @@ namespace Tests.CoreApplicationServicesTests
             var s2question1Response = new Tuple<int, ICollection<string>>(question1Id, new List<string> { "opcija 2" });
             var s2question2Response = new Tuple<int, ICollection<string>>(question2Id, new List<string> { "opcija 2"});
 
-            var student2TestScore = await TestService.TakeTheTest(testId, studentId2, new List<Tuple<int, ICollection<string>>> { s2question1Response, s2question2Response });
+            var student2TestScore = await TestService.TakeTheTest(testId, externalSId2, new List<Tuple<int, ICollection<string>>> { s2question1Response, s2question2Response });
 
             IReadOnlyCollection<StudentTestQuestion> student2TestQuestons = await CoreUnitOfWork.StudentTestQuestionRepository
                 .SearchByWithIncludes(stq => stq.StudentTest.StudentId == studentId2
@@ -113,7 +117,7 @@ namespace Tests.CoreApplicationServicesTests
             var s3question1Response = new Tuple<int, ICollection<string>>(question1Id, new List<string> { "opcija 1" });
             var s3question2Response = new Tuple<int, ICollection<string>>(question2Id, new List<string> { "opcija 2" });
 
-            var student3TestScore = await TestService.TakeTheTest(testId, studentId3, new List<Tuple<int, ICollection<string>>> { s2question1Response, s2question2Response });
+            var student3TestScore = await TestService.TakeTheTest(testId, externalSId3, new List<Tuple<int, ICollection<string>>> { s2question1Response, s2question2Response });
 
             IReadOnlyCollection<StudentTestQuestion> student3TestQuestons = await CoreUnitOfWork.StudentTestQuestionRepository
                 .SearchByWithIncludes(stq => stq.StudentTest.StudentId == studentId3
@@ -121,10 +125,10 @@ namespace Tests.CoreApplicationServicesTests
                 , stq => stq.Responses, stq => stq.StudentTest);
 
 
-            var Id = await TestStatisticService.CreateStatisticForTest(testId, examinerId);
+            var Id = await TestStatisticService.CreateStatisticForTest(testId, externalEId);
             TestStatistic testStatistic = await CoreUnitOfWork.TestStatisticRepository.GetById(Id);
 
-            TestStatisticDTO testStatisticDTO = await TestStatisticService.GetStatisticForTestbyDate(testId, examinerId, testStatistic.Date);
+            TestStatisticDTO testStatisticDTO = await TestStatisticService.GetStatisticForTestbyDate(testId, externalEId, testStatistic.Date);
            
             Assert.AreEqual(testStatistic.TestTitle, testStatisticDTO.TestTitle);
             Assert.AreEqual(testStatistic.PercentageOfStudentsWhoPassedTheTest, testStatisticDTO.PercentageOfStudentsWhoPassedTheTest);
@@ -138,12 +142,13 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task GetStatisticsForTestByDateTestsFail1()
         {
-           
-            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
-            var (testId, question1Id, question2Id) = await CreateTestWithQuestions(examinerId, "Title test");
+            string externalEId = Guid.NewGuid().ToString();
+
+            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
+            var (testId, question1Id, question2Id) = await CreateTestWithQuestions(externalEId, "Title test");
 
 
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await TestStatisticService.GetStatisticForTestbyDate(testId, 100, DateTime.Now), $"Examiner does not exist");
+            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await TestStatisticService.GetStatisticForTestbyDate(testId, "100", DateTime.Now), $"Examiner does not exist");
 
         }
 
@@ -154,7 +159,7 @@ namespace Tests.CoreApplicationServicesTests
             int studentId = await StudentService.CreateStudent("ImeS", "Prezimes", "12345");
 
 
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await TestStatisticService.GetStatisticForTestbyDate(100, examinerId, DateTime.Now), $"Test does not exist");
+            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await TestStatisticService.GetStatisticForTestbyDate(100, "123", DateTime.Now), $"Test does not exist");
 
 
         }

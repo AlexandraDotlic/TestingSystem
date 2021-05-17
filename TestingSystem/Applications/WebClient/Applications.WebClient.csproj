@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Hangfire" Version="1.7.22" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.15" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -18,13 +19,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Authentication.ApplicationServices\Authentication.ApplicationServices.csproj" />
-    <ProjectReference Include="..\..\Authentication\Domain\Authentication.Domain.csproj" />
+    <ProjectReference Include="..\..\Auth\ApplicationServices\Auth.ApplicationServices.csproj" />
+    <ProjectReference Include="..\..\Auth\Domain\Auth.Domain.csproj" />
+    <ProjectReference Include="..\..\Auth\Infrastructure\DataAccess\EfCoreDataAccess\Auth.Infrastructure.DataAccess.EfCoreDataAccess.csproj" />
     <ProjectReference Include="..\..\Core\ApplicationServices\Core.ApplicationServices.csproj" />
     <ProjectReference Include="..\..\Core\Infrastructure\DataAccess\EfCoreDataAccess\Core.Infrastructure.DataAccess.EfCoreDataAccess.csproj" />
     <ProjectReference Include="..\..\Core\Infrastructure\Services\HangfireJobService\Core.Infrastructure.Services.HangfireJobService.csproj" />
     <ProjectReference Include="..\..\Core\Infrastructure\Services\MailService\Core.Infrastructure.Services.MailService.csproj" />
-    <ProjectReference Include="..\..\EfCoreDataAccess\Authentication.Infrastructure.DataAccess.EfCoreDataAccess.csproj" />
   </ItemGroup>
 
   <ItemGroup>

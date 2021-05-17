@@ -37,20 +37,24 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task TestCreateExaminerSuccess()
         {
-            int id  = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
+            string externalEId = Guid.NewGuid().ToString();
+
+            int id = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
             var examiner = await CoreUnitOfWork.ExaminerRepository.GetById(id);
 
             Assert.AreEqual(id, examiner.Id);
             Assert.AreEqual("Ime", examiner.FirstName);
             Assert.AreEqual("Prezime", examiner.LastName);
-            Assert.AreEqual("123", examiner.ExternalId);
+            Assert.AreEqual(externalEId, examiner.ExternalId);
 
         }
 
         [TestMethod]
         public async Task TestCreateExaminerFail()
         {
-            int id = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
+            string externalEId = Guid.NewGuid().ToString();
+
+            int id = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
             var examiner = await CoreUnitOfWork.ExaminerRepository.GetById(id);
 
             await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await ExaminerService.CreateExaminer("Ime", "Prezime", null), $"AccountId must not be null");

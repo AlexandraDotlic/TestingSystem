@@ -3,6 +3,7 @@ using Applications.WebClient.Helpers;
 using Applications.WebClient.Requests;
 using Applications.WebClient.Responses;
 using Core.ApplicationServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -29,12 +30,15 @@ namespace Applications.WebClient.Controllers
 
 
         [HttpPost]
-        [Route("SetStudentFirstName/{studentId}")]
-        public async Task<IActionResult> SetStudentFirstName(int studentId, string firstName)
+        [Route("SetStudentFirstName")]
+        [Authorize(Policy = "IsStudent")]
+        public async Task<IActionResult> SetStudentFirstName(string firstName)
         {
             try
             {
-                await StudentService.SetStudentFirstName(studentId, firstName);
+                var currentUserId = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+
+                await StudentService.SetStudentFirstName(currentUserId, firstName);
                 return Ok();
             }
             catch (Exception e)
@@ -45,12 +49,15 @@ namespace Applications.WebClient.Controllers
         }
 
         [HttpPost]
-        [Route("SetStudentLastName/{studentId}")]
-        public async Task<IActionResult> SetStudentLastName(int studentId, string lastName)
+        [Route("SetStudentLastName")]
+        [Authorize(Policy = "IsStudent")]
+        public async Task<IActionResult> SetStudentLastName(string lastName)
         {
             try
             {
-                await StudentService.SetStudentLastName(studentId, lastName);
+                var currentUserId = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+
+                await StudentService.SetStudentLastName(currentUserId, lastName);
                 return Ok();
             }
             catch (Exception e)
@@ -62,6 +69,7 @@ namespace Applications.WebClient.Controllers
 
         [HttpGet]
         [Route("GetAllStudents")]
+        [Authorize(Policy = "IsExaminer")]
         public async Task<ActionResult<GetAllStudentsResponse>> GetAllStudents()
         {
             try

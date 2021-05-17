@@ -46,16 +46,18 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task GetAllGroupsForExaminerSuccess()
         {
-            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
-            short groupId1 = await GroupService.CreateGroup("Grupa1", examinerId);
-            short groupId2 = await GroupService.CreateGroup("Grupa2", examinerId);
+            string externalEId = Guid.NewGuid().ToString();
+
+            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
+            short groupId1 = await GroupService.CreateGroup("Grupa1", externalEId);
+            short groupId2 = await GroupService.CreateGroup("Grupa2", externalEId);
 
             Group group1 = await CoreUnitOfWork.GroupRepository
                 .GetFirstOrDefaultWithIncludes(g => g.Id == groupId1);
             Group group2 = await CoreUnitOfWork.GroupRepository
                 .GetFirstOrDefaultWithIncludes(g => g.Id == groupId2);
 
-            ICollection<Core.ApplicationServices.DTOs.GroupDTO> groupDtos = await GroupService.GetAllGroupsForExaminer(examinerId);
+            ICollection<Core.ApplicationServices.DTOs.GroupDTO> groupDtos = await GroupService.GetAllGroupsForExaminer(externalEId);
 
             Assert.AreEqual(2, groupDtos.Count);
             Assert.AreEqual(group1.Title, groupDtos.FirstOrDefault().Title);

@@ -47,11 +47,16 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task TakeTheTestSuccess()
         {
-            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
-            int studentId = await StudentService.CreateStudent("ImeS", "Prezimes", "12345");
+
+            string externalSId = Guid.NewGuid().ToString();
+            string externalEId = Guid.NewGuid().ToString();
+
+            int studentId = await StudentService.CreateStudent("ImeS", "Prezime", externalSId);
+            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
+
 
             DateTime dateTime = DateTime.Now;
-            short testId = await TestService.CreateTest(examinerId, "Test1", dateTime);
+            short testId = await TestService.CreateTest(externalEId, "Test1", dateTime);
             string questionText1 = "Pitanje 1";
             ICollection<Tuple<string, bool>> answeOptionTuples1 = new List<Tuple<string, bool>>
             {
@@ -78,7 +83,7 @@ namespace Tests.CoreApplicationServicesTests
             var question1Response = new Tuple<int, ICollection<string>>(question1Id, new List<string> { "opcija 1" });
             var question2Response = new Tuple<int, ICollection<string>>(question2Id, new List<string> { "opcija 2", "opcija 3" });
 
-            var studentTestScore = await TestService.TakeTheTest(testId, studentId, new List<Tuple<int, ICollection<string>>> { question1Response, question2Response });
+            var studentTestScore = await TestService.TakeTheTest(testId, externalSId, new List<Tuple<int, ICollection<string>>> { question1Response, question2Response });
 
             IReadOnlyCollection<StudentTestQuestion> studentTestQuestons = await CoreUnitOfWork.StudentTestQuestionRepository
                 .SearchByWithIncludes(stq => stq.StudentTest.StudentId == studentId
@@ -93,12 +98,14 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task TakeTheTestFail()
         {
-           
-            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
-            int studentId = await StudentService.CreateStudent("ImeS", "Prezimes", "12345");
+            string externalSId = Guid.NewGuid().ToString();
+            string externalEId = Guid.NewGuid().ToString();
+
+            int studentId = await StudentService.CreateStudent("ImeS", "Prezime", externalSId);
+            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
 
             DateTime dateTime = DateTime.Now;
-            short testId = await TestService.CreateTest(examinerId, "Test1", dateTime);
+            short testId = await TestService.CreateTest(externalEId, "Test1", dateTime);
             string questionText1 = "Pitanje 1";
             ICollection<Tuple<string, bool>> answeOptionTuples1 = new List<Tuple<string, bool>>
             {
@@ -124,7 +131,7 @@ namespace Tests.CoreApplicationServicesTests
 
             var question1Response = new Tuple<int, ICollection<string>>(question1Id, new List<string> { "opcija 1" });
             var question2Response = new Tuple<int, ICollection<string>>(question2Id, new List<string> { "opcija 2", "opcija 3" });
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await TestService.TakeTheTest(100, studentId, new List<Tuple<int, ICollection<string>>> { question1Response, question2Response }), $"Test does not exist");
+            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await TestService.TakeTheTest(100, externalSId, new List<Tuple<int, ICollection<string>>> { question1Response, question2Response }), $"Test does not exist");
 
 
 
@@ -133,12 +140,15 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task TakeTheTestFail2()
         {
+            string externalSId = Guid.NewGuid().ToString();
+            string externalEId = Guid.NewGuid().ToString();
 
-            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
-            int studentId = await StudentService.CreateStudent("ImeS", "Prezimes", "12345");
+            int studentId = await StudentService.CreateStudent("ImeS", "Prezime", externalSId);
+            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
+
 
             DateTime dateTime = DateTime.Now;
-            short testId = await TestService.CreateTest(examinerId, "Test1", dateTime);
+            short testId = await TestService.CreateTest(externalEId, "Test1", dateTime);
             string questionText1 = "Pitanje 1";
             ICollection<Tuple<string, bool>> answeOptionTuples1 = new List<Tuple<string, bool>>
             {
@@ -164,7 +174,7 @@ namespace Tests.CoreApplicationServicesTests
 
             var question1Response = new Tuple<int, ICollection<string>>(question1Id, new List<string> { "opcija 1" });
             var question2Response = new Tuple<int, ICollection<string>>(question2Id, new List<string> { "opcija 2", "opcija 3" });
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await TestService.TakeTheTest(testId, 100, new List<Tuple<int, ICollection<string>>> { question1Response, question2Response }), $"Student does not exist");
+            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await TestService.TakeTheTest(testId, "100", new List<Tuple<int, ICollection<string>>> { question1Response, question2Response }), $"Student does not exist");
 
 
 
@@ -173,12 +183,14 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task TakeTheTestFail3()
         {
+            string externalSId = Guid.NewGuid().ToString();
+            string externalEId = Guid.NewGuid().ToString();
 
-            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
-            int studentId = await StudentService.CreateStudent("ImeS", "Prezimes", "12345");
+            int studentId = await StudentService.CreateStudent("ImeS", "Prezime", externalSId);
+            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
 
             DateTime dateTime = DateTime.Now;
-            short testId = await TestService.CreateTest(examinerId, "Test1", dateTime);
+            short testId = await TestService.CreateTest(externalEId, "Test1", dateTime);
             string questionText1 = "Pitanje 1";
             ICollection<Tuple<string, bool>> answeOptionTuples1 = new List<Tuple<string, bool>>
             {
@@ -204,7 +216,7 @@ namespace Tests.CoreApplicationServicesTests
 
             var question1Response = new Tuple<int, ICollection<string>>(question1Id, new List<string> { "opcija 1" });
             var question2Response = new Tuple<int, ICollection<string>>(question2Id, new List<string> { "opcija 2", "opcija 3" });
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await TestService.TakeTheTest(testId, studentId, null), $"Collection of responses can't be null");
+            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await TestService.TakeTheTest(testId, externalSId, null), $"Collection of responses can't be null");
 
 
 

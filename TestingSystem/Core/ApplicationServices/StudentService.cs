@@ -19,13 +19,13 @@ namespace Core.ApplicationServices
             UnitOfWork = unitOfWork;
         }
 
-        public async Task<int> CreateStudent(string firstName, string lastName, string accountId)
+        public async Task<int> CreateStudent(string firstName, string lastName, string externalId)
         {
-            if (string.IsNullOrEmpty(accountId))
+            if (string.IsNullOrEmpty(externalId))
             {
-                throw new ArgumentNullException($"AccountId must not be null");
+                throw new ArgumentNullException($"ExternalId must not be null");
             }
-            Student newStudent = new Student(firstName, lastName, accountId);
+            Student newStudent = new Student(firstName, lastName, externalId);
             await UnitOfWork.StudentRepository.Insert(newStudent);
             await UnitOfWork.SaveChangesAsync();
             return newStudent.Id;
@@ -52,12 +52,16 @@ namespace Core.ApplicationServices
             await UnitOfWork.CommitTransactionAsync();
         }
 
-        public async Task SetStudentFirstName(int studentId, string firstName)
+        public async Task SetStudentFirstName(string externalId, string firstName)
         {
-            Student student = await UnitOfWork.StudentRepository.GetById(studentId);
+            if (string.IsNullOrEmpty(externalId))
+            {
+                throw new ArgumentNullException($"ExternalId must not be null");
+            }
+            Student student = await UnitOfWork.StudentRepository.GetFirstOrDefaultWithIncludes(s => s.ExternalId == externalId);
             if (student == null)
             {
-                throw new ArgumentNullException($"{nameof(Student)} with Id {studentId} not exist");
+                throw new ArgumentNullException($"{nameof(Student)} with externalId {externalId} not exist");
             }
 
             student.SetFirstName(firstName);
@@ -65,12 +69,16 @@ namespace Core.ApplicationServices
             await UnitOfWork.SaveChangesAsync();
         }
 
-        public async Task SetStudentLastName(int studentId, string lastName)
+        public async Task SetStudentLastName(string externalId, string lastName)
         {
-            Student student = await UnitOfWork.StudentRepository.GetById(studentId);
+            if (string.IsNullOrEmpty(externalId))
+            {
+                throw new ArgumentNullException($"ExternalId must not be null");
+            }
+            Student student = await UnitOfWork.StudentRepository.GetFirstOrDefaultWithIncludes(s => s.ExternalId == externalId);
             if (student == null)
             {
-                throw new ArgumentNullException($"{nameof(Student)} with Id {studentId} not exist");
+                throw new ArgumentNullException($"{nameof(Student)} with externalId {externalId} not exist");
             }
 
             student.SetLastName(lastName);
