@@ -3,7 +3,7 @@ import React from 'react';
 import QuestionList from '../questionlist/QuestionList';
 import Test from './Test';
 import TableHeader from './TableHeader'
-import moment from 'moment';
+import EditTestStartDateTime from './EditTestStartDateTime'
 
 class TestList extends React.Component {
     constructor(props) {
@@ -14,6 +14,8 @@ class TestList extends React.Component {
             allTests: [],
             showQuestionId: null,
             showQuestionName: "",
+            changeStartDateTestId: null,
+            changeStartDateTestTitle: ""
         }
         this.activateOrDeactivateButton = this.activateOrDeactivateButton.bind(this);
         this.listAllQuestionsButton = this.listAllQuestionsButton.bind(this);
@@ -37,8 +39,6 @@ class TestList extends React.Component {
     activateOrDeactivateButton = (event) => {
         let aodId = parseInt(event.target.value);
         let aodName = parseInt(event.target.name);
-        var aodDate = moment(event.target.title); //samo ovako mi daje da prosledjujem prop a ne kako ga ja imenujem - proveriti zasto
-        var dateParsed =  moment(Date());
 
         if(aodName){
             axios({
@@ -47,21 +47,18 @@ class TestList extends React.Component {
               });
         }
         else{
-            if(aodDate.diff(dateParsed,'hours')>=1)
-            {
-                alert("To activate the test you must change the start date");
-            }
-            else{
-                axios({
-                    method: 'post',
-                    url: 'https://localhost:44329/Test/ActivateTest/' + aodId
-                  });
-                }
-            }
+            axios({
+                method: 'post',
+                url: 'https://localhost:44329/Test/ActivateTest/' + aodId
+              });
+        }
     }
 
     changeStartDateButton = (event) => {
-        alert("Date has been changed");
+        let startDateTestId = parseInt(event.target.value);
+        let startDateTestTitle = event.target.name;
+        this.setState({changeStartDateTestId: startDateTestId});
+        this.setState({changeStartDateTestTitle: startDateTestTitle});
     }
 
     render() {
@@ -71,7 +68,7 @@ class TestList extends React.Component {
             questionCallback={this.listAllQuestionsButton} activateOrDeactivateCallback={this.activateOrDeactivateButton} changeStartDateCallback={this.changeStartDateButton}></Test>
         })
 
-        if(this.state.showQuestionId == null) {
+        if(this.state.showQuestionId == null & this.state.changeStartDateTestId == null) {
             return (
                 <div className="w-50 mx-auto pt-3">
                     <h5> Test for Examiner: <em>{this.state.examinerName}</em> </h5>
@@ -82,13 +79,18 @@ class TestList extends React.Component {
                     <ul>
                         {tests}
                     </ul>
-                    
+
                 </div>
             );
         }
         else if(this.state.showQuestionId != null) {
             return (
                 <QuestionList key={this.state.showQuestionId} id={this.state.showQuestionId} title={this.state.showQuestionName}></QuestionList>
+            )
+        }
+        else if(this.state.changeStartDateTestId != null){
+            return (
+                <EditTestStartDateTime key={this.state.changeStartDateTestId} id={this.state.changeStartDateTestId} title={this.state.changeStartDateTestTitle}></EditTestStartDateTime>        
             )
         }
     }
