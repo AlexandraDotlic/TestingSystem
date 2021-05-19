@@ -1,7 +1,5 @@
 import React from 'react'
-import axios from 'axios';
 import moment from 'moment';
-import QuestionList from '../questionlist/QuestionList';
 
 
 class Test extends React.Component {
@@ -36,13 +34,13 @@ class Test extends React.Component {
                         { this.state.testScore}
                     </div>
                     <div className="col-lg text-center">
-                        <button className="btn btn-success" onClick={this.props.activateOrDeactivateCallback} value={this.state.testId} name={Number(this.state.testIsActive)} title={this.state.testStartDateTime}> {(this.state.testIsActive ? "Deactivate" : "Activate")} </button>
+                        <button className="btn btn-success" onClick={this.props.activateOrDeactivateCallback} value={this.state.testId} name={Number(this.state.testIsActive)}> {(this.state.testIsActive ? "Deactivate" : "Activate")} </button>
                     </div> 
                     <div className="col-lg text-center">
                         <button className="btn btn-success" onClick={this.props.questionCallback} value={this.state.testId} name={this.state.testTitle}>Questions</button>
                     </div>                        
                     <div className="col-lg text-center">
-                        <button className="btn btn-success" onClick={this.props.changeStartDateCallback} value={this.state.testId}>Change Start Date</button>
+                        <button className="btn btn-success" onClick={this.props.changeStartDateCallback} value={this.state.testId} name={this.state.testTitle}>Edit Date</button>
                     </div>
                 </div>
             </div>
