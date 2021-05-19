@@ -46,11 +46,12 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task GetAllTestsForExaminerSuccess()
         {
-            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
+            string externalEId = Guid.NewGuid().ToString();
+            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
             DateTime dateTime = DateTime.Now;
 
-            short testId1 = await TestService.CreateTest(examinerId, "Test1", dateTime);
-            short testId2 = await TestService.CreateTest(examinerId, "Test2", dateTime);
+            short testId1 = await TestService.CreateTest(externalEId, "Test1", dateTime);
+            short testId2 = await TestService.CreateTest(externalEId, "Test2", dateTime);
 
             Test test1 = await CoreUnitOfWork.TestRepository
                 .GetFirstOrDefaultWithIncludes(t => t.Id == testId1, t => t.Questions);
@@ -59,7 +60,7 @@ namespace Tests.CoreApplicationServicesTests
                 .GetFirstOrDefaultWithIncludes(t => t.Id == testId2, t => t.Questions);
 
 
-            ICollection<Core.ApplicationServices.DTOs.TestDTO> testDtos = await TestService.GetAllTestsForExaminer(examinerId);
+            ICollection<Core.ApplicationServices.DTOs.TestDTO> testDtos = await TestService.GetAllTestsForExaminer(externalEId);
 
             Assert.AreEqual(2, testDtos.Count);
             Assert.AreEqual(test1.Title, testDtos.FirstOrDefault().Title);

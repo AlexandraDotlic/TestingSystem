@@ -220,9 +220,6 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.Migrations
                         .HasColumnType("smallint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("EndDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("ExaminerId")
                         .HasColumnType("int");
 

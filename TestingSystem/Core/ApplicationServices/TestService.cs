@@ -17,12 +17,12 @@ namespace Core.ApplicationServices
             UnitOfWork = unitOfWork;
         }
 
-        public async Task<short> CreateTest(int examinerId, string title, DateTime startDate)
+        public async Task<short> CreateTest(string externalUserId, string title, DateTime startDate)
         {
-            Examiner examiner = await UnitOfWork.ExaminerRepository.GetById(examinerId);
+            Examiner examiner = await UnitOfWork.ExaminerRepository.GetFirstOrDefaultWithIncludes(e => e.ExternalId == externalUserId);
             if (examiner == null)
             {
-                throw new ArgumentNullException($"{nameof(Examiner)} with Id {examinerId} not exist");
+                throw new ArgumentNullException($"{nameof(Examiner)} with external Id {externalUserId} not exist");
             }
             Test test = new Test(examiner, title, startDate);
             await UnitOfWork.TestRepository.Insert(test);
@@ -63,6 +63,26 @@ namespace Core.ApplicationServices
             await UnitOfWork.TestRepository.Update(test);
             await UnitOfWork.SaveChangesAsync();
         }
+
+        public async Task RemoveQuestionFromTest(short testId, int questionId)
+        {
+            Test test = await UnitOfWork.TestRepository.GetFirstOrDefaultWithIncludes(t => t.Id == testId, t => t.Questions);
+            Question question = await UnitOfWork.QuestionRepository.GetById(questionId);
+
+            if (test == null)
+            {
+                throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
+            }
+
+            if (question == null)
+            {
+                throw new ArgumentNullException($"{nameof(Question)} with Id {questionId} not exist");
+            }
+
+            test.RemoveQuestion(question);
+            await UnitOfWork.TestRepository.Update(test);
+            await UnitOfWork.SaveChangesAsync();
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -70,17 +90,17 @@ namespace Core.ApplicationServices
         /// <param name="studentId"></param>
         /// <param name="questonResponsesCollection">Kolekcija odgovora za svako pitanje</param>
         /// <returns></returns>
-        public async Task<StudentTestScoreDTO> TakeTheTest(short testId, int studentId, ICollection<Tuple<int, ICollection<string>>> questonResponsesCollection)
+        public async Task<StudentTestScoreDTO> TakeTheTest(short testId, string externalStudentId, ICollection<Tuple<int, ICollection<string>>> questonResponsesCollection)
         {
             Test test = await UnitOfWork.TestRepository.GetById(testId);
             if (test == null)
             {
                 throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
             }
-            Student student = await UnitOfWork.StudentRepository.GetById(studentId);
+            Student student = await UnitOfWork.StudentRepository.GetFirstOrDefaultWithIncludes(s => s.ExternalId == externalStudentId);
             if (student == null)
             {
-                throw new ArgumentNullException($"{nameof(Student)} with Id {studentId} not exist");
+                throw new ArgumentNullException($"{nameof(Student)} with Id {externalStudentId} not exist");
             }
 
             if (questonResponsesCollection == null || questonResponsesCollection.Count == 0)
@@ -116,7 +136,7 @@ namespace Core.ApplicationServices
             await UnitOfWork.CommitTransactionAsync();
             return new StudentTestScoreDTO
             {
-                StudentId = studentId,
+                StudentId = student.Id,
                 TestId = testId,
                 TotalTestScore = test.TestScore,
                 StudentTestScore = studentTest.Score
@@ -126,9 +146,9 @@ namespace Core.ApplicationServices
         }
 
 
-        public async Task<ICollection<TestDTO>> GetAllTestsForExaminer(int examinerId)
+        public async Task<ICollection<TestDTO>> GetAllTestsForExaminer(string externalExaminerId)
         {
-            IReadOnlyCollection<Test> tests = await UnitOfWork.TestRepository.SearchByWithIncludes(t => t.ExaminerId == examinerId);
+            IReadOnlyCollection<Test> tests = await UnitOfWork.TestRepository.SearchByWithIncludes(t => t.Examiner.ExternalId == externalExaminerId, t => t.Examiner);
 
             List<TestDTO> testDTOs = tests == null || tests.Count == 0
                 ? null

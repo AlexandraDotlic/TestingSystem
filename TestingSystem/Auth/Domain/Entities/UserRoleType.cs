@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Authentication.Domain.Entities
+namespace Auth.Domain.Entities
 {
     public enum UserRoleType: byte
     {

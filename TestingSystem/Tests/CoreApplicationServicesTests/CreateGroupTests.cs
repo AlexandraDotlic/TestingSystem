@@ -39,8 +39,10 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task TestCreateGroupSuccess()
         {
-            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
-            var groupId = await GroupService.CreateGroup("grupa", examinerId);
+            string externalEId = Guid.NewGuid().ToString();
+
+            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
+            var groupId = await GroupService.CreateGroup("grupa", externalEId);
             var group = await CoreUnitOfWork.GroupRepository.GetById(groupId);
 
             Assert.AreEqual(groupId, group.Id);
@@ -53,7 +55,7 @@ namespace Tests.CoreApplicationServicesTests
         public async Task TestCreateGroupFail()
         {
 
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await GroupService.CreateGroup("grupa", 1000), $"Examiner with id = {1000} not exist");
+            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await GroupService.CreateGroup("grupa", "1000"), $"Examiner with external id = 1000 not exist");
         }
 
     }

@@ -39,9 +39,11 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task DectivateTestSuccess()
         {
-            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
+            string externalEId = Guid.NewGuid().ToString();
+
+            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
             DateTime dateTime = DateTime.Now;
-            short testId = await TestService.CreateTest(examinerId, "Test1", dateTime);
+            short testId = await TestService.CreateTest(externalEId, "Test1", dateTime);
 
             var test = await CoreUnitOfWork.TestRepository.GetById(testId);
             await TestService.DeactivateTest(testId);
@@ -52,9 +54,11 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task DeactivateTestFail()
         {
-            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
+            string externalEId = Guid.NewGuid().ToString();
+
+            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
             DateTime dateTime = DateTime.Now;
-            short testId = await TestService.CreateTest(examinerId, "Test1", dateTime);
+            short testId = await TestService.CreateTest(externalEId, "Test1", dateTime);
 
             var test = await CoreUnitOfWork.TestRepository.GetById(testId);
             await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await TestService.DeactivateTest(1000), $"Test with Id 1000 does not exist");

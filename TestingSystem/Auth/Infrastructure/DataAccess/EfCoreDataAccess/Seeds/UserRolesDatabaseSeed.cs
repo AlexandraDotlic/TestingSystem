@@ -1,4 +1,4 @@
-﻿using Authentication.Domain.Entities;
+﻿using Auth.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;

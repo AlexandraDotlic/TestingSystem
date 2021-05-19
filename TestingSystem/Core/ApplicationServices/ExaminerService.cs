@@ -16,13 +16,13 @@ namespace Core.ApplicationServices
             UnitOfWork = unitOfWork;
         }
 
-        public async Task<int> CreateExaminer(string firstName, string lastName, string accountId)
+        public async Task<int> CreateExaminer(string firstName, string lastName, string externalId)
         {
-            if (string.IsNullOrEmpty(accountId))
+            if (string.IsNullOrEmpty(externalId))
             {
-                throw new ArgumentNullException($"AccountId must not be null");
+                throw new ArgumentNullException($"ExternalId must not be null");
             }
-            Examiner examiner = new Examiner(firstName, lastName, accountId);
+            Examiner examiner = new Examiner(firstName, lastName, externalId);
             await UnitOfWork.ExaminerRepository.Insert(examiner);
             await UnitOfWork.SaveChangesAsync();
             return examiner.Id;
@@ -38,5 +38,41 @@ namespace Core.ApplicationServices
             await UnitOfWork.ExaminerRepository.Delete(examiner);
             await UnitOfWork.SaveChangesAsync();
         }
+
+
+        public async Task SetExaminerFirstName(string externalId, string firstName)
+        {
+            if (string.IsNullOrEmpty(externalId))
+            {
+                throw new ArgumentNullException($"ExternalId must not be null");
+            }
+            Examiner examiner = await UnitOfWork.ExaminerRepository.GetFirstOrDefaultWithIncludes(e => e.ExternalId == externalId);
+            if (examiner == null)
+            {
+                throw new ArgumentNullException($"{nameof(Examiner)} with external Id {externalId} not exist");
+            }
+
+            examiner.SetFirstName(firstName);
+            await UnitOfWork.ExaminerRepository.Update(examiner);
+            await UnitOfWork.SaveChangesAsync();
+        }
+
+        public async Task SetExaminerLastName(string externalId, string lastName)
+        {
+            if (string.IsNullOrEmpty(externalId))
+            {
+                throw new ArgumentNullException($"ExternalId must not be null");
+            }
+            Examiner examiner = await UnitOfWork.ExaminerRepository.GetFirstOrDefaultWithIncludes(e => e.ExternalId == externalId);
+            if (examiner == null)
+            {
+                throw new ArgumentNullException($"{nameof(Examiner)} with external Id {externalId} not exist");
+            }
+
+            examiner.SetLastName(lastName);
+            await UnitOfWork.ExaminerRepository.Update(examiner);
+            await UnitOfWork.SaveChangesAsync();
+        }
+
     }
 }
