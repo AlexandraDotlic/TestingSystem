@@ -17,12 +17,12 @@ namespace Core.ApplicationServices
             UnitOfWork = unitOfWork;
         }
 
-        public async Task<short> CreateGroup(string title, int examinerId)
+        public async Task<short> CreateGroup(string title, string externalExaminerId)
         {
-            Examiner examiner = await UnitOfWork.ExaminerRepository.GetById(examinerId);
+            Examiner examiner = await UnitOfWork.ExaminerRepository.GetFirstOrDefaultWithIncludes(e => e.ExternalId == externalExaminerId);
             if (examiner == null)
             {
-                throw new ArgumentNullException($"{nameof(Examiner)} with Id {examinerId} not exist");
+                throw new ArgumentNullException($"{nameof(Examiner)} with Id {externalExaminerId} not exist");
             }
          
             Group group = new Group(title, examiner);
@@ -63,9 +63,9 @@ namespace Core.ApplicationServices
         }
 
 
-        public async Task<ICollection<GroupDTO>> GetAllGroupsForExaminer(int examinerId)
+        public async Task<ICollection<GroupDTO>> GetAllGroupsForExaminer(string externalExaminerId)
         {
-            IReadOnlyCollection<Group> groups = await UnitOfWork.GroupRepository.SearchByWithIncludes(g => g.ExaminerId == examinerId);
+            IReadOnlyCollection<Group> groups = await UnitOfWork.GroupRepository.SearchByWithIncludes(g => g.Examiner.ExternalId == externalExaminerId, g => g.Examiner);
 
             List<GroupDTO> groupDTOs = groups == null || groups.Count == 0
                 ? null

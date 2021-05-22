@@ -4,6 +4,7 @@ using Applications.WebClient.Requests;
 using Applications.WebClient.Responses;
 using Core.ApplicationServices;
 using Core.Domain.Services.External.JobService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -20,8 +21,7 @@ namespace Applications.WebClient.Controllers
         private readonly IJobService JobService;
         private readonly QuestionService QuestionService;
         private readonly ILogger<TestStatisticController> Logger;
-        private readonly int examinerId = 1; //temp
-        private readonly int studentId = 1;
+
 
         public TestStatisticController(
             TestStatisticService testStatisticService,
@@ -37,11 +37,13 @@ namespace Applications.WebClient.Controllers
 
         [HttpPost]
         [Route("CreateTestStatistic")]
+        [Authorize(Policy = "IsExaminer")]
         public async Task<IActionResult> CreateTestStatistic(CreateTestStatisticRequest createTestStatisticRequest)
         {
             try
             {
-                await JobService.EnqueueJob<TestStatisticService>(ts => ts.CreateStatisticForTest(createTestStatisticRequest.TestId, examinerId, createTestStatisticRequest.GroupId));
+                var currentUserId = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+                await JobService.EnqueueJob<TestStatisticService>(ts => ts.CreateStatisticForTest(createTestStatisticRequest.TestId, currentUserId, createTestStatisticRequest.GroupId));
                 return Ok();
             }
             catch (Exception e)
@@ -53,16 +55,19 @@ namespace Applications.WebClient.Controllers
 
         [HttpPost]
         [Route("ScheduleTestStatisticCreation")]
+        [Authorize(Policy = "IsExaminer")]
         public async Task<IActionResult> ScheduleTestStatisticCreation(CreateTestStatisticRequest createTestStatisticRequest)
         {
             try
             {
+                var currentUserId = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+
                 var delay = (TimeSpan)createTestStatisticRequest.CreationDate?.Subtract(DateTime.Now);
                 if(delay.TotalSeconds < 0)
                 {
                     throw new InvalidOperationException("Creation date cannot be erlier than today");
                 }
-                await JobService.ScheduleJob<TestStatisticService>(ts => ts.CreateStatisticForTest(createTestStatisticRequest.TestId, examinerId, createTestStatisticRequest.GroupId), delay);
+                await JobService.ScheduleJob<TestStatisticService>(ts => ts.CreateStatisticForTest(createTestStatisticRequest.TestId, currentUserId, createTestStatisticRequest.GroupId), delay);
                 return Ok();
             }
             catch (Exception e)
@@ -75,12 +80,14 @@ namespace Applications.WebClient.Controllers
 
         [HttpPost]
         [Route("ScheduleMonthlyTestStatisticCreation")]
+        [Authorize(Policy = "IsExaminer")]
         public async Task<IActionResult> ScheduleMonthlyTestStatisticCreation(CreateTestStatisticRequest createTestStatisticRequest)
         {
             try
             {
-               
-                await JobService.CreateMonthlyRecurringJob<TestStatisticService>(ts => ts.CreateStatisticForTest(createTestStatisticRequest.TestId, examinerId, createTestStatisticRequest.GroupId));
+                var currentUserId = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+
+                await JobService.CreateMonthlyRecurringJob<TestStatisticService>(ts => ts.CreateStatisticForTest(createTestStatisticRequest.TestId, currentUserId, createTestStatisticRequest.GroupId));
                 return Ok();
             }
             catch (Exception e)
@@ -92,11 +99,14 @@ namespace Applications.WebClient.Controllers
 
         [HttpGet]
         [Route("GetAllStatisticsForTest/{testId}")]
+        [Authorize(Policy = "IsExaminer")]
         public async Task<ActionResult<GetAllStatisticsForTestResponse>> GetAllStatisticsForTest(short testId)
         {
             try
             {
-                System.Collections.Generic.ICollection<Core.ApplicationServices.DTOs.TestStatisticDTO> testStatistics = await TestStatisticService.GetAllStatisticsForTest(testId, examinerId);
+                var currentUserId = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+
+                System.Collections.Generic.ICollection<Core.ApplicationServices.DTOs.TestStatisticDTO> testStatistics = await TestStatisticService.GetAllStatisticsForTest(testId, currentUserId);
                 var response = testStatistics == null 
                     ? null
                     : new GetAllStatisticsForTestResponse
@@ -114,11 +124,14 @@ namespace Applications.WebClient.Controllers
 
         [HttpGet]
         [Route("GetStatisticForTestByDate")]
+        [Authorize(Policy = "IsExaminer")]
         public async Task<ActionResult<TestStatisticDTO>> GetStatisticForTestByDate(short testId, DateTime date)
         {
             try
             {
-                Core.ApplicationServices.DTOs.TestStatisticDTO testStatistic = await TestStatisticService.GetStatisticForTestbyDate(testId, examinerId, date);
+                var currentUserId = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+
+                Core.ApplicationServices.DTOs.TestStatisticDTO testStatistic = await TestStatisticService.GetStatisticForTestbyDate(testId, currentUserId, date);
 
                 var response = testStatistic == null 
                     ? null

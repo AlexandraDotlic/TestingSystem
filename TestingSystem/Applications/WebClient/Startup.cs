@@ -1,6 +1,5 @@
-using Authentication.ApplicationServices;
-using Authentication.Domain.Entities;
-using Authentication.Infrastructure.DataAccess.EfCoreDataAccess;
+using Auth.Domain.Entities;
+using Auth.Infrastructure.DataAccess.EfCoreDataAccess;
 using Core.ApplicationServices;
 using Core.Domain.Repositories;
 using Core.Domain.Services.External.JobService;
@@ -11,14 +10,21 @@ using Core.Infrastructure.Services.MailService;
 using Core.Infrastructure.Services.MailService.Settings;
 using Hangfire;
 using Infrastructure.DataAccess.EfCoreDataAccess.Seeds;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 
 namespace WebClient
 {
@@ -65,23 +71,61 @@ namespace WebClient
             services.AddScoped<StudentService>();
             services.AddScoped<ExaminerService>();
             services.AddScoped<QuestionService>();
-            services.AddScoped<UserService>();
+            services.AddScoped<GroupService>();
             services.AddScoped<TestStatisticService>();
             services.AddScoped<IJobService, HangfireJobService>();
 
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             services.AddTransient<IMailService, MailService>();
 
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // => remove default claims
+
+            services
+                .AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(cfg =>
+                {
+                    cfg.RequireHttpsMetadata = false;
+                    cfg.SaveToken = true;
+                    cfg.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = false,
+                        ValidIssuer = Configuration["Security:Issuer"],
+                        ValidateAudience = false,
+                        ValidAudience = Configuration["Security:Audience"],
+                        ValidateLifetime = true,
+                        IssuerSigningKey =
+                        new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Security:SecretKey"])),
+                        ValidateIssuerSigningKey = true,
+                        ClockSkew = TimeSpan.Zero
+                    };
+                });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("IsExaminer", policy => policy.RequireClaim("user_roles", "Examiner"));
+                options.AddPolicy("IsStudent", policy => policy.RequireClaim("user_roles", "Student"));
+            });
+
+
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment  env, RoleManager<IdentityRole> roleManager)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, CoreEfCoreDbContext context, AuthenticationEfCoreDbContext authContext, RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            context.GetInfrastructure().GetService<IMigrator>().Migrate();
+            authContext.GetInfrastructure().GetService<IMigrator>().Migrate();
+
             UserRolesDatabaseSeed.Seed(roleManager);
 
             app.UseHttpsRedirection();
@@ -89,11 +133,11 @@ namespace WebClient
             app.UseSerilogRequestLogging();
             app.UseCors("LocalhostPolicy");
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseHangfireDashboard("/mydashboard");
 
-            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

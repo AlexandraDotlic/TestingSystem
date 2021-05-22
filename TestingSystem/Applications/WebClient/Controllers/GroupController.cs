@@ -3,6 +3,7 @@ using Applications.WebClient.Helpers;
 using Applications.WebClient.Requests;
 using Applications.WebClient.Responses;
 using Core.ApplicationServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -21,7 +22,6 @@ namespace Applications.WebClient.Controllers
         private readonly GroupService GroupService;
         private readonly StudentService StudentService;
         private readonly ILogger<GroupController> Logger;
-        private readonly int examinerId = 1; //temp
 
         public GroupController(
             GroupService groupService,
@@ -35,11 +35,14 @@ namespace Applications.WebClient.Controllers
 
         [HttpPost]
         [Route("CreateGroup")]
+        [Authorize(Policy = "IsExaminer")]
         public async Task<IActionResult> CreateGroup(CreateGroupRequest createGroupRequest)
         {
             try
             {
-                var result = await GroupService.CreateGroup(createGroupRequest.Title, examinerId);
+                var currentUserId = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+
+                var result = await GroupService.CreateGroup(createGroupRequest.Title, currentUserId);
                 return Ok(result);
             }
             catch (Exception e)
@@ -52,6 +55,7 @@ namespace Applications.WebClient.Controllers
 
         [HttpPost]
         [Route("AddStudentToGroup")]
+        [Authorize(Policy = "IsExaminer")]
         public async Task<IActionResult> AddStudentToGroup(AddStudentToGroupRequest addStudentToGroupRequest)
         {
             try
@@ -68,6 +72,7 @@ namespace Applications.WebClient.Controllers
 
         [HttpGet]
         [Route("GetAllStudentsForGroup/{groupId}")]
+        [Authorize(Policy = "IsExaminer")]
         public async Task<ActionResult<GetAllStudentsForGroupResponse>> GetAllStudentsForGroup(short groupId)
         {
             try
@@ -89,6 +94,7 @@ namespace Applications.WebClient.Controllers
 
         [HttpPost]
         [Route("SetGroupTitle/{groupId}")]
+        [Authorize(Policy = "IsExaminer")]
         public async Task<IActionResult> SetGroupTitle(short groupId, string title)
         {
             try

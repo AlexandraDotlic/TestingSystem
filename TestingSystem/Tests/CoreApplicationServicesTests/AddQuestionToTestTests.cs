@@ -45,9 +45,11 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task AddQuestionToTestSuccess()
         {
-            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
+            string externalId = Guid.NewGuid().ToString();
+
+            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalId);
             DateTime dateTime = DateTime.Now;
-            short testId = await TestService.CreateTest(examinerId, "Test1", dateTime);
+            short testId = await TestService.CreateTest(externalId, "Test1", dateTime);
 
             Test test = await CoreUnitOfWork.TestRepository
                 .GetFirstOrDefaultWithIncludes(t => t.Id == testId, t => t.Questions);
@@ -88,9 +90,11 @@ namespace Tests.CoreApplicationServicesTests
         public async Task AddQuestionToTestFail2()
         {
             string questionText = "Pitanje 1";
-            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
+            string externalId = Guid.NewGuid().ToString();
+
+            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalId);
             DateTime dateTime = DateTime.Now;
-            short testId = await TestService.CreateTest(examinerId, "Test1", dateTime);
+            short testId = await TestService.CreateTest(externalId, "Test1", dateTime);
 
 
             await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await TestService.AddQuestionToTest(testId, questionText, null), $"AnswerOptions cant be null");

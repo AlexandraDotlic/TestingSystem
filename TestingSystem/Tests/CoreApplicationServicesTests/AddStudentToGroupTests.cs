@@ -41,9 +41,13 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task TestAddStudentToGroupSuccess()
         {
-            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
-            int studentId = await StudentService.CreateStudent("StudentIme", "StudentPrezime", "1234");
-            var groupId = await GroupService.CreateGroup("grupa", examinerId);
+            string externalEId = Guid.NewGuid().ToString();
+            string externalSId = Guid.NewGuid().ToString();
+
+
+            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
+            int studentId = await StudentService.CreateStudent("StudentIme", "StudentPrezime", externalSId);
+            var groupId = await GroupService.CreateGroup("grupa", externalEId);
             var group = await CoreUnitOfWork.GroupRepository.GetFirstOrDefaultWithIncludes(g => g.Id == groupId, g => g.Students);
             var student = await CoreUnitOfWork.StudentRepository.GetFirstOrDefaultWithIncludes(s => s.Id == studentId, s => s.Group);
             await GroupService.AddStudentToGroup(groupId, studentId);
@@ -57,9 +61,11 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task TestAddStudentToGroupFail()
         {
-            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
-            int studentId = await StudentService.CreateStudent("StudentIme", "StudentPrezime", "1234");
-            var groupId = await GroupService.CreateGroup("grupa", examinerId);
+            string externalEId = Guid.NewGuid().ToString();
+            string externalSId = Guid.NewGuid().ToString();
+            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
+            int studentId = await StudentService.CreateStudent("StudentIme", "StudentPrezime", externalSId);
+            var groupId = await GroupService.CreateGroup("grupa", externalEId);
             await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await GroupService.AddStudentToGroup(groupId, 123), $"Student with Id 123 does not exist");
         }
 

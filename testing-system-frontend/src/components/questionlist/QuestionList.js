@@ -10,8 +10,8 @@ class QuestionList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            testId: 1, //temp
-            testTitle: "TestName", //should be getted 
+            testId: this.props.id,
+            testTitle: this.props.title,
             allQuestions: [],
             editQuestionId: null,
             deleteQuestionId: null,

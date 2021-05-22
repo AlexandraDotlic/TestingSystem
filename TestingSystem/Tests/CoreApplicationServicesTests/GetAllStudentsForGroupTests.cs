@@ -46,11 +46,14 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task GetAllStudentsForGroupSuccess()
         {
-            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
-            int studentId1 = await StudentService.CreateStudent("Marko","Markovic","01");
-            int studentId2 = await StudentService.CreateStudent("Petar", "Petrovic", "02");
+            string externalEId = Guid.NewGuid().ToString();
+            string externalSId2 = Guid.NewGuid().ToString();
+            string externalSId1 = Guid.NewGuid().ToString();
+            int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
+            int studentId1 = await StudentService.CreateStudent("Marko","Markovic",externalSId1);
+            int studentId2 = await StudentService.CreateStudent("Petar", "Petrovic", externalSId2);
 
-            short groupId = await GroupService.CreateGroup("Grupa",examinerId);
+            short groupId = await GroupService.CreateGroup("Grupa", externalEId);
             Group group = await CoreUnitOfWork.GroupRepository.GetFirstOrDefaultWithIncludes(g => g.Id == groupId, g => g.Students);
 
             await GroupService.AddStudentToGroup(groupId, studentId1);
