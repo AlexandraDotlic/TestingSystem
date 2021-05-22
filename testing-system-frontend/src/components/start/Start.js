@@ -11,6 +11,7 @@ class Start extends React.Component {
         };
         this.loginSuccessCallback = this.loginSuccessCallback.bind(this);
         this.loginFailureCallback = this.loginFailureCallback.bind(this);
+        this.registerCallback = this.registerCallback.bind(this);
     }
 
     loginSuccessCallback() {
@@ -22,6 +23,10 @@ class Start extends React.Component {
 
     loginFailureCallback() {
         window.alert("Login failed. Please enter your credentials once again.");
+    }
+
+    registerCallback() {
+        this.setState({option: "register"})
     }
 
     render() {
@@ -40,6 +45,11 @@ class Start extends React.Component {
         else if(this.state.option === "loginsuccess") {
             return (
                 <Home></Home>
+            )
+        }
+        else if(this.state.option === "register") {
+            return (
+                <Register></Register>
             )
         }
     }

@@ -43,7 +43,7 @@ class Login extends React.Component {
         axios.defaults.headers.post['Content-Type'] = 'application/json';
         axios.post("https://localhost:44329/Account/Token", dataObject).then( 
             response => {
-                const token = response.data.token;
+                const token = "Bearer " + response.data.token;
                 sessionStorage.setItem("userToken", token);
                 debugger;
                 this.props.loginSuccess();
