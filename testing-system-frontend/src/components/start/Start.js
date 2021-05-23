@@ -2,12 +2,14 @@ import React from 'react';
 import Login from '../login/Login.js'
 import Register from '../register/Register.js'
 import Home from '../home/Home.js'
+import Header from '../../template/header'
 
 class Start extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            option: null
+            option: null,
+            name: null
         };
         this.loginSuccessCallback = this.loginSuccessCallback.bind(this);
         this.loginFailureCallback = this.loginFailureCallback.bind(this);
@@ -15,10 +17,13 @@ class Start extends React.Component {
     }
 
     loginSuccessCallback() {
-        // This is place to check if student or professor checked in
-        // This is place to update name in Header component
-        window.alert("Uspeh");
-        this.setState({option: "loginsuccess"})
+        const nameStorage = sessionStorage.getItem('userName');
+        if(sessionStorage.getItem('userType') === 'Examiner') {
+            this.setState({option: "loginsuccessexaminer", name: nameStorage});
+        }
+        else if(sessionStorage.getItem('userType') === 'Student') {
+            this.setState({option: "loginsuccessstudent", name: nameStorage});
+        }
     }
 
     loginFailureCallback() {
@@ -32,7 +37,9 @@ class Start extends React.Component {
     render() {
         if(this.state.option == null) {
             return (
+                
                 <div>
+                    <Header name={this.state.name}></Header>
                     <Login loginSuccess={this.loginSuccessCallback} loginFailure={this.loginFailureCallback}></Login>
                     <hr></hr>
                     <div className="w-50 mx-auto pt-5 text-center">
@@ -42,14 +49,30 @@ class Start extends React.Component {
                 </div> 
             )
         }
-        else if(this.state.option === "loginsuccess") {
+        else if(this.state.option === "loginsuccessexaminer") {
+            const res = this.state.name;
+            debugger;
             return (
-                <Home></Home>
+                <div>
+                    <Header name={this.state.name}></Header>
+                    <Home></Home>
+                </div>
+            )
+        }
+        else if(this.state.option === "loginsuccessstudent") {
+            return (
+                <div>
+                <Header name={this.state.name}></Header>
+                Student
+            </div>
             )
         }
         else if(this.state.option === "register") {
             return (
+            <div>
+                <Header></Header>
                 <Register></Register>
+            </div>
             )
         }
     }

@@ -122,7 +122,9 @@ namespace Applications.WebClient.Controllers
 
             return Ok(new
             {
-                Token = GenerateJWT(user, user_role)
+                Token = GenerateJWT(user, user_role),
+                UserRole = user_role,
+                User = user
             });
         }
 

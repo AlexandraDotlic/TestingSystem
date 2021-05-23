@@ -45,13 +45,14 @@ class Login extends React.Component {
             response => {
                 const token = "Bearer " + response.data.token;
                 sessionStorage.setItem("userToken", token);
-                debugger;
+                sessionStorage.setItem("userType", response.data.userRole);
+                sessionStorage.setItem("userName", response.data.user.userName);
                 this.props.loginSuccess();
             }
         ).catch(
             error => {
                 sessionStorage.setItem("userToken", "-1");
-                console.log("Failed to login user.");
+                window.alert("Failed to login user.");
                 this.props.loginFailure();
             }
         );
