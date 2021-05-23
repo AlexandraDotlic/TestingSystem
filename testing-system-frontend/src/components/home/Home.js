@@ -2,16 +2,7 @@ import React from 'react';
 import './contentBoxes.css';
 import CreateTestForm from '../CreateTestForm'
 import CreateGroupForm from '../CreateGroupForm'
-
-{/* 
-<CreateTestForm></CreateTestForm>
-<CreateQuestion></CreateQuestion>
-<CreateGroupForm />
-<Register></Register>
-<Login></Login> 
-<QuestionList></QuestionList>
-<StudentList></StudentList>
-*/}
+import TestList from '../testlist/TestList'
 
 class Home extends React.Component {
     constructor(props) {
@@ -38,7 +29,7 @@ class Home extends React.Component {
                     </div>
                     <div className="container">
                         <div className="row p-1">
-                            <button className="button" style={{backgroundColor: '#b0b0f5'}}><span>List all tests </span></button>
+                            <button onClick={() => this.clicked("listtest")} className="button" style={{backgroundColor: '#b0b0f5'}}><span>List all tests </span></button>
                             <button className="button" style={{backgroundColor: '#5027c2'}}><span>List all groups </span></button>
                             <button className="button" style={{backgroundColor: '#b0b0f5'}}><span> EMPTY </span></button>
                         </div>
@@ -54,6 +45,11 @@ class Home extends React.Component {
         else if(this.state.clicked === "newgroup") {
             return (
                 <CreateGroupForm></CreateGroupForm>
+            )
+        }
+        else if(this.state.clicked === "listtest") {
+            return (
+                <TestList></TestList>
             )
         }
         else {
