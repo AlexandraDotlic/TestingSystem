@@ -7,6 +7,12 @@ class Header extends React.Component {
         this.state = {name: "Welcome" };
     }
 
+    componentDidUpdate(prevProps) {
+        if(prevProps.username != this.props.username) {
+            this.setState({name: this.props.username});
+        }
+    }
+
     render() {
         let menu = (
             <div className="dropdown-menu leftMoved" aria-labelledby="navbarDropdownMenuLink">

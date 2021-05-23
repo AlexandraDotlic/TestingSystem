@@ -39,7 +39,7 @@ class Start extends React.Component {
             return (
                 
                 <div>
-                    <Header name={this.state.name}></Header>
+                    <Header></Header>
                     <Login loginSuccess={this.loginSuccessCallback} loginFailure={this.loginFailureCallback}></Login>
                     <hr></hr>
                     <div className="w-50 mx-auto pt-5 text-center">
