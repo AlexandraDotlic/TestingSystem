@@ -18,16 +18,19 @@ class CreateGroupForm extends React.Component{
     }
 
     submitButton = (event) => {
-        let dataObject = {
-            title: this.state.groupName
-        }
-        
-        axios.defaults.headers.post['Content-Type'] = 'application/json';
-        axios.post(
-            "https://localhost:44329/Group/CreateGroup",  
-            JSON.stringify(dataObject)
-        );
-        event.preventDefault();
+        // Prepare token 
+        let token = sessionStorage.getItem('userToken');
+
+        axios({
+            method: 'post',
+            url: 'https://localhost:44329/Group/CreateGroup',
+            headers: {
+                'Authorization': token
+            },
+            data: {
+              title: this.state.groupName
+            }
+        });
     }
 
     render (){  
@@ -40,7 +43,7 @@ class CreateGroupForm extends React.Component{
                         <input id="groupName" value={this.state.groupName} onChange={this.groupNameChange} className="form-control" placeholder="Enter group name" ></input>
                     </div>
                     <div className="text-center mb-2">
-                        <button className="btn btn-success" type="submit" onClick={this.submitButton}>Submit </button>
+                        <button className="btn btn-success" type="submit">Submit </button>
                     </div>
                 </form>
             </div>

@@ -39,17 +39,20 @@ class CreateTestForm extends React.Component {
         startDateParsed += parseInt(this.state.startTime.substring(3)) * 60000;
         // Recombine it back to Date object
         let startDateCombined = new Date(startDateParsed);
+        // Prepare token 
+        let token = sessionStorage.getItem('userToken');
 
         axios({
             method: 'post',
             url: 'https://localhost:44329/Test/CreateTest',
+            headers: {
+                'Authorization': token
+            },
             data: {
               title: this.state.testName,
               startDate: startDateCombined,
             }
           });
-        
-        event.preventDefault();
     }
 
     render(){
@@ -70,7 +73,7 @@ class CreateTestForm extends React.Component {
                     <input id="startTime" value={this.state.startTime} onChange={this.startTimeChange} className="form-control" type="time" ></input>
                 </div>
                 <div className="text-center mb-2">
-                    <button className="btn btn-success" type="submit" onClick={this.submitButton}>Submit </button>
+                    <button className="btn btn-success" type="submit">Submit </button>
                 </div>
             </form>
         </div>
