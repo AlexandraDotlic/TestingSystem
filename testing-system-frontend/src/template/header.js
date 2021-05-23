@@ -4,16 +4,8 @@ import './header.css'
 class Header extends React.Component {
     constructor(props) {
         super(props);
-        const res = this.props.name;
-        debugger;
-        if(this.props.name) {
-            this.state = { name: this.props.name };
-        }
-        else {
-            this.state = {name: "Welcome" };
-        }
+        this.state = {name: "Welcome" };
     }
-
 
     render() {
         let menu = (

@@ -50,11 +50,9 @@ class Start extends React.Component {
             )
         }
         else if(this.state.option === "loginsuccessexaminer") {
-            const res = this.state.name;
-            debugger;
             return (
                 <div>
-                    <Header name={this.state.name}></Header>
+                    <Header username={this.state.name}></Header>
                     <Home></Home>
                 </div>
             )
@@ -62,7 +60,7 @@ class Start extends React.Component {
         else if(this.state.option === "loginsuccessstudent") {
             return (
                 <div>
-                <Header name={this.state.name}></Header>
+                <Header username={this.state.name}></Header>
                 Student
             </div>
             )
