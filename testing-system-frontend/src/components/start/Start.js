@@ -14,6 +14,20 @@ class Start extends React.Component {
         this.loginSuccessCallback = this.loginSuccessCallback.bind(this);
         this.loginFailureCallback = this.loginFailureCallback.bind(this);
         this.registerCallback = this.registerCallback.bind(this);
+        this.logout = this.logout.bind(this);
+    }
+
+    componentDidMount() {
+        if(sessionStorage.getItem("userName") != undefined) {
+            this.loginSuccessCallback();
+        }
+        
+    }
+
+    logout() {
+        window.alert();
+        sessionStorage.clear();
+        this.setState({option: null, name: null});
     }
 
     loginSuccessCallback() {
@@ -52,7 +66,7 @@ class Start extends React.Component {
         else if(this.state.option === "loginsuccessexaminer") {
             return (
                 <div>
-                    <Header username={this.state.name}></Header>
+                    <Header username={this.state.name} logoutCallback={this.logout}></Header>
                     <Home></Home>
                 </div>
             )
@@ -60,7 +74,7 @@ class Start extends React.Component {
         else if(this.state.option === "loginsuccessstudent") {
             return (
                 <div>
-                <Header username={this.state.name}></Header>
+                <Header username={this.state.name} logoutCallback={this.logout}></Header>
                 Student
             </div>
             )

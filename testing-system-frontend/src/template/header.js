@@ -5,6 +5,7 @@ class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = {name: "Welcome" };
+        this.logout = this.logout.bind(this);
     }
 
     componentDidUpdate(prevProps) {
@@ -13,12 +14,14 @@ class Header extends React.Component {
         }
     }
 
+    logout() {
+        this.props.logoutCallback();
+    }
+
     render() {
         let menu = (
             <div className="dropdown-menu leftMoved" aria-labelledby="navbarDropdownMenuLink">
-                <a className="dropdown-item" href="#">Action</a>
-                <a className="dropdown-item" href="#">Another action</a>
-                <a className="dropdown-item" href="#">Something else here</a>
+                <a className="dropdown-item" onClick={this.logout}>Logout</a>
             </div>
         );
 
