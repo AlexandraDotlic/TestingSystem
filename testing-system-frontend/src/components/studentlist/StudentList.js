@@ -7,16 +7,35 @@ class StudentList extends React.Component {
         super(props);
         this.state = {
             students : [],
-            studentsAddList: []
+            studentsAddList: [],
+            groupId : this.props.groupId
         }
         this.finishClick = this.finishClick.bind(this);
         this.getChecked = this.getChecked.bind(this);
     }
 
     finishClick() {
-        let result = this.state.studentsAddList
-        // Backend should be hitted with each of elements from result
-        
+        let studentIds = this.state.studentsAddList;
+        let groupId = this.state.groupId;
+        for(let studentId of studentIds) {
+            let token = sessionStorage.getItem('userToken');
+
+            axios({
+                method: 'post',
+                url: 'https://localhost:44329/Group/AddStudentToGroup',
+                headers: {
+                    'Authorization': token
+                },
+                data: {
+                    groupId: groupId,
+                    studentId: studentId
+                }
+            }).then(() => {
+            }).catch(() => {
+                window.alert("Failed to insert student to group");
+            });
+        }
+        this.props.backHomeCallback();
     }
 
     getChecked(object) {
@@ -27,12 +46,21 @@ class StudentList extends React.Component {
     }
 
     componentDidMount() {
-        axios.get("https://localhost:44329/Student/GetAllStudents").then( response => {
+        let token = sessionStorage.getItem('userToken');
+
+        axios({
+            method: 'get',
+            url: 'https://localhost:44329/Student/GetAllStudents',
+            headers: {
+                'Authorization': token
+            }
+        }).then(response => {
             let studentsObjects = response.data.students.map(student => {
                 return <Student key={student.id} id={student.id} firstName={student.firstName} lastName={student.lastName} checked={this.getChecked}></Student>
-            })
-
+            });
             this.setState({students: studentsObjects});
+        }).catch(() => {
+            window.alert("Failed to get all tests for examiner");
         });
     }
 

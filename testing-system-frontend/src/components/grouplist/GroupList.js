@@ -12,6 +12,7 @@ class GroupList extends React.Component {
             listStudentsGroupId: null
         }
         this.listAllStudentsButton = this.listAllStudentsButton.bind(this);
+        this.goBackHome = this.goBackHome.bind(this);
     }
 
     componentDidMount() {
@@ -36,6 +37,10 @@ class GroupList extends React.Component {
         //mozda treba da se doda jos nesto sto treba da se salje listi studenata!
     }
 
+    goBackHome() {
+        this.props.backHomeCallback();
+    }
+
     render() {
         let groups = this.state.allGroups.map(group => {
             return <Group key={group.id} groupId={group.id} groupTitle={group.title} groupExaminerId={group.examinerId} listAllStudentsCallback={this.listAllStudentsButton} editCallback={this.editButton}></Group>
@@ -54,7 +59,7 @@ class GroupList extends React.Component {
         }
         else if(this.state.listStudentsGroupId != null) {
             return (
-                <StudentList id={this.state.listStudentsGroupId}></StudentList>
+                <StudentList groupId={this.state.listStudentsGroupId} backHomeCallback={this.goBackHome}></StudentList>
             )
         }
     }

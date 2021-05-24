@@ -11,10 +11,15 @@ class Home extends React.Component {
         this.state = {
             clicked: null
         }
+        this.goBackHome = this.goBackHome.bind(this);
     }
 
     clicked(value) {
-        this.setState({clicked: value})
+        this.setState({clicked: value});
+    }
+
+    goBackHome() {
+        this.setState({clicked:null});
     }
 
     render() {
@@ -55,7 +60,7 @@ class Home extends React.Component {
         }
         else if(this.state.clicked === "grouplist") {
             return (
-                <GroupList></GroupList>
+                <GroupList backHomeCallback={this.goBackHome}></GroupList>
             )
         }
         else {
