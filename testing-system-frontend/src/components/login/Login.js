@@ -32,27 +32,30 @@ class Login extends React.Component {
         }
     }
 
-    submit() {
+    submit(event) {
+        event.preventDefault();
+
         let dataObject = {
             email: this.state.email,
             password: this.state.password,
-            remember: this.state.rememberMe
         };
-        debugger;
         
         axios.defaults.headers.post['Content-Type'] = 'application/json';
-        axios.post(
-            "https://localhost:44329/Account/Register", 
-            dataObject
-        ).then(response => {
-            debugger;
-            console.log("User successfuly registered.");
-        }
-        ).catch(error => {
-            debugger;
-            console.log(error);
-        });
-
+        axios.post("https://localhost:44329/Account/Token", dataObject).then( 
+            response => {
+                const token = "Bearer " + response.data.token;
+                sessionStorage.setItem("userToken", token);
+                sessionStorage.setItem("userType", response.data.userRole);
+                sessionStorage.setItem("userName", response.data.user.userName);
+                this.props.loginSuccess();
+            }
+        ).catch(
+            error => {
+                sessionStorage.setItem("userToken", "-1");
+                window.alert("Failed to login user.");
+                this.props.loginFailure();
+            }
+        );
     }
 
     render() {

@@ -7,18 +7,27 @@ class GroupList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            examinerId: 1, //temp
-            examinerName: "Andrew", //temp
+            examinerId: null, //temp
             allGroups: [],
             listStudentsGroupId: null
         }
         this.listAllStudentsButton = this.listAllStudentsButton.bind(this);
+        this.goBackHome = this.goBackHome.bind(this);
     }
 
     componentDidMount() {
-        axios.get("https://localhost:44329/Examiner/GetAllGroupsForExaminer/"+this.state.examinerId)
-        .then(response => {
-            this.setState({allGroups: response.data.groups})
+        let token = sessionStorage.getItem('userToken');
+
+        axios({
+            method: 'get',
+            url: 'https://localhost:44329/Examiner/GetAllGroupsForExaminer',
+            headers: {
+                'Authorization': token
+            }
+        }).then(response => {
+            this.setState({allGroups: response.data.groups});
+        }).catch(() => {
+            window.alert("Failed to get all tests for examiner");
         });
     }
 
@@ -26,6 +35,10 @@ class GroupList extends React.Component {
         let studentListGroupId = parseInt(event.target.value);
         this.setState({listStudentsGroupId: studentListGroupId});
         //mozda treba da se doda jos nesto sto treba da se salje listi studenata!
+    }
+
+    goBackHome() {
+        this.props.backHomeCallback();
     }
 
     render() {
@@ -46,7 +59,7 @@ class GroupList extends React.Component {
         }
         else if(this.state.listStudentsGroupId != null) {
             return (
-                <StudentList id={this.state.listStudentsGroupId}></StudentList>
+                <StudentList groupId={this.state.listStudentsGroupId} backHomeCallback={this.goBackHome}></StudentList>
             )
         }
     }

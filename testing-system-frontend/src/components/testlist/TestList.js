@@ -23,10 +23,24 @@ class TestList extends React.Component {
     }
 
     componentDidMount() {
-        axios.get("https://localhost:44329/Examiner/GetAllTestsForExaminer/" + this.state.examinerId)
-        .then(response => {
-            this.setState({allTests: response.data.tests})
+        let token = sessionStorage.getItem('userToken');
+
+        axios({
+            method: 'get',
+            url: 'https://localhost:44329/Examiner/GetAllTestsForExaminer',
+            headers: {
+                'Authorization': token
+            }
+        }).then(response => {
+            this.setState({allTests:response.data.tests})
+        }).catch(() => {
+            window.alert("Failed to get all tests for examiner");
         });
+
+        // axios.get("https://localhost:44329/Examiner/GetAllTestsForExaminer/" + this.state.examinerId)
+        // .then(response => {
+        //     this.setState({allTests: response.data.tests})
+        // });
     }
 
     listAllQuestionsButton = (event) => {
