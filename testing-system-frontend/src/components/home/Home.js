@@ -3,6 +3,7 @@ import './contentBoxes.css';
 import CreateTestForm from '../CreateTestForm'
 import CreateGroupForm from '../CreateGroupForm'
 import TestList from '../testlist/TestList'
+import GroupList from '../grouplist/GroupList'
 
 class Home extends React.Component {
     constructor(props) {
@@ -24,14 +25,14 @@ class Home extends React.Component {
                         <div className="row p-1">
                             <button onClick={() => this.clicked("newtest")} className="button" style={{backgroundColor: '#5027c2'}}><span>Create new test</span></button>
                             <button onClick={() => this.clicked("newgroup")} className="button" style={{backgroundColor: '#b0b0f5'}}><span>Create new group</span></button>
-                            <button onClick={() => this.clicked("stats")} className="button" style={{backgroundColor: '#5027c2'}}><span>Statistics</span></button>
+                            <button className="button" style={{backgroundColor: '#5027c2'}}><span> Connect group-test </span></button>
                         </div>
                     </div>
                     <div className="container">
                         <div className="row p-1">
                             <button onClick={() => this.clicked("listtest")} className="button" style={{backgroundColor: '#b0b0f5'}}><span>List all tests </span></button>
-                            <button className="button" style={{backgroundColor: '#5027c2'}}><span>List all groups </span></button>
-                            <button className="button" style={{backgroundColor: '#b0b0f5'}}><span> EMPTY </span></button>
+                            <button onClick={() => this.clicked("grouplist")} className="button" style={{backgroundColor: '#5027c2'}}><span>List all groups </span></button>
+                            <button onClick={() => this.clicked("stats")} className="button" style={{backgroundColor: '#b0b0f5'}}><span>Statistics</span></button>
                         </div>
                     </div>
                 </div>
@@ -50,6 +51,11 @@ class Home extends React.Component {
         else if(this.state.clicked === "listtest") {
             return (
                 <TestList></TestList>
+            )
+        }
+        else if(this.state.clicked === "grouplist") {
+            return (
+                <GroupList></GroupList>
             )
         }
         else {

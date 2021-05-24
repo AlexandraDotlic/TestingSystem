@@ -7,8 +7,7 @@ class GroupList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            examinerId: 1, //temp
-            examinerName: "Andrew", //temp
+            examinerId: null, //temp
             allGroups: [],
             listStudentsGroupId: null
         }
@@ -16,9 +15,18 @@ class GroupList extends React.Component {
     }
 
     componentDidMount() {
-        axios.get("https://localhost:44329/Examiner/GetAllGroupsForExaminer/"+this.state.examinerId)
-        .then(response => {
-            this.setState({allGroups: response.data.groups})
+        let token = sessionStorage.getItem('userToken');
+
+        axios({
+            method: 'get',
+            url: 'https://localhost:44329/Examiner/GetAllGroupsForExaminer',
+            headers: {
+                'Authorization': token
+            }
+        }).then(response => {
+            this.setState({allGroups: response.data.groups});
+        }).catch(() => {
+            window.alert("Failed to get all tests for examiner");
         });
     }
 
