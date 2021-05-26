@@ -53,6 +53,24 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("GetAllTests")]
+        public async Task<IActionResult> GetAllTests()
+        {
+            try
+            {
+                var result = await TestService.GetAllTests();
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+        }
+
+
+
         [HttpPost]
         [Route("AddQuestionToTest")]
         [Authorize(Policy = "IsExaminer")]
