@@ -6,7 +6,7 @@ class CreateQuestion extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            testId: 1, 
+            testId: this.props.testId, 
             answerType: "yesNo",
             questionText: ""
         };
@@ -66,11 +66,18 @@ class CreateQuestion extends React.Component {
         answerOptions: answers
         }
         
-        axios.defaults.headers.post['Content-Type'] = 'application/json';
-        axios.post(
-            "https://localhost:44329/Test/AddQuestionToTest", 
-            JSON.stringify(dataObject)
-        );
+        let token = sessionStorage.getItem('userToken');
+        axios({
+            method: 'post',
+            url: 'https://localhost:44329/Test/AddQuestionToTest',
+            headers: {
+                'Authorization': token
+            },
+            data: dataObject
+        }).then(() => {
+        }).catch(() => {
+            window.alert("Failed to add question to test.");
+        });
     }
 
     render() {
