@@ -92,6 +92,31 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+
+        [HttpGet]
+        [Route("GetAllGroups")]
+        [Authorize(Policy = "IsExaminer")]
+        public async Task<ActionResult<GetAllGroupsResponse>> GetAllGroups()
+        {
+            try
+            {
+                ICollection<Core.ApplicationServices.DTOs.GroupDTO> groups = await GroupService.GetAllGroups();
+                var response = new GetAllGroupsResponse
+                {
+                    Groups = groups.Select(g => new GroupDTO(g.Id, g.Title, g.ExaminerId)).ToList()
+
+                };
+                return response;
+
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+        }
+
+
         [HttpPost]
         [Route("SetGroupTitle/{groupId}")]
         [Authorize(Policy = "IsExaminer")]
