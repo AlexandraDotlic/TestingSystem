@@ -8,9 +8,12 @@ class TakeTest extends React.Component {
         this.state = {
             currentState: "selectTest",
             tests: null,
-            selectedTestId: 0
+            selectedTestId: 0,
+            totalScore: 0,
+            studentScore: 0
         }
         this.selectedChange = this.selectedChange.bind(this);
+        this.testResults = this.testResults.bind(this);
     }
 
     componentDidMount() {
@@ -26,6 +29,10 @@ class TakeTest extends React.Component {
 
     selectedChange(event) {
         this.setState({selectedTestId: event.target.value, currentState: "takeTest"})
+    }
+
+    testResults(totalScore, studentScore) {
+        this.setState({selectedTestId: 0, totalScore: totalScore, studentScore: studentScore, currentState: "results"});
     }
 
 
@@ -56,10 +63,20 @@ class TakeTest extends React.Component {
                 </div>
             )
         }
+        else if(this.state.currentState === "results") {
+            return (
+                <div className="w-50 mx-auto pt-4">
+                    {selectMenu}
+                    <div className="p-3 mb-2 bg-primary text-white">
+                        You scored {this.state.studentScore} out of {this.state.totalScore}. Congrats !
+                    </div>
+                </div>
+            )
+        }
         else if(this.state.currentState === "takeTest") {
             return (
                 <div>
-                    <TakeQuestions testId={this.state.selectedTestId}></TakeQuestions>
+                    <TakeQuestions testId={this.state.selectedTestId} finishedCallback={this.testResults}></TakeQuestions>
                 </div>
             )
         }

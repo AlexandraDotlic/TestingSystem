@@ -51,7 +51,8 @@ class TakeQuestions extends React.Component {
         let x = currentSelection;
     }
 
-    onSubmit() {
+    onSubmit(event) {
+        event.preventDefault();
         let responsesArray = [];
         for(let questionId of this.answersMap.keys()) {
             responsesArray.push( {questionId: questionId, responses: this.answersMap.get(questionId)});
@@ -71,9 +72,9 @@ class TakeQuestions extends React.Component {
             },
             data: requestPayload
         }).then(response => {
-            let x = response.data;
             debugger;
-        }).catch(() => {
+            this.props.finishedCallback(response.data.totalTestScore, response.data.studentScore);
+        }).catch(err => {
             window.alert("Failed to take test");
         });
     }
