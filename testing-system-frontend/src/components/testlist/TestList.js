@@ -10,7 +10,7 @@ class TestList extends React.Component {
         super(props);
         this.state = {
             examinerId: 1, //temp
-            examinerName: "Andrew", //temp
+            examinerName: sessionStorage.getItem('userName'), //temp
             allTests: [],
             showQuestionId: null,
             showQuestionName: "",

@@ -84,13 +84,12 @@ class QuestionList extends React.Component {
         }
         else if(this.state.deleteQuestionId != null) {
             return (
-                <DeleteQuestion id={this.state.deleteQuestionId}></DeleteQuestion>
+                <DeleteQuestion testId={this.state.testId} id={this.state.deleteQuestionId}></DeleteQuestion>
             )
         }
         else if(this.state.addQuestion != null) {
-            debugger;
             return (
-                <CreateQuestion></CreateQuestion>
+                <CreateQuestion testId={this.state.testId}></CreateQuestion>
             )
         }
         else {

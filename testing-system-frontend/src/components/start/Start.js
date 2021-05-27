@@ -3,6 +3,7 @@ import Login from '../login/Login.js'
 import Register from '../register/Register.js'
 import Home from '../home/Home.js'
 import Header from '../../template/header'
+import TakeTest from '../taketest/TakeTest'
 
 class Start extends React.Component {
     constructor(props) {
@@ -75,7 +76,7 @@ class Start extends React.Component {
             return (
                 <div>
                 <Header username={this.state.name} logoutCallback={this.logout}></Header>
-                Student
+                <TakeTest></TakeTest>
             </div>
             )
         }

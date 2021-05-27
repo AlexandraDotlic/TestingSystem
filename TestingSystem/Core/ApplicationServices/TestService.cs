@@ -145,6 +145,14 @@ namespace Core.ApplicationServices
             };
         }
 
+        public async Task<ICollection<TestDTO>> GetAllTests()
+        {
+            IReadOnlyCollection<Test> tests = await UnitOfWork.TestRepository.GetAllList();
+            List<TestDTO> testDTOs = tests == null || tests.Count == 0
+                ? new List<TestDTO>()
+                : tests.Select(t => new TestDTO(t.Id, t.Title, t.ExaminerId, t.StartDate, t.IsActive, t.TestScore)).ToList();
+            return testDTOs;
+        }
 
         public async Task<ICollection<TestDTO>> GetAllTestsForExaminer(string externalExaminerId)
         {

@@ -4,6 +4,7 @@ import CreateTestForm from '../CreateTestForm'
 import CreateGroupForm from '../CreateGroupForm'
 import TestList from '../testlist/TestList'
 import GroupList from '../grouplist/GroupList'
+import Statistics from '../statistics/Statistics';
 
 class Home extends React.Component {
     constructor(props) {
@@ -61,6 +62,11 @@ class Home extends React.Component {
         else if(this.state.clicked === "grouplist") {
             return (
                 <GroupList backHomeCallback={this.goBackHome}></GroupList>
+            )
+        }
+        else if(this.state.clicked === "stats") {
+            return (
+                <Statistics></Statistics>
             )
         }
         else {
