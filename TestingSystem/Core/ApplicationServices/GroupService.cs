@@ -81,9 +81,11 @@ namespace Core.ApplicationServices
             List<GroupDTO> groupDTOs = groups == null || groups.Count == 0
                 ? null
                 : groups.Select(g => new GroupDTO(g.Id, g.Title, g.ExaminerId)).ToList();
+
             return groupDTOs;
 
         }
+
 
         public async Task SetGroupTitle(short groupId, string title)
         {
