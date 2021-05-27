@@ -33,7 +33,7 @@ class TakeTest extends React.Component {
         let testOptions;
         if(this.state.tests !== null) {
             testOptions = this.state.tests.map(test => {
-                return <option value={test.id}> {test.title} </option>
+                return <option key={test.id} value={test.id}> {test.title} </option>
             })
         }
 
