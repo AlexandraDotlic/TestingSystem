@@ -41,17 +41,41 @@ class TakeQuestions extends React.Component {
         let currentSelection = this.answersMap.get(questionId);
         if(currentSelection.includes(questionAnswer)) {
             currentSelection = currentSelection.filter(function(value, index, arr){ 
-                return value == questionAnswer;
+                return value != questionAnswer;
             });
         }
         else {
             currentSelection.push(questionAnswer);
         }
+        this.answersMap.set(questionId, currentSelection);
+        let x = currentSelection;
     }
 
     onSubmit() {
-        let mapaOdgovora = this.answersMap;
-        debugger;
+        let responsesArray = [];
+        for(let questionId of this.answersMap.keys()) {
+            responsesArray.push( {questionId: questionId, responses: this.answersMap.get(questionId)});
+        }
+
+        let requestPayload = {
+            testId: parseInt(this.state.testId),
+            response: responsesArray
+        }
+
+        let token = sessionStorage.getItem('userToken');
+        axios({
+            method: 'post',
+            url: 'https://localhost:44329/Test/TakeTheTest/',
+            headers: {
+                'Authorization': token
+            },
+            data: requestPayload
+        }).then(response => {
+            let x = response.data;
+            debugger;
+        }).catch(() => {
+            window.alert("Failed to take test");
+        });
     }
 
     render() {
