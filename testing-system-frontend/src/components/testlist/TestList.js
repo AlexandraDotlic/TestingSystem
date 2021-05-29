@@ -24,7 +24,6 @@ class TestList extends React.Component {
 
     componentDidMount() {
         let token = sessionStorage.getItem('userToken');
-
         axios({
             method: 'get',
             url: 'https://localhost:44329/Examiner/GetAllTestsForExaminer',
@@ -44,32 +43,47 @@ class TestList extends React.Component {
     }
 
     listAllQuestionsButton = (event) => {
-        let showId = parseInt(event.target.value);
+        let showId = parseInt(event.target.id);
         let showName = event.target.name;
         this.setState({showQuestionId: showId});
         this.setState({showQuestionName: showName});
+        console.log(showId)
+        console.log(showName)
     }
 
     activateOrDeactivateButton = (event) => {
-        let aodId = parseInt(event.target.value);
+        let aodId = parseInt(event.target.id);
         let aodName = parseInt(event.target.name);
+        let token = sessionStorage.getItem('userToken');
 
         if(aodName){
             axios({
                 method: 'post',
-                url: 'https://localhost:44329/Test/DeactivateTest/' + aodId
+                url: 'https://localhost:44329/Test/DeactivateTest/'+ aodId,
+                headers: {
+                    'Authorization': token
+                },
+                data: {
+                    testId: aodId
+                }
               });
         }
         else{
             axios({
                 method: 'post',
-                url: 'https://localhost:44329/Test/ActivateTest/' + aodId
+                url: 'https://localhost:44329/Test/ActivateTest/'+ aodId,
+                headers: {
+                    'Authorization': token
+                },
+                data: {
+                    testId: aodId
+                }
               });
         }
     }
 
     changeStartDateButton = (event) => {
-        let startDateTestId = parseInt(event.target.value);
+        let startDateTestId = parseInt(event.target.id);
         let startDateTestTitle = event.target.name;
         this.setState({changeStartDateTestId: startDateTestId});
         this.setState({changeStartDateTestTitle: startDateTestTitle});

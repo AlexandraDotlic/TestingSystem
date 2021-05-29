@@ -34,23 +34,30 @@ class EditTestStartDateTime extends React.Component {
         startDateParsed += parseInt(this.state.startTime.substring(3)) * 60000;
 
         let startDateCombined = new Date(startDateParsed);
+        
+        let token = sessionStorage.getItem('userToken');
 
         axios({
             method: 'post',
             url: 'https://localhost:44329/Test/ChangeStartDate',
+            headers: {
+                'Authorization': token
+            },
             data: {
             testId: this.state.testId,
             startDate: startDateCombined,
             }
+        }).then(() => {
+        }).catch(() => {
+            window.alert("Failed to change start date. Insert all values");
         });
-        event.preventDefault();
     }
 
     render(){
         return (
         <div className = "container-fluid w-50 mx-auto pt-4"> 
             <h3 className="text-center"> Change Start Date and Start Time for test: <em>{this.state.testTitle}</em></h3>
-            <form onSubmit={this.submitButton}>
+            <form>
                 <div className="form-group">
                     <label htmlFor="startDate">Start Date:</label>
                     <input id="startDate" value={this.state.startDate} onChange={this.startDateChange} className="form-control" type="date"></input>

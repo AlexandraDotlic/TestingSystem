@@ -8,27 +8,21 @@ class TableHeader extends React.Component {
     render() {
         return (
             <div className="container">
-                <div className="row p-3">
+                <div className="row">
                     <div className="col-lg text-center">
-                        Test Name: 
+                        Title: 
                     </div>
-                    <div className="col-sm text-center">
+                    <div className="col-lg text-center">
                         Date: 
                     </div>
-                    <div className="col-sm text-center">
+                    <div className="col-lg text-center">
                         Time: 
                     </div>
                     <div className="col-sm text-center">
-                        Points: 
+                        Pt's: 
                     </div>
-                    <div className="col-lg text-center">
-                        Change Status: 
-                    </div>
-                    <div className="col-lg text-center">
-                        Questions: 
-                    </div>
-                    <div className="col-lg text-center"> 
-                        Edit:
+                    <div className="col-sm text-center">
+                        Options:
                     </div>
                 </div>
             </div>
