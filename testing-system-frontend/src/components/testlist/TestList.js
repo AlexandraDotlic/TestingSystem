@@ -35,11 +35,6 @@ class TestList extends React.Component {
         }).catch(() => {
             window.alert("Failed to get all tests for examiner");
         });
-
-        // axios.get("https://localhost:44329/Examiner/GetAllTestsForExaminer/" + this.state.examinerId)
-        // .then(response => {
-        //     this.setState({allTests: response.data.tests})
-        // });
     }
 
     listAllQuestionsButton = (event) => {
@@ -47,8 +42,6 @@ class TestList extends React.Component {
         let showName = event.target.name;
         this.setState({showQuestionId: showId});
         this.setState({showQuestionName: showName});
-        console.log(showId)
-        console.log(showName)
     }
 
     activateOrDeactivateButton = (event) => {
@@ -66,6 +59,8 @@ class TestList extends React.Component {
                 data: {
                     testId: aodId
                 }
+              }).then(() =>{       
+                window.location.reload()
               });
         }
         else{
@@ -78,7 +73,9 @@ class TestList extends React.Component {
                 data: {
                     testId: aodId
                 }
-              });
+              }).then(() =>{       
+                  window.location.reload()
+                });
         }
     }
 

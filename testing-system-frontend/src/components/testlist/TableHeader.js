@@ -9,7 +9,7 @@ class TableHeader extends React.Component {
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col-lg text-center">
+                    <div className="col-xl text-center">
                         Title: 
                     </div>
                     <div className="col-lg text-center">

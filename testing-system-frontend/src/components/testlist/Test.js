@@ -25,7 +25,7 @@ class Test extends React.Component {
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col-lg text-center">
+                    <div className="col-xl text-center">
                         { this.state.testTitle}
                     </div>
                     <div className="col-lg text-center">
