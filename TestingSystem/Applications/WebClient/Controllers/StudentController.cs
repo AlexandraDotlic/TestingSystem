@@ -92,7 +92,7 @@ namespace Applications.WebClient.Controllers
         [HttpGet]
         [Route("GetStudentTestResult/{testId}")]
         [Authorize(Policy = "IsStudent")]
-        public async Task<ActionResult<GetStudentTestResultResponse>> GetStudentTestResult(short testId)
+        public async Task<ActionResult<StudentTestResultDTO>> GetStudentTestResult(short testId)
         {
             try
             {
@@ -100,7 +100,7 @@ namespace Applications.WebClient.Controllers
                 Core.ApplicationServices.DTOs.StudentTestScoreDTO studentTestResult = await StudentService.GetStudentTestResult(currentUserId, testId);
                 var response = studentTestResult == null
                     ? null
-                    : new GetStudentTestResultResponse
+                    : new StudentTestResultDTO
                     {
                         TestId = studentTestResult.TestId,
                         StudentTestScore = studentTestResult.StudentTestScore,
@@ -115,7 +115,34 @@ namespace Applications.WebClient.Controllers
             }
         }
 
-       
+        [HttpGet]
+        [Route("GetStudentResultsForAllTakenTests")]
+        [Authorize(Policy = "IsStudent")]
+        public async Task<ActionResult<GetStudentResultsForAllTakenTestsResponse>> GetStudentResultsForAllTakenTests()
+        {
+            try
+            {
+                var currentUserId = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+                ICollection<Core.ApplicationServices.DTOs.StudentTestScoreDTO> studentResults = await StudentService.GetStudentResultsForAllTakenTests(currentUserId);
+                var response = studentResults == null || studentResults.Count == 0
+                    ? null
+                    : new GetStudentResultsForAllTakenTestsResponse
+                    {
+                        StudentResults = studentResults.Select(sr => new StudentTestResultDTO
+                        {
+                            StudentTestScore = sr.StudentTestScore,
+                            TotalTestScore = sr.TotalTestScore,
+                            TestId = sr.TestId
+                        }).ToList()
+                    };
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+        }
     }
 
 

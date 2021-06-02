@@ -109,5 +109,66 @@ namespace Core.ApplicationServices
             return studentDTOs;
 
         }
+
+
+        public async Task<StudentTestScoreDTO> GetStudentTestResult(string studentExternalId, short testId)
+        {
+            if (string.IsNullOrEmpty(studentExternalId))
+            {
+                throw new ArgumentNullException($"ExternalId must not be null");
+            }
+            Student student = await UnitOfWork.StudentRepository.GetFirstOrDefaultWithIncludes(s => s.ExternalId == studentExternalId, s => s.StudentTests);
+            if (student == null)
+            {
+                throw new ArgumentNullException($"{nameof(Student)} with externalId {studentExternalId} not exist");
+            }
+            Test test = await UnitOfWork.TestRepository.GetById(testId);
+            if (test == null)
+            {
+                throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
+            }
+            StudentTest studentTest = student.StudentTests.Where(st => st.TestId == testId).FirstOrDefault();
+            if (studentTest == null)
+            {
+                throw new ArgumentNullException($"{nameof(Student)} did not take the test with id={testId}");
+            }
+            return new StudentTestScoreDTO
+            {
+                StudentId = student.Id,
+                TestId = test.Id,
+                TotalTestScore = test.TestScore,
+                StudentTestScore = studentTest.Score
+            };
+
+        }
+
+        public async Task<ICollection<StudentTestScoreDTO>> GetStudentResultsForAllTakenTests(string studentExternalId)
+        {
+            if (string.IsNullOrEmpty(studentExternalId))
+            {
+                throw new ArgumentNullException($"ExternalId must not be null");
+            }
+            Student student = await UnitOfWork.StudentRepository.GetFirstOrDefaultWithIncludes(s => s.ExternalId == studentExternalId, s => s.StudentTests);
+            if (student == null)
+            {
+                throw new ArgumentNullException($"{nameof(Student)} with externalId {studentExternalId} not exist");
+            }
+
+            ICollection<StudentTest> studentTests = student.StudentTests;
+            ICollection<StudentTestScoreDTO> studentTestScoreDTOs = new List<StudentTestScoreDTO>();
+            foreach (var studentTest in studentTests)
+            {
+                var test = await UnitOfWork.TestRepository.GetById(studentTest.TestId);
+                studentTestScoreDTOs.Add(new StudentTestScoreDTO
+                {
+                    StudentId = student.Id,
+                    TestId = studentTest.TestId,
+                    TotalTestScore = test.TestScore,
+                    StudentTestScore = studentTest.Score
+                });
+            }
+            return studentTestScoreDTOs;
+
+        }
     }
 }

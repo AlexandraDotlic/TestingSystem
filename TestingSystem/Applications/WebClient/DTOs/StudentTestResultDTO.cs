@@ -4,10 +4,10 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
-namespace Applications.WebClient.Responses
+namespace Applications.WebClient.DTOs
 {
     [DataContract]
-    public class GetStudentTestResultResponse
+    public class StudentTestResultDTO
     {
         [DataMember]
         public short TestId { get; set; }
