@@ -88,6 +88,34 @@ namespace Applications.WebClient.Controllers
                 return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
             }
         }
+
+        [HttpGet]
+        [Route("GetStudentTestResult/{testId}")]
+        [Authorize(Policy = "IsStudent")]
+        public async Task<ActionResult<GetStudentTestResultResponse>> GetStudentTestResult(short testId)
+        {
+            try
+            {
+                var currentUserId = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+                Core.ApplicationServices.DTOs.StudentTestScoreDTO studentTestResult = await StudentService.GetStudentTestResult(currentUserId, testId);
+                var response = studentTestResult == null
+                    ? null
+                    : new GetStudentTestResultResponse
+                    {
+                        TestId = studentTestResult.TestId,
+                        StudentTestScore = studentTestResult.StudentTestScore,
+                        TotalTestScore = studentTestResult.TotalTestScore
+                    };
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+        }
+
+       
     }
 
 
