@@ -44,7 +44,7 @@ class Register extends React.Component {
         }
     }
 
-    submit() {
+    submit(event) {
         let dataObject = {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
@@ -53,17 +53,35 @@ class Register extends React.Component {
             userRoleType: this.state.type
         };
 
-        axios.defaults.headers.post['Content-Type'] = 'application/json';
-        axios.post(
-            "https://localhost:44329/Account/Register", 
-            dataObject
-        ).then(response => {
+        axios({
+            method: 'post',
+            url: "https://localhost:44329/Account/Register", 
+            data: {
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                email: this.state.email,
+                password: this.state.password,
+                userRoleType: this.state.type
+            }
+        }).then(() => {
             console.log("User successfuly registered.");
+            
+            axios({
+                method: 'post',
+                url: "https://localhost:44329/Mail/SendWelcomeMail", 
+                data: {
+                    toEmail: this.state.email,
+                    username: this.state.email
+                }
+            }).catch(error => {
+                console.log(error);
+            });
         }
         ).catch(error => {
             console.log(error);
         });
 
+        // event.preventDefault();
     }
 
     render() {
