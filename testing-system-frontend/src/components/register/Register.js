@@ -45,13 +45,6 @@ class Register extends React.Component {
     }
 
     submit(event) {
-        let dataObject = {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            email: this.state.email,
-            password: this.state.password,
-            userRoleType: this.state.type
-        };
 
         axios({
             method: 'post',
@@ -80,8 +73,8 @@ class Register extends React.Component {
         ).catch(error => {
             console.log(error);
         });
-
-        // event.preventDefault();
+        
+        event.preventDefault();
     }
 
     render() {
