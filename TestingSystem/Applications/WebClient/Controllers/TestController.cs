@@ -226,6 +226,8 @@ namespace Applications.WebClient.Controllers
                 return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
             }
         }
-      
+
+        
+
     }
 }
