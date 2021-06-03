@@ -1,11 +1,10 @@
 import Start from './components/start/Start.js'
-import Header from './template/header.js'
 
 function App() {
   return (
-    <div className="App">
-      <Start></Start>
-    </div>
+      <div className="App h-100" style={{ backgroundImage: "url(/background.jpg)", backgroundRepeat: 'repeat'}}>
+        <Start></Start>
+      </div>
   );
 }
 
