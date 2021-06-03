@@ -72,6 +72,9 @@ class QuestionList extends React.Component {
                     <div className="text-center">
                         <button className="btn btn-success" onClick={this.addClicked}> Add new question </button>
                     </div>
+                    <div className="text-center">
+                        <button className="btn btn-warning mt-2" onClick={() => this.props.cancelCallback()}> Discard </button>
+                    </div>
     
                 </div>
     
@@ -84,7 +87,7 @@ class QuestionList extends React.Component {
         }
         else if(this.state.deleteQuestionId != null) {
             return (
-                <DeleteQuestion testId={this.state.testId} id={this.state.deleteQuestionId}></DeleteQuestion>
+                <DeleteQuestion testId={this.state.testId} id={this.state.deleteQuestionId} cancelCallback={this.props.cancelCallback}></DeleteQuestion>
             )
         }
         else if(this.state.addQuestion != null) {

@@ -27,6 +27,7 @@ class DeleteQuestion extends React.Component {
                 questionId: this.state.questionId
             }
         }).then(() => {
+            this.props.cancelCallback();
         }).catch(() => {
             window.alert("Failed to delete question");
         });

@@ -65,12 +65,12 @@ class Login extends React.Component {
                 <form onSubmit={this.submit}>
                     <div className="form-group">
                         <label htmlFor="email"> E-mail address: </label>
-                        <input id="email" value={this.state.email} onChange={this.emailChanged} type="email" className="form-control" placeholder="Enter your e-mail address"></input>
+                        <input id="email" value={this.state.email} onChange={this.emailChanged} type="email" className="form-control" placeholder="Enter your e-mail address" required></input>
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="password"> Password: </label>
-                        <input id="password" value={this.state.password} onChange={this.passwordChanged} type="password" className="form-control"></input>
+                        <input id="password" value={this.state.password} onChange={this.passwordChanged} type="password" className="form-control" required></input>
                     </div>
 
                     <div className="form-check">

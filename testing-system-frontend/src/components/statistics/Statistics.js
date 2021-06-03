@@ -48,6 +48,9 @@ class Statistics extends React.Component {
                                 {testOptions}
                             </select>
                         </div>
+                        <div className="text-center mt-3">
+                            <button className="btn btn-warning" onClick={() => this.props.cancelCallback()}> Discard </button>
+                        </div>
                     </form>
                 </div>
             )
@@ -57,6 +60,9 @@ class Statistics extends React.Component {
                 <div className="w-50 mx-auto pt-4">
                     <StatisticsTable id={this.state.selectedTestId}></StatisticsTable>
                     <StatisticsDetail id={this.state.selectedTestId}></StatisticsDetail>
+                    <div className="text-center mt-3">
+                        <button className="btn btn-warning" onClick={() => this.props.cancelCallback()}> Discard </button>
+                    </div>
                 </div>
             )
         }

@@ -53,8 +53,10 @@ class GroupList extends React.Component {
                     <ul>
                         {groups}
                     </ul>
+                    <div className="text-center mt-3">
+                        <button className="btn btn-warning" onClick={() => this.props.cancelCallback()}> Discard </button>
+                    </div>
                 </div>
-    
             );
         }
         else if(this.state.listStudentsGroupId != null) {
