@@ -45,20 +45,21 @@ class Register extends React.Component {
     }
 
     submit(event) {
-
+        event.preventDefault();
+        let dataPayload = {
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.email,
+            password: this.state.password,
+            userRoleType: this.state.type
+        }
+        
         axios({
             method: 'post',
             url: "https://localhost:44329/Account/Register", 
-            data: {
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
-                email: this.state.email,
-                password: this.state.password,
-                userRoleType: this.state.type
-            }
+            data: dataPayload
         }).then(() => {
             console.log("User successfuly registered.");
-            
             axios({
                 method: 'post',
                 url: "https://localhost:44329/Mail/SendWelcomeMail", 
@@ -66,40 +67,43 @@ class Register extends React.Component {
                     toEmail: this.state.email,
                     username: this.state.email
                 }
-            }).catch(error => {
-                console.log(error);
+            })
+            .then(() => {
+                this.props.callback();
+            })
+            .catch(error => {
+                window.alert(error);
             });
         }
         ).catch(error => {
-            console.log(error);
+            window.alert(error);
         });
         
-        event.preventDefault();
     }
 
     render() {
         return (
             <div className="w-50 mx-auto pt-4">
                 <h3 className="text-center"> Register new user </h3>
-                <form onSubmit={this.submit}>
+                <form onSubmit={this.submit} onReset={() => this.props.cancelCallback()}>
                     <div className="form-group">
                         <label htmlFor="firstName"> First name: </label>
-                        <input id="firstName" value={this.state.firstName} onChange={this.firstNameChanged} className="form-control" placeholder="Enter your first name"></input>
+                        <input id="firstName" value={this.state.firstName} onChange={this.firstNameChanged} className="form-control" placeholder="Enter your first name" required></input>
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="lastName"> Last name: </label>
-                        <input id="lastName" value={this.state.lastName} onChange={this.lastNameChanged} className="form-control" placeholder="Enter your last name"></input>
+                        <input id="lastName" value={this.state.lastName} onChange={this.lastNameChanged} className="form-control" placeholder="Enter your last name" required></input>
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="email"> E-mail address: </label>
-                        <input id="email" value={this.state.email} onChange={this.emailChanged} type="email" className="form-control" placeholder="Enter your e-mail address"></input>
+                        <input id="email" value={this.state.email} onChange={this.emailChanged} type="email" className="form-control" placeholder="Enter your e-mail address" required></input>
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="password"> Password: </label>
-                        <input id="password" value={this.state.password} onChange={this.passwordChanged} type="password" className="form-control"></input>
+                        <input id="password" value={this.state.password} onChange={this.passwordChanged} type="password" className="form-control" pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^*-]).{8,}$" title="Password must contain at least one uppercase, one lowercase, one special, one number, minimum 8 chars" required></input>
                     </div>
 
                     <div className="form-group">
@@ -110,8 +114,11 @@ class Register extends React.Component {
                         </select>
                     </div>
 
-                    <div className="text-center mb-2">
+                    <div className="form-group text-center mb-2">
                         <button type="submit" className="btn btn-success">Submit</button>
+                    </div>
+                    <div className="form-group text-center mb-2">
+                        <button type="reset" className="btn btn-warning">Discard</button>
                     </div>
                 </form>
             </div>
