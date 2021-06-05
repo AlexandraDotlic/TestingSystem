@@ -20,15 +20,19 @@ function TakeResults() {
         });
     }, []);
 
-    const resultList = results.map(result => {
-        return (
-            <tr key={result.testId}>
-                <td> {result.testName} </td>
-                <td> {result.studentTestScore} </td>
-                <td> {result.totalTestScore} </td>
-            </tr>
-        )
-    });
+    let resultList = null;
+    if(results && results.length != 0) {
+        resultList = results.map(result => {
+            return (
+                <tr key={result.testId}>
+                    <td> {result.testName} </td>
+                    <td> {result.studentTestScore} </td>
+                    <td> {result.totalTestScore} </td>
+                </tr>
+            )
+        });
+    }
+
 
     return (
         <div>
