@@ -163,9 +163,10 @@ namespace Core.ApplicationServices
                 {
                     StudentId = student.Id,
                     TestId = studentTest.TestId,
+                    TestName = studentTest.Test.Title,
                     TotalTestScore = test.TestScore,
                     StudentTestScore = studentTest.Score
-                });
+                }); ;
             }
             return studentTestScoreDTOs;
 

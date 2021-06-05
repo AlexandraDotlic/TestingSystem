@@ -8,6 +8,7 @@ namespace Core.ApplicationServices.DTOs
     {
         public int StudentId { get; set; }
         public short TestId { get; set; }
+        public string TestName { get; set; }
         public int StudentTestScore { get; set; }
         public int TotalTestScore { get; set; }
     }

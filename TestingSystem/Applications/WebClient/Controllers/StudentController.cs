@@ -132,7 +132,8 @@ namespace Applications.WebClient.Controllers
                         {
                             StudentTestScore = sr.StudentTestScore,
                             TotalTestScore = sr.TotalTestScore,
-                            TestId = sr.TestId
+                            TestId = sr.TestId,
+                            TestName = sr.TestName
                         }).ToList()
                     };
                 return Ok(response);
