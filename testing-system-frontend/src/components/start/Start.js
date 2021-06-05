@@ -77,7 +77,7 @@ class Start extends React.Component {
         }
         else if(this.state.option === "loginsuccessexaminer") {
             return (
-                <div>
+                <div >
                     <Header username={this.state.name} logoutCallback={this.logout}></Header>
                     <Home></Home>
                 </div>
