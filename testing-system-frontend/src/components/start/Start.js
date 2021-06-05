@@ -21,7 +21,7 @@ class Start extends React.Component {
     }
 
     componentDidMount() {
-        if(sessionStorage.getItem("userName") != undefined) {
+        if(sessionStorage.getItem("userName") !== undefined) {
             this.loginSuccessCallback();
         }
         

@@ -18,7 +18,7 @@ function StatisticsTable(props) {
         }).catch(() => {
             window.alert("Failed to get all statistics for test");
         });
-    }, []);
+    }, [props.id]);
 
     let rows = null;
 

@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios';
 import StatisticsTable from './StatisticsTable'
-import StatisticsDetails from './StatisticsDetail'
 import StatisticsDetail from './StatisticsDetail';
 
 class Statistics extends React.Component {
@@ -37,7 +36,7 @@ class Statistics extends React.Component {
             })
         }
 
-        if(this.state.selectedTestId == 0) {
+        if(this.state.selectedTestId === 0) {
             return (
                 <div className="w-50 mx-auto pt-4">
                     <form>

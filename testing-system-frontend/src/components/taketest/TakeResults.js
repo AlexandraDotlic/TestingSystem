@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { render } from '@testing-library/react';
 
 function TakeResults() {
     const [results, setResults] = useState([]);
@@ -21,7 +20,7 @@ function TakeResults() {
     }, []);
 
     let resultList = null;
-    if(results && results.length != 0) {
+    if(results && results.length !== 0) {
         resultList = results.map(result => {
             return (
                 <tr key={result.testId}>
