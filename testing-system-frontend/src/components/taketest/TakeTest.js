@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 import TakeQuestions from './TakeQuestions'
+import TakeResults from './TakeResults'
 
 class TakeTest extends React.Component {
     constructor(props) {
@@ -60,6 +61,8 @@ class TakeTest extends React.Component {
             return (
                 <div className="w-50 mx-auto pt-4">
                     {selectMenu}
+                    <hr/>
+                    <TakeResults/>
                 </div>
             )
         }
@@ -70,6 +73,8 @@ class TakeTest extends React.Component {
                     <div className="p-3 mb-2 bg-primary text-white">
                         You scored {this.state.studentScore} out of {this.state.totalScore}. Congrats !
                     </div>
+                    <hr/>
+                    <TakeResults/>
                 </div>
             )
         }

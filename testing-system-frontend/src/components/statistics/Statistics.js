@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios';
 import StatisticsTable from './StatisticsTable'
-import StatisticsDetails from './StatisticsDetail'
 import StatisticsDetail from './StatisticsDetail';
 
 class Statistics extends React.Component {
@@ -37,7 +36,7 @@ class Statistics extends React.Component {
             })
         }
 
-        if(this.state.selectedTestId == 0) {
+        if(this.state.selectedTestId === 0) {
             return (
                 <div className="w-50 mx-auto pt-4">
                     <form>
@@ -48,6 +47,9 @@ class Statistics extends React.Component {
                                 {testOptions}
                             </select>
                         </div>
+                        <div className="text-center mt-3">
+                            <button className="btn btn-warning" onClick={() => this.props.cancelCallback()}> Discard </button>
+                        </div>
                     </form>
                 </div>
             )
@@ -57,6 +59,9 @@ class Statistics extends React.Component {
                 <div className="w-50 mx-auto pt-4">
                     <StatisticsTable id={this.state.selectedTestId}></StatisticsTable>
                     <StatisticsDetail id={this.state.selectedTestId}></StatisticsDetail>
+                    <div className="text-center mt-3">
+                        <button className="btn btn-warning" onClick={() => this.props.cancelCallback()}> Discard </button>
+                    </div>
                 </div>
             )
         }

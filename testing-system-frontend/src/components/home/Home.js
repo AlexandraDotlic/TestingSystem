@@ -46,27 +46,27 @@ class Home extends React.Component {
         }
         else if(this.state.clicked === "newtest") {
             return (
-                <CreateTestForm></CreateTestForm>
+                <CreateTestForm cancelCallback={this.goBackHome}></CreateTestForm>
             )
         }
         else if(this.state.clicked === "newgroup") {
             return (
-                <CreateGroupForm></CreateGroupForm>
+                <CreateGroupForm cancelCallback={this.goBackHome}></CreateGroupForm>
             )
         }
         else if(this.state.clicked === "listtest") {
             return (
-                <TestList></TestList>
+                <TestList cancelCallback={this.goBackHome}></TestList>
             )
         }
         else if(this.state.clicked === "grouplist") {
             return (
-                <GroupList backHomeCallback={this.goBackHome}></GroupList>
+                <GroupList backHomeCallback={this.goBackHome} cancelCallback={this.goBackHome}></GroupList>
             )
         }
         else if(this.state.clicked === "stats") {
             return (
-                <Statistics></Statistics>
+                <Statistics cancelCallback={this.goBackHome}></Statistics>
             )
         }
         else {

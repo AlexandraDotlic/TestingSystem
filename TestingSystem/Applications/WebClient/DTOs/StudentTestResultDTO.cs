@@ -12,6 +12,8 @@ namespace Applications.WebClient.DTOs
         [DataMember]
         public short TestId { get; set; }
         [DataMember]
+        public string TestName { get; set; }
+        [DataMember]
         public int StudentTestScore { get; set; }
         [DataMember]
         public int TotalTestScore { get; set; }

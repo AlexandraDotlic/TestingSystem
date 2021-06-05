@@ -59,7 +59,7 @@ class CreateTestForm extends React.Component {
         return (
         <div className = "container-fluid w-50 mx-auto pt-4"> 
             <h3 className="text-center"> Create a new test</h3>
-            <form onSubmit={this.submitButton}>
+            <form onSubmit={this.submitButton} onReset={() => {this.props.cancelCallback()}}>
                 <div className="form-group">
                     <label htmlFor="testName">Test Name:</label>
                     <input id="testName" value={this.state.testName} onChange={this.testNameChange} className="form-control" placeholder="Enter test name"></input>
@@ -72,8 +72,11 @@ class CreateTestForm extends React.Component {
                     <label htmlFor="startTime">Start Time</label>
                     <input id="startTime" value={this.state.startTime} onChange={this.startTimeChange} className="form-control" type="time" ></input>
                 </div>
-                <div className="text-center mb-2">
+                <div className="form-group text-center mb-2">
                     <button className="btn btn-success" type="submit">Submit </button>
+                </div>
+                <div className="form-group text-center mb-2">
+                    <button className="btn btn-warning" type="reset">Discard </button>
                 </div>
             </form>
         </div>

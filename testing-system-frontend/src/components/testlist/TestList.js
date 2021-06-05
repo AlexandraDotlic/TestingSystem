@@ -104,13 +104,15 @@ class TestList extends React.Component {
                     <ul>
                         {tests}
                     </ul>
-
+                    <div className="text-center mb-2">
+                        <button onClick={() => this.props.cancelCallback()} className="btn btn-warning"> Discard </button>
+                    </div>
                 </div>
             );
         }
         else if(this.state.showQuestionId != null) {
             return (
-                <QuestionList key={this.state.showQuestionId} id={this.state.showQuestionId} title={this.state.showQuestionName}></QuestionList>
+                <QuestionList key={this.state.showQuestionId} cancelCallback={this.props.cancelCallback} id={this.state.showQuestionId} title={this.state.showQuestionName}></QuestionList>
             )
         }
         else if(this.state.changeStartDateTestId != null){

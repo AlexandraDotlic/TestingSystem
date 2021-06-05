@@ -37,13 +37,16 @@ class CreateGroupForm extends React.Component{
         return (
             <div className= "container-fluid w-50 mx-auto pt-4"> 
             <h3 className="text-center"> Create new group</h3>
-                <form onSubmit={this.submitButton}>
+                <form onSubmit={this.submitButton} onReset={() => this.props.cancelCallback()}>
                     <div className="form-group">
                         <label htmlFor="groupName">Group Name:</label>
                         <input id="groupName" value={this.state.groupName} onChange={this.groupNameChange} className="form-control" placeholder="Enter group name" ></input>
                     </div>
-                    <div className="text-center mb-2">
+                    <div className="form-group text-center mb-2">
                         <button className="btn btn-success" type="submit">Submit </button>
+                    </div>
+                    <div className= "form-group text-center mb-2">
+                        <button className="btn btn-warning" type="reset">Submit </button>
                     </div>
                 </form>
             </div>

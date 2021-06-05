@@ -25,7 +25,7 @@ class Header extends React.Component {
             </div>
         );
 
-        if(this.state.name == "Welcome") {
+        if(this.state.name === "Welcome") {
             menu = null;
         }
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from 'axios'
-import { data } from 'jquery';
 
 class TakeQuestions extends React.Component {
     constructor(props) {
@@ -41,14 +40,13 @@ class TakeQuestions extends React.Component {
         let currentSelection = this.answersMap.get(questionId);
         if(currentSelection.includes(questionAnswer)) {
             currentSelection = currentSelection.filter(function(value, index, arr){ 
-                return value != questionAnswer;
+                return value !== questionAnswer;
             });
         }
         else {
             currentSelection.push(questionAnswer);
         }
         this.answersMap.set(questionId, currentSelection);
-        let x = currentSelection;
     }
 
     onSubmit(event) {
@@ -88,7 +86,7 @@ class TakeQuestions extends React.Component {
         else {
             const questionList = this.state.questions.map(question => {
                 // Yes/No questions
-                if(question.answerOptions.length == 2) {
+                if(question.answerOptions.length === 2) {
                     return (
                         <div key={question.id} className="form-group">
                             <label className="font-weight-bold"> {question.questionText} </label>

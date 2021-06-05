@@ -6,7 +6,7 @@ class StatisticsDetail extends React.Component {
         super(props)
         this.state = {
             testId: this.props.id,
-            groupId: 1,
+            groupId: 502,
             date: null
         }
         this.createNow = this.createNow.bind(this);

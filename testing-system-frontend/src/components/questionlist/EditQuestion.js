@@ -30,7 +30,7 @@ class EditQuestion extends React.Component {
             }
         }).then(response => {
             this.setState({questionText: response.data.questionText});
-            if(response.data.answerOptions.length == 2) {
+            if(response.data.answerOptions.length === 2) {
                 this.setState({answerType: "yesNo"});
             }
             this.setState({answers: response.data.answerOptions})
