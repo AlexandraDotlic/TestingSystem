@@ -14,6 +14,7 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess.EntityConfigurations
             builder.Property(e => e.Id).ValueGeneratedOnAdd();
             builder.Property(e => e.FirstName).HasMaxLength(50);
             builder.Property(e => e.LastName).HasMaxLength(50);
+            builder.Property(e => e.Email).HasMaxLength(100);
         }
     }
 }

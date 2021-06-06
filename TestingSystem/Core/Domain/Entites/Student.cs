@@ -19,6 +19,10 @@ namespace Core.Domain.Entites
         /// </summary>
         public string LastName { get; private set; }
         /// <summary>
+        /// email
+        /// </summary>
+        public string Email { get; private set; }
+        /// <summary>
         /// Grupa kojoj pripada
         /// </summary>
         public short? GroupId { get; private set; }
@@ -35,10 +39,11 @@ namespace Core.Domain.Entites
         }
 
         
-        public Student(string firstname, string lastname, string externalId)
+        public Student(string firstname, string lastname, string email, string externalId)
         {
             FirstName = firstname;
             LastName = lastname;
+            Email = email;
             StudentTests = new List<StudentTest>();
             ExternalId = externalId;
         }
