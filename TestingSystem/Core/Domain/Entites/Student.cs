@@ -19,6 +19,10 @@ namespace Core.Domain.Entites
         /// </summary>
         public string LastName { get; private set; }
         /// <summary>
+        /// email
+        /// </summary>
+        public string Email { get; private set; }
+        /// <summary>
         /// Grupa kojoj pripada
         /// </summary>
         public short? GroupId { get; private set; }
