@@ -39,10 +39,11 @@ namespace Core.Domain.Entites
         }
 
         
-        public Student(string firstname, string lastname, string externalId)
+        public Student(string firstname, string lastname, string email, string externalId)
         {
             FirstName = firstname;
             LastName = lastname;
+            Email = email;
             StudentTests = new List<StudentTest>();
             ExternalId = externalId;
         }

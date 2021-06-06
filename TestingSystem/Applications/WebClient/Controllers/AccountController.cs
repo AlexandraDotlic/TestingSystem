@@ -91,7 +91,7 @@ namespace Applications.WebClient.Controllers
             {
                 try
                 {
-                    int studentId = await StudentService.CreateStudent(registerUserRequest.FirstName, registerUserRequest.LastName, accountId);
+                    int studentId = await StudentService.CreateStudent(registerUserRequest.FirstName, registerUserRequest.LastName, registerUserRequest.Email, accountId);
                     return Ok(studentId);
                 }
                 catch(Exception e)

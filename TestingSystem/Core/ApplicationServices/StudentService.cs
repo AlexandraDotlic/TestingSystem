@@ -19,13 +19,13 @@ namespace Core.ApplicationServices
             UnitOfWork = unitOfWork;
         }
 
-        public async Task<int> CreateStudent(string firstName, string lastName, string externalId)
+        public async Task<int> CreateStudent(string firstName, string lastName, string email, string externalId)
         {
             if (string.IsNullOrEmpty(externalId))
             {
                 throw new ArgumentNullException($"ExternalId must not be null");
             }
-            Student newStudent = new Student(firstName, lastName, externalId);
+            Student newStudent = new Student(firstName, lastName, email, externalId);
             await UnitOfWork.StudentRepository.Insert(newStudent);
             await UnitOfWork.SaveChangesAsync();
             return newStudent.Id;
