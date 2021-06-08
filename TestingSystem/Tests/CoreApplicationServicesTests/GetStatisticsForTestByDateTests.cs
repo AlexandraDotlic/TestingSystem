@@ -85,9 +85,9 @@ namespace Tests.CoreApplicationServicesTests
             string externalSId3 = Guid.NewGuid().ToString();
 
             int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
-            int studentId1 = await StudentService.CreateStudent("student1", "Prezimes", externalSId1);
-            int studentId2 = await StudentService.CreateStudent("student2", "Prezimes", externalSId2);
-            int studentId3 = await StudentService.CreateStudent("student3", "Prezimes", externalSId3);
+            int studentId1 = await StudentService.CreateStudent("student1", "Prezimes", "email1@email.com", externalSId1);
+            int studentId2 = await StudentService.CreateStudent("student2", "Prezimes", "email2@email.com", externalSId2);
+            int studentId3 = await StudentService.CreateStudent("student3", "Prezimes", "email3@email.com", externalSId3);
 
             var (testId, question1Id, question2Id) = await CreateTestWithQuestions(externalEId, "Title test");
 
@@ -156,7 +156,7 @@ namespace Tests.CoreApplicationServicesTests
         public async Task GetStatisticsForTestByDateTestsFail2()
         {
             int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
-            int studentId = await StudentService.CreateStudent("ImeS", "Prezimes", "12345");
+            int studentId = await StudentService.CreateStudent("ImeS", "Prezimes", "email@email.com", "12345");
 
 
             await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await TestStatisticService.GetStatisticForTestbyDate(100, "123", DateTime.Now), $"Test does not exist");
