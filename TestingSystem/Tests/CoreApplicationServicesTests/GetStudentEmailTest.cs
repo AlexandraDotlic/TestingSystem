@@ -55,14 +55,14 @@ namespace Tests.CoreApplicationServicesTests
         {
 
             string externalId = Guid.NewGuid().ToString();
-            await ExaminerService.CreateExaminer("Ime", "Prezime", externalId);
+            await ExaminerService.CreateExaminer("Ime", "Prezime", "123");
 
             string externalSId = Guid.NewGuid().ToString();
 
-            int id = await StudentService.CreateStudent("Ime", "Prezime", "imeprezime@mail.com", externalSId);
+            int id = await StudentService.CreateStudent("Ime", "Prezime", "imeprezime@gmail.com", "111");
             var student = await CoreUnitOfWork.StudentRepository.GetById(id);
 
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await StudentService.GetStudentEmail(100000), $"Test with Id 1000 does not exist");
+            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await StudentService.GetStudentEmail(100), $"Student with id 100 does not exist!");
         }
 
     }
