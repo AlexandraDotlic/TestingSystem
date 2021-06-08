@@ -35,7 +35,6 @@ namespace Tests.CoreApplicationServicesTests
         {
             await DbContext.DisposeAsync();
             DbContext = null;
-            
         }
 
         [TestMethod]
@@ -46,7 +45,7 @@ namespace Tests.CoreApplicationServicesTests
 
 
             int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
-            int studentId = await StudentService.CreateStudent("StudentIme", "StudentPrezime", externalSId);
+            int studentId = await StudentService.CreateStudent("StudentIme", "StudentPrezime", "email@email.com",externalSId);
             var groupId = await GroupService.CreateGroup("grupa", externalEId);
             var group = await CoreUnitOfWork.GroupRepository.GetFirstOrDefaultWithIncludes(g => g.Id == groupId, g => g.Students);
             var student = await CoreUnitOfWork.StudentRepository.GetFirstOrDefaultWithIncludes(s => s.Id == studentId, s => s.Group);
@@ -55,7 +54,6 @@ namespace Tests.CoreApplicationServicesTests
             Assert.AreEqual(1, group.Students.Count);
             Assert.AreEqual(student.Group.Id, group.Id);
             Assert.AreEqual(true, group.Students.Contains(student));
-
         }
 
         [TestMethod]
@@ -64,10 +62,9 @@ namespace Tests.CoreApplicationServicesTests
             string externalEId = Guid.NewGuid().ToString();
             string externalSId = Guid.NewGuid().ToString();
             int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
-            int studentId = await StudentService.CreateStudent("StudentIme", "StudentPrezime", externalSId);
+            int studentId = await StudentService.CreateStudent("StudentIme", "StudentPrezime", "email@email.com", externalSId);
             var groupId = await GroupService.CreateGroup("grupa", externalEId);
             await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await GroupService.AddStudentToGroup(groupId, 123), $"Student with Id 123 does not exist");
         }
-
     }
 }
