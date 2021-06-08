@@ -62,5 +62,10 @@ namespace Core.Domain.Entites
         {
             LastName = lastName;
         }
+
+        public string GetEmail()
+        {
+            return Email;
+        }
     }
 }
