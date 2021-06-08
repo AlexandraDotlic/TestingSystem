@@ -8,18 +8,20 @@ class StudentList extends React.Component {
         this.state = {
             students : [],
             studentsAddList: [],
-            groupId : this.props.groupId
+            groupId : this.props.groupId,
+            groupTitle: this.props.groupTitle
         }
         this.finishClick = this.finishClick.bind(this);
         this.getChecked = this.getChecked.bind(this);
     }
 
-    finishClick() {
+    finishClick(event) {
         let studentIds = this.state.studentsAddList;
         let groupId = this.state.groupId;
         for(let studentId of studentIds) {
-            let token = sessionStorage.getItem('userToken');
 
+            let token = sessionStorage.getItem('userToken');
+            console.log("Finish click dugme");
             axios({
                 method: 'post',
                 url: 'https://localhost:44329/Group/AddStudentToGroup',
@@ -31,11 +33,23 @@ class StudentList extends React.Component {
                     studentId: studentId
                 }
             }).then(() => {
+                    axios({
+                        method: 'post',
+                        url: "https://localhost:44329/Mail/SendMailToUser", 
+                        data: {
+                            userId: studentId,
+                            body: "Dear student, wellcome to the group: "+this.state.groupTitle+"! We wish you the best of luck on your tests!",
+                            subject: "Wellcome"
+                        }
+                    }).catch(error => {
+                        console.log(error);
+                    });
             }).catch(() => {
                 window.alert("Failed to insert student to group");
             });
         }
         this.props.backHomeCallback();
+        event.preventDefault();
     }
 
     getChecked(object) {
