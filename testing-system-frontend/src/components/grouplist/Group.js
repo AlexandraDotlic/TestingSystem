@@ -17,7 +17,7 @@ class Group extends React.Component {
                         {this.state.groupTitle}
                     </div>
                     <div className="col-sm text-center">
-                        <button className="btn btn-info" onClick={this.props.listAllStudentsCallback} value={this.state.groupId}> Students </button>
+                        <button className="btn btn-info" onClick={this.props.listAllStudentsCallback} value={this.state.groupId} name={this.state.groupTitle}> Students </button>
                     </div>
                 </div>
             </div>
