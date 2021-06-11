@@ -58,10 +58,10 @@ namespace Tests.CoreApplicationServicesTests
             DateTime dateTime = DateTime.Now;
             short testId = await TestService.CreateTest(externalEId, "Test1", dateTime);
             string questionText1 = "Pitanje 1";
+            //trebalo bi da bude tipa free text jer ima jedan odgovor
             ICollection<Tuple<string, bool>> answeOptionTuples1 = new List<Tuple<string, bool>>
             {
-                new Tuple<string, bool>("opcija 1", true),
-                new Tuple<string, bool>("opcija 2", false)
+                new Tuple<string, bool>("odgovor", true),
             };
 
             await TestService.AddQuestionToTest(testId, questionText1, answeOptionTuples1);
@@ -80,7 +80,7 @@ namespace Tests.CoreApplicationServicesTests
             var question2 = await CoreUnitOfWork.QuestionRepository.GetFirstOrDefaultWithIncludes(q => q.QuestionText == questionText2 && q.TestId == testId);
             var question2Id = question2.Id;
 
-            var question1Response = new Tuple<int, ICollection<string>>(question1Id, new List<string> { "opcija 1" });
+            var question1Response = new Tuple<int, ICollection<string>>(question1Id, new List<string> { "sta god da unesem tacno je" });
             var question2Response = new Tuple<int, ICollection<string>>(question2Id, new List<string> { "opcija 2", "opcija 3" });
 
             var studentTestScore = await TestService.TakeTheTest(testId, externalSId, new List<Tuple<int, ICollection<string>>> { question1Response, question2Response });
@@ -89,11 +89,13 @@ namespace Tests.CoreApplicationServicesTests
                 .SearchByWithIncludes(stq => stq.StudentTest.StudentId == studentId
                 && stq.StudentTest.TestId == testId
                 , stq => stq.Responses, stq => stq.StudentTest);
-
+            Assert.AreEqual(question1.Type, QuestionType.FreeText);
             Assert.AreEqual(2, studentTestQuestons.Count);
             Assert.AreEqual(2, studentTestScore.StudentTestScore);
 
         }
+
+
 
         [TestMethod]
         public async Task TakeTheTestFail()

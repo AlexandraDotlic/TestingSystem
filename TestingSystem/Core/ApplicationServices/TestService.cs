@@ -1,4 +1,5 @@
 ﻿using Core.ApplicationServices.DTOs;
+
 using Core.Domain.Entites;
 using Core.Domain.Repositories;
 using System;
@@ -63,6 +64,26 @@ namespace Core.ApplicationServices
             await UnitOfWork.TestRepository.Update(test);
             await UnitOfWork.SaveChangesAsync();
         }
+        //TODO: remove?
+        //public async Task AddFreeTextQuestionToTest(short testId, string questionText, string answer)
+        //{
+        //    Test test = await UnitOfWork.TestRepository.GetFirstOrDefaultWithIncludes(t => t.Id == testId, t => t.Questions);
+        //    if (test == null)
+        //    {
+        //        throw new ArgumentNullException($"{nameof(Test)} with Id {testId} not exist");
+        //    }
+        //    ICollection<AnswerOption> answerOptionsCollection = new List<AnswerOption>();
+        //    if (string.IsNullOrEmpty(answer))
+        //    {
+        //        throw new ArgumentNullException($"{nameof(answer)}");
+        //    }
+        //    var answerOption = new AnswerOption(answer, true);
+        //    answerOptionsCollection.Add(answerOption);
+        //    Question question = new Question(questionText, answerOptionsCollection);
+        //    test.AddQuestion(question);
+        //    await UnitOfWork.TestRepository.Update(test);
+        //    await UnitOfWork.SaveChangesAsync();
+        //}
 
         public async Task RemoveQuestionFromTest(short testId, int questionId)
         {
@@ -117,13 +138,33 @@ namespace Core.ApplicationServices
             {
                 var question = testQuestions.Where(q => q.Id == questionResponse.Item1).FirstOrDefault();
                 ICollection<StudentTestQuestionResponse> studentTestQuestionResponses = new List<StudentTestQuestionResponse>();
-                foreach (var response in questionResponse.Item2)
+                
+                //ako je broj odgovora = 1 a pitanje tipa freeText
+                if(question.Type == QuestionType.FreeText)
                 {
-                    AnswerOption answer = question.AnswerOptions.Where(ao => ao.OptionText == response).FirstOrDefault();
-                    var studentTestQuestionResponse = new StudentTestQuestionResponse(answer.OptionText, answer.IsCorrect ? 1 : 0);
-                    studentTestQuestionResponses.Add(studentTestQuestionResponse);
-
+                    //ovo je samo privremeno - ako je student uneo bilo sta osim praznog stringa onda je tacan odgovor
+                    if (!string.IsNullOrEmpty(questionResponse.Item2.FirstOrDefault()))
+                    {
+                        var studentTestQuestionResponse = new StudentTestQuestionResponse(questionResponse.Item2.FirstOrDefault(), 1);
+                        studentTestQuestionResponses.Add(studentTestQuestionResponse);
+                    }
+                    else
+                    {
+                        var studentTestQuestionResponse = new StudentTestQuestionResponse(questionResponse.Item2.FirstOrDefault(), 0);
+                        studentTestQuestionResponses.Add(studentTestQuestionResponse);
+                    }
                 }
+                else
+                {
+                    foreach (var response in questionResponse.Item2)
+                    {
+                        AnswerOption answer = question.AnswerOptions.Where(ao => ao.OptionText == response).FirstOrDefault();
+                        var studentTestQuestionResponse = new StudentTestQuestionResponse(answer.OptionText, answer.IsCorrect ? 1 : 0);
+                        studentTestQuestionResponses.Add(studentTestQuestionResponse);
+
+                    }
+                }
+               
                 var studentTestQuestion = new StudentTestQuestion(question.Id, studentTestQuestionResponses);
                 studentTestQuestions.Add(studentTestQuestion);
             }
