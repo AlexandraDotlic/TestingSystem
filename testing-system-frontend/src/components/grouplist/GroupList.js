@@ -9,7 +9,8 @@ class GroupList extends React.Component {
         this.state = {
             examinerId: null, //temp
             allGroups: [],
-            listStudentsGroupId: null
+            listStudentsGroupId: null,
+            listStudentsGroupName:""
         }
         this.listAllStudentsButton = this.listAllStudentsButton.bind(this);
         this.goBackHome = this.goBackHome.bind(this);
@@ -33,8 +34,9 @@ class GroupList extends React.Component {
 
     listAllStudentsButton = (event) => {
         let studentListGroupId = parseInt(event.target.value);
+        let studentListGroupName= event.target.name;
         this.setState({listStudentsGroupId: studentListGroupId});
-        //mozda treba da se doda jos nesto sto treba da se salje listi studenata!
+        this.setState({listStudentsGroupName: studentListGroupName});
     }
 
     goBackHome() {
@@ -61,7 +63,7 @@ class GroupList extends React.Component {
         }
         else if(this.state.listStudentsGroupId != null) {
             return (
-                <StudentList groupId={this.state.listStudentsGroupId} backHomeCallback={this.goBackHome}></StudentList>
+                <StudentList groupId={this.state.listStudentsGroupId} groupTitle={this.state.listStudentsGroupName} backHomeCallback={this.goBackHome}></StudentList>
             )
         }
     }

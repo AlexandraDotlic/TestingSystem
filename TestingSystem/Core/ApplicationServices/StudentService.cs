@@ -34,12 +34,12 @@ namespace Core.ApplicationServices
         public async Task DeleteStudent(int studentId)
         {
             Student student = await UnitOfWork.StudentRepository.GetById(studentId);
-            if(student == null)
+            if (student == null)
             {
                 throw new ArgumentNullException($"Student with Id {studentId} doesn't exist.");
             }
             await UnitOfWork.BeginTransactionAsync();
-            if(student.GroupId != null)
+            if (student.GroupId != null)
             {
                 Group group = await UnitOfWork.GroupRepository.GetById(student.GroupId);
                 group.RemoveStudentFromGroup(student);
@@ -171,5 +171,19 @@ namespace Core.ApplicationServices
             return studentTestScoreDTOs;
 
         }
+
+
+        public async Task<string> GetStudentEmail(int studentId)
+        {
+            Student student = await UnitOfWork.StudentRepository.GetById(studentId);
+
+            if (student == null)
+            {
+                throw new ArgumentNullException($"{nameof(Student)} with externalId {studentId} not exist");
+            }
+
+            return student.GetEmail();
+        }
+
     }
 }

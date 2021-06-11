@@ -46,7 +46,7 @@ class CreateGroupForm extends React.Component{
                         <button className="btn btn-success" type="submit">Submit </button>
                     </div>
                     <div className= "form-group text-center mb-2">
-                        <button className="btn btn-warning" type="reset">Submit </button>
+                        <button className="btn btn-warning" type="reset">Discard </button>
                     </div>
                 </form>
             </div>

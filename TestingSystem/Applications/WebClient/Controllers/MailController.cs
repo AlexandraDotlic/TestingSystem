@@ -1,5 +1,6 @@
 ﻿using Applications.WebClient.Helpers;
 using Applications.WebClient.Requests;
+using Core.ApplicationServices;
 using Core.Domain.Services.External.MailService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,24 +16,39 @@ namespace Applications.WebClient.Controllers
     [ApiController]
     public class MailController : ControllerBase
     {
+        private readonly StudentService StudentService;
         private readonly IMailService MailService;
         private readonly ILogger<MailController> Logger;
 
         public MailController(
             IMailService mailService,
+            StudentService studentService,
             ILogger<MailController> logger)
         {
             MailService = mailService;
+            StudentService = studentService;
             Logger = logger;
         }
-        [HttpPost("SendMail")]
-        public async Task<IActionResult> SendMail(SendMailRequest sendMailRequest)
+
+        [HttpPost("SendMailToUser")]
+        public async Task<IActionResult> SendMailToUser(SendMailRequest sendMailRequest)
         {
             try
             {
+                string email;
+                try
+                {
+                    email = await StudentService.GetStudentEmail(sendMailRequest.UserId);
+                }
+                catch (Exception e)
+                {
+                    Logger.LogError(e, e.Message);
+                    return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+                }
+
                 var request = new MailRequest
                 {
-                    ToEmail = sendMailRequest.ToEmail,
+                    ToEmail = email,
                     Body = sendMailRequest.Body,
                     Subject = sendMailRequest.Subject,
                     Attachments = sendMailRequest.Attachments
