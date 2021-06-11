@@ -40,7 +40,7 @@ namespace Tests.CoreApplicationServicesTests
         {
             string externalSId = Guid.NewGuid().ToString();
 
-            int studentId = await StudentService.CreateStudent("Ime", "Prezime", externalSId);
+            int studentId = await StudentService.CreateStudent("Ime", "Prezime", "email@email.com", externalSId);
             var student = await CoreUnitOfWork.StudentRepository.GetById(studentId);
             await StudentService.SetStudentFirstName(externalSId, "Marko");
 

@@ -39,12 +39,13 @@ namespace Tests.CoreApplicationServicesTests
         {
             string externalSId = Guid.NewGuid().ToString();
 
-            int id  = await StudentService.CreateStudent("Ime", "Prezime", externalSId);
+            int id  = await StudentService.CreateStudent("Ime", "Prezime", "email@email.com", externalSId);
             var student = await CoreUnitOfWork.StudentRepository.GetById(id);
 
             Assert.AreEqual(id, student.Id);
             Assert.AreEqual("Ime", student.FirstName);
             Assert.AreEqual("Prezime", student.LastName);
+            Assert.AreEqual("email@email.com", student.Email);
             Assert.AreEqual(externalSId, student.ExternalId);
 
         }
@@ -54,10 +55,10 @@ namespace Tests.CoreApplicationServicesTests
         {
             string externalSId = Guid.NewGuid().ToString();
 
-            int id = await StudentService.CreateStudent("Ime", "Prezime", externalSId);
+            int id = await StudentService.CreateStudent("Ime", "Prezime", "email@email.com", externalSId);
             var student = await CoreUnitOfWork.StudentRepository.GetById(id);
 
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await StudentService.CreateStudent("Ime", "Prezime", null), $"AccountId must not be null");
+            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await StudentService.CreateStudent("Ime", "Prezime", "email@email.com", null), $"AccountId must not be null");
 
 
 
