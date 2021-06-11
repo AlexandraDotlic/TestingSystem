@@ -84,9 +84,9 @@ namespace Tests.CoreApplicationServicesTests
             string externalSId3 = Guid.NewGuid().ToString();
 
             int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
-            int studentId1 = await StudentService.CreateStudent("student1", "Prezimes", externalSId1);
-            int studentId2 = await StudentService.CreateStudent("student2", "Prezimes", externalSId2);
-            int studentId3 = await StudentService.CreateStudent("student3", "Prezimes", externalSId3);
+            int studentId1 = await StudentService.CreateStudent("student1", "Prezimes", "email1@email.com", externalSId1);
+            int studentId2 = await StudentService.CreateStudent("student2", "Prezimes", "email2@email.com", externalSId2);
+            int studentId3 = await StudentService.CreateStudent("student3", "Prezimes", "email3@email.com", externalSId3);
 
 
             var (testId, question1Id, question2Id) = await CreateTestWithQuestions(externalEId, "Title test");
@@ -172,7 +172,7 @@ namespace Tests.CoreApplicationServicesTests
             string externalSId = Guid.NewGuid().ToString();
 
             int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
-            int studentId = await StudentService.CreateStudent("ImeS", "Prezimes", externalSId);
+            int studentId = await StudentService.CreateStudent("ImeS", "Prezimes", "email@email.com", externalSId);
 
 
             await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await TestStatisticService.CreateStatisticForTest(100, "123"), $"Test does not exist");

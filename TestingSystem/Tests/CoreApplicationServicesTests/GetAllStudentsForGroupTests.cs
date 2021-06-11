@@ -50,8 +50,8 @@ namespace Tests.CoreApplicationServicesTests
             string externalSId2 = Guid.NewGuid().ToString();
             string externalSId1 = Guid.NewGuid().ToString();
             int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
-            int studentId1 = await StudentService.CreateStudent("Marko","Markovic",externalSId1);
-            int studentId2 = await StudentService.CreateStudent("Petar", "Petrovic", externalSId2);
+            int studentId1 = await StudentService.CreateStudent("Marko","Markovic", "email1@email.com", externalSId1);
+            int studentId2 = await StudentService.CreateStudent("Petar", "Petrovic", "email2@email.com", externalSId2);
 
             short groupId = await GroupService.CreateGroup("Grupa", externalEId);
             Group group = await CoreUnitOfWork.GroupRepository.GetFirstOrDefaultWithIncludes(g => g.Id == groupId, g => g.Students);

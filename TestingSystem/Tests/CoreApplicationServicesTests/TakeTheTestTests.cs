@@ -51,7 +51,7 @@ namespace Tests.CoreApplicationServicesTests
             string externalSId = Guid.NewGuid().ToString();
             string externalEId = Guid.NewGuid().ToString();
 
-            int studentId = await StudentService.CreateStudent("ImeS", "Prezime", externalSId);
+            int studentId = await StudentService.CreateStudent("ImeS", "Prezime", "email@email.com", externalSId);
             int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
 
 
@@ -101,7 +101,7 @@ namespace Tests.CoreApplicationServicesTests
             string externalSId = Guid.NewGuid().ToString();
             string externalEId = Guid.NewGuid().ToString();
 
-            int studentId = await StudentService.CreateStudent("ImeS", "Prezime", externalSId);
+            int studentId = await StudentService.CreateStudent("ImeS", "Prezime", "email@email.com", externalSId);
             int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
 
             DateTime dateTime = DateTime.Now;
@@ -143,7 +143,7 @@ namespace Tests.CoreApplicationServicesTests
             string externalSId = Guid.NewGuid().ToString();
             string externalEId = Guid.NewGuid().ToString();
 
-            int studentId = await StudentService.CreateStudent("ImeS", "Prezime", externalSId);
+            int studentId = await StudentService.CreateStudent("ImeS", "Prezime", "email@email.com", externalSId);
             int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
 
 
@@ -186,7 +186,7 @@ namespace Tests.CoreApplicationServicesTests
             string externalSId = Guid.NewGuid().ToString();
             string externalEId = Guid.NewGuid().ToString();
 
-            int studentId = await StudentService.CreateStudent("ImeS", "Prezime", externalSId);
+            int studentId = await StudentService.CreateStudent("ImeS", "Prezime", "email@email.com", externalSId);
             int examinerId = await ExaminerService.CreateExaminer("Ime", "Prezime", externalEId);
 
             DateTime dateTime = DateTime.Now;

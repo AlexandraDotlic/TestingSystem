@@ -42,8 +42,7 @@ namespace Tests.CoreApplicationServicesTests
         [TestMethod]
         public async Task TestDeleteStudentSuccess()
         {
-            int id  = await StudentService.CreateStudent("Ime", "Prezime", "123");
-            
+            int id  = await StudentService.CreateStudent("Ime", "Prezime", "123", "email@email.com");
 
             await StudentService.DeleteStudent(id);
             var student = await CoreUnitOfWork.StudentRepository.GetById(id);
@@ -57,7 +56,7 @@ namespace Tests.CoreApplicationServicesTests
             string externalEId = Guid.NewGuid().ToString();
             string externalSId = Guid.NewGuid().ToString();
 
-            int studentId = await StudentService.CreateStudent("Ime", "Prezime", externalSId);
+            int studentId = await StudentService.CreateStudent("Ime", "Prezime", "email1@email.com", externalSId);
             int examinerId = await ExaminerService.CreateExaminer("Ime2", "Prezime2", externalEId);
             var groupId = await GroupService.CreateGroup("grupa", externalEId);
             var group = await CoreUnitOfWork.GroupRepository.GetById(groupId);
@@ -78,10 +77,6 @@ namespace Tests.CoreApplicationServicesTests
             var examiner = await CoreUnitOfWork.ExaminerRepository.GetById(100);
 
             await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () => await StudentService.DeleteStudent(100), $"Student with Id={100} doesn't exist");
-
-
-
         }
-
     }
 }
