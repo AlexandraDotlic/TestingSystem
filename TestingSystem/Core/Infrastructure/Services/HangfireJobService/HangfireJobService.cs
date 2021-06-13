@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Core.Infrastructure.Services.HangfireJobService
 {
+    /// <summary>
+    /// Hangfire implementacija Job servisa
+    /// </summary>
     public class HangfireJobService : IJobService
     {
         public async Task CreateMonthlyRecurringJob<T>(Expression<Action<T>> methodCall)

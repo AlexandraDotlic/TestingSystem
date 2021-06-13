@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace Core.Infrastructure.Services.MailService
 {
+    /// <summary>
+    /// Implemenatcija mail servisa
+    /// </summary>
     public class MailService : IMailService
     {
         private readonly MailSettings MailSettings;

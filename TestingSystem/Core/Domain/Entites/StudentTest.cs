@@ -5,8 +5,12 @@ using System.Text;
 
 namespace Core.Domain.Entites
 {
+    /// <summary>
+    /// Klasa koja predstavlja vezu izmedju studenta i testa
+    /// </summary>
     public class StudentTest
     {
+
         public int StudentId { get; private set; }
         public Student Student { get; private set; }
         public short? StudentGroupId { get; private set; }

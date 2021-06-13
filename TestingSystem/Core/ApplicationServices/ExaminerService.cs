@@ -15,7 +15,14 @@ namespace Core.ApplicationServices
         {
             UnitOfWork = unitOfWork;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="externalId"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public async Task<int> CreateExaminer(string firstName, string lastName, string externalId)
         {
             if (string.IsNullOrEmpty(externalId))

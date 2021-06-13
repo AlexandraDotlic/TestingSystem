@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Core.Domain.Entites
 {
+    /// <summary>
+    /// Klasa koja predstavlja odgovor studenta na pitanje na testu 
+    /// </summary>
     public class StudentTestQuestionResponse
     {
         public int Id { get; private set; }

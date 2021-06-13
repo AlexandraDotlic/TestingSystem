@@ -27,6 +27,7 @@ namespace Core.Domain.Entites
         /// </summary>
         public short? GroupId { get; private set; }
         public Group Group { get; private set; }
+
         public ICollection<StudentTest> StudentTests { get; private set; }
 
         /// <summary>
@@ -38,7 +39,7 @@ namespace Core.Domain.Entites
             StudentTests = new List<StudentTest>();
         }
 
-        
+
         public Student(string firstname, string lastname, string email, string externalId)
         {
             FirstName = firstname;
@@ -47,6 +48,7 @@ namespace Core.Domain.Entites
             StudentTests = new List<StudentTest>();
             ExternalId = externalId;
         }
+
 
         public void AddStudentTest(StudentTest studentTest)
         {

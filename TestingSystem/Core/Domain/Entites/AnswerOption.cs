@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Core.Domain.Entites
 {
+    /// <summary>
+    /// Klasa ponudjen odgovor
+    /// </summary>
     public class AnswerOption
     {
         public int Id { get; private set; }

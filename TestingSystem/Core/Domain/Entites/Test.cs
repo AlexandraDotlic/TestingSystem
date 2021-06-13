@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace Core.Domain.Entites
 {
+    /// <summary>
+    /// Klasa koja predstavlja test
+    /// </summary>
     public class Test
     {
         /// <summary>
@@ -18,8 +21,9 @@ namespace Core.Domain.Entites
         /// Kolekcija pitanja
         /// </summary>
         public ICollection<Question> Questions { get; private set; }
-
-
+        /// <summary>
+        /// Id ispitivaca
+        /// </summary>
         public int ExaminerId { get; private set; }
         public Examiner Examiner { get; private set; }
         /// <summary>
