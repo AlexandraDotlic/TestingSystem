@@ -23,9 +23,6 @@ class TakeQuestions extends React.Component {
                 'Authorization': token
             }
         }).then(response => {
-            for(let question of response.data.questions) {
-                this.answersMap.set(question.id, []);
-            }
             this.setState({questions: response.data.questions})
         }).catch(() => {
             window.alert("Failed to get questions for this test");
@@ -37,16 +34,21 @@ class TakeQuestions extends React.Component {
     }
 
     answeredMultiple(questionId, questionAnswer) {
-        let currentSelection = this.answersMap.get(questionId);
-        if(currentSelection.includes(questionAnswer)) {
-            currentSelection = currentSelection.filter(function(value, index, arr){ 
-                return value !== questionAnswer;
-            });
+        if(this.answersMap.has(questionId)) {
+            let currentSelection = this.answersMap.get(questionId);
+            if(currentSelection.includes(questionAnswer)) {
+                currentSelection = currentSelection.filter(f => f == questionAnswer ? false : true);
+            }
+            else {
+                currentSelection.push(questionAnswer);
+            }
+            this.answersMap.set(questionId, currentSelection);
         }
         else {
-            currentSelection.push(questionAnswer);
+            this.answersMap.set(questionId, [questionAnswer]);
         }
-        this.answersMap.set(questionId, currentSelection);
+        let x = this.answersMap;
+        debugger;
     }
 
     onSubmit(event) {
@@ -55,7 +57,7 @@ class TakeQuestions extends React.Component {
         for(let questionId of this.answersMap.keys()) {
             responsesArray.push( {questionId: questionId, responses: this.answersMap.get(questionId)});
         }
-
+        debugger;
         let requestPayload = {
             testId: parseInt(this.state.testId),
             response: responsesArray
@@ -70,7 +72,6 @@ class TakeQuestions extends React.Component {
             },
             data: requestPayload
         }).then(response => {
-            debugger;
             this.props.finishedCallback(response.data.totalTestScore, response.data.studentScore);
         }).catch(err => {
             window.alert("Failed to take test");
@@ -116,52 +117,32 @@ class TakeQuestions extends React.Component {
                 }
                 // Multiple questions
                 else {
+                    const questionOptionsNumber = question.answerOptions.length;
+                    let answerOptions = [];
+                    for(let i = 0; i < questionOptionsNumber; i = i + 1) {
+                        const answerOption = (
+                            <div className="form-group" key={question.id + "-" + i}>
+                                <div className="input-group">
+                                    <div className="input-group-prepend">
+                                        <div className="input-group-text">
+                                            <input onChange={e => this.answeredMultiple(question.id, question.answerOptions[i].optionText)} type="checkbox" name={question.id} value={question.answerOptions[i].optionText}></input>
+                                        </div>
+                                    </div>
+                                    <input disabled className="form-control" value={question.answerOptions[i].optionText}></input>
+                                </div>
+                            </div>
+                        );
+                        answerOptions.push(answerOption);
+                    }
+
                     return (
-                    <div key={question.id} className="form-group">
-                        <label className="font-weight-bold"> {question.questionText} </label>
-                        <div className="form-group">
-                            <div className="input-group">
-                                <div className="input-group-prepend">
-                                    <div className="input-group-text">
-                                        <input onChange={e => this.answeredMultiple(question.id, question.answerOptions[0].optionText)} type="checkbox" name={question.id} value={question.answerOptions[0].optionText}></input>
-                                    </div>
-                                </div>
-                                <input disabled className="form-control" value={question.answerOptions[0].optionText}></input>
-                            </div>
+                        <div key={question.id} className="form-group">
+                            <label className="font-weight-bold"> {question.questionText} </label>
+                                {answerOptions}
+                            <hr></hr>
                         </div>
-                        <div className="form-group">
-                            <div className="input-group">
-                                <div className="input-group-prepend">
-                                    <div className="input-group-text">
-                                        <input onChange={e => this.answeredMultiple(question.id, question.answerOptions[1].optionText)} type="checkbox" name={question.id} value={question.answerOptions[1].optionText}></input>
-                                    </div>
-                                </div>
-                                <input disabled className="form-control" value={question.answerOptions[1].optionText}></input>
-                            </div>
-                        </div>
-                        <div className="form-group">
-                            <div className="input-group">
-                                <div className="input-group-prepend">
-                                    <div className="input-group-text">
-                                        <input onChange={e => this.answeredMultiple(question.id, question.answerOptions[2].optionText)} type="checkbox" name={question.id} value={question.answerOptions[2].optionText}></input>
-                                    </div>
-                                </div>
-                                <input disabled className="form-control" value={question.answerOptions[2].optionText}></input>
-                            </div>
-                        </div>
-                        <div className="form-group">
-                            <div className="input-group">
-                                <div className="input-group-prepend">
-                                    <div className="input-group-text">
-                                        <input onChange={e => this.answeredMultiple(question.id, question.answerOptions[3].optionText)} type="checkbox" name={question.id} value={question.answerOptions[3].optionText}></input>
-                                    </div>
-                                </div>
-                                <input disabled className="form-control" value={question.answerOptions[3].optionText}></input>
-                            </div>
-                        </div>
-                        <hr></hr>
-                    </div>
-                )}
+                    )
+                }
             });
 
             return (
