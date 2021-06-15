@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react'
 import Answer from './Answer'
+import MultipleAnswers from './MultipleAnswers'
 
 class CreateQuestion extends React.Component {
     constructor(props) {
@@ -91,14 +92,7 @@ class CreateQuestion extends React.Component {
             );
         }
         else if(this.state.answerType === "multiple") {
-            answer = (
-                <div>
-                    <Answer callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"checkbox"} orderNumber={"0answer"} labelText={"Option 1:"}></Answer>
-                    <Answer callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"checkbox"} orderNumber={"1answer"} labelText={"Option 2:"}></Answer>
-                    <Answer callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"checkbox"} orderNumber={"2answer"} labelText={"Option 3:"}></Answer>
-                    <Answer callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"checkbox"} orderNumber={"3answer"} labelText={"Option 4:"}></Answer>
-                </div>
-            );
+            answer = (<MultipleAnswers></MultipleAnswers>)
         }
         else {
             answer = <p>ERROR WRONG TYPE</p>
