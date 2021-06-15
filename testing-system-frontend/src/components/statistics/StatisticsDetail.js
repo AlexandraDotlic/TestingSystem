@@ -5,14 +5,22 @@ class StatisticsDetail extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            testId: this.props.id,
-            groupId: 502,
-            date: null
+            testId: this.props.testId,
+            groupId: this.props.groupId,
+            date: null,
+            changed: false
         }
         this.createNow = this.createNow.bind(this);
         this.scheduleDate = this.scheduleDate.bind(this);
         this.scheduleMonthly = this.scheduleMonthly.bind(this);
         this.changedDate = this.changedDate.bind(this);
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevState.changed === false) {
+            this.props.refresh();
+            this.setState({changed: false});
+        }
     }
 
     createNow(event) {
@@ -32,7 +40,8 @@ class StatisticsDetail extends React.Component {
             },
             data: payload
         }).then(response => {
-            window.alert("Statistic created successfully.")
+            // this.setState({changed: true});
+            window.alert("Statistic created successfully");
         }).catch(() => {
             window.alert("Failed to create statistic");
         });

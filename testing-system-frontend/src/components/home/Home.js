@@ -31,7 +31,7 @@ class Home extends React.Component {
                         <div className="row p-1">
                             <button onClick={() => this.clicked("newtest")} className="button" style={{backgroundColor: '#5027c2'}}><span>Create new test</span></button>
                             <button onClick={() => this.clicked("newgroup")} className="button" style={{backgroundColor: '#b0b0f5'}}><span>Create new group</span></button>
-                            <button className="button" style={{backgroundColor: '#5027c2'}}><span> Connect group-test </span></button>
+                            <button className="button" style={{backgroundColor: '#5027c2'}}><span> Empty </span></button>
                         </div>
                     </div>
                     <div className="container">
