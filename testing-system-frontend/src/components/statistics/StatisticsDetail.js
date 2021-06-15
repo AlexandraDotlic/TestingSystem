@@ -16,13 +16,6 @@ class StatisticsDetail extends React.Component {
         this.changedDate = this.changedDate.bind(this);
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if(prevState.changed === false) {
-            this.props.refresh();
-            this.setState({changed: false});
-        }
-    }
-
     createNow(event) {
         event.preventDefault();
         let payload = {
