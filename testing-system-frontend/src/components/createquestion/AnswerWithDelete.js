@@ -18,17 +18,17 @@ class AnswerWithDelete extends React.Component {
 
     valueChanged(event) {
         this.setState({value: event.target.value});
-        //this.props.valueChanged({id: this.state.orderNumber, val: event.target.value});
+        this.props.valueChanged({id: this.state.orderNumber, val: event.target.value});
     }
 
     correctChanged(event) {
         if(this.state.isCorrect == false) {
             this.setState({isCorrect: true})
-            //this.props.correctChanged({id: this.state.orderNumber, val: true})
+            this.props.correctChanged({id: this.state.orderNumber, val: true})
         }
         else {
             this.setState({isCorrect: false})
-            //this.props.correctChanged({id: this.state.orderNumber, val: false})
+            this.props.correctChanged({id: this.state.orderNumber, val: false})
         }
     }
 
