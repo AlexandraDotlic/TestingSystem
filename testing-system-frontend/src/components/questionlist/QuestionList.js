@@ -20,6 +20,7 @@ class QuestionList extends React.Component {
         this.editClicked = this.editClicked.bind(this);
         this.deleteClicked = this.deleteClicked.bind(this);
         this.addClicked = this.addClicked.bind(this);
+        this.createCallback = this.createCallback.bind(this);
     }
 
     componentDidMount() {
@@ -50,6 +51,10 @@ class QuestionList extends React.Component {
     addClicked(event) {
         console.log("CLicked");
         this.setState({addQuestion: true})
+    }
+
+    createCallback() {
+        this.setState({addQuestion: null});
     }
 
     render() {
@@ -92,7 +97,7 @@ class QuestionList extends React.Component {
         }
         else if(this.state.addQuestion != null) {
             return (
-                <CreateQuestion testId={this.state.testId}></CreateQuestion>
+                <CreateQuestion testId={this.state.testId} goBack={this.createCallback}></CreateQuestion>
             )
         }
         else {

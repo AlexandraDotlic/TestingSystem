@@ -90,6 +90,7 @@ class CreateQuestion extends React.Component {
 
         }
 
+        event.preventDefault()
         let token = sessionStorage.getItem('userToken');
         axios({
             method: 'post',
@@ -100,6 +101,7 @@ class CreateQuestion extends React.Component {
             data: dataObject
         }).then(() => {
             window.alert("Question created successfully.");
+            this.props.goBack();
         }).catch(() => {
             window.alert("Failed to add question to test.");
         });
