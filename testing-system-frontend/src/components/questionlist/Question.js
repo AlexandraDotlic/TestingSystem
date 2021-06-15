@@ -17,7 +17,7 @@ class Question extends React.Component {
                         { this.state.questionText}
                     </div>
                     <div className="col-sm text-center">
-                        <button className="btn btn-info" onClick={this.props.editCallback} value={this.state.questionId}> Edit </button>
+                        {/* <button className="btn btn-info" onClick={this.props.editCallback} value={this.state.questionId}> Edit </button> */}
                     </div>
                     <div className="col-sm text-center">
                         <button className="btn btn-info" onClick={this.props.deleteCallback} value={this.state.questionId}> Delete </button>

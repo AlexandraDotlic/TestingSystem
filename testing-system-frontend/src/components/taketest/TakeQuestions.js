@@ -11,6 +11,7 @@ class TakeQuestions extends React.Component {
         this.answersMap = new Map();
         this.answeredYesNo = this.answeredYesNo.bind(this);
         this.answeredMultiple = this.answeredMultiple.bind(this);
+        this.answeredFreeText = this.answeredFreeText.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
@@ -33,6 +34,10 @@ class TakeQuestions extends React.Component {
         this.answersMap.set(questionId, [questionAnswer]);
     }
 
+    answeredFreeText(questionId, e) {
+        this.answersMap.set(questionId, [e.target.value]);
+    }
+
     answeredMultiple(questionId, questionAnswer) {
         if(this.answersMap.has(questionId)) {
             let currentSelection = this.answersMap.get(questionId);
@@ -47,8 +52,6 @@ class TakeQuestions extends React.Component {
         else {
             this.answersMap.set(questionId, [questionAnswer]);
         }
-        let x = this.answersMap;
-        debugger;
     }
 
     onSubmit(event) {
@@ -113,6 +116,20 @@ class TakeQuestions extends React.Component {
                             </div>
                             <hr></hr>
                         </div>
+                    )
+                }
+                // Free text
+                else if(question.answerOptions.length === 1 && question.answerOptions[0].optionText === "") {
+                    return (
+                        <div key={question.id} className="form-group">
+                        <label className="font-weight-bold"> {question.questionText} </label>
+                        <div className="form-group">
+                            <div className="input-group">
+                                <textarea className="form-control" onChange={e => this.answeredFreeText(question.id, e)}></textarea>
+                            </div>
+                        </div>
+                        <hr></hr>
+                    </div>
                     )
                 }
                 // Multiple questions
