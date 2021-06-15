@@ -69,6 +69,29 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("GetAllAvailableTestsForStudent")]
+        [Authorize(Policy = "IsStudent")]
+        public async Task<ActionResult<GetAllAvailableTestsForStudentResponse>> GetAllAvailableTestsForStudent()
+        {
+            var currentUserId = User.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
+
+            try
+            {
+                ICollection<Core.ApplicationServices.DTOs.TestDTO> result = await TestService.GetAllAvailableTestsForStudent(currentUserId);
+                var response = new GetAllAvailableTestsForStudentResponse
+                {
+                    Tests = result.Select(r => new TestDTO(r.Id, r.Title, r.ExaminerId, r.StartDate, r.IsActive, r.TestScore)).ToList()
+                };
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, e.Message);
+                return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
+            }
+        }
+
 
 
         [HttpPost]

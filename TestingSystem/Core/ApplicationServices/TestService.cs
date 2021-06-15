@@ -64,6 +64,25 @@ namespace Core.ApplicationServices
             await UnitOfWork.TestRepository.Update(test);
             await UnitOfWork.SaveChangesAsync();
         }
+
+        public async Task<ICollection<TestDTO>> GetAllAvailableTestsForStudent(string currentUserId)
+        {
+            IReadOnlyCollection<StudentTest> studentTests = await UnitOfWork.StudentTestRepository.SearchByWithIncludes(t => t.Student.ExternalId == currentUserId, t => t.Student);
+            IReadOnlyCollection<Test> tests = await UnitOfWork.TestRepository.GetAllList();
+            if(studentTests != null || studentTests.Count != 0)
+            {
+                tests = await UnitOfWork.TestRepository.GetFilteredList(t => !studentTests.Select(st => st.TestId).Contains(t.Id));
+            }
+            IReadOnlyCollection<Test> filteredTests = studentTests != null || studentTests.Count != 0 
+                ? tests.Where(t => !studentTests.Select(st => st.TestId).Contains(t.Id)).ToList()
+                : tests; 
+
+            List<TestDTO> testDTOs = filteredTests == null || filteredTests.Count == 0
+                ? null
+                : filteredTests.Select(t => new TestDTO(t.Id, t.Title, t.ExaminerId, t.StartDate, t.IsActive, t.TestScore)).ToList();
+            return testDTOs;
+        }
+
         //TODO: remove?
         //public async Task AddFreeTextQuestionToTest(short testId, string questionText, string answer)
         //{
