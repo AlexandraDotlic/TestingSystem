@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { data } from 'jquery';
 import React, { createRef } from 'react'
 import Answer from './Answer'
 import MultipleAnswers from './MultipleAnswers'
@@ -61,6 +62,13 @@ class CreateQuestion extends React.Component {
                 answerOptions: data
             }
         }
+        else if(this.state.answerType === "freeText") {
+            dataObject = {
+                testId: this.state.testId,
+                questionText: this.state.questionText,
+                answerOptions: [{optionText: "", isCorrect: true}]
+            }
+        }
         else {
             let answers = [];
             for(let answer of this.answersMap) {
@@ -110,6 +118,9 @@ class CreateQuestion extends React.Component {
         else if(this.state.answerType === "multiple") {
             answer = (<MultipleAnswers ref={this.multipleAnswers}></MultipleAnswers>)
         }
+        else if(this.state.answerType === "freeText") {
+            answer = (<div></div>)
+        }
         else {
             answer = <p>ERROR WRONG TYPE</p>
         }
@@ -128,6 +139,7 @@ class CreateQuestion extends React.Component {
                     <select className="form-control" id="questionType" value={this.state.answerType} onChange={this.answerTypeChanged}>
                         <option value="yesNo">Yes / No answer</option>
                         <option value="multiple">Multiple answers</option>
+                        <option value="freeText"> Fill text </option>
                     </select>
                 </div>
 
