@@ -18,9 +18,10 @@ class CreateGroupForm extends React.Component{
     }
 
     submitButton = (event) => {
-        // Prepare token 
-        let token = sessionStorage.getItem('userToken');
+        event.preventDefault();
 
+        let token = sessionStorage.getItem('userToken');
+        debugger;
         axios({
             method: 'post',
             url: 'https://localhost:44329/Group/CreateGroup',
@@ -30,7 +31,12 @@ class CreateGroupForm extends React.Component{
             data: {
               title: this.state.groupName
             }
-        });
+        })
+        .then(() => { 
+            window.alert("Group successfuly created.");
+            this.props.cancelCallback();
+        })
+        .catch(() => { window.alert("Error during creating group.")});
     }
 
     render (){  

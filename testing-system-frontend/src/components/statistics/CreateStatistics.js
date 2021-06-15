@@ -1,21 +1,18 @@
 import React from 'react'
 import axios from 'axios';
-import StatisticsTable from './StatisticsTable'
 import StatisticsDetail from './StatisticsDetail';
 
-class Statistics extends React.Component {
+class CreateStatistics extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             tests: null,
             groups: null,
             selectedTestId: 0,
-            selectedGroupId: 0,
-            trigger: false
+            selectedGroupId: 0
         }
         this.selectedChange = this.selectedChange.bind(this);
         this.selectedGroupChange = this.selectedGroupChange.bind(this);
-        this.refresh = this.refresh.bind(this);
     }
 
     componentDidMount() {
@@ -51,9 +48,6 @@ class Statistics extends React.Component {
         this.setState({selectedGroupId: event.target.value})
     }
 
-    refresh() {
-    }
-
     render() {
         let testOptions;
         if(this.state.tests !== null) {
@@ -86,7 +80,7 @@ class Statistics extends React.Component {
                             </select>
                         </div>
                         <div className="text-center mt-3">
-                            <button className="btn btn-warning" onClick={() => this.props.cancelCallback()}> Discard </button>
+                            <button className="btn btn-warning" onClick={() => this.props.cancelCallback()}> Back </button>
                         </div>
                     </form>
                 </div>
@@ -95,9 +89,9 @@ class Statistics extends React.Component {
         else {
             return (
                 <div className="w-50 mx-auto pt-4">
-                    <StatisticsTable id={this.state.selectedTestId}></StatisticsTable>
+                    <StatisticsDetail testId={this.state.selectedTestId} groupId={this.state.selectedGroupId}></StatisticsDetail>
                     <div className="text-center mt-3">
-                        <button className="btn btn-warning" onClick={() => this.props.cancelCallback()}> Discard </button>
+                        <button className="btn btn-warning" onClick={() => this.props.cancelCallback()}> Back </button>
                     </div>
                 </div>
             )
@@ -105,4 +99,4 @@ class Statistics extends React.Component {
     }
 }
 
-export default Statistics;
+export default CreateStatistics;

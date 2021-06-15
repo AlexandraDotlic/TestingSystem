@@ -18,8 +18,6 @@ class CreateTestForm extends React.Component {
 
     }
 
-    //resiti redundantnost koda!
-
     testNameChange(event) {
         this.setState({testName: event.target.value});
     }
@@ -52,6 +50,14 @@ class CreateTestForm extends React.Component {
               title: this.state.testName,
               startDate: startDateCombined,
             }
+          })
+          .then(() => {
+            window.alert("Test successfuly created.");
+            this.props.cancelCallback();
+          })
+          .catch(() => {
+            window.alert("Failed to create test.");
+            this.props.cancelCallback();
           });
     }
 

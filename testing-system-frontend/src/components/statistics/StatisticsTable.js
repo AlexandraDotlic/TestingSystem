@@ -41,10 +41,10 @@ function StatisticsTable(props) {
                 <table className="table table-striped w-100">
                     <thead>
                         <tr>
-                        <th scope="col">Id</th>
+                        <th scope="col">TestId</th>
                         <th scope="col">Title</th>
-                        <th scope="col">% students that passed test </th>
-                        <th scope="col">Total number of students</th>
+                        <th scope="col">% passed </th>
+                        <th scope="col">Num of students</th>
                         </tr>
                     </thead>
                     <tbody>

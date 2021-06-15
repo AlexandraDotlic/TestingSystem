@@ -1,10 +1,12 @@
 import axios from 'axios';
-import React from 'react'
+import React, { createRef } from 'react'
 import Answer from './Answer'
+import MultipleAnswers from './MultipleAnswers'
 
 class CreateQuestion extends React.Component {
     constructor(props) {
         super(props);
+        this.multipleAnswers = React.createRef()
         this.state = {
             testId: this.props.testId, 
             answerType: "yesNo",
@@ -48,24 +50,38 @@ class CreateQuestion extends React.Component {
     }
 
     submit(event) {
-        let answers = [];
-        for(let answer of this.answersMap) {
-            let correctCurrent = false;
-            if(this.correctAnswer.includes(answer[0])) {
-                correctCurrent = true;
+        let dataObject = null;
+        
+        if(this.state.answerType === "multiple") {
+            let data = this.multipleAnswers.current.returnData();
+            
+            dataObject = {
+                testId: this.state.testId,
+                questionText: this.state.questionText,
+                answerOptions: data
             }
-            answers.push({
-                optionText: answer[1],
-                isCorrect: correctCurrent
-            });
         }
-        
-        let dataObject = {
-        testId: this.state.testId,
-        questionText: this.state.questionText,
-        answerOptions: answers
+        else {
+            let answers = [];
+            for(let answer of this.answersMap) {
+                let correctCurrent = false;
+                if(this.correctAnswer.includes(answer[0])) {
+                    correctCurrent = true;
+                }
+                answers.push({
+                    optionText: answer[1],
+                    isCorrect: correctCurrent
+                });
+            }
+    
+            dataObject = {
+                testId: this.state.testId,
+                questionText: this.state.questionText,
+                answerOptions: answers
+            }
+
         }
-        
+
         let token = sessionStorage.getItem('userToken');
         axios({
             method: 'post',
@@ -75,6 +91,7 @@ class CreateQuestion extends React.Component {
             },
             data: dataObject
         }).then(() => {
+            window.alert("Question created successfully.");
         }).catch(() => {
             window.alert("Failed to add question to test.");
         });
@@ -91,14 +108,7 @@ class CreateQuestion extends React.Component {
             );
         }
         else if(this.state.answerType === "multiple") {
-            answer = (
-                <div>
-                    <Answer callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"checkbox"} orderNumber={"0answer"} labelText={"Option 1:"}></Answer>
-                    <Answer callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"checkbox"} orderNumber={"1answer"} labelText={"Option 2:"}></Answer>
-                    <Answer callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"checkbox"} orderNumber={"2answer"} labelText={"Option 3:"}></Answer>
-                    <Answer callback={this.getAnswerText} correct={this.setCorrectAnswer} logo={"checkbox"} orderNumber={"3answer"} labelText={"Option 4:"}></Answer>
-                </div>
-            );
+            answer = (<MultipleAnswers ref={this.multipleAnswers}></MultipleAnswers>)
         }
         else {
             answer = <p>ERROR WRONG TYPE</p>
