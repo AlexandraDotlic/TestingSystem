@@ -15,6 +15,8 @@ namespace Core.Domain.Repositories
         public IAnswerOptionRepository AnswerOptionRepository { get; }
         public IStudentTestQuestionRepository StudentTestQuestionRepository { get; }
         public ITestStatisticRepository TestStatisticRepository { get; }
+        public IStudentTestRepository StudentTestRepository { get; }
+
 
 
     }

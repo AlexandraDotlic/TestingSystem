@@ -19,6 +19,7 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess
             AnswerOptionRepository = new AnswerOptionRepository(context);
             StudentTestQuestionRepository = new StudentTestQuestionRepository(context);
             TestStatisticRepository = new TestStatisticRepository(context);
+            StudentTestRepository = new StudentTestRepository(context);
 
         }
 
@@ -35,6 +36,7 @@ namespace Core.Infrastructure.DataAccess.EfCoreDataAccess
         public IAnswerOptionRepository AnswerOptionRepository { get; }
         public IStudentTestQuestionRepository StudentTestQuestionRepository { get; }
         public ITestStatisticRepository TestStatisticRepository { get; }
+        public IStudentTestRepository StudentTestRepository { get; }
 
 
     }
