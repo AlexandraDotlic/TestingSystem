@@ -18,9 +18,13 @@ class TakeTest extends React.Component {
     }
 
     componentDidMount() {
+        let token = sessionStorage.getItem('userToken');
         axios({
             method: 'get',
-            url: 'https://localhost:44329/Test/GetAllTests/',
+            url: 'https://localhost:44329/Test/GetAllAvailableTestsForStudent/',
+            headers: {
+                'Authorization': token
+            }
         }).then(response => {
             this.setState({tests: response.data})
         }).catch(() => {

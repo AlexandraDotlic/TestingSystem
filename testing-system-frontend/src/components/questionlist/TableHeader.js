@@ -16,7 +16,7 @@ class TableHeader extends React.Component {
                         Question text: 
                     </div>
                     <div className="col-sm text-center">
-                        Edit: 
+                         
                     </div>
                     <div className="col-sm text-center">
                         Delete: 
