@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace Applications.WebClient.Controllers
 {
+    /// <summary>
+    /// Kontroler klasa ispitivaca
+    /// </summary>
     [Route("[controller]")]
     [ApiController]
     public class ExaminerController : ControllerBase
@@ -34,6 +37,10 @@ namespace Applications.WebClient.Controllers
             Logger = logger;
         }
 
+
+        /// <summary>
+        /// Kontroler koji vraca sve testove koje je kreirao ispitivac
+        /// </summary>
         [HttpGet]
         [Route("GetAllTestsForExaminer")]
         [Authorize(Policy = "IsExaminer")]
@@ -63,6 +70,10 @@ namespace Applications.WebClient.Controllers
         }
 
 
+        /// <summary>
+        /// Kontroler za postavljanje imena ispitivaca
+        /// </summary>
+        /// <param name="firstName"></param>
         [HttpPost]
         [Route("SetExaminerFirstName")]
         [Authorize(Policy = "IsExaminer")]
@@ -82,6 +93,10 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+        /// <summary>
+        /// Kontroler za postavljanje prezimena ispitivaca
+        /// </summary>
+        /// <param name="lastName"></param>
         [HttpPost]
         [Route("SetExaminerLastName")]
         [Authorize(Policy = "IsExaminer")]
@@ -102,7 +117,9 @@ namespace Applications.WebClient.Controllers
         }
     
 
-
+        /// <summary>
+        /// Kontroler koji vraca sve grupe koje je kreirao ispitivac
+        /// </summary>
         [HttpGet]
         [Route("GetAllGroupsForExaminer")]
         [Authorize(Policy = "IsExaminer")]

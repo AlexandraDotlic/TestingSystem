@@ -1,0 +1,116 @@
+\hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_student_controller}{}\doxysection{Applications.\+Web\+Client.\+Controllers.\+Student\+Controller Class Reference}
+\label{class_applications_1_1_web_client_1_1_controllers_1_1_student_controller}\index{Applications.WebClient.Controllers.StudentController@{Applications.WebClient.Controllers.StudentController}}
+
+
+Kontroler klasa studenta  
+
+
+Inheritance diagram for Applications.\+Web\+Client.\+Controllers.\+Student\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_applications_1_1_web_client_1_1_controllers_1_1_student_controller}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_student_controller_a177684b57663f7644e05e74bdb565dfe}\label{class_applications_1_1_web_client_1_1_controllers_1_1_student_controller_a177684b57663f7644e05e74bdb565dfe}} 
+{\bfseries Student\+Controller} (\mbox{\hyperlink{class_core_1_1_application_services_1_1_student_service}{Student\+Service}} student\+Service, ILogger$<$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_examiner_controller}{Examiner\+Controller}} $>$ logger)
+\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_student_controller_a930ee1c23c4115dc8d9f463bb46a5d9b}{Set\+Student\+First\+Name}} (string first\+Name)
+\begin{DoxyCompactList}\small\item\em Kontroler za postavljanje imena studenta \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_student_controller_a9be71283c6f7aaba98cb7143b6efe373}{Set\+Student\+Last\+Name}} (string last\+Name)
+\begin{DoxyCompactList}\small\item\em Kontroler za postavljanje prezimena studenta \end{DoxyCompactList}\item 
+async Task$<$ Action\+Result$<$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_responses_1_1_get_all_students_response}{Get\+All\+Students\+Response}} $>$ $>$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_student_controller_a6c4d1f7bf3141083d8276d4b1d7d3e9c}{Get\+All\+Students}} ()
+\begin{DoxyCompactList}\small\item\em Kontroler za vracanje liste svih studenata iz baze \end{DoxyCompactList}\item 
+async Task$<$ Action\+Result$<$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_d_t_os_1_1_student_test_result_d_t_o}{Student\+Test\+Result\+DTO}} $>$ $>$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_student_controller_a9b2144c222b0fe85575b7b255bce652d}{Get\+Student\+Test\+Result}} (short test\+Id)
+\begin{DoxyCompactList}\small\item\em Kontroler za vracanje rezultata studenta na testu \end{DoxyCompactList}\item 
+async Task$<$ Action\+Result$<$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_responses_1_1_get_student_results_for_all_taken_tests_response}{Get\+Student\+Results\+For\+All\+Taken\+Tests\+Response}} $>$ $>$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_student_controller_ab35e6943e627e30aefcf20bca55c3312}{Get\+Student\+Results\+For\+All\+Taken\+Tests}} ()
+\begin{DoxyCompactList}\small\item\em Kontroler za vracanje rezultata studenta na svim testovima koje je polagao \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_student_controller_ae429e02fd87d0c0a7fd7dbd6f15cc633}\label{class_applications_1_1_web_client_1_1_controllers_1_1_student_controller_ae429e02fd87d0c0a7fd7dbd6f15cc633}} 
+readonly \mbox{\hyperlink{class_core_1_1_application_services_1_1_student_service}{Student\+Service}} {\bfseries Student\+Service}
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_student_controller_ad21f5dcb1aa378fb187518b80baf8640}\label{class_applications_1_1_web_client_1_1_controllers_1_1_student_controller_ad21f5dcb1aa378fb187518b80baf8640}} 
+readonly ILogger$<$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_examiner_controller}{Examiner\+Controller}} $>$ {\bfseries Logger}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Kontroler klasa studenta 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_student_controller_a6c4d1f7bf3141083d8276d4b1d7d3e9c}\label{class_applications_1_1_web_client_1_1_controllers_1_1_student_controller_a6c4d1f7bf3141083d8276d4b1d7d3e9c}} 
+\index{Applications.WebClient.Controllers.StudentController@{Applications.WebClient.Controllers.StudentController}!GetAllStudents@{GetAllStudents}}
+\index{GetAllStudents@{GetAllStudents}!Applications.WebClient.Controllers.StudentController@{Applications.WebClient.Controllers.StudentController}}
+\doxysubsubsection{\texorpdfstring{GetAllStudents()}{GetAllStudents()}}
+{\footnotesize\ttfamily async Task$<$Action\+Result$<$\mbox{\hyperlink{class_applications_1_1_web_client_1_1_responses_1_1_get_all_students_response}{Get\+All\+Students\+Response}}$>$ $>$ Applications.\+Web\+Client.\+Controllers.\+Student\+Controller.\+Get\+All\+Students (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Kontroler za vracanje liste svih studenata iz baze 
+
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_student_controller_ab35e6943e627e30aefcf20bca55c3312}\label{class_applications_1_1_web_client_1_1_controllers_1_1_student_controller_ab35e6943e627e30aefcf20bca55c3312}} 
+\index{Applications.WebClient.Controllers.StudentController@{Applications.WebClient.Controllers.StudentController}!GetStudentResultsForAllTakenTests@{GetStudentResultsForAllTakenTests}}
+\index{GetStudentResultsForAllTakenTests@{GetStudentResultsForAllTakenTests}!Applications.WebClient.Controllers.StudentController@{Applications.WebClient.Controllers.StudentController}}
+\doxysubsubsection{\texorpdfstring{GetStudentResultsForAllTakenTests()}{GetStudentResultsForAllTakenTests()}}
+{\footnotesize\ttfamily async Task$<$Action\+Result$<$\mbox{\hyperlink{class_applications_1_1_web_client_1_1_responses_1_1_get_student_results_for_all_taken_tests_response}{Get\+Student\+Results\+For\+All\+Taken\+Tests\+Response}}$>$ $>$ Applications.\+Web\+Client.\+Controllers.\+Student\+Controller.\+Get\+Student\+Results\+For\+All\+Taken\+Tests (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Kontroler za vracanje rezultata studenta na svim testovima koje je polagao 
+
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_student_controller_a9b2144c222b0fe85575b7b255bce652d}\label{class_applications_1_1_web_client_1_1_controllers_1_1_student_controller_a9b2144c222b0fe85575b7b255bce652d}} 
+\index{Applications.WebClient.Controllers.StudentController@{Applications.WebClient.Controllers.StudentController}!GetStudentTestResult@{GetStudentTestResult}}
+\index{GetStudentTestResult@{GetStudentTestResult}!Applications.WebClient.Controllers.StudentController@{Applications.WebClient.Controllers.StudentController}}
+\doxysubsubsection{\texorpdfstring{GetStudentTestResult()}{GetStudentTestResult()}}
+{\footnotesize\ttfamily async Task$<$Action\+Result$<$\mbox{\hyperlink{class_applications_1_1_web_client_1_1_d_t_os_1_1_student_test_result_d_t_o}{Student\+Test\+Result\+DTO}}$>$ $>$ Applications.\+Web\+Client.\+Controllers.\+Student\+Controller.\+Get\+Student\+Test\+Result (\begin{DoxyParamCaption}\item[{short}]{test\+Id }\end{DoxyParamCaption})}
+
+
+
+Kontroler za vracanje rezultata studenta na testu 
+
+
+\begin{DoxyParams}{Parameters}
+{\em test\+Id} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_student_controller_a930ee1c23c4115dc8d9f463bb46a5d9b}\label{class_applications_1_1_web_client_1_1_controllers_1_1_student_controller_a930ee1c23c4115dc8d9f463bb46a5d9b}} 
+\index{Applications.WebClient.Controllers.StudentController@{Applications.WebClient.Controllers.StudentController}!SetStudentFirstName@{SetStudentFirstName}}
+\index{SetStudentFirstName@{SetStudentFirstName}!Applications.WebClient.Controllers.StudentController@{Applications.WebClient.Controllers.StudentController}}
+\doxysubsubsection{\texorpdfstring{SetStudentFirstName()}{SetStudentFirstName()}}
+{\footnotesize\ttfamily async Task$<$IAction\+Result$>$ Applications.\+Web\+Client.\+Controllers.\+Student\+Controller.\+Set\+Student\+First\+Name (\begin{DoxyParamCaption}\item[{string}]{first\+Name }\end{DoxyParamCaption})}
+
+
+
+Kontroler za postavljanje imena studenta 
+
+
+\begin{DoxyParams}{Parameters}
+{\em first\+Name} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_student_controller_a9be71283c6f7aaba98cb7143b6efe373}\label{class_applications_1_1_web_client_1_1_controllers_1_1_student_controller_a9be71283c6f7aaba98cb7143b6efe373}} 
+\index{Applications.WebClient.Controllers.StudentController@{Applications.WebClient.Controllers.StudentController}!SetStudentLastName@{SetStudentLastName}}
+\index{SetStudentLastName@{SetStudentLastName}!Applications.WebClient.Controllers.StudentController@{Applications.WebClient.Controllers.StudentController}}
+\doxysubsubsection{\texorpdfstring{SetStudentLastName()}{SetStudentLastName()}}
+{\footnotesize\ttfamily async Task$<$IAction\+Result$>$ Applications.\+Web\+Client.\+Controllers.\+Student\+Controller.\+Set\+Student\+Last\+Name (\begin{DoxyParamCaption}\item[{string}]{last\+Name }\end{DoxyParamCaption})}
+
+
+
+Kontroler za postavljanje prezimena studenta 
+
+
+\begin{DoxyParams}{Parameters}
+{\em last\+Name} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Testing\+System/\+Applications/\+Web\+Client/\+Controllers/Student\+Controller.\+cs\end{DoxyCompactItemize}

@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace Applications.WebClient.Controllers
 {
+    /// <summary>
+    /// Kontroler klasa grupe
+    /// </summary>
     [Route("[controller]")]
     [ApiController]
     public class GroupController : ControllerBase
@@ -33,6 +36,10 @@ namespace Applications.WebClient.Controllers
             Logger = logger;
         }
 
+        /// <summary>
+        /// Kontroler za kreiranje grupe od strane ispitivaca
+        /// </summary>
+        /// <param name="createGroupRequest"></param>
         [HttpPost]
         [Route("CreateGroup")]
         [Authorize(Policy = "IsExaminer")]
@@ -52,7 +59,10 @@ namespace Applications.WebClient.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Kontroler za dodavanje studenta u grupu od strane ispitivaca
+        /// </summary>
+        /// <param name="addStudentToGroupRequest"></param>
         [HttpPost]
         [Route("AddStudentToGroup")]
         [Authorize(Policy = "IsExaminer")]
@@ -70,6 +80,10 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+        /// <summary>
+        /// Kontroler koji vraca kolekciju svih studenata koji pripadaju odredjenoj grupi
+        /// </summary>
+        /// <param name="groupId"></param>
         [HttpGet]
         [Route("GetAllStudentsForGroup/{groupId}")]
         [Authorize(Policy = "IsExaminer")]
@@ -92,7 +106,9 @@ namespace Applications.WebClient.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Kontroler koji vraca sve kreirane grupe iz baze
+        /// </summary>
         [HttpGet]
         [Route("GetAllGroups")]
         [Authorize(Policy = "IsExaminer")]
@@ -116,7 +132,11 @@ namespace Applications.WebClient.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Kontroler koji postavlja naziv grupe
+        /// </summary>
+        /// <param name="groupId"></param>
+        /// <param name="title"></param>
         [HttpPost]
         [Route("SetGroupTitle/{groupId}")]
         [Authorize(Policy = "IsExaminer")]

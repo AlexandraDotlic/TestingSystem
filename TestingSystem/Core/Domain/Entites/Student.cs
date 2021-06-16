@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Core.Domain.Entites
 {
+    /// <summary>
+    /// Klasa studenta
+    /// </summary>
     public class Student
     {
         /// <summary>
@@ -49,25 +52,32 @@ namespace Core.Domain.Entites
             ExternalId = externalId;
         }
 
-
+        /// <summary>
+        /// Metoda koja sluzi da se studentu dodeli test
+        /// </summary>
+        /// <param name="studentTest"></param>
         public void AddStudentTest(StudentTest studentTest)
         {
             StudentTests.Add(studentTest);
         }
 
+        /// <summary>
+        /// Metoda za postavljanje imena studenta
+        /// </summary>
+        /// <param name="firstName"></param>
         public void SetFirstName(string firstName)
         {
             FirstName = firstName;
         }
 
+        /// <summary>
+        /// Metoda koja sluzi za postavljanje prezimena studenta
+        /// </summary>
+        /// <param name="lastName"></param>
         public void SetLastName(string lastName)
         {
             LastName = lastName;
         }
 
-        public string GetEmail()
-        {
-            return Email;
-        }
     }
 }

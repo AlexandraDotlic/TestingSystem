@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Core.Domain.Entites
 {
+    /// <summary>
+    /// Klasa ispitivaca
+    /// </summary>
     public class Examiner
     {
         /// <summary>
@@ -48,11 +51,19 @@ namespace Core.Domain.Entites
             ExternalId = externalId;
         }
 
+        /// <summary>
+        /// Metoda koja sluzi za postavljanje imena ispitivaca
+        /// </summary>
+        /// <param name="firstName"></param>
         public void SetFirstName(string firstName)
         {
             FirstName = firstName;
         }
 
+        /// <summary>
+        /// Metoda koja sluzi za postavljanje prezimena ispitivaca
+        /// </summary>
+        /// <param name="lastName"></param>
         public void SetLastName(string lastName)
         {
             LastName = lastName;

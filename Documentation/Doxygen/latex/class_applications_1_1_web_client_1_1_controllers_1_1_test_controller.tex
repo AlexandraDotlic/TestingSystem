@@ -1,0 +1,223 @@
+\hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller}{}\doxysection{Applications.\+Web\+Client.\+Controllers.\+Test\+Controller Class Reference}
+\label{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller}\index{Applications.WebClient.Controllers.TestController@{Applications.WebClient.Controllers.TestController}}
+
+
+Kontroler klasa testa  
+
+
+Inheritance diagram for Applications.\+Web\+Client.\+Controllers.\+Test\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_ad878fd3a6430e010cc7f462fd30dec5a}\label{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_ad878fd3a6430e010cc7f462fd30dec5a}} 
+{\bfseries Test\+Controller} (\mbox{\hyperlink{class_core_1_1_application_services_1_1_test_service}{Test\+Service}} test\+Service, \mbox{\hyperlink{class_core_1_1_application_services_1_1_question_service}{Question\+Service}} question\+Service, ILogger$<$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller}{Test\+Controller}} $>$ logger)
+\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_af16a0e115b3d01f1f441335f4c74f342}{Create\+Test}} (\mbox{\hyperlink{class_applications_1_1_web_client_1_1_requests_1_1_create_test_request}{Create\+Test\+Request}} create\+Test\+Request)
+\begin{DoxyCompactList}\small\item\em Kontroler za kreiranje testa \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_a362cb9cf6696f1ad93ee487ebc55908f}{Get\+All\+Tests}} ()
+\begin{DoxyCompactList}\small\item\em Kontroler za vracanje svih kreiranih testova iz baze \end{DoxyCompactList}\item 
+async Task$<$ Action\+Result$<$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_responses_1_1_get_all_available_tests_for_student_response}{Get\+All\+Available\+Tests\+For\+Student\+Response}} $>$ $>$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_a46701c989e5b5aac5b72370f6b20d593}{Get\+All\+Available\+Tests\+For\+Student}} ()
+\begin{DoxyCompactList}\small\item\em Kontroler za vracanje svih dostupnih testova za polaganje datog studenta \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_a897dfa6182932372c9fb520e2a5c0c0a}{Add\+Question\+To\+Test}} (\mbox{\hyperlink{class_applications_1_1_web_client_1_1_requests_1_1_add_question_to_test_request}{Add\+Question\+To\+Test\+Request}} add\+Question\+To\+Test\+Request)
+\begin{DoxyCompactList}\small\item\em Kontroler za dodavanje pitanja u test \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_abc61d4dac1eb1df374f4d5031d6b12b8}{Remove\+Question\+From\+Test}} (\mbox{\hyperlink{class_applications_1_1_web_client_1_1_requests_1_1_remove_question_from_test_request}{Remove\+Question\+From\+Test\+Request}} remove\+Question\+From\+Test\+Request)
+\begin{DoxyCompactList}\small\item\em Kontroler za uklanjanje pitanja sa testa \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_aef3b014b1d1ef11b1c2c8c3cb3e71eb7}{Get\+Question\+And\+Answers}} (short question\+Id, short test\+Id)
+\begin{DoxyCompactList}\small\item\em Kontroler za vracanje pitanja sa njegovim odgovorima \end{DoxyCompactList}\item 
+async Task$<$ Action\+Result$<$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_responses_1_1_get_all_questions_for_test_response}{Get\+All\+Questions\+For\+Test\+Response}} $>$ $>$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_acbebec3d30f0151f8fe2010fd83954bc}{Get\+All\+Questions\+For\+Test}} (short test\+Id)
+\begin{DoxyCompactList}\small\item\em Kontroler za vracanje svih pitanja sa jednog testa \end{DoxyCompactList}\item 
+async Task$<$ Action\+Result$<$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_responses_1_1_take_the_test_response}{Take\+The\+Test\+Response}} $>$ $>$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_a4da8c904c400a9d3268938c1d2245a6f}{Take\+The\+Test}} (\mbox{\hyperlink{class_applications_1_1_web_client_1_1_requests_1_1_take_the_test_request}{Take\+The\+Test\+Request}} take\+The\+Test\+Request)
+\begin{DoxyCompactList}\small\item\em Kontroler koji vraca rezulat polaganja testa od strane studenta \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_a359d6849a81ec700ae876bcdc4455a43}{Activate\+Test}} (short test\+Id)
+\begin{DoxyCompactList}\small\item\em Kontroler za aktivaciju neaktivnog testa \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_acd1ed09d6cc2b856423198a625dfca80}{Deactivate\+Test}} (short test\+Id)
+\begin{DoxyCompactList}\small\item\em Kontroler za deaktivaciju aktivnog testa \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_aafcb8b349c157fefe5b4734819abd2e1}{Change\+Start\+Date}} (\mbox{\hyperlink{class_applications_1_1_web_client_1_1_requests_1_1_change_start_date_request}{Change\+Start\+Date\+Request}} change\+Start\+Date\+Request)
+\begin{DoxyCompactList}\small\item\em Kontroler za izmenu datuma pocetka mogucnosti polaganja testa \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_ad9582087f370eff76f8fb1e231c46737}\label{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_ad9582087f370eff76f8fb1e231c46737}} 
+readonly \mbox{\hyperlink{class_core_1_1_application_services_1_1_test_service}{Test\+Service}} {\bfseries Test\+Service}
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_aa15f1a18044129ef77fd8a6b6b7bf258}\label{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_aa15f1a18044129ef77fd8a6b6b7bf258}} 
+readonly \mbox{\hyperlink{class_core_1_1_application_services_1_1_question_service}{Question\+Service}} {\bfseries Question\+Service}
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_ab1f0958aa04314883958791a85bc168a}\label{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_ab1f0958aa04314883958791a85bc168a}} 
+readonly ILogger$<$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller}{Test\+Controller}} $>$ {\bfseries Logger}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Kontroler klasa testa 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_a359d6849a81ec700ae876bcdc4455a43}\label{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_a359d6849a81ec700ae876bcdc4455a43}} 
+\index{Applications.WebClient.Controllers.TestController@{Applications.WebClient.Controllers.TestController}!ActivateTest@{ActivateTest}}
+\index{ActivateTest@{ActivateTest}!Applications.WebClient.Controllers.TestController@{Applications.WebClient.Controllers.TestController}}
+\doxysubsubsection{\texorpdfstring{ActivateTest()}{ActivateTest()}}
+{\footnotesize\ttfamily async Task$<$IAction\+Result$>$ Applications.\+Web\+Client.\+Controllers.\+Test\+Controller.\+Activate\+Test (\begin{DoxyParamCaption}\item[{short}]{test\+Id }\end{DoxyParamCaption})}
+
+
+
+Kontroler za aktivaciju neaktivnog testa 
+
+
+\begin{DoxyParams}{Parameters}
+{\em test\+Id} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_a897dfa6182932372c9fb520e2a5c0c0a}\label{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_a897dfa6182932372c9fb520e2a5c0c0a}} 
+\index{Applications.WebClient.Controllers.TestController@{Applications.WebClient.Controllers.TestController}!AddQuestionToTest@{AddQuestionToTest}}
+\index{AddQuestionToTest@{AddQuestionToTest}!Applications.WebClient.Controllers.TestController@{Applications.WebClient.Controllers.TestController}}
+\doxysubsubsection{\texorpdfstring{AddQuestionToTest()}{AddQuestionToTest()}}
+{\footnotesize\ttfamily async Task$<$IAction\+Result$>$ Applications.\+Web\+Client.\+Controllers.\+Test\+Controller.\+Add\+Question\+To\+Test (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_applications_1_1_web_client_1_1_requests_1_1_add_question_to_test_request}{Add\+Question\+To\+Test\+Request}}}]{add\+Question\+To\+Test\+Request }\end{DoxyParamCaption})}
+
+
+
+Kontroler za dodavanje pitanja u test 
+
+
+\begin{DoxyParams}{Parameters}
+{\em add\+Question\+To\+Test\+Request} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_aafcb8b349c157fefe5b4734819abd2e1}\label{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_aafcb8b349c157fefe5b4734819abd2e1}} 
+\index{Applications.WebClient.Controllers.TestController@{Applications.WebClient.Controllers.TestController}!ChangeStartDate@{ChangeStartDate}}
+\index{ChangeStartDate@{ChangeStartDate}!Applications.WebClient.Controllers.TestController@{Applications.WebClient.Controllers.TestController}}
+\doxysubsubsection{\texorpdfstring{ChangeStartDate()}{ChangeStartDate()}}
+{\footnotesize\ttfamily async Task$<$IAction\+Result$>$ Applications.\+Web\+Client.\+Controllers.\+Test\+Controller.\+Change\+Start\+Date (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_applications_1_1_web_client_1_1_requests_1_1_change_start_date_request}{Change\+Start\+Date\+Request}}}]{change\+Start\+Date\+Request }\end{DoxyParamCaption})}
+
+
+
+Kontroler za izmenu datuma pocetka mogucnosti polaganja testa 
+
+
+\begin{DoxyParams}{Parameters}
+{\em change\+Start\+Date\+Request} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_af16a0e115b3d01f1f441335f4c74f342}\label{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_af16a0e115b3d01f1f441335f4c74f342}} 
+\index{Applications.WebClient.Controllers.TestController@{Applications.WebClient.Controllers.TestController}!CreateTest@{CreateTest}}
+\index{CreateTest@{CreateTest}!Applications.WebClient.Controllers.TestController@{Applications.WebClient.Controllers.TestController}}
+\doxysubsubsection{\texorpdfstring{CreateTest()}{CreateTest()}}
+{\footnotesize\ttfamily async Task$<$IAction\+Result$>$ Applications.\+Web\+Client.\+Controllers.\+Test\+Controller.\+Create\+Test (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_applications_1_1_web_client_1_1_requests_1_1_create_test_request}{Create\+Test\+Request}}}]{create\+Test\+Request }\end{DoxyParamCaption})}
+
+
+
+Kontroler za kreiranje testa 
+
+
+\begin{DoxyParams}{Parameters}
+{\em create\+Test\+Request} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_acd1ed09d6cc2b856423198a625dfca80}\label{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_acd1ed09d6cc2b856423198a625dfca80}} 
+\index{Applications.WebClient.Controllers.TestController@{Applications.WebClient.Controllers.TestController}!DeactivateTest@{DeactivateTest}}
+\index{DeactivateTest@{DeactivateTest}!Applications.WebClient.Controllers.TestController@{Applications.WebClient.Controllers.TestController}}
+\doxysubsubsection{\texorpdfstring{DeactivateTest()}{DeactivateTest()}}
+{\footnotesize\ttfamily async Task$<$IAction\+Result$>$ Applications.\+Web\+Client.\+Controllers.\+Test\+Controller.\+Deactivate\+Test (\begin{DoxyParamCaption}\item[{short}]{test\+Id }\end{DoxyParamCaption})}
+
+
+
+Kontroler za deaktivaciju aktivnog testa 
+
+
+\begin{DoxyParams}{Parameters}
+{\em test\+Id} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_a46701c989e5b5aac5b72370f6b20d593}\label{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_a46701c989e5b5aac5b72370f6b20d593}} 
+\index{Applications.WebClient.Controllers.TestController@{Applications.WebClient.Controllers.TestController}!GetAllAvailableTestsForStudent@{GetAllAvailableTestsForStudent}}
+\index{GetAllAvailableTestsForStudent@{GetAllAvailableTestsForStudent}!Applications.WebClient.Controllers.TestController@{Applications.WebClient.Controllers.TestController}}
+\doxysubsubsection{\texorpdfstring{GetAllAvailableTestsForStudent()}{GetAllAvailableTestsForStudent()}}
+{\footnotesize\ttfamily async Task$<$Action\+Result$<$\mbox{\hyperlink{class_applications_1_1_web_client_1_1_responses_1_1_get_all_available_tests_for_student_response}{Get\+All\+Available\+Tests\+For\+Student\+Response}}$>$ $>$ Applications.\+Web\+Client.\+Controllers.\+Test\+Controller.\+Get\+All\+Available\+Tests\+For\+Student (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Kontroler za vracanje svih dostupnih testova za polaganje datog studenta 
+
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_acbebec3d30f0151f8fe2010fd83954bc}\label{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_acbebec3d30f0151f8fe2010fd83954bc}} 
+\index{Applications.WebClient.Controllers.TestController@{Applications.WebClient.Controllers.TestController}!GetAllQuestionsForTest@{GetAllQuestionsForTest}}
+\index{GetAllQuestionsForTest@{GetAllQuestionsForTest}!Applications.WebClient.Controllers.TestController@{Applications.WebClient.Controllers.TestController}}
+\doxysubsubsection{\texorpdfstring{GetAllQuestionsForTest()}{GetAllQuestionsForTest()}}
+{\footnotesize\ttfamily async Task$<$Action\+Result$<$\mbox{\hyperlink{class_applications_1_1_web_client_1_1_responses_1_1_get_all_questions_for_test_response}{Get\+All\+Questions\+For\+Test\+Response}}$>$ $>$ Applications.\+Web\+Client.\+Controllers.\+Test\+Controller.\+Get\+All\+Questions\+For\+Test (\begin{DoxyParamCaption}\item[{short}]{test\+Id }\end{DoxyParamCaption})}
+
+
+
+Kontroler za vracanje svih pitanja sa jednog testa 
+
+
+\begin{DoxyParams}{Parameters}
+{\em test\+Id} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_a362cb9cf6696f1ad93ee487ebc55908f}\label{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_a362cb9cf6696f1ad93ee487ebc55908f}} 
+\index{Applications.WebClient.Controllers.TestController@{Applications.WebClient.Controllers.TestController}!GetAllTests@{GetAllTests}}
+\index{GetAllTests@{GetAllTests}!Applications.WebClient.Controllers.TestController@{Applications.WebClient.Controllers.TestController}}
+\doxysubsubsection{\texorpdfstring{GetAllTests()}{GetAllTests()}}
+{\footnotesize\ttfamily async Task$<$IAction\+Result$>$ Applications.\+Web\+Client.\+Controllers.\+Test\+Controller.\+Get\+All\+Tests (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Kontroler za vracanje svih kreiranih testova iz baze 
+
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_aef3b014b1d1ef11b1c2c8c3cb3e71eb7}\label{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_aef3b014b1d1ef11b1c2c8c3cb3e71eb7}} 
+\index{Applications.WebClient.Controllers.TestController@{Applications.WebClient.Controllers.TestController}!GetQuestionAndAnswers@{GetQuestionAndAnswers}}
+\index{GetQuestionAndAnswers@{GetQuestionAndAnswers}!Applications.WebClient.Controllers.TestController@{Applications.WebClient.Controllers.TestController}}
+\doxysubsubsection{\texorpdfstring{GetQuestionAndAnswers()}{GetQuestionAndAnswers()}}
+{\footnotesize\ttfamily async Task$<$IAction\+Result$>$ Applications.\+Web\+Client.\+Controllers.\+Test\+Controller.\+Get\+Question\+And\+Answers (\begin{DoxyParamCaption}\item[{short}]{question\+Id,  }\item[{short}]{test\+Id }\end{DoxyParamCaption})}
+
+
+
+Kontroler za vracanje pitanja sa njegovim odgovorima 
+
+
+\begin{DoxyParams}{Parameters}
+{\em question\+Id} & \\
+\hline
+{\em test\+Id} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_abc61d4dac1eb1df374f4d5031d6b12b8}\label{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_abc61d4dac1eb1df374f4d5031d6b12b8}} 
+\index{Applications.WebClient.Controllers.TestController@{Applications.WebClient.Controllers.TestController}!RemoveQuestionFromTest@{RemoveQuestionFromTest}}
+\index{RemoveQuestionFromTest@{RemoveQuestionFromTest}!Applications.WebClient.Controllers.TestController@{Applications.WebClient.Controllers.TestController}}
+\doxysubsubsection{\texorpdfstring{RemoveQuestionFromTest()}{RemoveQuestionFromTest()}}
+{\footnotesize\ttfamily async Task$<$IAction\+Result$>$ Applications.\+Web\+Client.\+Controllers.\+Test\+Controller.\+Remove\+Question\+From\+Test (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_applications_1_1_web_client_1_1_requests_1_1_remove_question_from_test_request}{Remove\+Question\+From\+Test\+Request}}}]{remove\+Question\+From\+Test\+Request }\end{DoxyParamCaption})}
+
+
+
+Kontroler za uklanjanje pitanja sa testa 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remove\+Question\+From\+Test\+Request} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_a4da8c904c400a9d3268938c1d2245a6f}\label{class_applications_1_1_web_client_1_1_controllers_1_1_test_controller_a4da8c904c400a9d3268938c1d2245a6f}} 
+\index{Applications.WebClient.Controllers.TestController@{Applications.WebClient.Controllers.TestController}!TakeTheTest@{TakeTheTest}}
+\index{TakeTheTest@{TakeTheTest}!Applications.WebClient.Controllers.TestController@{Applications.WebClient.Controllers.TestController}}
+\doxysubsubsection{\texorpdfstring{TakeTheTest()}{TakeTheTest()}}
+{\footnotesize\ttfamily async Task$<$Action\+Result$<$\mbox{\hyperlink{class_applications_1_1_web_client_1_1_responses_1_1_take_the_test_response}{Take\+The\+Test\+Response}}$>$ $>$ Applications.\+Web\+Client.\+Controllers.\+Test\+Controller.\+Take\+The\+Test (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_applications_1_1_web_client_1_1_requests_1_1_take_the_test_request}{Take\+The\+Test\+Request}}}]{take\+The\+Test\+Request }\end{DoxyParamCaption})}
+
+
+
+Kontroler koji vraca rezulat polaganja testa od strane studenta 
+
+
+\begin{DoxyParams}{Parameters}
+{\em take\+The\+Test\+Request} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Testing\+System/\+Applications/\+Web\+Client/\+Controllers/Test\+Controller.\+cs\end{DoxyCompactItemize}

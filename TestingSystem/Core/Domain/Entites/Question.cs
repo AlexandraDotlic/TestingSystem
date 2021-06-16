@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Core.Domain.Entites
 {
+    /// <summary>
+    /// Klasa pitanja koja mogu da se nadju na nekom testu
+    /// </summary>
     public class Question
     {
         /// <summary>
@@ -27,7 +30,9 @@ namespace Core.Domain.Entites
         /// Tip pitanja
         /// </summary>
         public QuestionType Type { get; private set; }
-
+        /// <summary>
+        /// Maksimalan broj poena koji se moze ostvariti na tom pitnju u zavisnosti od tipa mogucih odgovora
+        /// </summary>
         public byte QuestionScore { get; private set; }
 
         protected Question()
@@ -35,6 +40,14 @@ namespace Core.Domain.Entites
             AnswerOptions = new List<AnswerOption>();
         }
 
+        /// <summary>
+        /// Konstruktor pitanja u zavisnosti od tipa odgovora
+        /// Tip odgovora moze biti: Free text, Yes/No tip ili Multiple choice
+        /// Free Text jedno polje za tekstualni odgovor, Yes/No dve moguce opcije, a Mutiple choice proizvoljan broj opcija za odgovor
+        /// </summary>
+        /// <param name="questionText"></param>
+        /// <param name="answerOptions"></param>
+        /// <exception cref="ArgumentNullException"></exception>
         public Question(string questionText, ICollection<AnswerOption> answerOptions)
         {
             QuestionText = questionText;

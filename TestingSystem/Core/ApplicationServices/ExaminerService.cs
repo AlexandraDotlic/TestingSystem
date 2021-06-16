@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Core.ApplicationServices
 {
+    /// <summary>
+    /// Servis ispitivaca
+    /// </summary>
     public class ExaminerService
     {
         private readonly ICoreUnitOfWork UnitOfWork;
@@ -16,12 +19,12 @@ namespace Core.ApplicationServices
             UnitOfWork = unitOfWork;
         }
         /// <summary>
-        /// 
+        /// Servisni task za kreiranje ispitivaca
         /// </summary>
-        /// <param name="firstName"></param>
-        /// <param name="lastName"></param>
-        /// <param name="externalId"></param>
-        /// <returns></returns>
+        /// <param name="firstName">Ime ispitivaca</param>
+        /// <param name="lastName">Prezime ispitivaca</param>
+        /// <param name="externalId">Eksterni Id prema bazi za autentifikaciju</param>
+        /// <returns>int - id ispitivaca</returns>
         /// <exception cref="ArgumentNullException"></exception>
         public async Task<int> CreateExaminer(string firstName, string lastName, string externalId)
         {
@@ -35,6 +38,12 @@ namespace Core.ApplicationServices
             return examiner.Id;
         }
 
+        /// <summary>
+        /// Servisni task za brisanje ispitivaca
+        /// </summary>
+        /// <param name="examinerId">Identifikator ispitivaca</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public async Task DeleteExaminer(int examinerId)
         {
             Examiner examiner = await UnitOfWork.ExaminerRepository.GetById(examinerId);
@@ -46,7 +55,13 @@ namespace Core.ApplicationServices
             await UnitOfWork.SaveChangesAsync();
         }
 
-
+        /// <summary>
+        /// Servisni task za postavljanje imena ispitivaca
+        /// </summary>
+        /// <param name="externalId">Eksterni identifikator prema bazi za autentifikaciju</param>
+        /// <param name="firstName">Ime ispitivaca koje se postavlja</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public async Task SetExaminerFirstName(string externalId, string firstName)
         {
             if (string.IsNullOrEmpty(externalId))
@@ -63,6 +78,14 @@ namespace Core.ApplicationServices
             await UnitOfWork.ExaminerRepository.Update(examiner);
             await UnitOfWork.SaveChangesAsync();
         }
+
+        /// <summary>
+        /// Servisni task za postavljanje prezimena ispitivaca
+        /// </summary>
+        /// <param name="externalId">Eksterni identifikator prema bazi za autentifikaciju</param>
+        /// <param name="lastName">Prezime koje se postavlja</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
 
         public async Task SetExaminerLastName(string externalId, string lastName)
         {

@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace Core.ApplicationServices
 {
+    /// <summary>
+    /// Servis testa
+    /// </summary>
     public class TestService
     {
         private readonly ICoreUnitOfWork UnitOfWork;
@@ -18,6 +21,14 @@ namespace Core.ApplicationServices
             UnitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// Servisni task za kreiranje testa
+        /// </summary>
+        /// <param name="externalUserId">Eksterni id testa u bazi za autentifikaciju</param>
+        /// <param name="title">Naziv tesa</param>
+        /// <param name="startDate">Pocetak mogucnosti polaganja testa</param>
+        /// <returns>short - identifikator testa</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public async Task<short> CreateTest(string externalUserId, string title, DateTime startDate)
         {
             Examiner examiner = await UnitOfWork.ExaminerRepository.GetFirstOrDefaultWithIncludes(e => e.ExternalId == externalUserId);
@@ -31,6 +42,13 @@ namespace Core.ApplicationServices
             return test.Id;
         }
 
+        /// <summary>
+        /// Servisni task za brisanje testa
+        /// </summary>
+        /// <param name="testId">Identifikator testa</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+
         public async Task DeleteTest(short testId)
         {
             Test test = await UnitOfWork.TestRepository.GetById(testId);
@@ -43,6 +61,14 @@ namespace Core.ApplicationServices
 
         }
 
+        /// <summary>
+        /// Servisni task za dodavanje pitanja u test
+        /// </summary>
+        /// <param name="testId">Identifikator testa</param>
+        /// <param name="questionText">Tekst pitanja</param>
+        /// <param name="answerOptionTuples">Par (ponudjen odgovor, tacnost)</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public async Task AddQuestionToTest(short testId, string questionText, ICollection<Tuple<string, bool>> answerOptionTuples)
         {
             Test test = await UnitOfWork.TestRepository.GetFirstOrDefaultWithIncludes(t => t.Id == testId, t => t.Questions);
@@ -65,6 +91,11 @@ namespace Core.ApplicationServices
             await UnitOfWork.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Servisni task koji vraca kolekciju svih testova koji su na raspolaganju studentu za polaganje
+        /// </summary>
+        /// <param name="currentUserId">Eksterni id studenta iz baze za autentifikaciju</param>
+        /// <returns>Kolekcija svih testova koji su na raspolaganju studentu za polaganje</returns>
         public async Task<ICollection<TestDTO>> GetAllAvailableTestsForStudent(string currentUserId)
         {
             IReadOnlyCollection<StudentTest> studentTests = await UnitOfWork.StudentTestRepository.SearchByWithIncludes(t => t.Student.ExternalId == currentUserId, t => t.Student);
@@ -104,6 +135,13 @@ namespace Core.ApplicationServices
         //    await UnitOfWork.SaveChangesAsync();
         //}
 
+        /// <summary>
+        /// Servisni task koji uklanja pitanje sa testa
+        /// </summary>
+        /// <param name="testId">Identifikator testa</param>
+        /// <param name="questionId">Identifikator pitanja za uklanjanje</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public async Task RemoveQuestionFromTest(short testId, int questionId)
         {
             Test test = await UnitOfWork.TestRepository.GetFirstOrDefaultWithIncludes(t => t.Id == testId, t => t.Questions);
@@ -124,12 +162,14 @@ namespace Core.ApplicationServices
             await UnitOfWork.SaveChangesAsync();
         }
         /// <summary>
-        /// 
+        /// Servisni task koji nakon studentovog polaganja testa, tj nakon primanja svih argumenata koji referisu na test koji je student sa odredjenim id-jem polagao 
+        /// i sa kojim odgovorima, vraca studentov rezultat na tom testu
         /// </summary>
-        /// <param name="testId"></param>
-        /// <param name="studentId"></param>
+        /// <param name="testId">Identifikator testa</param>
+        /// <param name="studentId">Identifikator studenta koji polaze test</param>
         /// <param name="questonResponsesCollection">Kolekcija odgovora za svako pitanje</param>
-        /// <returns></returns>
+        /// <returns>Rezultat studenta na datom testu</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public async Task<StudentTestScoreDTO> TakeTheTest(short testId, string externalStudentId, ICollection<Tuple<int, ICollection<string>>> questonResponsesCollection)
         {
             Test test = await UnitOfWork.TestRepository.GetById(testId);
@@ -205,6 +245,10 @@ namespace Core.ApplicationServices
             };
         }
 
+        /// <summary>
+        /// Servisni task koji vraca kolekciju svih testova
+        /// </summary>
+        /// <returns>Kolekcija svih testova</returns>
         public async Task<ICollection<TestDTO>> GetAllTests()
         {
             IReadOnlyCollection<Test> tests = await UnitOfWork.TestRepository.GetAllList();
@@ -214,6 +258,11 @@ namespace Core.ApplicationServices
             return testDTOs;
         }
 
+        /// <summary>
+        /// Servisni task koji vraca kolekciju svih testova koje je kreirao ispitivac
+        /// </summary>
+        /// <param name="externalExaminerId">Eksterni identifikator ispitivaca iz baze za autentifikaciju</param>
+        /// <returns>Kolekcija svih testova koje je kreirao ispitivac</returns>
         public async Task<ICollection<TestDTO>> GetAllTestsForExaminer(string externalExaminerId)
         {
             IReadOnlyCollection<Test> tests = await UnitOfWork.TestRepository.SearchByWithIncludes(t => t.Examiner.ExternalId == externalExaminerId, t => t.Examiner);
@@ -224,7 +273,14 @@ namespace Core.ApplicationServices
             return testDTOs;
 
         }
-         public async Task ActivateTest(short testId)
+
+        /// <summary>
+        /// Servisni task koji aktivira neaktivan test
+        /// </summary>
+        /// <param name="testId">Identifikator testa</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public async Task ActivateTest(short testId)
          {
                 Test test = await UnitOfWork.TestRepository.GetById(testId);
                 if (test == null)
@@ -238,6 +294,12 @@ namespace Core.ApplicationServices
 
          }
 
+        /// <summary>
+        /// Servisni task koji deaktivira aktivan test
+        /// </summary>
+        /// <param name="testId">Identifikator testa</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public async Task DeactivateTest(short testId)
         {
             Test test = await UnitOfWork.TestRepository.GetById(testId);
@@ -251,6 +313,12 @@ namespace Core.ApplicationServices
             await UnitOfWork.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Servisni task koji menja pocetak mogucnosti polaganja odredjenog testa
+        /// </summary>
+        /// <param name="testId">Identifikator testa</param>
+        /// <param name="startDate">Novi pocetni datum</param>
+        /// <returns></returns>
         public async Task ChangeStartDate(short testId, DateTime startDate)
         {
             Test test = await UnitOfWork.TestRepository.GetById(testId);
@@ -267,4 +335,4 @@ namespace Core.ApplicationServices
 
 
     }
-    }
+}

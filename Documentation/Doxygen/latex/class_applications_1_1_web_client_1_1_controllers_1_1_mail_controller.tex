@@ -1,0 +1,78 @@
+\hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_mail_controller}{}\doxysection{Applications.\+Web\+Client.\+Controllers.\+Mail\+Controller Class Reference}
+\label{class_applications_1_1_web_client_1_1_controllers_1_1_mail_controller}\index{Applications.WebClient.Controllers.MailController@{Applications.WebClient.Controllers.MailController}}
+
+
+Kontroler klasa maila  
+
+
+Inheritance diagram for Applications.\+Web\+Client.\+Controllers.\+Mail\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_applications_1_1_web_client_1_1_controllers_1_1_mail_controller}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_mail_controller_ac2388a0015f3e33c0024b33ebc1d857a}\label{class_applications_1_1_web_client_1_1_controllers_1_1_mail_controller_ac2388a0015f3e33c0024b33ebc1d857a}} 
+{\bfseries Mail\+Controller} (\mbox{\hyperlink{interface_core_1_1_domain_1_1_services_1_1_external_1_1_mail_service_1_1_i_mail_service}{IMail\+Service}} mail\+Service, \mbox{\hyperlink{class_core_1_1_application_services_1_1_student_service}{Student\+Service}} student\+Service, ILogger$<$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_mail_controller}{Mail\+Controller}} $>$ logger)
+\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_mail_controller_a190da06b8d53a957e8d5e73b7de74661}{Send\+Mail\+To\+User}} (\mbox{\hyperlink{class_applications_1_1_web_client_1_1_requests_1_1_send_mail_request}{Send\+Mail\+Request}} send\+Mail\+Request)
+\begin{DoxyCompactList}\small\item\em Kontroler za slanje maila korisniku \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_mail_controller_abae6204dd8ae15bb5f42bbb6ee12bb0f}{Send\+Welcome\+Mail}} (\mbox{\hyperlink{class_applications_1_1_web_client_1_1_requests_1_1_send_welcome_mail_request}{Send\+Welcome\+Mail\+Request}} welcome\+Mail\+Request)
+\begin{DoxyCompactList}\small\item\em Kontroler za slanje maila dobrodoslice korisniku \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_mail_controller_a5c4277243b7a23d86a4da3de4e40754f}\label{class_applications_1_1_web_client_1_1_controllers_1_1_mail_controller_a5c4277243b7a23d86a4da3de4e40754f}} 
+readonly \mbox{\hyperlink{class_core_1_1_application_services_1_1_student_service}{Student\+Service}} {\bfseries Student\+Service}
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_mail_controller_aab2624b772ddff6cdd3b3eb09f15e1d0}\label{class_applications_1_1_web_client_1_1_controllers_1_1_mail_controller_aab2624b772ddff6cdd3b3eb09f15e1d0}} 
+readonly \mbox{\hyperlink{interface_core_1_1_domain_1_1_services_1_1_external_1_1_mail_service_1_1_i_mail_service}{IMail\+Service}} {\bfseries Mail\+Service}
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_mail_controller_a3f6d0561972bf0080e686a25a9297211}\label{class_applications_1_1_web_client_1_1_controllers_1_1_mail_controller_a3f6d0561972bf0080e686a25a9297211}} 
+readonly ILogger$<$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_mail_controller}{Mail\+Controller}} $>$ {\bfseries Logger}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Kontroler klasa maila 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_mail_controller_a190da06b8d53a957e8d5e73b7de74661}\label{class_applications_1_1_web_client_1_1_controllers_1_1_mail_controller_a190da06b8d53a957e8d5e73b7de74661}} 
+\index{Applications.WebClient.Controllers.MailController@{Applications.WebClient.Controllers.MailController}!SendMailToUser@{SendMailToUser}}
+\index{SendMailToUser@{SendMailToUser}!Applications.WebClient.Controllers.MailController@{Applications.WebClient.Controllers.MailController}}
+\doxysubsubsection{\texorpdfstring{SendMailToUser()}{SendMailToUser()}}
+{\footnotesize\ttfamily async Task$<$IAction\+Result$>$ Applications.\+Web\+Client.\+Controllers.\+Mail\+Controller.\+Send\+Mail\+To\+User (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_applications_1_1_web_client_1_1_requests_1_1_send_mail_request}{Send\+Mail\+Request}}}]{send\+Mail\+Request }\end{DoxyParamCaption})}
+
+
+
+Kontroler za slanje maila korisniku 
+
+
+\begin{DoxyParams}{Parameters}
+{\em send\+Mail\+Request} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_mail_controller_abae6204dd8ae15bb5f42bbb6ee12bb0f}\label{class_applications_1_1_web_client_1_1_controllers_1_1_mail_controller_abae6204dd8ae15bb5f42bbb6ee12bb0f}} 
+\index{Applications.WebClient.Controllers.MailController@{Applications.WebClient.Controllers.MailController}!SendWelcomeMail@{SendWelcomeMail}}
+\index{SendWelcomeMail@{SendWelcomeMail}!Applications.WebClient.Controllers.MailController@{Applications.WebClient.Controllers.MailController}}
+\doxysubsubsection{\texorpdfstring{SendWelcomeMail()}{SendWelcomeMail()}}
+{\footnotesize\ttfamily async Task$<$IAction\+Result$>$ Applications.\+Web\+Client.\+Controllers.\+Mail\+Controller.\+Send\+Welcome\+Mail (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_applications_1_1_web_client_1_1_requests_1_1_send_welcome_mail_request}{Send\+Welcome\+Mail\+Request}}}]{welcome\+Mail\+Request }\end{DoxyParamCaption})}
+
+
+
+Kontroler za slanje maila dobrodoslice korisniku 
+
+
+\begin{DoxyParams}{Parameters}
+{\em welcome\+Mail\+Request} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Testing\+System/\+Applications/\+Web\+Client/\+Controllers/Mail\+Controller.\+cs\end{DoxyCompactItemize}

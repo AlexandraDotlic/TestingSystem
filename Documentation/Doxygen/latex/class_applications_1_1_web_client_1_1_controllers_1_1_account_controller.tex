@@ -1,0 +1,114 @@
+\hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller}{}\doxysection{Applications.\+Web\+Client.\+Controllers.\+Account\+Controller Class Reference}
+\label{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller}\index{Applications.WebClient.Controllers.AccountController@{Applications.WebClient.Controllers.AccountController}}
+
+
+Kontroler klasa za registraciju naloga  
+
+
+Inheritance diagram for Applications.\+Web\+Client.\+Controllers.\+Account\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_a154b3027023dbf2c8c93b50af8dff3a8}\label{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_a154b3027023dbf2c8c93b50af8dff3a8}} 
+{\bfseries Account\+Controller} (\mbox{\hyperlink{class_core_1_1_application_services_1_1_student_service}{Student\+Service}} student\+Service, \mbox{\hyperlink{class_core_1_1_application_services_1_1_examiner_service}{Examiner\+Service}} examiner\+Service, ILogger$<$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller}{Account\+Controller}} $>$ logger, Sign\+In\+Manager$<$ \mbox{\hyperlink{class_auth_1_1_domain_1_1_entities_1_1_user}{User}} $>$ sign\+In\+Manager, User\+Manager$<$ \mbox{\hyperlink{class_auth_1_1_domain_1_1_entities_1_1_user}{User}} $>$ user\+Manager, Role\+Manager$<$ Identity\+Role $>$ role\+Manager, IConfiguration configuration)
+\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_af407c5951e92114d87d0d9eb57426ee4}{Register}} (\mbox{\hyperlink{class_applications_1_1_web_client_1_1_requests_1_1_register_user_request}{Register\+User\+Request}} register\+User\+Request)
+\begin{DoxyCompactList}\small\item\em Kontroler za registraciju korisnika -\/ ispitivaca ili studenta \end{DoxyCompactList}\item 
+async Task$<$ IAction\+Result $>$ \mbox{\hyperlink{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_a4727c58a28da278a0c59177e5fba5810}{Token}} (\mbox{[}From\+Body\mbox{]} \mbox{\hyperlink{class_applications_1_1_web_client_1_1_requests_1_1_log_in_user_request}{Log\+In\+User\+Request}} model)
+\begin{DoxyCompactList}\small\item\em Kontroler za kreiranje korisnickog tokena na osnovu podataka za registraciju \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_a09b5105afa7ff71e2657d0ba33853f9d}\label{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_a09b5105afa7ff71e2657d0ba33853f9d}} 
+string {\bfseries Generate\+JWT} (\mbox{\hyperlink{class_auth_1_1_domain_1_1_entities_1_1_user}{User}} user, string user\+\_\+roles)
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_a11d69c9f6326b34b38196f99bcf04f70}\label{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_a11d69c9f6326b34b38196f99bcf04f70}} 
+long {\bfseries To\+Unix\+Epoch\+Date} (Date\+Time date)
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_a3d4e23e94aaf523559dc8f1304ae1aaf}\label{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_a3d4e23e94aaf523559dc8f1304ae1aaf}} 
+async Task$<$ string $>$ {\bfseries Create\+User\+Async} (string email, string password, User\+Role\+Type user\+Role)
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_a4461635965c43a7612aabbe2d99151c7}\label{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_a4461635965c43a7612aabbe2d99151c7}} 
+void {\bfseries Check\+False\+Identity\+Result} (Identity\+Result result)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_afcefc91af1a41d71079120d35174158f}\label{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_afcefc91af1a41d71079120d35174158f}} 
+readonly \mbox{\hyperlink{class_core_1_1_application_services_1_1_student_service}{Student\+Service}} {\bfseries Student\+Service}
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_a17bd011c2ea900e8cfed5fc391da057e}\label{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_a17bd011c2ea900e8cfed5fc391da057e}} 
+readonly \mbox{\hyperlink{class_core_1_1_application_services_1_1_examiner_service}{Examiner\+Service}} {\bfseries Examiner\+Service}
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_ac72313f7bf1340eee52787dcdf0a3a08}\label{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_ac72313f7bf1340eee52787dcdf0a3a08}} 
+readonly ILogger {\bfseries Logger}
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_a8e26df86ebf568de128489874bbba51b}\label{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_a8e26df86ebf568de128489874bbba51b}} 
+readonly Sign\+In\+Manager$<$ \mbox{\hyperlink{class_auth_1_1_domain_1_1_entities_1_1_user}{User}} $>$ {\bfseries Sign\+In\+Manager}
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_a6752f0aaa5cc3155858de82e98960d5a}\label{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_a6752f0aaa5cc3155858de82e98960d5a}} 
+readonly User\+Manager$<$ \mbox{\hyperlink{class_auth_1_1_domain_1_1_entities_1_1_user}{User}} $>$ {\bfseries User\+Manager}
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_a1dc25c1dd3d28566b88bdb72f998acf2}\label{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_a1dc25c1dd3d28566b88bdb72f998acf2}} 
+readonly Role\+Manager$<$ Identity\+Role $>$ {\bfseries Role\+Manager}
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_ad590bcdc00009cd60de6126767713004}\label{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_ad590bcdc00009cd60de6126767713004}} 
+readonly string {\bfseries \+\_\+issuer}
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_ab80b27fc36f76b036545de437080a65d}\label{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_ab80b27fc36f76b036545de437080a65d}} 
+readonly string {\bfseries \+\_\+audience}
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_a3c116243a87769ef23dfd771e86849c2}\label{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_a3c116243a87769ef23dfd771e86849c2}} 
+readonly int {\bfseries \+\_\+valid\+For}
+\item 
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_a614a63955a25fc5c35cbffd602006382}\label{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_a614a63955a25fc5c35cbffd602006382}} 
+readonly Symmetric\+Security\+Key {\bfseries \+\_\+signing\+Key}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Kontroler klasa za registraciju naloga 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_af407c5951e92114d87d0d9eb57426ee4}\label{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_af407c5951e92114d87d0d9eb57426ee4}} 
+\index{Applications.WebClient.Controllers.AccountController@{Applications.WebClient.Controllers.AccountController}!Register@{Register}}
+\index{Register@{Register}!Applications.WebClient.Controllers.AccountController@{Applications.WebClient.Controllers.AccountController}}
+\doxysubsubsection{\texorpdfstring{Register()}{Register()}}
+{\footnotesize\ttfamily async Task$<$IAction\+Result$>$ Applications.\+Web\+Client.\+Controllers.\+Account\+Controller.\+Register (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_applications_1_1_web_client_1_1_requests_1_1_register_user_request}{Register\+User\+Request}}}]{register\+User\+Request }\end{DoxyParamCaption})}
+
+
+
+Kontroler za registraciju korisnika -\/ ispitivaca ili studenta 
+
+
+\begin{DoxyParams}{Parameters}
+{\em register\+User\+Request} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_a4727c58a28da278a0c59177e5fba5810}\label{class_applications_1_1_web_client_1_1_controllers_1_1_account_controller_a4727c58a28da278a0c59177e5fba5810}} 
+\index{Applications.WebClient.Controllers.AccountController@{Applications.WebClient.Controllers.AccountController}!Token@{Token}}
+\index{Token@{Token}!Applications.WebClient.Controllers.AccountController@{Applications.WebClient.Controllers.AccountController}}
+\doxysubsubsection{\texorpdfstring{Token()}{Token()}}
+{\footnotesize\ttfamily async Task$<$IAction\+Result$>$ Applications.\+Web\+Client.\+Controllers.\+Account\+Controller.\+Token (\begin{DoxyParamCaption}\item[{\mbox{[}\+From\+Body\mbox{]} \mbox{\hyperlink{class_applications_1_1_web_client_1_1_requests_1_1_log_in_user_request}{Log\+In\+User\+Request}}}]{model }\end{DoxyParamCaption})}
+
+
+
+Kontroler za kreiranje korisnickog tokena na osnovu podataka za registraciju 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Testing\+System/\+Applications/\+Web\+Client/\+Controllers/Account\+Controller.\+cs\end{DoxyCompactItemize}

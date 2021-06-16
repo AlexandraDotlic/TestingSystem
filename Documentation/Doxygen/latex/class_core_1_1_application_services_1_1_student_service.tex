@@ -1,0 +1,254 @@
+\hypertarget{class_core_1_1_application_services_1_1_student_service}{}\doxysection{Core.\+Application\+Services.\+Student\+Service Class Reference}
+\label{class_core_1_1_application_services_1_1_student_service}\index{Core.ApplicationServices.StudentService@{Core.ApplicationServices.StudentService}}
+
+
+Servis studenta  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_core_1_1_application_services_1_1_student_service_a3100d685f2a29bada5a9418ddba670b1}\label{class_core_1_1_application_services_1_1_student_service_a3100d685f2a29bada5a9418ddba670b1}} 
+{\bfseries Student\+Service} (\mbox{\hyperlink{interface_core_1_1_domain_1_1_repositories_1_1_i_core_unit_of_work}{ICore\+Unit\+Of\+Work}} unit\+Of\+Work)
+\item 
+async Task$<$ int $>$ \mbox{\hyperlink{class_core_1_1_application_services_1_1_student_service_a27cb3c1a0e00ec6b127e578689e8a30a}{Create\+Student}} (string first\+Name, string last\+Name, string email, string external\+Id)
+\begin{DoxyCompactList}\small\item\em Servisni task za keiranje studenta \end{DoxyCompactList}\item 
+async Task \mbox{\hyperlink{class_core_1_1_application_services_1_1_student_service_affa99b1d92475534036ebaa4490a9108}{Delete\+Student}} (int student\+Id)
+\begin{DoxyCompactList}\small\item\em Servisni task za brisanje studenta \end{DoxyCompactList}\item 
+async Task \mbox{\hyperlink{class_core_1_1_application_services_1_1_student_service_aa84ef76c4460009135f007f66a6b8247}{Set\+Student\+First\+Name}} (string external\+Id, string first\+Name)
+\begin{DoxyCompactList}\small\item\em Servisni task za postavljanje imena studenta \end{DoxyCompactList}\item 
+async Task \mbox{\hyperlink{class_core_1_1_application_services_1_1_student_service_aeb94c29a44062bb489c8ffad2393180a}{Set\+Student\+Last\+Name}} (string external\+Id, string last\+Name)
+\begin{DoxyCompactList}\small\item\em Servisni task za postavljanje prezimena studenta \end{DoxyCompactList}\item 
+async Task$<$ ICollection$<$ \mbox{\hyperlink{class_core_1_1_application_services_1_1_d_t_os_1_1_student_d_t_o}{Student\+DTO}} $>$ $>$ \mbox{\hyperlink{class_core_1_1_application_services_1_1_student_service_a432ebe866fdc13bc89dfac9e0b151480}{Get\+All\+Students\+For\+Group}} (short group\+Id)
+\begin{DoxyCompactList}\small\item\em Servisni task koji vraca kolekciju studenata koji pripadaju grupi \end{DoxyCompactList}\item 
+async Task$<$ ICollection$<$ \mbox{\hyperlink{class_core_1_1_application_services_1_1_d_t_os_1_1_student_d_t_o}{Student\+DTO}} $>$ $>$ \mbox{\hyperlink{class_core_1_1_application_services_1_1_student_service_a757354b5b9549d191735df71a76671fc}{Get\+All\+Students}} ()
+\begin{DoxyCompactList}\small\item\em Servisni task koji vraca kolekciju svih studenata iz baze \end{DoxyCompactList}\item 
+async Task$<$ \mbox{\hyperlink{class_core_1_1_application_services_1_1_d_t_os_1_1_student_test_score_d_t_o}{Student\+Test\+Score\+DTO}} $>$ \mbox{\hyperlink{class_core_1_1_application_services_1_1_student_service_a7401b2f4c6188e0e813bd6a95cdce64f}{Get\+Student\+Test\+Result}} (string student\+External\+Id, short test\+Id)
+\begin{DoxyCompactList}\small\item\em Servisni task koji vraca rezultat sa testa koji je polagao student \end{DoxyCompactList}\item 
+async Task$<$ ICollection$<$ \mbox{\hyperlink{class_core_1_1_application_services_1_1_d_t_os_1_1_student_test_score_d_t_o}{Student\+Test\+Score\+DTO}} $>$ $>$ \mbox{\hyperlink{class_core_1_1_application_services_1_1_student_service_a057797e9ffe44c25a7772919b0bef213}{Get\+Student\+Results\+For\+All\+Taken\+Tests}} (string student\+External\+Id)
+\begin{DoxyCompactList}\small\item\em Servisni task koji vraca rezultate studenta na svim testovima koje je polagao \end{DoxyCompactList}\item 
+async Task$<$ string $>$ \mbox{\hyperlink{class_core_1_1_application_services_1_1_student_service_a1e44e1e882761f4cad3637e03bbd08e1}{Get\+Student\+Email}} (int student\+Id)
+\begin{DoxyCompactList}\small\item\em Servisni metod koji vraca email studenta \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_core_1_1_application_services_1_1_student_service_a144950ac65ce4a1eadae208b960890bd}\label{class_core_1_1_application_services_1_1_student_service_a144950ac65ce4a1eadae208b960890bd}} 
+readonly \mbox{\hyperlink{interface_core_1_1_domain_1_1_repositories_1_1_i_core_unit_of_work}{ICore\+Unit\+Of\+Work}} {\bfseries Unit\+Of\+Work}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Servis studenta 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_core_1_1_application_services_1_1_student_service_a27cb3c1a0e00ec6b127e578689e8a30a}\label{class_core_1_1_application_services_1_1_student_service_a27cb3c1a0e00ec6b127e578689e8a30a}} 
+\index{Core.ApplicationServices.StudentService@{Core.ApplicationServices.StudentService}!CreateStudent@{CreateStudent}}
+\index{CreateStudent@{CreateStudent}!Core.ApplicationServices.StudentService@{Core.ApplicationServices.StudentService}}
+\doxysubsubsection{\texorpdfstring{CreateStudent()}{CreateStudent()}}
+{\footnotesize\ttfamily async Task$<$int$>$ Core.\+Application\+Services.\+Student\+Service.\+Create\+Student (\begin{DoxyParamCaption}\item[{string}]{first\+Name,  }\item[{string}]{last\+Name,  }\item[{string}]{email,  }\item[{string}]{external\+Id }\end{DoxyParamCaption})}
+
+
+
+Servisni task za keiranje studenta 
+
+
+\begin{DoxyParams}{Parameters}
+{\em first\+Name} & Ime\\
+\hline
+{\em last\+Name} & Prezime\\
+\hline
+{\em email} & Email\\
+\hline
+{\em external\+Id} & Eksterni id iz baze za autentifikaciju\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int -\/ id studenta
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Null\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_core_1_1_application_services_1_1_student_service_affa99b1d92475534036ebaa4490a9108}\label{class_core_1_1_application_services_1_1_student_service_affa99b1d92475534036ebaa4490a9108}} 
+\index{Core.ApplicationServices.StudentService@{Core.ApplicationServices.StudentService}!DeleteStudent@{DeleteStudent}}
+\index{DeleteStudent@{DeleteStudent}!Core.ApplicationServices.StudentService@{Core.ApplicationServices.StudentService}}
+\doxysubsubsection{\texorpdfstring{DeleteStudent()}{DeleteStudent()}}
+{\footnotesize\ttfamily async Task Core.\+Application\+Services.\+Student\+Service.\+Delete\+Student (\begin{DoxyParamCaption}\item[{int}]{student\+Id }\end{DoxyParamCaption})}
+
+
+
+Servisni task za brisanje studenta 
+
+
+\begin{DoxyParams}{Parameters}
+{\em student\+Id} & Id studenta\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Null\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_core_1_1_application_services_1_1_student_service_a757354b5b9549d191735df71a76671fc}\label{class_core_1_1_application_services_1_1_student_service_a757354b5b9549d191735df71a76671fc}} 
+\index{Core.ApplicationServices.StudentService@{Core.ApplicationServices.StudentService}!GetAllStudents@{GetAllStudents}}
+\index{GetAllStudents@{GetAllStudents}!Core.ApplicationServices.StudentService@{Core.ApplicationServices.StudentService}}
+\doxysubsubsection{\texorpdfstring{GetAllStudents()}{GetAllStudents()}}
+{\footnotesize\ttfamily async Task$<$ICollection$<$\mbox{\hyperlink{class_core_1_1_application_services_1_1_d_t_os_1_1_student_d_t_o}{Student\+DTO}}$>$ $>$ Core.\+Application\+Services.\+Student\+Service.\+Get\+All\+Students (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Servisni task koji vraca kolekciju svih studenata iz baze 
+
+\begin{DoxyReturn}{Returns}
+Kolekcija svih studenata iz baze
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_core_1_1_application_services_1_1_student_service_a432ebe866fdc13bc89dfac9e0b151480}\label{class_core_1_1_application_services_1_1_student_service_a432ebe866fdc13bc89dfac9e0b151480}} 
+\index{Core.ApplicationServices.StudentService@{Core.ApplicationServices.StudentService}!GetAllStudentsForGroup@{GetAllStudentsForGroup}}
+\index{GetAllStudentsForGroup@{GetAllStudentsForGroup}!Core.ApplicationServices.StudentService@{Core.ApplicationServices.StudentService}}
+\doxysubsubsection{\texorpdfstring{GetAllStudentsForGroup()}{GetAllStudentsForGroup()}}
+{\footnotesize\ttfamily async Task$<$ICollection$<$\mbox{\hyperlink{class_core_1_1_application_services_1_1_d_t_os_1_1_student_d_t_o}{Student\+DTO}}$>$ $>$ Core.\+Application\+Services.\+Student\+Service.\+Get\+All\+Students\+For\+Group (\begin{DoxyParamCaption}\item[{short}]{group\+Id }\end{DoxyParamCaption})}
+
+
+
+Servisni task koji vraca kolekciju studenata koji pripadaju grupi 
+
+
+\begin{DoxyParams}{Parameters}
+{\em group\+Id} & Id grupe\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Kolekcija studenata iz grupe
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_core_1_1_application_services_1_1_student_service_a1e44e1e882761f4cad3637e03bbd08e1}\label{class_core_1_1_application_services_1_1_student_service_a1e44e1e882761f4cad3637e03bbd08e1}} 
+\index{Core.ApplicationServices.StudentService@{Core.ApplicationServices.StudentService}!GetStudentEmail@{GetStudentEmail}}
+\index{GetStudentEmail@{GetStudentEmail}!Core.ApplicationServices.StudentService@{Core.ApplicationServices.StudentService}}
+\doxysubsubsection{\texorpdfstring{GetStudentEmail()}{GetStudentEmail()}}
+{\footnotesize\ttfamily async Task$<$string$>$ Core.\+Application\+Services.\+Student\+Service.\+Get\+Student\+Email (\begin{DoxyParamCaption}\item[{int}]{student\+Id }\end{DoxyParamCaption})}
+
+
+
+Servisni metod koji vraca email studenta 
+
+
+\begin{DoxyParams}{Parameters}
+{\em student\+Id} & Id studenta\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string -\/ email studenta
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Null\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_core_1_1_application_services_1_1_student_service_a057797e9ffe44c25a7772919b0bef213}\label{class_core_1_1_application_services_1_1_student_service_a057797e9ffe44c25a7772919b0bef213}} 
+\index{Core.ApplicationServices.StudentService@{Core.ApplicationServices.StudentService}!GetStudentResultsForAllTakenTests@{GetStudentResultsForAllTakenTests}}
+\index{GetStudentResultsForAllTakenTests@{GetStudentResultsForAllTakenTests}!Core.ApplicationServices.StudentService@{Core.ApplicationServices.StudentService}}
+\doxysubsubsection{\texorpdfstring{GetStudentResultsForAllTakenTests()}{GetStudentResultsForAllTakenTests()}}
+{\footnotesize\ttfamily async Task$<$ICollection$<$\mbox{\hyperlink{class_core_1_1_application_services_1_1_d_t_os_1_1_student_test_score_d_t_o}{Student\+Test\+Score\+DTO}}$>$ $>$ Core.\+Application\+Services.\+Student\+Service.\+Get\+Student\+Results\+For\+All\+Taken\+Tests (\begin{DoxyParamCaption}\item[{string}]{student\+External\+Id }\end{DoxyParamCaption})}
+
+
+
+Servisni task koji vraca rezultate studenta na svim testovima koje je polagao 
+
+
+\begin{DoxyParams}{Parameters}
+{\em student\+External\+Id} & Eksterni Id studenta iz baze za autentifikaciju\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Kolekcija svih rezultata koje je student ostvario na testovima
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Null\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_core_1_1_application_services_1_1_student_service_a7401b2f4c6188e0e813bd6a95cdce64f}\label{class_core_1_1_application_services_1_1_student_service_a7401b2f4c6188e0e813bd6a95cdce64f}} 
+\index{Core.ApplicationServices.StudentService@{Core.ApplicationServices.StudentService}!GetStudentTestResult@{GetStudentTestResult}}
+\index{GetStudentTestResult@{GetStudentTestResult}!Core.ApplicationServices.StudentService@{Core.ApplicationServices.StudentService}}
+\doxysubsubsection{\texorpdfstring{GetStudentTestResult()}{GetStudentTestResult()}}
+{\footnotesize\ttfamily async Task$<$\mbox{\hyperlink{class_core_1_1_application_services_1_1_d_t_os_1_1_student_test_score_d_t_o}{Student\+Test\+Score\+DTO}}$>$ Core.\+Application\+Services.\+Student\+Service.\+Get\+Student\+Test\+Result (\begin{DoxyParamCaption}\item[{string}]{student\+External\+Id,  }\item[{short}]{test\+Id }\end{DoxyParamCaption})}
+
+
+
+Servisni task koji vraca rezultat sa testa koji je polagao student 
+
+
+\begin{DoxyParams}{Parameters}
+{\em student\+External\+Id} & Eksterni id studenta iz baze za autentifikaciju\\
+\hline
+{\em test\+Id} & id testa\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Podaci o polaganju testa od strane studenta koji ukljucuju njegov rezultat i maksimalni ostvarivi rezultat na tom testu.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Null\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_core_1_1_application_services_1_1_student_service_aa84ef76c4460009135f007f66a6b8247}\label{class_core_1_1_application_services_1_1_student_service_aa84ef76c4460009135f007f66a6b8247}} 
+\index{Core.ApplicationServices.StudentService@{Core.ApplicationServices.StudentService}!SetStudentFirstName@{SetStudentFirstName}}
+\index{SetStudentFirstName@{SetStudentFirstName}!Core.ApplicationServices.StudentService@{Core.ApplicationServices.StudentService}}
+\doxysubsubsection{\texorpdfstring{SetStudentFirstName()}{SetStudentFirstName()}}
+{\footnotesize\ttfamily async Task Core.\+Application\+Services.\+Student\+Service.\+Set\+Student\+First\+Name (\begin{DoxyParamCaption}\item[{string}]{external\+Id,  }\item[{string}]{first\+Name }\end{DoxyParamCaption})}
+
+
+
+Servisni task za postavljanje imena studenta 
+
+
+\begin{DoxyParams}{Parameters}
+{\em external\+Id} & Eksterni id iz baze za autentifikaciju\\
+\hline
+{\em first\+Name} & Ime koje se postavlja\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Null\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_core_1_1_application_services_1_1_student_service_aeb94c29a44062bb489c8ffad2393180a}\label{class_core_1_1_application_services_1_1_student_service_aeb94c29a44062bb489c8ffad2393180a}} 
+\index{Core.ApplicationServices.StudentService@{Core.ApplicationServices.StudentService}!SetStudentLastName@{SetStudentLastName}}
+\index{SetStudentLastName@{SetStudentLastName}!Core.ApplicationServices.StudentService@{Core.ApplicationServices.StudentService}}
+\doxysubsubsection{\texorpdfstring{SetStudentLastName()}{SetStudentLastName()}}
+{\footnotesize\ttfamily async Task Core.\+Application\+Services.\+Student\+Service.\+Set\+Student\+Last\+Name (\begin{DoxyParamCaption}\item[{string}]{external\+Id,  }\item[{string}]{last\+Name }\end{DoxyParamCaption})}
+
+
+
+Servisni task za postavljanje prezimena studenta 
+
+
+\begin{DoxyParams}{Parameters}
+{\em external\+Id} & Eksterni id iz baze za autentifikaciju\\
+\hline
+{\em last\+Name} & Prezime koje se postavlja\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Null\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Testing\+System/\+Core/\+Application\+Services/Student\+Service.\+cs\end{DoxyCompactItemize}

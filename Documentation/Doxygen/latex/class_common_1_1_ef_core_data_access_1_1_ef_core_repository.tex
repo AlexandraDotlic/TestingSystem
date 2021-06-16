@@ -1,0 +1,55 @@
+\hypertarget{class_common_1_1_ef_core_data_access_1_1_ef_core_repository}{}\doxysection{Common.\+Ef\+Core\+Data\+Access.\+Ef\+Core\+Repository$<$ TEntity $>$ Class Template Reference}
+\label{class_common_1_1_ef_core_data_access_1_1_ef_core_repository}\index{Common.EfCoreDataAccess.EfCoreRepository$<$ TEntity $>$@{Common.EfCoreDataAccess.EfCoreRepository$<$ TEntity $>$}}
+Inheritance diagram for Common.\+Ef\+Core\+Data\+Access.\+Ef\+Core\+Repository$<$ TEntity $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_common_1_1_ef_core_data_access_1_1_ef_core_repository}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_common_1_1_ef_core_data_access_1_1_ef_core_repository_acb7b2f6598e73e80cb142330f0566901}\label{class_common_1_1_ef_core_data_access_1_1_ef_core_repository_acb7b2f6598e73e80cb142330f0566901}} 
+{\bfseries Ef\+Core\+Repository} (\mbox{\hyperlink{class_common_1_1_ef_core_data_access_1_1_ef_core_db_context}{Ef\+Core\+Db\+Context}} context)
+\item 
+\mbox{\Hypertarget{class_common_1_1_ef_core_data_access_1_1_ef_core_repository_a6906eada84cd638699ef89c5aec6564e}\label{class_common_1_1_ef_core_data_access_1_1_ef_core_repository_a6906eada84cd638699ef89c5aec6564e}} 
+virtual async Task {\bfseries Insert} (TEntity entity)
+\item 
+\mbox{\Hypertarget{class_common_1_1_ef_core_data_access_1_1_ef_core_repository_a2c313e33ddd18c8683d4b69ff7a0b788}\label{class_common_1_1_ef_core_data_access_1_1_ef_core_repository_a2c313e33ddd18c8683d4b69ff7a0b788}} 
+virtual async Task {\bfseries Insert\+Many} (ICollection$<$ TEntity $>$ entities)
+\item 
+\mbox{\Hypertarget{class_common_1_1_ef_core_data_access_1_1_ef_core_repository_a4f9722d3c47c52c93cc5e7cd8bee7037}\label{class_common_1_1_ef_core_data_access_1_1_ef_core_repository_a4f9722d3c47c52c93cc5e7cd8bee7037}} 
+virtual async Task$<$ bool $>$ {\bfseries Update} (TEntity entity)
+\item 
+\mbox{\Hypertarget{class_common_1_1_ef_core_data_access_1_1_ef_core_repository_a0f90645c6fc037c028b6e8bc7a9869a7}\label{class_common_1_1_ef_core_data_access_1_1_ef_core_repository_a0f90645c6fc037c028b6e8bc7a9869a7}} 
+virtual async Task$<$ bool $>$ {\bfseries Delete} (TEntity entity)
+\item 
+\mbox{\Hypertarget{class_common_1_1_ef_core_data_access_1_1_ef_core_repository_aeb6b321deaef20ef5b275362e6c4a8bf}\label{class_common_1_1_ef_core_data_access_1_1_ef_core_repository_aeb6b321deaef20ef5b275362e6c4a8bf}} 
+Task$<$ TEntity $>$ {\bfseries Get\+By\+Id} (params object\mbox{[}$\,$\mbox{]} id)
+\item 
+\mbox{\Hypertarget{class_common_1_1_ef_core_data_access_1_1_ef_core_repository_af8b6617bddb8d5a0e49fbaf07da7effb}\label{class_common_1_1_ef_core_data_access_1_1_ef_core_repository_af8b6617bddb8d5a0e49fbaf07da7effb}} 
+virtual async Task$<$ IRead\+Only\+Collection$<$ TEntity $>$ $>$ {\bfseries Get\+All\+List} ()
+\item 
+\mbox{\Hypertarget{class_common_1_1_ef_core_data_access_1_1_ef_core_repository_a90bb47cc89f8c18301ff94969e08845f}\label{class_common_1_1_ef_core_data_access_1_1_ef_core_repository_a90bb47cc89f8c18301ff94969e08845f}} 
+virtual async Task$<$ IRead\+Only\+Collection$<$ TEntity $>$ $>$ {\bfseries Get\+Filtered\+List} (Expression$<$ Func$<$ TEntity, bool $>$$>$ filter)
+\item 
+\mbox{\Hypertarget{class_common_1_1_ef_core_data_access_1_1_ef_core_repository_a523a044ae7fd9693469ac5befab98df1}\label{class_common_1_1_ef_core_data_access_1_1_ef_core_repository_a523a044ae7fd9693469ac5befab98df1}} 
+async Task$<$ TEntity $>$ {\bfseries Get\+First\+Or\+Default\+With\+Includes} (Expression$<$ Func$<$ TEntity, bool $>$$>$ filter, params Expression$<$ Func$<$ TEntity, object $>$$>$\mbox{[}$\,$\mbox{]} include\+Property\+Expressions)
+\item 
+\mbox{\Hypertarget{class_common_1_1_ef_core_data_access_1_1_ef_core_repository_a45ef68b6eb7ecc40fcec33a05933a9e1}\label{class_common_1_1_ef_core_data_access_1_1_ef_core_repository_a45ef68b6eb7ecc40fcec33a05933a9e1}} 
+virtual async Task$<$ IRead\+Only\+Collection$<$ TEntity $>$ $>$ {\bfseries Search\+By\+With\+Includes} (Expression$<$ Func$<$ TEntity, bool $>$$>$ search\+By, params Expression$<$ Func$<$ TEntity, object $>$$>$\mbox{[}$\,$\mbox{]} includes)
+\item 
+\mbox{\Hypertarget{class_common_1_1_ef_core_data_access_1_1_ef_core_repository_a891542cc0fc79cb83ebb49497e2f03a6}\label{class_common_1_1_ef_core_data_access_1_1_ef_core_repository_a891542cc0fc79cb83ebb49497e2f03a6}} 
+virtual void {\bfseries Dispose} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_common_1_1_ef_core_data_access_1_1_ef_core_repository_a23f6958807e798e9ef1376d54172b84d}\label{class_common_1_1_ef_core_data_access_1_1_ef_core_repository_a23f6958807e798e9ef1376d54172b84d}} 
+IQueryable$<$ TEntity $>$ {\bfseries Add\+Multiple\+Includes\+To\+Query} (IQueryable$<$ TEntity $>$ initial\+Query, params Expression$<$ Func$<$ TEntity, object $>$$>$\mbox{[}$\,$\mbox{]} include\+Property\+Expressions)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Testing\+System/\+Common/\+Ef\+Core\+Data\+Access/Ef\+Core\+Repository.\+cs\end{DoxyCompactItemize}

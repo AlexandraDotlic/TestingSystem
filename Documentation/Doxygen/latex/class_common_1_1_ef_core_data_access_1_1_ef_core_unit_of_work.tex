@@ -1,0 +1,55 @@
+\hypertarget{class_common_1_1_ef_core_data_access_1_1_ef_core_unit_of_work}{}\doxysection{Common.\+Ef\+Core\+Data\+Access.\+Ef\+Core\+Unit\+Of\+Work Class Reference}
+\label{class_common_1_1_ef_core_data_access_1_1_ef_core_unit_of_work}\index{Common.EfCoreDataAccess.EfCoreUnitOfWork@{Common.EfCoreDataAccess.EfCoreUnitOfWork}}
+Inheritance diagram for Common.\+Ef\+Core\+Data\+Access.\+Ef\+Core\+Unit\+Of\+Work\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_common_1_1_ef_core_data_access_1_1_ef_core_unit_of_work}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_common_1_1_ef_core_data_access_1_1_ef_core_unit_of_work_aebe67fd6399b9ae51f0eec7766cdeb48}\label{class_common_1_1_ef_core_data_access_1_1_ef_core_unit_of_work_aebe67fd6399b9ae51f0eec7766cdeb48}} 
+{\bfseries Ef\+Core\+Unit\+Of\+Work} (\mbox{\hyperlink{class_common_1_1_ef_core_data_access_1_1_ef_core_db_context}{Ef\+Core\+Db\+Context}} context)
+\item 
+\mbox{\Hypertarget{class_common_1_1_ef_core_data_access_1_1_ef_core_unit_of_work_ac21ccefe780b732367dd2be472e880e0}\label{class_common_1_1_ef_core_data_access_1_1_ef_core_unit_of_work_ac21ccefe780b732367dd2be472e880e0}} 
+async Task {\bfseries Begin\+Transaction\+Async} ()
+\item 
+\mbox{\Hypertarget{class_common_1_1_ef_core_data_access_1_1_ef_core_unit_of_work_ad36d36474208f48655d4255f8908d187}\label{class_common_1_1_ef_core_data_access_1_1_ef_core_unit_of_work_ad36d36474208f48655d4255f8908d187}} 
+Task {\bfseries Commit\+Transaction\+Async} ()
+\item 
+\mbox{\Hypertarget{class_common_1_1_ef_core_data_access_1_1_ef_core_unit_of_work_a3f515c262055ed89dd00ca0b1b1eb4b3}\label{class_common_1_1_ef_core_data_access_1_1_ef_core_unit_of_work_a3f515c262055ed89dd00ca0b1b1eb4b3}} 
+Task {\bfseries Rollback\+Transaction\+Async} ()
+\item 
+\mbox{\Hypertarget{class_common_1_1_ef_core_data_access_1_1_ef_core_unit_of_work_a4e80df47d035aba7c67bcc77f365d60d}\label{class_common_1_1_ef_core_data_access_1_1_ef_core_unit_of_work_a4e80df47d035aba7c67bcc77f365d60d}} 
+async Task {\bfseries Save\+Changes\+Async} ()
+\item 
+\mbox{\Hypertarget{class_common_1_1_ef_core_data_access_1_1_ef_core_unit_of_work_acaa0c96e8920cb34358fec4d51eb8629}\label{class_common_1_1_ef_core_data_access_1_1_ef_core_unit_of_work_acaa0c96e8920cb34358fec4d51eb8629}} 
+void {\bfseries Clear\+Tracker} ()
+\item 
+\mbox{\Hypertarget{class_common_1_1_ef_core_data_access_1_1_ef_core_unit_of_work_a407306f4f6c56428938cb1bc4f9d917c}\label{class_common_1_1_ef_core_data_access_1_1_ef_core_unit_of_work_a407306f4f6c56428938cb1bc4f9d917c}} 
+void {\bfseries Dispose} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_common_1_1_ef_core_data_access_1_1_ef_core_unit_of_work_a76be7c1237b980921e7e521666b65001}\label{class_common_1_1_ef_core_data_access_1_1_ef_core_unit_of_work_a76be7c1237b980921e7e521666b65001}} 
+virtual void {\bfseries Dispose} (bool disposing)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_common_1_1_ef_core_data_access_1_1_ef_core_unit_of_work_a1652a3b14c060d06c10a433c315ca2c6}\label{class_common_1_1_ef_core_data_access_1_1_ef_core_unit_of_work_a1652a3b14c060d06c10a433c315ca2c6}} 
+readonly \mbox{\hyperlink{class_common_1_1_ef_core_data_access_1_1_ef_core_db_context}{Ef\+Core\+Db\+Context}} {\bfseries Context}
+\item 
+\mbox{\Hypertarget{class_common_1_1_ef_core_data_access_1_1_ef_core_unit_of_work_a727a330a85102806a56c7521ee1f54b3}\label{class_common_1_1_ef_core_data_access_1_1_ef_core_unit_of_work_a727a330a85102806a56c7521ee1f54b3}} 
+IDb\+Context\+Transaction {\bfseries Transaction}
+\item 
+\mbox{\Hypertarget{class_common_1_1_ef_core_data_access_1_1_ef_core_unit_of_work_a0d73f2c8c152358b305d954dd3e3d57b}\label{class_common_1_1_ef_core_data_access_1_1_ef_core_unit_of_work_a0d73f2c8c152358b305d954dd3e3d57b}} 
+bool {\bfseries disposed\+Value} = false
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Testing\+System/\+Common/\+Ef\+Core\+Data\+Access/Ef\+Core\+Unit\+Of\+Work.\+cs\end{DoxyCompactItemize}

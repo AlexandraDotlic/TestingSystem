@@ -1,0 +1,227 @@
+\hypertarget{class_core_1_1_domain_1_1_entites_1_1_test}{}\doxysection{Core.\+Domain.\+Entites.\+Test Class Reference}
+\label{class_core_1_1_domain_1_1_entites_1_1_test}\index{Core.Domain.Entites.Test@{Core.Domain.Entites.Test}}
+
+
+Klasa koja predstavlja test  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_test_a34cb88f28bcf85c5953c0ab538ab712d}{Test}} (\mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_examiner}{Examiner}} examiner, string title, Date\+Time start\+Date)
+\begin{DoxyCompactList}\small\item\em Konsturktor testa koji kreira test od strane examiner-\/a. U slucaju da se stavi da je trenutak kreiranja trenutak pocetka test je odmah aktivan. U suprotnom je kreiran neaktivan test \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_test_af90c192dcb2ebee2d419ab2166ee9577}{Activate}} ()
+\begin{DoxyCompactList}\small\item\em Metoda koja sluzi za aktiviranje neaktivnog testa \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_test_a68d781358eeb32ba745399e72c3d5551}{Deactivate}} ()
+\begin{DoxyCompactList}\small\item\em Metoda koja sluzi za deaktiviranje aktivnog testa \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_test_aba94f23588eeb646f7ee172bfbb02d8b}{Change\+Start\+Date}} (Date\+Time start\+Date)
+\begin{DoxyCompactList}\small\item\em Metoda koja sluzi da promeni pocetak perioda kada test moze da se polaze \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_test_ab137c9ab0af9d40e9a6f8f28408a3f9b}{Add\+Question}} (\mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_question}{Question}} test\+Question)
+\begin{DoxyCompactList}\small\item\em Metoda koja sluzi za dodavanje pitanja u test \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_test_a7b87c0809d7302bbdff7e9d0011f9633}{Remove\+Question}} (\mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_question}{Question}} test\+Question)
+\begin{DoxyCompactList}\small\item\em Metoda koja sluzi za uklanjanje pitanja iz testa \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+short \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_test_a8fb1b7f0aed08bd8851859bd4060ac6a}{Id}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, private set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Id \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_test_a56d2e5407bcb4e931237d158cd05e62a}{Title}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, private set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Naziv \end{DoxyCompactList}\item 
+ICollection$<$ \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_question}{Question}} $>$ \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_test_af0a35c72fda93147e512836f723abfa8}{Questions}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, private set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Kolekcija pitanja \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_test_a08dedbde8e2990c759e2a87dda68b327}{Examiner\+Id}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, private set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Id ispitivaca \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_core_1_1_domain_1_1_entites_1_1_test_a2709fc03fc0ce92d5af285b4f88dcf76}\label{class_core_1_1_domain_1_1_entites_1_1_test_a2709fc03fc0ce92d5af285b4f88dcf76}} 
+\mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_examiner}{Examiner}} {\bfseries Examiner}\hspace{0.3cm}{\ttfamily  \mbox{[}get, private set\mbox{]}}
+\item 
+bool \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_test_a7fbcb848f3cf315f755c03c8c97879d6}{Is\+Active}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, private set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Indikator da li je test aktivan za polaganje \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_test_a43093d97b8ba0e1cbe5e9c385a4b199e}{Test\+Score}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, private set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Ukupan rezultat testa \end{DoxyCompactList}\item 
+Date\+Time \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_test_a293f41eaf9cc38037426dedd9b8d5601}{Start\+Date}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, private set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Pocetni datum vazenja testa \end{DoxyCompactList}\item 
+ICollection$<$ \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_student_test}{Student\+Test}} $>$ \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_test_abc2548b334f7067181c0c0846ceedac0}{Student\+Tests}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, private set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Kolekcija studenata koji polazu ovaj test \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Klasa koja predstavlja test 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_core_1_1_domain_1_1_entites_1_1_test_a34cb88f28bcf85c5953c0ab538ab712d}\label{class_core_1_1_domain_1_1_entites_1_1_test_a34cb88f28bcf85c5953c0ab538ab712d}} 
+\index{Core.Domain.Entites.Test@{Core.Domain.Entites.Test}!Test@{Test}}
+\index{Test@{Test}!Core.Domain.Entites.Test@{Core.Domain.Entites.Test}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}}
+{\footnotesize\ttfamily Core.\+Domain.\+Entites.\+Test.\+Test (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_examiner}{Examiner}}}]{examiner,  }\item[{string}]{title,  }\item[{Date\+Time}]{start\+Date }\end{DoxyParamCaption})}
+
+
+
+Konsturktor testa koji kreira test od strane examiner-\/a. U slucaju da se stavi da je trenutak kreiranja trenutak pocetka test je odmah aktivan. U suprotnom je kreiran neaktivan test 
+
+
+\begin{DoxyParams}{Parameters}
+{\em examiner} & \\
+\hline
+{\em title} & \\
+\hline
+{\em start\+Date} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_core_1_1_domain_1_1_entites_1_1_test_af90c192dcb2ebee2d419ab2166ee9577}\label{class_core_1_1_domain_1_1_entites_1_1_test_af90c192dcb2ebee2d419ab2166ee9577}} 
+\index{Core.Domain.Entites.Test@{Core.Domain.Entites.Test}!Activate@{Activate}}
+\index{Activate@{Activate}!Core.Domain.Entites.Test@{Core.Domain.Entites.Test}}
+\doxysubsubsection{\texorpdfstring{Activate()}{Activate()}}
+{\footnotesize\ttfamily void Core.\+Domain.\+Entites.\+Test.\+Activate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Metoda koja sluzi za aktiviranje neaktivnog testa 
+
+\mbox{\Hypertarget{class_core_1_1_domain_1_1_entites_1_1_test_ab137c9ab0af9d40e9a6f8f28408a3f9b}\label{class_core_1_1_domain_1_1_entites_1_1_test_ab137c9ab0af9d40e9a6f8f28408a3f9b}} 
+\index{Core.Domain.Entites.Test@{Core.Domain.Entites.Test}!AddQuestion@{AddQuestion}}
+\index{AddQuestion@{AddQuestion}!Core.Domain.Entites.Test@{Core.Domain.Entites.Test}}
+\doxysubsubsection{\texorpdfstring{AddQuestion()}{AddQuestion()}}
+{\footnotesize\ttfamily void Core.\+Domain.\+Entites.\+Test.\+Add\+Question (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_question}{Question}}}]{test\+Question }\end{DoxyParamCaption})}
+
+
+
+Metoda koja sluzi za dodavanje pitanja u test 
+
+
+\begin{DoxyParams}{Parameters}
+{\em test\+Question} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_core_1_1_domain_1_1_entites_1_1_test_aba94f23588eeb646f7ee172bfbb02d8b}\label{class_core_1_1_domain_1_1_entites_1_1_test_aba94f23588eeb646f7ee172bfbb02d8b}} 
+\index{Core.Domain.Entites.Test@{Core.Domain.Entites.Test}!ChangeStartDate@{ChangeStartDate}}
+\index{ChangeStartDate@{ChangeStartDate}!Core.Domain.Entites.Test@{Core.Domain.Entites.Test}}
+\doxysubsubsection{\texorpdfstring{ChangeStartDate()}{ChangeStartDate()}}
+{\footnotesize\ttfamily void Core.\+Domain.\+Entites.\+Test.\+Change\+Start\+Date (\begin{DoxyParamCaption}\item[{Date\+Time}]{start\+Date }\end{DoxyParamCaption})}
+
+
+
+Metoda koja sluzi da promeni pocetak perioda kada test moze da se polaze 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+Date} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_core_1_1_domain_1_1_entites_1_1_test_a68d781358eeb32ba745399e72c3d5551}\label{class_core_1_1_domain_1_1_entites_1_1_test_a68d781358eeb32ba745399e72c3d5551}} 
+\index{Core.Domain.Entites.Test@{Core.Domain.Entites.Test}!Deactivate@{Deactivate}}
+\index{Deactivate@{Deactivate}!Core.Domain.Entites.Test@{Core.Domain.Entites.Test}}
+\doxysubsubsection{\texorpdfstring{Deactivate()}{Deactivate()}}
+{\footnotesize\ttfamily void Core.\+Domain.\+Entites.\+Test.\+Deactivate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Metoda koja sluzi za deaktiviranje aktivnog testa 
+
+\mbox{\Hypertarget{class_core_1_1_domain_1_1_entites_1_1_test_a7b87c0809d7302bbdff7e9d0011f9633}\label{class_core_1_1_domain_1_1_entites_1_1_test_a7b87c0809d7302bbdff7e9d0011f9633}} 
+\index{Core.Domain.Entites.Test@{Core.Domain.Entites.Test}!RemoveQuestion@{RemoveQuestion}}
+\index{RemoveQuestion@{RemoveQuestion}!Core.Domain.Entites.Test@{Core.Domain.Entites.Test}}
+\doxysubsubsection{\texorpdfstring{RemoveQuestion()}{RemoveQuestion()}}
+{\footnotesize\ttfamily void Core.\+Domain.\+Entites.\+Test.\+Remove\+Question (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_question}{Question}}}]{test\+Question }\end{DoxyParamCaption})}
+
+
+
+Metoda koja sluzi za uklanjanje pitanja iz testa 
+
+
+\begin{DoxyParams}{Parameters}
+{\em test\+Question} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_core_1_1_domain_1_1_entites_1_1_test_a08dedbde8e2990c759e2a87dda68b327}\label{class_core_1_1_domain_1_1_entites_1_1_test_a08dedbde8e2990c759e2a87dda68b327}} 
+\index{Core.Domain.Entites.Test@{Core.Domain.Entites.Test}!ExaminerId@{ExaminerId}}
+\index{ExaminerId@{ExaminerId}!Core.Domain.Entites.Test@{Core.Domain.Entites.Test}}
+\doxysubsubsection{\texorpdfstring{ExaminerId}{ExaminerId}}
+{\footnotesize\ttfamily int Core.\+Domain.\+Entites.\+Test.\+Examiner\+Id\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [private set]}}
+
+
+
+Id ispitivaca 
+
+\mbox{\Hypertarget{class_core_1_1_domain_1_1_entites_1_1_test_a8fb1b7f0aed08bd8851859bd4060ac6a}\label{class_core_1_1_domain_1_1_entites_1_1_test_a8fb1b7f0aed08bd8851859bd4060ac6a}} 
+\index{Core.Domain.Entites.Test@{Core.Domain.Entites.Test}!Id@{Id}}
+\index{Id@{Id}!Core.Domain.Entites.Test@{Core.Domain.Entites.Test}}
+\doxysubsubsection{\texorpdfstring{Id}{Id}}
+{\footnotesize\ttfamily short Core.\+Domain.\+Entites.\+Test.\+Id\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [private set]}}
+
+
+
+Id 
+
+\mbox{\Hypertarget{class_core_1_1_domain_1_1_entites_1_1_test_a7fbcb848f3cf315f755c03c8c97879d6}\label{class_core_1_1_domain_1_1_entites_1_1_test_a7fbcb848f3cf315f755c03c8c97879d6}} 
+\index{Core.Domain.Entites.Test@{Core.Domain.Entites.Test}!IsActive@{IsActive}}
+\index{IsActive@{IsActive}!Core.Domain.Entites.Test@{Core.Domain.Entites.Test}}
+\doxysubsubsection{\texorpdfstring{IsActive}{IsActive}}
+{\footnotesize\ttfamily bool Core.\+Domain.\+Entites.\+Test.\+Is\+Active\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [private set]}}
+
+
+
+Indikator da li je test aktivan za polaganje 
+
+\mbox{\Hypertarget{class_core_1_1_domain_1_1_entites_1_1_test_af0a35c72fda93147e512836f723abfa8}\label{class_core_1_1_domain_1_1_entites_1_1_test_af0a35c72fda93147e512836f723abfa8}} 
+\index{Core.Domain.Entites.Test@{Core.Domain.Entites.Test}!Questions@{Questions}}
+\index{Questions@{Questions}!Core.Domain.Entites.Test@{Core.Domain.Entites.Test}}
+\doxysubsubsection{\texorpdfstring{Questions}{Questions}}
+{\footnotesize\ttfamily ICollection$<$\mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_question}{Question}}$>$ Core.\+Domain.\+Entites.\+Test.\+Questions\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [private set]}}
+
+
+
+Kolekcija pitanja 
+
+\mbox{\Hypertarget{class_core_1_1_domain_1_1_entites_1_1_test_a293f41eaf9cc38037426dedd9b8d5601}\label{class_core_1_1_domain_1_1_entites_1_1_test_a293f41eaf9cc38037426dedd9b8d5601}} 
+\index{Core.Domain.Entites.Test@{Core.Domain.Entites.Test}!StartDate@{StartDate}}
+\index{StartDate@{StartDate}!Core.Domain.Entites.Test@{Core.Domain.Entites.Test}}
+\doxysubsubsection{\texorpdfstring{StartDate}{StartDate}}
+{\footnotesize\ttfamily Date\+Time Core.\+Domain.\+Entites.\+Test.\+Start\+Date\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [private set]}}
+
+
+
+Pocetni datum vazenja testa 
+
+\mbox{\Hypertarget{class_core_1_1_domain_1_1_entites_1_1_test_abc2548b334f7067181c0c0846ceedac0}\label{class_core_1_1_domain_1_1_entites_1_1_test_abc2548b334f7067181c0c0846ceedac0}} 
+\index{Core.Domain.Entites.Test@{Core.Domain.Entites.Test}!StudentTests@{StudentTests}}
+\index{StudentTests@{StudentTests}!Core.Domain.Entites.Test@{Core.Domain.Entites.Test}}
+\doxysubsubsection{\texorpdfstring{StudentTests}{StudentTests}}
+{\footnotesize\ttfamily ICollection$<$\mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_student_test}{Student\+Test}}$>$ Core.\+Domain.\+Entites.\+Test.\+Student\+Tests\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [private set]}}
+
+
+
+Kolekcija studenata koji polazu ovaj test 
+
+\mbox{\Hypertarget{class_core_1_1_domain_1_1_entites_1_1_test_a43093d97b8ba0e1cbe5e9c385a4b199e}\label{class_core_1_1_domain_1_1_entites_1_1_test_a43093d97b8ba0e1cbe5e9c385a4b199e}} 
+\index{Core.Domain.Entites.Test@{Core.Domain.Entites.Test}!TestScore@{TestScore}}
+\index{TestScore@{TestScore}!Core.Domain.Entites.Test@{Core.Domain.Entites.Test}}
+\doxysubsubsection{\texorpdfstring{TestScore}{TestScore}}
+{\footnotesize\ttfamily int Core.\+Domain.\+Entites.\+Test.\+Test\+Score\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [private set]}}
+
+
+
+Ukupan rezultat testa 
+
+\mbox{\Hypertarget{class_core_1_1_domain_1_1_entites_1_1_test_a56d2e5407bcb4e931237d158cd05e62a}\label{class_core_1_1_domain_1_1_entites_1_1_test_a56d2e5407bcb4e931237d158cd05e62a}} 
+\index{Core.Domain.Entites.Test@{Core.Domain.Entites.Test}!Title@{Title}}
+\index{Title@{Title}!Core.Domain.Entites.Test@{Core.Domain.Entites.Test}}
+\doxysubsubsection{\texorpdfstring{Title}{Title}}
+{\footnotesize\ttfamily string Core.\+Domain.\+Entites.\+Test.\+Title\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [private set]}}
+
+
+
+Naziv 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Testing\+System/\+Core/\+Domain/\+Entites/Test.\+cs\end{DoxyCompactItemize}

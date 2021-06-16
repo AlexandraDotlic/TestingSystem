@@ -23,6 +23,9 @@ namespace Core.Domain.Entites
         /// Odgovori na pitanje
         /// </summary>
         public ICollection<StudentTestQuestionResponse> Responses { get; private set; }
+        /// <summary>
+        /// Maksimalni skor za dato pitanje na testu
+        /// </summary>
         public int Score { get; private set; }
 
         public StudentTestQuestion() 

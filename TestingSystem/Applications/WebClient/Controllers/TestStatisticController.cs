@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace Applications.WebClient.Controllers
 {
+    /// <summary>
+    /// Kontroler klasa statistika za test
+    /// </summary>
     [Route("[controller]")]
     [ApiController]
     public class TestStatisticController : ControllerBase
@@ -35,6 +38,10 @@ namespace Applications.WebClient.Controllers
             Logger = logger;
         }
 
+        /// <summary>
+        /// Kontroler za kreiranje statistike za test
+        /// </summary>
+        /// <param name="createTestStatisticRequest"></param>
         [HttpPost]
         [Route("CreateTestStatistic")]
         [Authorize(Policy = "IsExaminer")]
@@ -53,6 +60,10 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+        /// <summary>
+        /// Kontroler za zakazivanje kreiranja statistike za test
+        /// </summary>
+        /// <param name="createTestStatisticRequest"></param>
         [HttpPost]
         [Route("ScheduleTestStatisticCreation")]
         [Authorize(Policy = "IsExaminer")]
@@ -77,7 +88,10 @@ namespace Applications.WebClient.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Kontroler za mesecno zakazivanje kreiranja statistike za test
+        /// </summary>
+        /// <param name="createTestStatisticRequest"></param>
         [HttpPost]
         [Route("ScheduleMonthlyTestStatisticCreation")]
         [Authorize(Policy = "IsExaminer")]
@@ -97,6 +111,10 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+        /// <summary>
+        /// Kontroler za vracanje statistika za dati test
+        /// </summary>
+        /// <param name="testId"></param>
         [HttpGet]
         [Route("GetAllStatisticsForTest/{testId}")]
         [Authorize(Policy = "IsExaminer")]
@@ -122,6 +140,11 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+        /// <summary>
+        /// Kontroler za vracanje statistika za test za odredjeni datum
+        /// </summary>
+        /// <param name="testId"></param>
+        /// <param name="date"></param>
         [HttpGet]
         [Route("GetStatisticForTestByDate")]
         [Authorize(Policy = "IsExaminer")]

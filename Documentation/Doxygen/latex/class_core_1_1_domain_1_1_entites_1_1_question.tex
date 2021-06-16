@@ -1,0 +1,128 @@
+\hypertarget{class_core_1_1_domain_1_1_entites_1_1_question}{}\doxysection{Core.\+Domain.\+Entites.\+Question Class Reference}
+\label{class_core_1_1_domain_1_1_entites_1_1_question}\index{Core.Domain.Entites.Question@{Core.Domain.Entites.Question}}
+
+
+Klasa pitanja koja mogu da se nadju na nekom testu  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_question_a097f09ab4b8c0d24964ba5d8384a0b7e}{Question}} (string question\+Text, ICollection$<$ \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_answer_option}{Answer\+Option}} $>$ answer\+Options)
+\begin{DoxyCompactList}\small\item\em Konstruktor pitanja u zavisnosti od tipa odgovora Tip odgovora moze biti\+: Free text, Yes/\+No tip ili Multiple choice Free Text jedno polje za tekstualni odgovor, Yes/\+No dve moguce opcije, a Mutiple choice proizvoljan broj opcija za odgovor \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_question_af5bcc0b73b9e4c12126f1dcc2d349834}{Id}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, protected set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Id \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_question_ad3f06a53bc7a5e6810946fd5ea31b61f}{Question\+Text}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, protected set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Tekst pitanja \end{DoxyCompactList}\item 
+ICollection$<$ \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_answer_option}{Answer\+Option}} $>$ \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_question_aec5f8922345877bb0f7c832a184c0dab}{Answer\+Options}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, private set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Ponudjeni odgovori \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_test}{Test}} \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_question_acb55ba01adbf079859467d876aee8788}{Test}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, private set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_test}{Test}} kome pitanje pripada \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_core_1_1_domain_1_1_entites_1_1_question_a4ec41dbd71c5eae014c269575a29e514}\label{class_core_1_1_domain_1_1_entites_1_1_question_a4ec41dbd71c5eae014c269575a29e514}} 
+short {\bfseries Test\+Id}\hspace{0.3cm}{\ttfamily  \mbox{[}get, private set\mbox{]}}
+\item 
+\mbox{\hyperlink{namespace_core_1_1_domain_1_1_entites_ae1c6094ce28d9fce2a783a9157f234ee}{Question\+Type}} \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_question_a58e589ab75f248ac5eb7ae9939d39805}{Type}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, private set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Tip pitanja \end{DoxyCompactList}\item 
+byte \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_question_ac3ab93ecedc147017fa48f2e6853160c}{Question\+Score}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, private set\mbox{]}}
+\begin{DoxyCompactList}\small\item\em Maksimalan broj poena koji se moze ostvariti na tom pitnju u zavisnosti od tipa mogucih odgovora \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Klasa pitanja koja mogu da se nadju na nekom testu 
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_core_1_1_domain_1_1_entites_1_1_question_a097f09ab4b8c0d24964ba5d8384a0b7e}\label{class_core_1_1_domain_1_1_entites_1_1_question_a097f09ab4b8c0d24964ba5d8384a0b7e}} 
+\index{Core.Domain.Entites.Question@{Core.Domain.Entites.Question}!Question@{Question}}
+\index{Question@{Question}!Core.Domain.Entites.Question@{Core.Domain.Entites.Question}}
+\doxysubsubsection{\texorpdfstring{Question()}{Question()}}
+{\footnotesize\ttfamily Core.\+Domain.\+Entites.\+Question.\+Question (\begin{DoxyParamCaption}\item[{string}]{question\+Text,  }\item[{ICollection$<$ \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_answer_option}{Answer\+Option}} $>$}]{answer\+Options }\end{DoxyParamCaption})}
+
+
+
+Konstruktor pitanja u zavisnosti od tipa odgovora Tip odgovora moze biti\+: Free text, Yes/\+No tip ili Multiple choice Free Text jedno polje za tekstualni odgovor, Yes/\+No dve moguce opcije, a Mutiple choice proizvoljan broj opcija za odgovor 
+
+
+\begin{DoxyParams}{Parameters}
+{\em question\+Text} & \\
+\hline
+{\em answer\+Options} & \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Null\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+\doxysubsection{Property Documentation}
+\mbox{\Hypertarget{class_core_1_1_domain_1_1_entites_1_1_question_aec5f8922345877bb0f7c832a184c0dab}\label{class_core_1_1_domain_1_1_entites_1_1_question_aec5f8922345877bb0f7c832a184c0dab}} 
+\index{Core.Domain.Entites.Question@{Core.Domain.Entites.Question}!AnswerOptions@{AnswerOptions}}
+\index{AnswerOptions@{AnswerOptions}!Core.Domain.Entites.Question@{Core.Domain.Entites.Question}}
+\doxysubsubsection{\texorpdfstring{AnswerOptions}{AnswerOptions}}
+{\footnotesize\ttfamily ICollection$<$\mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_answer_option}{Answer\+Option}}$>$ Core.\+Domain.\+Entites.\+Question.\+Answer\+Options\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [private set]}}
+
+
+
+Ponudjeni odgovori 
+
+\mbox{\Hypertarget{class_core_1_1_domain_1_1_entites_1_1_question_af5bcc0b73b9e4c12126f1dcc2d349834}\label{class_core_1_1_domain_1_1_entites_1_1_question_af5bcc0b73b9e4c12126f1dcc2d349834}} 
+\index{Core.Domain.Entites.Question@{Core.Domain.Entites.Question}!Id@{Id}}
+\index{Id@{Id}!Core.Domain.Entites.Question@{Core.Domain.Entites.Question}}
+\doxysubsubsection{\texorpdfstring{Id}{Id}}
+{\footnotesize\ttfamily int Core.\+Domain.\+Entites.\+Question.\+Id\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [protected set]}}
+
+
+
+Id 
+
+\mbox{\Hypertarget{class_core_1_1_domain_1_1_entites_1_1_question_ac3ab93ecedc147017fa48f2e6853160c}\label{class_core_1_1_domain_1_1_entites_1_1_question_ac3ab93ecedc147017fa48f2e6853160c}} 
+\index{Core.Domain.Entites.Question@{Core.Domain.Entites.Question}!QuestionScore@{QuestionScore}}
+\index{QuestionScore@{QuestionScore}!Core.Domain.Entites.Question@{Core.Domain.Entites.Question}}
+\doxysubsubsection{\texorpdfstring{QuestionScore}{QuestionScore}}
+{\footnotesize\ttfamily byte Core.\+Domain.\+Entites.\+Question.\+Question\+Score\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [private set]}}
+
+
+
+Maksimalan broj poena koji se moze ostvariti na tom pitnju u zavisnosti od tipa mogucih odgovora 
+
+\mbox{\Hypertarget{class_core_1_1_domain_1_1_entites_1_1_question_ad3f06a53bc7a5e6810946fd5ea31b61f}\label{class_core_1_1_domain_1_1_entites_1_1_question_ad3f06a53bc7a5e6810946fd5ea31b61f}} 
+\index{Core.Domain.Entites.Question@{Core.Domain.Entites.Question}!QuestionText@{QuestionText}}
+\index{QuestionText@{QuestionText}!Core.Domain.Entites.Question@{Core.Domain.Entites.Question}}
+\doxysubsubsection{\texorpdfstring{QuestionText}{QuestionText}}
+{\footnotesize\ttfamily string Core.\+Domain.\+Entites.\+Question.\+Question\+Text\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [protected set]}}
+
+
+
+Tekst pitanja 
+
+\mbox{\Hypertarget{class_core_1_1_domain_1_1_entites_1_1_question_acb55ba01adbf079859467d876aee8788}\label{class_core_1_1_domain_1_1_entites_1_1_question_acb55ba01adbf079859467d876aee8788}} 
+\index{Core.Domain.Entites.Question@{Core.Domain.Entites.Question}!Test@{Test}}
+\index{Test@{Test}!Core.Domain.Entites.Question@{Core.Domain.Entites.Question}}
+\doxysubsubsection{\texorpdfstring{Test}{Test}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_test}{Test}} Core.\+Domain.\+Entites.\+Question.\+Test\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [private set]}}
+
+
+
+\mbox{\hyperlink{class_core_1_1_domain_1_1_entites_1_1_test}{Test}} kome pitanje pripada 
+
+\mbox{\Hypertarget{class_core_1_1_domain_1_1_entites_1_1_question_a58e589ab75f248ac5eb7ae9939d39805}\label{class_core_1_1_domain_1_1_entites_1_1_question_a58e589ab75f248ac5eb7ae9939d39805}} 
+\index{Core.Domain.Entites.Question@{Core.Domain.Entites.Question}!Type@{Type}}
+\index{Type@{Type}!Core.Domain.Entites.Question@{Core.Domain.Entites.Question}}
+\doxysubsubsection{\texorpdfstring{Type}{Type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespace_core_1_1_domain_1_1_entites_ae1c6094ce28d9fce2a783a9157f234ee}{Question\+Type}} Core.\+Domain.\+Entites.\+Question.\+Type\hspace{0.3cm}{\ttfamily [get]}, {\ttfamily [private set]}}
+
+
+
+Tip pitanja 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Testing\+System/\+Core/\+Domain/\+Entites/Question.\+cs\end{DoxyCompactItemize}

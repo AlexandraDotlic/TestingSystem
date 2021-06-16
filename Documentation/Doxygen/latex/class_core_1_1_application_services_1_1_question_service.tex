@@ -1,0 +1,52 @@
+\hypertarget{class_core_1_1_application_services_1_1_question_service}{}\doxysection{Core.\+Application\+Services.\+Question\+Service Class Reference}
+\label{class_core_1_1_application_services_1_1_question_service}\index{Core.ApplicationServices.QuestionService@{Core.ApplicationServices.QuestionService}}
+
+
+Servis pitanja  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_core_1_1_application_services_1_1_question_service_a9d5e48b9c987a67ba87646ebdbaffeba}\label{class_core_1_1_application_services_1_1_question_service_a9d5e48b9c987a67ba87646ebdbaffeba}} 
+{\bfseries Question\+Service} (\mbox{\hyperlink{interface_core_1_1_domain_1_1_repositories_1_1_i_core_unit_of_work}{ICore\+Unit\+Of\+Work}} unit\+Of\+Work)
+\item 
+async Task$<$ ICollection$<$ \mbox{\hyperlink{class_core_1_1_application_services_1_1_d_t_os_1_1_question_d_t_o}{Question\+DTO}} $>$ $>$ \mbox{\hyperlink{class_core_1_1_application_services_1_1_question_service_a4c866239366e48d8d57579fc4b7e90a4}{Get\+All\+Questions\+For\+Test}} (short test\+Id)
+\begin{DoxyCompactList}\small\item\em Servisni task koji vraca sva pitanja koja pripadaju jednom testu \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_core_1_1_application_services_1_1_question_service_a63ca2f427e6000a4673dc04544f0c842}\label{class_core_1_1_application_services_1_1_question_service_a63ca2f427e6000a4673dc04544f0c842}} 
+readonly \mbox{\hyperlink{interface_core_1_1_domain_1_1_repositories_1_1_i_core_unit_of_work}{ICore\+Unit\+Of\+Work}} {\bfseries Unit\+Of\+Work}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Servis pitanja 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_core_1_1_application_services_1_1_question_service_a4c866239366e48d8d57579fc4b7e90a4}\label{class_core_1_1_application_services_1_1_question_service_a4c866239366e48d8d57579fc4b7e90a4}} 
+\index{Core.ApplicationServices.QuestionService@{Core.ApplicationServices.QuestionService}!GetAllQuestionsForTest@{GetAllQuestionsForTest}}
+\index{GetAllQuestionsForTest@{GetAllQuestionsForTest}!Core.ApplicationServices.QuestionService@{Core.ApplicationServices.QuestionService}}
+\doxysubsubsection{\texorpdfstring{GetAllQuestionsForTest()}{GetAllQuestionsForTest()}}
+{\footnotesize\ttfamily async Task$<$ICollection$<$\mbox{\hyperlink{class_core_1_1_application_services_1_1_d_t_os_1_1_question_d_t_o}{Question\+DTO}}$>$ $>$ Core.\+Application\+Services.\+Question\+Service.\+Get\+All\+Questions\+For\+Test (\begin{DoxyParamCaption}\item[{short}]{test\+Id }\end{DoxyParamCaption})}
+
+
+
+Servisni task koji vraca sva pitanja koja pripadaju jednom testu 
+
+
+\begin{DoxyParams}{Parameters}
+{\em test\+Id} & Id testa\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Kolekcija pitanja sa testa
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Testing\+System/\+Core/\+Application\+Services/Question\+Service.\+cs\end{DoxyCompactItemize}

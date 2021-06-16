@@ -1,0 +1,77 @@
+\hypertarget{interface_core_1_1_domain_1_1_services_1_1_external_1_1_mail_service_1_1_i_mail_service}{}\doxysection{Core.\+Domain.\+Services.\+External.\+Mail\+Service.\+IMail\+Service Interface Reference}
+\label{interface_core_1_1_domain_1_1_services_1_1_external_1_1_mail_service_1_1_i_mail_service}\index{Core.Domain.Services.External.MailService.IMailService@{Core.Domain.Services.External.MailService.IMailService}}
+
+
+Interfejs mail servisa  
+
+
+Inheritance diagram for Core.\+Domain.\+Services.\+External.\+Mail\+Service.\+IMail\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interface_core_1_1_domain_1_1_services_1_1_external_1_1_mail_service_1_1_i_mail_service}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Task \mbox{\hyperlink{interface_core_1_1_domain_1_1_services_1_1_external_1_1_mail_service_1_1_i_mail_service_a3789cc32830808f82579e92f5b5890e0}{Send\+Email\+Async}} (\mbox{\hyperlink{class_core_1_1_domain_1_1_services_1_1_external_1_1_mail_service_1_1_mail_request}{Mail\+Request}} mail\+Request)
+\begin{DoxyCompactList}\small\item\em Metod za slanje email-\/a \end{DoxyCompactList}\item 
+Task \mbox{\hyperlink{interface_core_1_1_domain_1_1_services_1_1_external_1_1_mail_service_1_1_i_mail_service_a116311657cd6a264eec24899a1c2e58d}{Send\+Welcome\+Email\+Async}} (\mbox{\hyperlink{class_core_1_1_domain_1_1_services_1_1_external_1_1_mail_service_1_1_welcome_mail_request}{Welcome\+Mail\+Request}} welcome\+Mail\+Request)
+\begin{DoxyCompactList}\small\item\em Metod za slanje email-\/a \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interfejs mail servisa 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{interface_core_1_1_domain_1_1_services_1_1_external_1_1_mail_service_1_1_i_mail_service_a3789cc32830808f82579e92f5b5890e0}\label{interface_core_1_1_domain_1_1_services_1_1_external_1_1_mail_service_1_1_i_mail_service_a3789cc32830808f82579e92f5b5890e0}} 
+\index{Core.Domain.Services.External.MailService.IMailService@{Core.Domain.Services.External.MailService.IMailService}!SendEmailAsync@{SendEmailAsync}}
+\index{SendEmailAsync@{SendEmailAsync}!Core.Domain.Services.External.MailService.IMailService@{Core.Domain.Services.External.MailService.IMailService}}
+\doxysubsubsection{\texorpdfstring{SendEmailAsync()}{SendEmailAsync()}}
+{\footnotesize\ttfamily Task Core.\+Domain.\+Services.\+External.\+Mail\+Service.\+IMail\+Service.\+Send\+Email\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_core_1_1_domain_1_1_services_1_1_external_1_1_mail_service_1_1_mail_request}{Mail\+Request}}}]{mail\+Request }\end{DoxyParamCaption})}
+
+
+
+Metod za slanje email-\/a 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mail\+Request} & Klasa koja sadrzi email, naziv emaila, body i attachment-\/e\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_core_1_1_infrastructure_1_1_services_1_1_mail_service_1_1_mail_service_ae75d503794cd4ac4e291c54eb9fd1060}{Core.\+Infrastructure.\+Services.\+Mail\+Service.\+Mail\+Service}}.
+
+\mbox{\Hypertarget{interface_core_1_1_domain_1_1_services_1_1_external_1_1_mail_service_1_1_i_mail_service_a116311657cd6a264eec24899a1c2e58d}\label{interface_core_1_1_domain_1_1_services_1_1_external_1_1_mail_service_1_1_i_mail_service_a116311657cd6a264eec24899a1c2e58d}} 
+\index{Core.Domain.Services.External.MailService.IMailService@{Core.Domain.Services.External.MailService.IMailService}!SendWelcomeEmailAsync@{SendWelcomeEmailAsync}}
+\index{SendWelcomeEmailAsync@{SendWelcomeEmailAsync}!Core.Domain.Services.External.MailService.IMailService@{Core.Domain.Services.External.MailService.IMailService}}
+\doxysubsubsection{\texorpdfstring{SendWelcomeEmailAsync()}{SendWelcomeEmailAsync()}}
+{\footnotesize\ttfamily Task Core.\+Domain.\+Services.\+External.\+Mail\+Service.\+IMail\+Service.\+Send\+Welcome\+Email\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_core_1_1_domain_1_1_services_1_1_external_1_1_mail_service_1_1_welcome_mail_request}{Welcome\+Mail\+Request}}}]{welcome\+Mail\+Request }\end{DoxyParamCaption})}
+
+
+
+Metod za slanje email-\/a 
+
+
+\begin{DoxyParams}{Parameters}
+{\em welcome\+Mail\+Request} & Klasa koja sadrzi email i username\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_core_1_1_infrastructure_1_1_services_1_1_mail_service_1_1_mail_service_a9823de573d4ac13e8c08ebb629eba7ef}{Core.\+Infrastructure.\+Services.\+Mail\+Service.\+Mail\+Service}}.
+
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Testing\+System/\+Core/\+Domain/\+Services/\+External/\+Mail\+Service/IMail\+Service.\+cs\end{DoxyCompactItemize}

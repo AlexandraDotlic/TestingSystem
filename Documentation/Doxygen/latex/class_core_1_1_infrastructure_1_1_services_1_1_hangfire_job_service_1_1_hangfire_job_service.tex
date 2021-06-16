@@ -1,0 +1,118 @@
+\hypertarget{class_core_1_1_infrastructure_1_1_services_1_1_hangfire_job_service_1_1_hangfire_job_service}{}\doxysection{Core.\+Infrastructure.\+Services.\+Hangfire\+Job\+Service.\+Hangfire\+Job\+Service Class Reference}
+\label{class_core_1_1_infrastructure_1_1_services_1_1_hangfire_job_service_1_1_hangfire_job_service}\index{Core.Infrastructure.Services.HangfireJobService.HangfireJobService@{Core.Infrastructure.Services.HangfireJobService.HangfireJobService}}
+
+
+Hangfire implementacija Job servisa  
+
+
+Inheritance diagram for Core.\+Infrastructure.\+Services.\+Hangfire\+Job\+Service.\+Hangfire\+Job\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_core_1_1_infrastructure_1_1_services_1_1_hangfire_job_service_1_1_hangfire_job_service}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+async Task \mbox{\hyperlink{class_core_1_1_infrastructure_1_1_services_1_1_hangfire_job_service_1_1_hangfire_job_service_a1b550c68201a6b5347fa5f43d0d9fbb5}{Create\+Monthly\+Recurring\+Job$<$ T $>$}} (Expression$<$ Action$<$ T $>$$>$ method\+Call)
+\begin{DoxyCompactList}\small\item\em Metod kreira job koji se ponavlja svakog meseca \end{DoxyCompactList}\item 
+async Task$<$ string $>$ \mbox{\hyperlink{class_core_1_1_infrastructure_1_1_services_1_1_hangfire_job_service_1_1_hangfire_job_service_a2021fc7b69e7295d55e42ad9ce3283b1}{Enqueue\+Job$<$ T $>$}} (Expression$<$ Action$<$ T $>$$>$ method\+Call)
+\begin{DoxyCompactList}\small\item\em Metod kreira job koji se trenutno izvrsava \end{DoxyCompactList}\item 
+async Task$<$ string $>$ \mbox{\hyperlink{class_core_1_1_infrastructure_1_1_services_1_1_hangfire_job_service_1_1_hangfire_job_service_ae5037e90f2858b98b65f40ff2e6cb373}{Schedule\+Job$<$ T $>$}} (Expression$<$ Action$<$ T $>$$>$ method\+Call, Time\+Span delay)
+\begin{DoxyCompactList}\small\item\em Metod kreira job koji se izvrsava u zakazano vreme \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Hangfire implementacija Job servisa 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_core_1_1_infrastructure_1_1_services_1_1_hangfire_job_service_1_1_hangfire_job_service_a1b550c68201a6b5347fa5f43d0d9fbb5}\label{class_core_1_1_infrastructure_1_1_services_1_1_hangfire_job_service_1_1_hangfire_job_service_a1b550c68201a6b5347fa5f43d0d9fbb5}} 
+\index{Core.Infrastructure.Services.HangfireJobService.HangfireJobService@{Core.Infrastructure.Services.HangfireJobService.HangfireJobService}!CreateMonthlyRecurringJob$<$ T $>$@{CreateMonthlyRecurringJob$<$ T $>$}}
+\index{CreateMonthlyRecurringJob$<$ T $>$@{CreateMonthlyRecurringJob$<$ T $>$}!Core.Infrastructure.Services.HangfireJobService.HangfireJobService@{Core.Infrastructure.Services.HangfireJobService.HangfireJobService}}
+\doxysubsubsection{\texorpdfstring{CreateMonthlyRecurringJob$<$ T $>$()}{CreateMonthlyRecurringJob< T >()}}
+{\footnotesize\ttfamily async Task Core.\+Infrastructure.\+Services.\+Hangfire\+Job\+Service.\+Hangfire\+Job\+Service.\+Create\+Monthly\+Recurring\+Job$<$ T $>$ (\begin{DoxyParamCaption}\item[{Expression$<$ Action$<$ T $>$$>$}]{method\+Call }\end{DoxyParamCaption})}
+
+
+
+Metod kreira job koji se ponavlja svakog meseca 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em method\+Call} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{interface_core_1_1_domain_1_1_services_1_1_external_1_1_job_service_1_1_i_job_service_a6454f554b2538cca81167ed001e2bbe0}{Core.\+Domain.\+Services.\+External.\+Job\+Service.\+IJob\+Service}}.
+
+\mbox{\Hypertarget{class_core_1_1_infrastructure_1_1_services_1_1_hangfire_job_service_1_1_hangfire_job_service_a2021fc7b69e7295d55e42ad9ce3283b1}\label{class_core_1_1_infrastructure_1_1_services_1_1_hangfire_job_service_1_1_hangfire_job_service_a2021fc7b69e7295d55e42ad9ce3283b1}} 
+\index{Core.Infrastructure.Services.HangfireJobService.HangfireJobService@{Core.Infrastructure.Services.HangfireJobService.HangfireJobService}!EnqueueJob$<$ T $>$@{EnqueueJob$<$ T $>$}}
+\index{EnqueueJob$<$ T $>$@{EnqueueJob$<$ T $>$}!Core.Infrastructure.Services.HangfireJobService.HangfireJobService@{Core.Infrastructure.Services.HangfireJobService.HangfireJobService}}
+\doxysubsubsection{\texorpdfstring{EnqueueJob$<$ T $>$()}{EnqueueJob< T >()}}
+{\footnotesize\ttfamily async Task$<$string$>$ Core.\+Infrastructure.\+Services.\+Hangfire\+Job\+Service.\+Hangfire\+Job\+Service.\+Enqueue\+Job$<$ T $>$ (\begin{DoxyParamCaption}\item[{Expression$<$ Action$<$ T $>$$>$}]{method\+Call }\end{DoxyParamCaption})}
+
+
+
+Metod kreira job koji se trenutno izvrsava 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em method\+Call} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{interface_core_1_1_domain_1_1_services_1_1_external_1_1_job_service_1_1_i_job_service_a3ce92ae8473f510484a704e995551aa8}{Core.\+Domain.\+Services.\+External.\+Job\+Service.\+IJob\+Service}}.
+
+\mbox{\Hypertarget{class_core_1_1_infrastructure_1_1_services_1_1_hangfire_job_service_1_1_hangfire_job_service_ae5037e90f2858b98b65f40ff2e6cb373}\label{class_core_1_1_infrastructure_1_1_services_1_1_hangfire_job_service_1_1_hangfire_job_service_ae5037e90f2858b98b65f40ff2e6cb373}} 
+\index{Core.Infrastructure.Services.HangfireJobService.HangfireJobService@{Core.Infrastructure.Services.HangfireJobService.HangfireJobService}!ScheduleJob$<$ T $>$@{ScheduleJob$<$ T $>$}}
+\index{ScheduleJob$<$ T $>$@{ScheduleJob$<$ T $>$}!Core.Infrastructure.Services.HangfireJobService.HangfireJobService@{Core.Infrastructure.Services.HangfireJobService.HangfireJobService}}
+\doxysubsubsection{\texorpdfstring{ScheduleJob$<$ T $>$()}{ScheduleJob< T >()}}
+{\footnotesize\ttfamily async Task$<$string$>$ Core.\+Infrastructure.\+Services.\+Hangfire\+Job\+Service.\+Hangfire\+Job\+Service.\+Schedule\+Job$<$ T $>$ (\begin{DoxyParamCaption}\item[{Expression$<$ Action$<$ T $>$$>$}]{method\+Call,  }\item[{Time\+Span}]{delay }\end{DoxyParamCaption})}
+
+
+
+Metod kreira job koji se izvrsava u zakazano vreme 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em method\+Call} & \\
+\hline
+{\em delay} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{interface_core_1_1_domain_1_1_services_1_1_external_1_1_job_service_1_1_i_job_service_a7aaec4a78f21ac102b2427894a065fbc}{Core.\+Domain.\+Services.\+External.\+Job\+Service.\+IJob\+Service}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Testing\+System/\+Core/\+Infrastructure/\+Services/\+Hangfire\+Job\+Service/Hangfire\+Job\+Service.\+cs\end{DoxyCompactItemize}

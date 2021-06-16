@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace Core.ApplicationServices
 {
+    /// <summary>
+    /// Servis studenta
+    /// </summary>
     public class StudentService
     {
         private readonly ICoreUnitOfWork UnitOfWork;
@@ -18,6 +21,16 @@ namespace Core.ApplicationServices
         {
             UnitOfWork = unitOfWork;
         }
+
+        /// <summary>
+        /// Servisni task za keiranje studenta
+        /// </summary>
+        /// <param name="firstName">Ime</param>
+        /// <param name="lastName">Prezime</param>
+        /// <param name="email">Email</param>
+        /// <param name="externalId">Eksterni id iz baze za autentifikaciju</param>
+        /// <returns>int - id studenta</returns>
+        /// <exception cref="ArgumentNullException"></exception>
 
         public async Task<int> CreateStudent(string firstName, string lastName, string email, string externalId)
         {
@@ -30,6 +43,13 @@ namespace Core.ApplicationServices
             await UnitOfWork.SaveChangesAsync();
             return newStudent.Id;
         }
+
+        /// <summary>
+        /// Servisni task za brisanje studenta
+        /// </summary>
+        /// <param name="studentId">Id studenta</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
 
         public async Task DeleteStudent(int studentId)
         {
@@ -52,6 +72,14 @@ namespace Core.ApplicationServices
             await UnitOfWork.CommitTransactionAsync();
         }
 
+        /// <summary>
+        /// Servisni task za postavljanje imena studenta
+        /// </summary>
+        /// <param name="externalId">Eksterni id iz baze za autentifikaciju</param>
+        /// <param name="firstName">Ime koje se postavlja</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+
         public async Task SetStudentFirstName(string externalId, string firstName)
         {
             if (string.IsNullOrEmpty(externalId))
@@ -68,6 +96,15 @@ namespace Core.ApplicationServices
             await UnitOfWork.StudentRepository.Update(student);
             await UnitOfWork.SaveChangesAsync();
         }
+
+
+        /// <summary>
+        /// Servisni task za postavljanje prezimena studenta
+        /// </summary>
+        /// <param name="externalId">Eksterni id iz baze za autentifikaciju</param>
+        /// <param name="lastName">Prezime koje se postavlja</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
 
         public async Task SetStudentLastName(string externalId, string lastName)
         {
@@ -87,6 +124,12 @@ namespace Core.ApplicationServices
 
         }
 
+        /// <summary>
+        /// Servisni task koji vraca kolekciju studenata koji pripadaju grupi
+        /// </summary>
+        /// <param name="groupId">Id grupe</param>
+        /// <returns>Kolekcija studenata iz grupe</returns>
+
         public async Task<ICollection<StudentDTO>> GetAllStudentsForGroup(short groupId)
         {
             IReadOnlyCollection<Student> students = await UnitOfWork.StudentRepository.SearchByWithIncludes(s => s.GroupId == groupId);
@@ -98,6 +141,10 @@ namespace Core.ApplicationServices
 
         }
 
+        /// <summary>
+        /// Servisni task koji vraca kolekciju svih studenata iz baze
+        /// </summary>
+        /// <returns>Kolekcija svih studenata iz baze</returns>
         public async Task<ICollection<StudentDTO>> GetAllStudents()
         {
             IReadOnlyCollection<Student> students = await UnitOfWork.StudentRepository.GetAllList();
@@ -110,6 +157,13 @@ namespace Core.ApplicationServices
 
         }
 
+        /// <summary>
+        /// Servisni task koji vraca rezultat sa testa koji je polagao student
+        /// </summary>
+        /// <param name="studentExternalId">Eksterni id studenta iz baze za autentifikaciju</param>
+        /// <param name="testId">id testa</param>
+        /// <returns>Podaci o polaganju testa od strane studenta koji ukljucuju njegov rezultat i maksimalni ostvarivi rezultat na tom testu.</returns>
+        /// <exception cref="ArgumentNullException"></exception>
 
         public async Task<StudentTestScoreDTO> GetStudentTestResult(string studentExternalId, short testId)
         {
@@ -142,6 +196,13 @@ namespace Core.ApplicationServices
 
         }
 
+        /// <summary>
+        /// Servisni task koji vraca rezultate studenta na svim testovima koje je polagao
+        /// </summary>
+        /// <param name="studentExternalId">Eksterni Id studenta iz baze za autentifikaciju</param>
+        /// <returns>Kolekcija svih rezultata koje je student ostvario na testovima</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+
         public async Task<ICollection<StudentTestScoreDTO>> GetStudentResultsForAllTakenTests(string studentExternalId)
         {
             if (string.IsNullOrEmpty(studentExternalId))
@@ -172,6 +233,12 @@ namespace Core.ApplicationServices
 
         }
 
+        /// <summary>
+        /// Servisni metod koji vraca email studenta
+        /// </summary>
+        /// <param name="studentId">Id studenta</param>
+        /// <returns>string - email studenta</returns>
+        /// <exception cref="ArgumentNullException"></exception>
 
         public async Task<string> GetStudentEmail(int studentId)
         {
@@ -179,10 +246,10 @@ namespace Core.ApplicationServices
 
             if (student == null)
             {
-                throw new ArgumentNullException($"{nameof(Student)} with externalId {studentId} not exist");
+                throw new ArgumentNullException($"{nameof(Student)} with id {studentId} not exist");
             }
 
-            return student.GetEmail();
+            return student.Email;
         }
 
     }

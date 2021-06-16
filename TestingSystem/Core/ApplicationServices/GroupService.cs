@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Core.ApplicationServices
 {
+    /// <summary>
+    /// Servis grupe
+    /// </summary>
     public class GroupService
     {
         private readonly ICoreUnitOfWork UnitOfWork;
@@ -16,6 +19,14 @@ namespace Core.ApplicationServices
         {
             UnitOfWork = unitOfWork;
         }
+
+        /// <summary>
+        /// Servisni task za kreiranje grupe od strane ispitivaca
+        /// </summary>
+        /// <param name="title">Naziv grupe</param>
+        /// <param name="externalExaminerId">Eksterni Id ispitivaca</param>
+        /// <returns>short - id grupe</returns>
+        /// <exception cref="ArgumentNullException"></exception>
 
         public async Task<short> CreateGroup(string title, string externalExaminerId)
         {
@@ -32,6 +43,13 @@ namespace Core.ApplicationServices
             return group.Id;
         }
 
+        /// <summary>
+        /// Servisni task za brisanje grupe
+        /// </summary>
+        /// <param name="groupId">Id grupe</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+
         public async Task DeleteGroup(short groupId)
         {
             Group group = await UnitOfWork.GroupRepository.GetById(groupId);
@@ -42,6 +60,14 @@ namespace Core.ApplicationServices
             await UnitOfWork.GroupRepository.Delete(group);
             await UnitOfWork.SaveChangesAsync();
         }
+
+        /// <summary>
+        /// Servisni task za dodavanje studenta u grupu
+        /// </summary>
+        /// <param name="groupId">Id grupe</param>
+        /// <param name="studentId">Id studenta</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
 
         public async Task AddStudentToGroup(short groupId, int studentId)
         {
@@ -62,6 +88,11 @@ namespace Core.ApplicationServices
             await UnitOfWork.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Servisni task koji vraca sve grupe koje je kreirao jedan ispitivac
+        /// </summary>
+        /// <param name="externalExaminerId">Eksterni id ispitivaca iz baze za autentifikaciju</param>
+        /// <returns>Kolekcija grupa koje je kreirao ispitivac</returns>
 
         public async Task<ICollection<GroupDTO>> GetAllGroupsForExaminer(string externalExaminerId)
         {
@@ -73,6 +104,10 @@ namespace Core.ApplicationServices
             return groupDTOs;
         }
 
+        /// <summary>
+        /// Servisni task koji vraca sve grupe iz baze
+        /// </summary>
+        /// <returns>Kolekcija svih grupa iz baze</returns>
         public async Task<ICollection<GroupDTO>> GetAllGroups()
         {
             IReadOnlyCollection<Group> groups = await UnitOfWork.GroupRepository.GetAllList();
@@ -86,6 +121,13 @@ namespace Core.ApplicationServices
 
         }
 
+        /// <summary>
+        /// Servisni task koji grupi postavlja naziv
+        /// </summary>
+        /// <param name="groupId">Id grupe</param>
+        /// <param name="title">Naziv grupe</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
 
         public async Task SetGroupTitle(short groupId, string title)
         {

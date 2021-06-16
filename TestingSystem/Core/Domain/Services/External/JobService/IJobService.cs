@@ -26,6 +26,12 @@ namespace Core.Domain.Services.External.JobService
         /// <param name="delay"></param>
         /// <returns></returns>
         Task<string> ScheduleJob<T>(Expression<Action<T>> methodCall, TimeSpan delay);
+        /// <summary>
+        /// Metod kreira job koji se ponavlja svakog meseca
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="methodCall"></param>
+        /// <returns></returns>
         Task CreateMonthlyRecurringJob<T>(Expression<Action<T>> methodCall);
 
     }

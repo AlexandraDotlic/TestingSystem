@@ -1,0 +1,117 @@
+\hypertarget{class_core_1_1_application_services_1_1_test_statistic_service}{}\doxysection{Core.\+Application\+Services.\+Test\+Statistic\+Service Class Reference}
+\label{class_core_1_1_application_services_1_1_test_statistic_service}\index{Core.ApplicationServices.TestStatisticService@{Core.ApplicationServices.TestStatisticService}}
+
+
+Servis statistika za test  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_core_1_1_application_services_1_1_test_statistic_service_aa22aa14e27cc51b3df1c1260059ce47f}\label{class_core_1_1_application_services_1_1_test_statistic_service_aa22aa14e27cc51b3df1c1260059ce47f}} 
+{\bfseries Test\+Statistic\+Service} (\mbox{\hyperlink{interface_core_1_1_domain_1_1_repositories_1_1_i_core_unit_of_work}{ICore\+Unit\+Of\+Work}} unit\+Of\+Work)
+\item 
+async Task$<$ long $>$ \mbox{\hyperlink{class_core_1_1_application_services_1_1_test_statistic_service_ac1ac84958855bc420fbeaef0573e84f4}{Create\+Statistic\+For\+Test}} (short test\+Id, string external\+Examiner\+Id, short? group\+Id=null)
+\begin{DoxyCompactList}\small\item\em Servisni task koji kreira statistiku za sva polaganja testova koje je kreirao odredjeni ispitivac, sa mogucnoscu posmatranja po grupama \end{DoxyCompactList}\item 
+async Task$<$ ICollection$<$ \mbox{\hyperlink{class_core_1_1_application_services_1_1_d_t_os_1_1_test_statistic_d_t_o}{Test\+Statistic\+DTO}} $>$ $>$ \mbox{\hyperlink{class_core_1_1_application_services_1_1_test_statistic_service_a86bef8e6d681751127dddec80e4e9fc1}{Get\+All\+Statistics\+For\+Test}} (short test\+Id, string external\+Examiner\+Id)
+\begin{DoxyCompactList}\small\item\em Servisni task koji vraca kolekciju svih statistika za test koji je kreirao ispitivac \end{DoxyCompactList}\item 
+async Task$<$ \mbox{\hyperlink{class_core_1_1_application_services_1_1_d_t_os_1_1_test_statistic_d_t_o}{Test\+Statistic\+DTO}} $>$ \mbox{\hyperlink{class_core_1_1_application_services_1_1_test_statistic_service_ac6a89bf9226ca26a4e6f98b93389474f}{Get\+Statistic\+For\+Testby\+Date}} (short test\+Id, string external\+Examiner\+Id, Date\+Time date)
+\begin{DoxyCompactList}\small\item\em Servisni task koji vraca kolekciju svih statistika za test koji je kreirao ispitivac, za odredjeni datum polaganja \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_core_1_1_application_services_1_1_test_statistic_service_a6e1b9af29c4e984007d6444ea6fd2294}\label{class_core_1_1_application_services_1_1_test_statistic_service_a6e1b9af29c4e984007d6444ea6fd2294}} 
+readonly \mbox{\hyperlink{interface_core_1_1_domain_1_1_repositories_1_1_i_core_unit_of_work}{ICore\+Unit\+Of\+Work}} {\bfseries Unit\+Of\+Work}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Servis statistika za test 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_core_1_1_application_services_1_1_test_statistic_service_ac1ac84958855bc420fbeaef0573e84f4}\label{class_core_1_1_application_services_1_1_test_statistic_service_ac1ac84958855bc420fbeaef0573e84f4}} 
+\index{Core.ApplicationServices.TestStatisticService@{Core.ApplicationServices.TestStatisticService}!CreateStatisticForTest@{CreateStatisticForTest}}
+\index{CreateStatisticForTest@{CreateStatisticForTest}!Core.ApplicationServices.TestStatisticService@{Core.ApplicationServices.TestStatisticService}}
+\doxysubsubsection{\texorpdfstring{CreateStatisticForTest()}{CreateStatisticForTest()}}
+{\footnotesize\ttfamily async Task$<$long$>$ Core.\+Application\+Services.\+Test\+Statistic\+Service.\+Create\+Statistic\+For\+Test (\begin{DoxyParamCaption}\item[{short}]{test\+Id,  }\item[{string}]{external\+Examiner\+Id,  }\item[{short?}]{group\+Id = {\ttfamily null} }\end{DoxyParamCaption})}
+
+
+
+Servisni task koji kreira statistiku za sva polaganja testova koje je kreirao odredjeni ispitivac, sa mogucnoscu posmatranja po grupama 
+
+
+\begin{DoxyParams}{Parameters}
+{\em test\+Id} & Identifikator testa\\
+\hline
+{\em external\+Examiner\+Id} & Eksterni id ispitivaca iz baze za autentifikaciju\\
+\hline
+{\em group\+Id} & Identifikator grupe -\/ neobavezan za dodavanje\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+long -\/ identifikator kreirane statistike
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Null\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_core_1_1_application_services_1_1_test_statistic_service_a86bef8e6d681751127dddec80e4e9fc1}\label{class_core_1_1_application_services_1_1_test_statistic_service_a86bef8e6d681751127dddec80e4e9fc1}} 
+\index{Core.ApplicationServices.TestStatisticService@{Core.ApplicationServices.TestStatisticService}!GetAllStatisticsForTest@{GetAllStatisticsForTest}}
+\index{GetAllStatisticsForTest@{GetAllStatisticsForTest}!Core.ApplicationServices.TestStatisticService@{Core.ApplicationServices.TestStatisticService}}
+\doxysubsubsection{\texorpdfstring{GetAllStatisticsForTest()}{GetAllStatisticsForTest()}}
+{\footnotesize\ttfamily async Task$<$ICollection$<$\mbox{\hyperlink{class_core_1_1_application_services_1_1_d_t_os_1_1_test_statistic_d_t_o}{Test\+Statistic\+DTO}}$>$ $>$ Core.\+Application\+Services.\+Test\+Statistic\+Service.\+Get\+All\+Statistics\+For\+Test (\begin{DoxyParamCaption}\item[{short}]{test\+Id,  }\item[{string}]{external\+Examiner\+Id }\end{DoxyParamCaption})}
+
+
+
+Servisni task koji vraca kolekciju svih statistika za test koji je kreirao ispitivac 
+
+
+\begin{DoxyParams}{Parameters}
+{\em test\+Id} & Identifikator testa\\
+\hline
+{\em external\+Examiner\+Id} & Eksterni identifikator ispitivaca u bazi za autentifikaciju\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Kolekcija statistika za test
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Null\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{class_core_1_1_application_services_1_1_test_statistic_service_ac6a89bf9226ca26a4e6f98b93389474f}\label{class_core_1_1_application_services_1_1_test_statistic_service_ac6a89bf9226ca26a4e6f98b93389474f}} 
+\index{Core.ApplicationServices.TestStatisticService@{Core.ApplicationServices.TestStatisticService}!GetStatisticForTestbyDate@{GetStatisticForTestbyDate}}
+\index{GetStatisticForTestbyDate@{GetStatisticForTestbyDate}!Core.ApplicationServices.TestStatisticService@{Core.ApplicationServices.TestStatisticService}}
+\doxysubsubsection{\texorpdfstring{GetStatisticForTestbyDate()}{GetStatisticForTestbyDate()}}
+{\footnotesize\ttfamily async Task$<$\mbox{\hyperlink{class_core_1_1_application_services_1_1_d_t_os_1_1_test_statistic_d_t_o}{Test\+Statistic\+DTO}}$>$ Core.\+Application\+Services.\+Test\+Statistic\+Service.\+Get\+Statistic\+For\+Testby\+Date (\begin{DoxyParamCaption}\item[{short}]{test\+Id,  }\item[{string}]{external\+Examiner\+Id,  }\item[{Date\+Time}]{date }\end{DoxyParamCaption})}
+
+
+
+Servisni task koji vraca kolekciju svih statistika za test koji je kreirao ispitivac, za odredjeni datum polaganja 
+
+
+\begin{DoxyParams}{Parameters}
+{\em test\+Id} & Identifikator testa\\
+\hline
+{\em external\+Examiner\+Id} & Eksterni identifikator ispitivaca\\
+\hline
+{\em date} & Datum za koji se gleda statistika\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Kolekcija statistika za test polagan odredjenog datuma
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Argument\+Null\+Exception} & \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Testing\+System/\+Core/\+Application\+Services/Test\+Statistic\+Service.\+cs\end{DoxyCompactItemize}
