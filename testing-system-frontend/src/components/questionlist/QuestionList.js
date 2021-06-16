@@ -54,7 +54,18 @@ class QuestionList extends React.Component {
     }
 
     createCallback() {
-        this.setState({addQuestion: null});
+        let token = sessionStorage.getItem('userToken');
+        axios({
+            method: 'get',
+            url: 'https://localhost:44329/Test/GetAllQuestionsForTest/' + this.state.testId,
+            headers: {
+                'Authorization': token
+            }
+        }).then(response => {
+            this.setState({allQuestions: response.data.questions, addQuestion: null})
+        }).catch(() => {
+            window.alert("Failed to get all tests for examiner");
+        });
     }
 
     render() {

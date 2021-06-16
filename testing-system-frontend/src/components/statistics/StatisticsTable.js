@@ -24,12 +24,15 @@ function StatisticsTable(props) {
 
     if(entries != null) {
         rows = entries.map(entry => {
+            let dateChopped = new Date(entry.date);
+
             return (
                 <tr key={entry.id}>
                     <th scope="row"> {entry.testId} </th>
                     <td>{entry.testTitle}</td>
                     <td>{entry.percentageOfStudentsWhoPassedTheTest}</td>
                     <td>{entry.numberOfStudentsWhoTookTheTest}</td>
+                    <td>{dateChopped.toDateString()}</td>
                 </tr>
             )
         })
@@ -45,6 +48,7 @@ function StatisticsTable(props) {
                         <th scope="col">Title</th>
                         <th scope="col">% passed </th>
                         <th scope="col">Num of students</th>
+                        <th scope="col">Date</th>
                         </tr>
                     </thead>
                     <tbody>

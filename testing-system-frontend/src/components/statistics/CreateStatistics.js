@@ -26,7 +26,7 @@ class CreateStatistics extends React.Component {
         }).then(responseTest => {
             axios({
                 method: 'get',
-                url: 'https://localhost:44329/Group/GetAllGroups/',
+                url: 'https://localhost:44329/Examiner/GetAllGroupsForExaminer',
                 headers: {
                     'Authorization': token
                 }
