@@ -37,7 +37,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler za kreiranje grupe od strane ispitivaca
+        /// Ruta koja se gadja za kreiranje grupe od strane ispitivaca
         /// </summary>
         /// <param name="createGroupRequest"></param>
         [HttpPost]
@@ -60,7 +60,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler za dodavanje studenta u grupu od strane ispitivaca
+        /// Ruta koja se gadja za dodavanje studenta u grupu od strane ispitivaca
         /// </summary>
         /// <param name="addStudentToGroupRequest"></param>
         [HttpPost]
@@ -81,7 +81,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler koji vraca kolekciju svih studenata koji pripadaju odredjenoj grupi
+        /// Ruta koja se gadja za dobijanje kolekcije svih studenata koji pripadaju odredjenoj grupi
         /// </summary>
         /// <param name="groupId"></param>
         [HttpGet]
@@ -107,7 +107,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler koji vraca sve kreirane grupe iz baze
+        /// Ruta koja se gadja za dobijanje svih kreiranih grupa iz baze
         /// </summary>
         [HttpGet]
         [Route("GetAllGroups")]
@@ -133,7 +133,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler koji postavlja naziv grupe
+        /// Ruta koja se gadja za postavljanje naziva grupe
         /// </summary>
         /// <param name="groupId"></param>
         /// <param name="title"></param>

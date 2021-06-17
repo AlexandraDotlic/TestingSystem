@@ -34,7 +34,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler za slanje maila korisniku
+        /// Ruta koja se gadja za slanje maila korisniku
         /// </summary>
         /// <param name="sendMailRequest"></param>
         [HttpPost("SendMailToUser")]
@@ -71,7 +71,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler za slanje maila dobrodoslice korisniku
+        /// Ruta koja se gadja za slanje maila dobrodoslice korisniku
         /// </summary>
         /// <param name="welcomeMailRequest"></param>
         [HttpPost("SendWelcomeMail")]

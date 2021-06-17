@@ -62,7 +62,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler za registraciju korisnika - ispitivaca ili studenta
+        /// Ruta koja se gadja za registraciju korisnika - ispitivaca ili studenta
         /// </summary>
         /// <param name="registerUserRequest"></param>
 
@@ -113,7 +113,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler za kreiranje korisnickog tokena na osnovu podataka za registraciju
+        /// Ruta koja se gadja za kreiranje korisnickog tokena na osnovu podataka za registraciju
         /// </summary>
         /// <param name="model"></param>
 

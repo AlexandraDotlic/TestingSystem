@@ -39,7 +39,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler za kreiranje statistike za test
+        /// Ruta koja se gadja za kreiranje statistike za test
         /// </summary>
         /// <param name="createTestStatisticRequest"></param>
         [HttpPost]
@@ -61,7 +61,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler za zakazivanje kreiranja statistike za test
+        /// Ruta koja se gadja za zakazivanje kreiranja statistike za test
         /// </summary>
         /// <param name="createTestStatisticRequest"></param>
         [HttpPost]
@@ -89,7 +89,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler za mesecno zakazivanje kreiranja statistike za test
+        /// Ruta koja se gadja za mesecno zakazivanje kreiranja statistike za test
         /// </summary>
         /// <param name="createTestStatisticRequest"></param>
         [HttpPost]
@@ -112,7 +112,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler za vracanje statistika za dati test
+        /// Ruta koja se gadja za dobijanje statistika za dati test
         /// </summary>
         /// <param name="testId"></param>
         [HttpGet]
@@ -141,7 +141,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler za vracanje statistika za test za odredjeni datum
+        /// Ruta koja se gadja za dobijanje statistika za test za odredjeni datum
         /// </summary>
         /// <param name="testId"></param>
         /// <param name="date"></param>

@@ -39,7 +39,7 @@ namespace Applications.WebClient.Controllers
 
 
         /// <summary>
-        /// Kontroler koji vraca sve testove koje je kreirao ispitivac
+        /// Ruta koja se gadja za vracanje dobijanje svih testova koje je kreirao ispitivac
         /// </summary>
         [HttpGet]
         [Route("GetAllTestsForExaminer")]
@@ -71,7 +71,7 @@ namespace Applications.WebClient.Controllers
 
 
         /// <summary>
-        /// Kontroler za postavljanje imena ispitivaca
+        /// Ruta koja se gadja za postavljanje imena ispitivaca
         /// </summary>
         /// <param name="firstName"></param>
         [HttpPost]
@@ -94,7 +94,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler za postavljanje prezimena ispitivaca
+        /// Ruta koja se gadja za postavljanje prezimena ispitivaca
         /// </summary>
         /// <param name="lastName"></param>
         [HttpPost]
@@ -115,10 +115,10 @@ namespace Applications.WebClient.Controllers
                 return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
             }
         }
-    
+
 
         /// <summary>
-        /// Kontroler koji vraca sve grupe koje je kreirao ispitivac
+        /// Ruta koja se gadja za dobijanje svih grupa koje je kreirao ispitivac
         /// </summary>
         [HttpGet]
         [Route("GetAllGroupsForExaminer")]

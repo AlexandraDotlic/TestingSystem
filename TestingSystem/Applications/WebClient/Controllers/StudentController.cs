@@ -33,7 +33,7 @@ namespace Applications.WebClient.Controllers
 
 
         /// <summary>
-        /// Kontroler za postavljanje imena studenta
+        /// Ruta koja se gadja za postavljanje imena studenta
         /// </summary>
         /// <param name="firstName"></param>
         [HttpPost]
@@ -56,7 +56,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler za postavljanje prezimena studenta
+        /// Ruta koja se gadja za postavljanje prezimena studenta
         /// </summary>
         /// <param name="lastName"></param>
         [HttpPost]
@@ -79,7 +79,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler za vracanje liste svih studenata iz baze
+        /// Ruta koja se gadja za dobijanje liste svih studenata iz baze
         /// </summary>
         [HttpGet]
         [Route("GetAllStudents")]
@@ -104,7 +104,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler za vracanje rezultata studenta na testu
+        /// Ruta koja se gadja za dobijanje rezultata studenta na testu
         /// </summary>
         /// <param name="testId"></param>
         [HttpGet]
@@ -134,7 +134,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler za vracanje rezultata studenta na svim testovima koje je polagao
+        ///Ruta koja se gadja za dobijanje rezultata studenta na svim testovima koje je polagao
         /// </summary>
         [HttpGet]
         [Route("GetStudentResultsForAllTakenTests")]

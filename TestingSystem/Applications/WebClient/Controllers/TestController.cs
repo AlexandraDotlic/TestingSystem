@@ -39,7 +39,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler za kreiranje testa
+        /// Ruta koja se gadja za kreiranje testa
         /// </summary>
         /// <param name="createTestRequest"></param>
         [HttpPost]
@@ -61,7 +61,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler za vracanje svih kreiranih testova iz baze
+        /// Ruta koja se gadja za dobijanje svih kreiranih testova iz baze
         /// </summary>
         [HttpGet]
         [Route("GetAllTests")]
@@ -80,7 +80,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler za vracanje svih dostupnih testova za polaganje datog studenta
+        ///Ruta koja se gadja za dobijanje svih dostupnih testova za polaganje datog studenta
         /// </summary>
         [HttpGet]
         [Route("GetAllAvailableTestsForStudent")]
@@ -107,7 +107,7 @@ namespace Applications.WebClient.Controllers
 
 
         /// <summary>
-        /// Kontroler za dodavanje pitanja u test
+        /// Ruta koja se gadja za dodavanje pitanja u test
         /// </summary>
         /// <param name="addQuestionToTestRequest"></param>
         [HttpPost]
@@ -133,7 +133,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler za uklanjanje pitanja sa testa
+        /// Ruta koja se gadja za uklanjanje pitanja sa testa
         /// </summary>
         /// <param name="removeQuestionFromTestRequest"></param>
         [HttpPost]
@@ -154,7 +154,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler za vracanje pitanja sa njegovim odgovorima
+        /// Ruta koja se gadja za dobijanje pitanja sa njegovim odgovorima
         /// </summary>
         /// <param name="questionId"></param>
         /// <param name="testId"></param>
@@ -177,7 +177,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler za vracanje svih pitanja sa jednog testa
+        /// Ruta koja se gadja za dobijanje svih pitanja sa jednog testa
         /// </summary>
         /// <param name="testId"></param>
         [HttpGet]
@@ -204,7 +204,7 @@ namespace Applications.WebClient.Controllers
 
 
         /// <summary>
-        /// Kontroler koji vraca rezulat polaganja testa od strane studenta
+        /// Ruta koja se gadja za dobijanje rezulata polaganja testa od strane studenta
         /// </summary>
         /// <param name="takeTheTestRequest"></param>
         [HttpPost]
@@ -232,7 +232,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler za aktivaciju neaktivnog testa
+        /// Ruta koja se gadja za aktivaciju neaktivnog testa
         /// </summary>
         /// <param name="testId"></param>
         [HttpPost]
@@ -253,7 +253,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler za deaktivaciju aktivnog testa
+        /// Ruta koja se gadja za deaktivaciju aktivnog testa
         /// </summary>
         /// <param name="testId"></param>
         [HttpPost]
@@ -274,7 +274,7 @@ namespace Applications.WebClient.Controllers
         }
 
         /// <summary>
-        /// Kontroler za izmenu datuma pocetka mogucnosti polaganja testa
+        /// Ruta koja se gadja za izmenu datuma pocetka mogucnosti polaganja testa
         /// </summary>
         /// <param name="changeStartDateRequest"></param>
         [HttpPost]
