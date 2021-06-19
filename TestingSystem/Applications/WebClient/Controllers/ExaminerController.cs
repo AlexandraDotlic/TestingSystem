@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace Applications.WebClient.Controllers
 {
+    /// <summary>
+    /// Kontroler klasa ispitivaca
+    /// </summary>
     [Route("[controller]")]
     [ApiController]
     public class ExaminerController : ControllerBase
@@ -34,6 +37,10 @@ namespace Applications.WebClient.Controllers
             Logger = logger;
         }
 
+
+        /// <summary>
+        /// Ruta koja se gadja za vracanje dobijanje svih testova koje je kreirao ispitivac
+        /// </summary>
         [HttpGet]
         [Route("GetAllTestsForExaminer")]
         [Authorize(Policy = "IsExaminer")]
@@ -63,6 +70,10 @@ namespace Applications.WebClient.Controllers
         }
 
 
+        /// <summary>
+        /// Ruta koja se gadja za postavljanje imena ispitivaca
+        /// </summary>
+        /// <param name="firstName"></param>
         [HttpPost]
         [Route("SetExaminerFirstName")]
         [Authorize(Policy = "IsExaminer")]
@@ -82,6 +93,10 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+        /// <summary>
+        /// Ruta koja se gadja za postavljanje prezimena ispitivaca
+        /// </summary>
+        /// <param name="lastName"></param>
         [HttpPost]
         [Route("SetExaminerLastName")]
         [Authorize(Policy = "IsExaminer")]
@@ -100,9 +115,11 @@ namespace Applications.WebClient.Controllers
                 return BadRequest(ResponseHelper.ClientErrorResponse(e.Message, e.InnerException));
             }
         }
-    
 
 
+        /// <summary>
+        /// Ruta koja se gadja za dobijanje svih grupa koje je kreirao ispitivac
+        /// </summary>
         [HttpGet]
         [Route("GetAllGroupsForExaminer")]
         [Authorize(Policy = "IsExaminer")]

@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['getallavailabletestsforstudentresponse_346',['GetAllAvailableTestsForStudentResponse',['../class_applications_1_1_web_client_1_1_responses_1_1_get_all_available_tests_for_student_response.html',1,'Applications::WebClient::Responses']]],
+  ['getallgroupsforexaminer_347',['GetAllGroupsForExaminer',['../class_tests_1_1_core_application_services_tests_1_1_get_all_groups_for_examiner.html',1,'Tests::CoreApplicationServicesTests']]],
+  ['getallgroupsforexaminerresponse_348',['GetAllGroupsForExaminerResponse',['../class_applications_1_1_web_client_1_1_responses_1_1_get_all_groups_for_examiner_response.html',1,'Applications::WebClient::Responses']]],
+  ['getallgroupsresponse_349',['GetAllGroupsResponse',['../class_applications_1_1_web_client_1_1_responses_1_1_get_all_groups_response.html',1,'Applications::WebClient::Responses']]],
+  ['getallquestionsfortestresponse_350',['GetAllQuestionsForTestResponse',['../class_applications_1_1_web_client_1_1_responses_1_1_get_all_questions_for_test_response.html',1,'Applications::WebClient::Responses']]],
+  ['getallquestionsfortesttests_351',['GetAllQuestionsForTestTests',['../class_tests_1_1_core_application_services_tests_1_1_get_all_questions_for_test_tests.html',1,'Tests::CoreApplicationServicesTests']]],
+  ['getallstatisticsfortestresponse_352',['GetAllStatisticsForTestResponse',['../class_applications_1_1_web_client_1_1_responses_1_1_get_all_statistics_for_test_response.html',1,'Applications::WebClient::Responses']]],
+  ['getallstatisticsfortesttests_353',['GetAllStatisticsForTestTests',['../class_tests_1_1_core_application_services_tests_1_1_get_all_statistics_for_test_tests.html',1,'Tests::CoreApplicationServicesTests']]],
+  ['getallstudentsforgroupresponse_354',['GetAllStudentsForGroupResponse',['../class_applications_1_1_web_client_1_1_responses_1_1_get_all_students_for_group_response.html',1,'Applications::WebClient::Responses']]],
+  ['getallstudentsforgrouptests_355',['GetAllStudentsForGroupTests',['../class_tests_1_1_core_application_services_tests_1_1_get_all_students_for_group_tests.html',1,'Tests::CoreApplicationServicesTests']]],
+  ['getallstudentsresponse_356',['GetAllStudentsResponse',['../class_applications_1_1_web_client_1_1_responses_1_1_get_all_students_response.html',1,'Applications::WebClient::Responses']]],
+  ['getalltestsforexaminer_357',['GetAllTestsForExaminer',['../class_tests_1_1_core_application_services_tests_1_1_get_all_tests_for_examiner.html',1,'Tests::CoreApplicationServicesTests']]],
+  ['getalltestsforexaminerresponse_358',['GetAllTestsForExaminerResponse',['../class_applications_1_1_web_client_1_1_responses_1_1_get_all_tests_for_examiner_response.html',1,'Applications::WebClient::Responses']]],
+  ['getquestionandanswersrequest_359',['GetQuestionAndAnswersRequest',['../class_applications_1_1_web_client_1_1_requests_1_1_get_question_and_answers_request.html',1,'Applications::WebClient::Requests']]],
+  ['getstatisticfortestbydaterequest_360',['GetStatisticForTestByDateRequest',['../class_applications_1_1_web_client_1_1_requests_1_1_get_statistic_for_test_by_date_request.html',1,'Applications::WebClient::Requests']]],
+  ['getstatisticsfortestbydatetests_361',['GetStatisticsForTestByDateTests',['../class_tests_1_1_core_application_services_tests_1_1_get_statistics_for_test_by_date_tests.html',1,'Tests::CoreApplicationServicesTests']]],
+  ['getstudentemail_362',['GetStudentEmail',['../class_tests_1_1_core_application_services_tests_1_1_get_student_email.html',1,'Tests::CoreApplicationServicesTests']]],
+  ['getstudentresultsforalltakentestsresponse_363',['GetStudentResultsForAllTakenTestsResponse',['../class_applications_1_1_web_client_1_1_responses_1_1_get_student_results_for_all_taken_tests_response.html',1,'Applications::WebClient::Responses']]],
+  ['group_364',['Group',['../class_core_1_1_domain_1_1_entites_1_1_group.html',1,'Core::Domain::Entites']]],
+  ['groupconfiguration_365',['GroupConfiguration',['../class_core_1_1_infrastructure_1_1_data_access_1_1_ef_core_data_access_1_1_entity_configurations_1_1_group_configuration.html',1,'Core::Infrastructure::DataAccess::EfCoreDataAccess::EntityConfigurations']]],
+  ['groupcontroller_366',['GroupController',['../class_applications_1_1_web_client_1_1_controllers_1_1_group_controller.html',1,'Applications::WebClient::Controllers']]],
+  ['groupdto_367',['GroupDTO',['../class_applications_1_1_web_client_1_1_d_t_os_1_1_group_d_t_o.html',1,'Applications.WebClient.DTOs.GroupDTO'],['../class_core_1_1_application_services_1_1_d_t_os_1_1_group_d_t_o.html',1,'Core.ApplicationServices.DTOs.GroupDTO']]],
+  ['grouprepository_368',['GroupRepository',['../class_core_1_1_infrastructure_1_1_data_access_1_1_ef_core_data_access_1_1_repositories_1_1_group_repository.html',1,'Core::Infrastructure::DataAccess::EfCoreDataAccess::Repositories']]],
+  ['groupservice_369',['GroupService',['../class_core_1_1_application_services_1_1_group_service.html',1,'Core::ApplicationServices']]]
+];

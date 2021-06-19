@@ -12,6 +12,9 @@ using System.Threading.Tasks;
 
 namespace Applications.WebClient.Controllers
 {
+    /// <summary>
+    /// Kontroler klasa maila
+    /// </summary>
     [Route("[controller]")]
     [ApiController]
     public class MailController : ControllerBase
@@ -30,6 +33,10 @@ namespace Applications.WebClient.Controllers
             Logger = logger;
         }
 
+        /// <summary>
+        /// Ruta koja se gadja za slanje maila korisniku
+        /// </summary>
+        /// <param name="sendMailRequest"></param>
         [HttpPost("SendMailToUser")]
         public async Task<IActionResult> SendMailToUser(SendMailRequest sendMailRequest)
         {
@@ -63,6 +70,10 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+        /// <summary>
+        /// Ruta koja se gadja za slanje maila dobrodoslice korisniku
+        /// </summary>
+        /// <param name="welcomeMailRequest"></param>
         [HttpPost("SendWelcomeMail")]
         public async Task<IActionResult> SendWelcomeMail(SendWelcomeMailRequest welcomeMailRequest)
         {

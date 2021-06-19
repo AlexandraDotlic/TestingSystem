@@ -11,13 +11,31 @@ namespace Core.Domain.Entites
     public class StudentTest
     {
 
+        /// <summary>
+        /// Id Studenta
+        /// </summary>
         public int StudentId { get; private set; }
         public Student Student { get; private set; }
+        /// <summary>
+        /// Id grupe u kojoj je student
+        /// </summary>
         public short? StudentGroupId { get; private set; }
+        /// <summary>
+        /// Id testa koji student polaze
+        /// </summary>
         public short TestId { get; private set; }
         public Test Test { get; private set; }
+        /// <summary>
+        /// Kolekcija pitanja sa testa
+        /// </summary>
         public ICollection<StudentTestQuestion> Questions { get; private set; }
+        /// <summary>
+        /// Maksimalni broj poena na testu
+        /// </summary>
         public int Score { get; private set; }
+        /// <summary>
+        /// Da li je test polozen
+        /// </summary>
         public bool IsTestPassed { get; private set; }
         public StudentTest()
         {

@@ -5,7 +5,7 @@ using System.Text;
 namespace Core.Domain.Entites
 {
     /// <summary>
-    /// Klasa ponudjen odgovor
+    /// Klasa ponudjenih odgovora
     /// </summary>
     public class AnswerOption
     {

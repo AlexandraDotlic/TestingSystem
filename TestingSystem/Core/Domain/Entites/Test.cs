@@ -38,10 +38,21 @@ namespace Core.Domain.Entites
         /// Pocetni datum vazenja testa
         /// </summary>
         public DateTime StartDate { get; private set; }
+
+        /// <summary>
+        /// Kolekcija studenata koji polazu ovaj test
+        /// </summary>
         public ICollection<StudentTest> StudentTests { get; private set; }
 
 
-
+        /// <summary>
+        /// Konsturktor testa koji kreira test od strane examiner-a.
+        /// U slucaju da se stavi da je trenutak kreiranja trenutak pocetka test je odmah aktivan.
+        /// U suprotnom je kreiran neaktivan test
+        /// </summary>
+        /// <param name="examiner"></param>
+        /// <param name="title"></param>
+        /// <param name="startDate"></param>
         public Test(Examiner examiner, string title, DateTime startDate)
         {
             Title = title;
@@ -67,15 +78,25 @@ namespace Core.Domain.Entites
             IsActive = true;
         }
 
+        /// <summary>
+        /// Metoda koja sluzi za aktiviranje neaktivnog testa
+        /// </summary>
         public void Activate() {
             IsActive = true;
         }
 
+        /// <summary>
+        /// Metoda koja sluzi za deaktiviranje aktivnog testa
+        /// </summary>
         public void Deactivate()
         {
             IsActive = false;
         }
 
+        /// <summary>
+        /// Metoda koja sluzi da promeni pocetak perioda kada test moze da se polaze
+        /// </summary>
+        /// <param name="startDate"></param>
         public void ChangeStartDate(DateTime startDate) {
             StartDate = startDate;
             if (startDate <= DateTime.Now)
@@ -88,12 +109,20 @@ namespace Core.Domain.Entites
             }
         }
 
+        /// <summary>
+        /// Metoda koja sluzi za dodavanje pitanja u test
+        /// </summary>
+        /// <param name="testQuestion"></param>
         public void AddQuestion(Question testQuestion)
         {
             Questions.Add(testQuestion);
             TestScore += testQuestion.QuestionScore;
         }
 
+        /// <summary>
+        /// Metoda koja sluzi za uklanjanje pitanja iz testa
+        /// </summary>
+        /// <param name="testQuestion"></param>
         public void RemoveQuestion(Question testQuestion)
         {
             Questions.Remove(testQuestion);

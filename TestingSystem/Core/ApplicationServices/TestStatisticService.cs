@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Core.ApplicationServices
 {
+    /// <summary>
+    /// Servis statistika za test
+    /// </summary>
     public class TestStatisticService
     {
         private readonly ICoreUnitOfWork UnitOfWork;
@@ -17,6 +20,14 @@ namespace Core.ApplicationServices
             UnitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// Servisni task koji kreira statistiku za sva polaganja testova koje je kreirao odredjeni ispitivac, sa mogucnoscu posmatranja po grupama
+        /// </summary>
+        /// <param name="testId">Identifikator testa</param>
+        /// <param name="externalExaminerId">Eksterni id ispitivaca iz baze za autentifikaciju</param>
+        /// <param name="groupId">Identifikator grupe - neobavezan za dodavanje</param>
+        /// <returns>long - identifikator kreirane statistike</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public async Task<long> CreateStatisticForTest(short testId, string externalExaminerId, short? groupId = null)
         {
             Examiner examiner = await UnitOfWork.ExaminerRepository.GetFirstOrDefaultWithIncludes(e => e.ExternalId == externalExaminerId);
@@ -53,6 +64,13 @@ namespace Core.ApplicationServices
             return testStatistic.Id;
         }
 
+        /// <summary>
+        /// Servisni task koji vraca kolekciju svih statistika za test koji je kreirao ispitivac
+        /// </summary>
+        /// <param name="testId">Identifikator testa</param>
+        /// <param name="externalExaminerId">Eksterni identifikator ispitivaca u bazi za autentifikaciju</param>
+        /// <returns>Kolekcija statistika za test</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public async Task<ICollection<TestStatisticDTO>> GetAllStatisticsForTest(short testId, string externalExaminerId)
         {
             Examiner examiner = await UnitOfWork.ExaminerRepository.GetFirstOrDefaultWithIncludes(e => e.ExternalId == externalExaminerId);
@@ -76,6 +94,14 @@ namespace Core.ApplicationServices
             return testStatisticDTOs;
         }
 
+        /// <summary>
+        /// Servisni task koji vraca kolekciju svih statistika za test koji je kreirao ispitivac, za odredjeni datum polaganja
+        /// </summary>
+        /// <param name="testId">Identifikator testa</param>
+        /// <param name="externalExaminerId">Eksterni identifikator ispitivaca</param>
+        /// <param name="date">Datum za koji se gleda statistika</param>
+        /// <returns>Kolekcija statistika za test polagan odredjenog datuma</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public async Task<TestStatisticDTO> GetStatisticForTestbyDate(short testId, string externalExaminerId, DateTime date)
         {
             Examiner examiner = await UnitOfWork.ExaminerRepository.GetFirstOrDefaultWithIncludes(e => e.ExternalId == externalExaminerId);

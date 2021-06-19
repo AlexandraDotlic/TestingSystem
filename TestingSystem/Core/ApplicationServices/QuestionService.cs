@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Core.ApplicationServices
 {
+    /// <summary>
+    /// Servis pitanja
+    /// </summary>
     public class QuestionService
     {
         private readonly ICoreUnitOfWork UnitOfWork;
@@ -17,6 +20,11 @@ namespace Core.ApplicationServices
             UnitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// Servisni task koji vraca sva pitanja koja pripadaju jednom testu
+        /// </summary>
+        /// <param name="testId">Id testa</param>
+        /// <returns>Kolekcija pitanja sa testa</returns>
         public async Task<ICollection<QuestionDTO>> GetAllQuestionsForTest(short testId)
         {
             IReadOnlyCollection<Question> questions = await UnitOfWork.QuestionRepository.SearchByWithIncludes(q => q.TestId == testId, q => q.AnswerOptions);

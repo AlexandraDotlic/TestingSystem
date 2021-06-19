@@ -16,6 +16,9 @@ using System.Threading.Tasks;
 
 namespace Applications.WebClient.Controllers
 {
+    /// <summary>
+    /// Kontroler klasa testa
+    /// </summary>
     [Route("[controller]")]
     [ApiController]
     public class TestController : ControllerBase
@@ -35,6 +38,10 @@ namespace Applications.WebClient.Controllers
             Logger = logger;
         }
 
+        /// <summary>
+        /// Ruta koja se gadja za kreiranje testa
+        /// </summary>
+        /// <param name="createTestRequest"></param>
         [HttpPost]
         [Route("CreateTest")]
         [Authorize(Policy = "IsExaminer")]
@@ -53,6 +60,9 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+        /// <summary>
+        /// Ruta koja se gadja za dobijanje svih kreiranih testova iz baze
+        /// </summary>
         [HttpGet]
         [Route("GetAllTests")]
         public async Task<IActionResult> GetAllTests()
@@ -69,6 +79,9 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+        /// <summary>
+        ///Ruta koja se gadja za dobijanje svih dostupnih testova za polaganje datog studenta
+        /// </summary>
         [HttpGet]
         [Route("GetAllAvailableTestsForStudent")]
         [Authorize(Policy = "IsStudent")]
@@ -93,7 +106,10 @@ namespace Applications.WebClient.Controllers
         }
 
 
-
+        /// <summary>
+        /// Ruta koja se gadja za dodavanje pitanja u test
+        /// </summary>
+        /// <param name="addQuestionToTestRequest"></param>
         [HttpPost]
         [Route("AddQuestionToTest")]
         [Authorize(Policy = "IsExaminer")]
@@ -116,6 +132,10 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+        /// <summary>
+        /// Ruta koja se gadja za uklanjanje pitanja sa testa
+        /// </summary>
+        /// <param name="removeQuestionFromTestRequest"></param>
         [HttpPost]
         [Route("RemoveQuestionFromTest")]
         [Authorize(Policy = "IsExaminer")]
@@ -133,6 +153,11 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+        /// <summary>
+        /// Ruta koja se gadja za dobijanje pitanja sa njegovim odgovorima
+        /// </summary>
+        /// <param name="questionId"></param>
+        /// <param name="testId"></param>
         [HttpGet]
         [Route("GetQuestionAndAnswers")]
         [Authorize]
@@ -151,6 +176,10 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+        /// <summary>
+        /// Ruta koja se gadja za dobijanje svih pitanja sa jednog testa
+        /// </summary>
+        /// <param name="testId"></param>
         [HttpGet]
         [Route("GetAllQuestionsForTest/{testId}")]
         [Authorize]
@@ -174,6 +203,10 @@ namespace Applications.WebClient.Controllers
         }
 
 
+        /// <summary>
+        /// Ruta koja se gadja za dobijanje rezulata polaganja testa od strane studenta
+        /// </summary>
+        /// <param name="takeTheTestRequest"></param>
         [HttpPost]
         [Route("TakeTheTest")]
         [Authorize(Policy = "IsStudent")]
@@ -198,6 +231,10 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+        /// <summary>
+        /// Ruta koja se gadja za aktivaciju neaktivnog testa
+        /// </summary>
+        /// <param name="testId"></param>
         [HttpPost]
         [Route("ActivateTest/{testId}")]
         [Authorize(Policy = "IsExaminer")]
@@ -215,6 +252,10 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+        /// <summary>
+        /// Ruta koja se gadja za deaktivaciju aktivnog testa
+        /// </summary>
+        /// <param name="testId"></param>
         [HttpPost]
         [Route("DeactivateTest/{testId}")]
         [Authorize(Policy = "IsExaminer")]
@@ -232,7 +273,10 @@ namespace Applications.WebClient.Controllers
             }
         }
 
-    
+        /// <summary>
+        /// Ruta koja se gadja za izmenu datuma pocetka mogucnosti polaganja testa
+        /// </summary>
+        /// <param name="changeStartDateRequest"></param>
         [HttpPost]
         [Route("ChangeStartDate")]
         [Authorize(Policy = "IsExaminer")]

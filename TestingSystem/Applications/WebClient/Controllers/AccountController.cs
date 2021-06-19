@@ -15,8 +15,12 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Applications.WebClient.Controllers
 {
+    /// <summary>
+    /// Kontroler klasa za registraciju naloga
+    /// </summary>
     [Route("[controller]")]
     [ApiController]
     public class AccountController: ControllerBase
@@ -56,6 +60,11 @@ namespace Applications.WebClient.Controllers
             _validFor = configuration.GetValue<int>("Security:ValidFor");
             _signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
         }
+
+        /// <summary>
+        /// Ruta koja se gadja za registraciju korisnika - ispitivaca ili studenta
+        /// </summary>
+        /// <param name="registerUserRequest"></param>
 
         [HttpPost]
         [Route("Register")]
@@ -102,6 +111,11 @@ namespace Applications.WebClient.Controllers
           
             }
         }
+
+        /// <summary>
+        /// Ruta koja se gadja za kreiranje korisnickog tokena na osnovu podataka za registraciju
+        /// </summary>
+        /// <param name="model"></param>
 
         [HttpPost]
         [Route("Token")]

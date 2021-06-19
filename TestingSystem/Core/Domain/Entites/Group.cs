@@ -2,6 +2,10 @@
 
 namespace Core.Domain.Entites
 {
+
+    /// <summary>
+    /// Klasa grupe koja sadrzi studente
+    /// </summary>
     public class Group
     {
         /// <summary>
@@ -36,16 +40,28 @@ namespace Core.Domain.Entites
             Students = new List<Student>();
         }
 
+        /// <summary>
+        /// Metoda koja sluzi za dodavanje studenta u grupu
+        /// </summary>
+        /// <param name="student"></param>
         public void AddStudentToGroup(Student student)
         {
             Students.Add(student);
         }
 
+        /// <summary>
+        /// Metoda koja sluzi za uklanjanje studenta iz grupe
+        /// </summary>
+        /// <param name="student"></param>
         public void RemoveStudentFromGroup(Student student)
         {
             Students.Remove(student);
         }
 
+        /// <summary>
+        /// Metoda koja sluzi za postavljanje naziva grupe
+        /// </summary>
+        /// <param name="title"></param>
         public void SetTitle(string title)
         {
             Title = title;

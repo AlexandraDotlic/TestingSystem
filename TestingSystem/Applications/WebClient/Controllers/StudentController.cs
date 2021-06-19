@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace Applications.WebClient.Controllers
 {
+    /// <summary>
+    /// Kontroler klasa studenta
+    /// </summary>
     [Route("[controller]")]
     [ApiController]
     public class StudentController : ControllerBase
@@ -29,6 +32,10 @@ namespace Applications.WebClient.Controllers
         }
 
 
+        /// <summary>
+        /// Ruta koja se gadja za postavljanje imena studenta
+        /// </summary>
+        /// <param name="firstName"></param>
         [HttpPost]
         [Route("SetStudentFirstName")]
         [Authorize(Policy = "IsStudent")]
@@ -48,6 +55,10 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+        /// <summary>
+        /// Ruta koja se gadja za postavljanje prezimena studenta
+        /// </summary>
+        /// <param name="lastName"></param>
         [HttpPost]
         [Route("SetStudentLastName")]
         [Authorize(Policy = "IsStudent")]
@@ -67,6 +78,9 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+        /// <summary>
+        /// Ruta koja se gadja za dobijanje liste svih studenata iz baze
+        /// </summary>
         [HttpGet]
         [Route("GetAllStudents")]
         [Authorize(Policy = "IsExaminer")]
@@ -89,6 +103,10 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+        /// <summary>
+        /// Ruta koja se gadja za dobijanje rezultata studenta na testu
+        /// </summary>
+        /// <param name="testId"></param>
         [HttpGet]
         [Route("GetStudentTestResult/{testId}")]
         [Authorize(Policy = "IsStudent")]
@@ -115,6 +133,9 @@ namespace Applications.WebClient.Controllers
             }
         }
 
+        /// <summary>
+        ///Ruta koja se gadja za dobijanje rezultata studenta na svim testovima koje je polagao
+        /// </summary>
         [HttpGet]
         [Route("GetStudentResultsForAllTakenTests")]
         [Authorize(Policy = "IsStudent")]
