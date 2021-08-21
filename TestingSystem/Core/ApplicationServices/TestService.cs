@@ -109,7 +109,7 @@ namespace Core.ApplicationServices
                 : tests; 
 
             List<TestDTO> testDTOs = filteredTests == null || filteredTests.Count == 0
-                ? null
+                ? new List<TestDTO>()
                 : filteredTests.Select(t => new TestDTO(t.Id, t.Title, t.ExaminerId, t.StartDate, t.IsActive, t.TestScore)).ToList();
             return testDTOs;
         }
