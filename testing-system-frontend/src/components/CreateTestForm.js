@@ -30,7 +30,7 @@ class CreateTestForm extends React.Component {
         this.setState({startTime: event.target.value});
     }
 
-    submitButton = (event) => {
+    submitButton = () => {
         // Parse date from startDate and add hours and minutes converted to miliseconds
         let startDateParsed = Date.parse(this.state.startDate);
         startDateParsed += parseInt(this.state.startTime.substring(0, 2)) * 3600000;
@@ -50,22 +50,20 @@ class CreateTestForm extends React.Component {
               title: this.state.testName,
               startDate: startDateCombined,
             }
-          })
-          .then(() => {
+        }).then(() => {
             window.alert("Test successfuly created.");
             this.props.cancelCallback();
-          })
-          .catch(() => {
+        })
+        .catch(() => {
             window.alert("Failed to create test.");
             this.props.cancelCallback();
-          });
+        });
     }
 
     render(){
         return (
         <div className = "container-fluid w-50 mx-auto pt-4"> 
             <h3 className="text-center"> Create a new test</h3>
-            <form onSubmit={this.submitButton} onReset={() => {this.props.cancelCallback()}}>
                 <div className="form-group">
                     <label htmlFor="testName">Test Name:</label>
                     <input id="testName" value={this.state.testName} onChange={this.testNameChange} className="form-control" placeholder="Enter test name"></input>
@@ -79,12 +77,11 @@ class CreateTestForm extends React.Component {
                     <input id="startTime" value={this.state.startTime} onChange={this.startTimeChange} className="form-control" type="time" ></input>
                 </div>
                 <div className="form-group text-center mb-2">
-                    <button className="btn btn-success" type="submit">Submit </button>
+                    <button className="btn btn-success" onClick={this.submitButton}>Submit </button>
                 </div>
                 <div className="form-group text-center mb-2">
-                    <button className="btn btn-warning" type="reset">Discard </button>
+                    <button className="btn btn-warning" onClick={this.props.cancelCallback}>Discard </button>
                 </div>
-            </form>
         </div>
     );
     }

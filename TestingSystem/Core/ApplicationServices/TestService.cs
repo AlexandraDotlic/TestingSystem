@@ -100,9 +100,11 @@ namespace Core.ApplicationServices
         {
             IReadOnlyCollection<StudentTest> studentTests = await UnitOfWork.StudentTestRepository.SearchByWithIncludes(t => t.Student.ExternalId == currentUserId, t => t.Student);
             IReadOnlyCollection<Test> tests = await UnitOfWork.TestRepository.GetAllList();
+            if (tests == null || tests.Count == 0)
+                return new List<TestDTO>();
             if(studentTests != null || studentTests.Count != 0)
             {
-                tests = await UnitOfWork.TestRepository.GetFilteredList(t => !studentTests.Select(st => st.TestId).Contains(t.Id));
+                tests = await UnitOfWork.TestRepository.GetFilteredList(t => !studentTests.Select(st => st.TestId).Contains(t.Id) && t.IsActive == true);
             }
             IReadOnlyCollection<Test> filteredTests = studentTests != null || studentTests.Count != 0 
                 ? tests.Where(t => !studentTests.Select(st => st.TestId).Contains(t.Id)).ToList()
