@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['coreapplicationservicestests_264',['CoreApplicationServicesTests',['../namespace_tests_1_1_core_application_services_tests.html',1,'Tests']]],
+  ['takethetest_265',['TakeTheTest',['../class_applications_1_1_web_client_1_1_controllers_1_1_test_controller.html#a4da8c904c400a9d3268938c1d2245a6f',1,'Applications.WebClient.Controllers.TestController.TakeTheTest()'],['../class_core_1_1_application_services_1_1_test_service.html#a29299d66ccdf64dcad066dfc7482717c',1,'Core.ApplicationServices.TestService.TakeTheTest()']]],
+  ['takethetestrequest_266',['TakeTheTestRequest',['../class_applications_1_1_web_client_1_1_requests_1_1_take_the_test_request.html',1,'Applications::WebClient::Requests']]],
+  ['takethetestresponse_267',['TakeTheTestResponse',['../class_applications_1_1_web_client_1_1_responses_1_1_take_the_test_response.html',1,'Applications::WebClient::Responses']]],
+  ['takethetesttests_268',['TakeTheTestTests',['../class_tests_1_1_core_application_services_tests_1_1_take_the_test_tests.html',1,'Tests::CoreApplicationServicesTests']]],
+  ['test_269',['Test',['../class_core_1_1_domain_1_1_entites_1_1_test.html',1,'Core.Domain.Entites.Test'],['../class_core_1_1_domain_1_1_entites_1_1_question.html#acb55ba01adbf079859467d876aee8788',1,'Core.Domain.Entites.Question.Test()'],['../class_core_1_1_domain_1_1_entites_1_1_test.html#a34cb88f28bcf85c5953c0ab538ab712d',1,'Core.Domain.Entites.Test.Test()']]],
+  ['testconfiguration_270',['TestConfiguration',['../class_core_1_1_infrastructure_1_1_data_access_1_1_ef_core_data_access_1_1_entity_configurations_1_1_test_configuration.html',1,'Core::Infrastructure::DataAccess::EfCoreDataAccess::EntityConfigurations']]],
+  ['testcontroller_271',['TestController',['../class_applications_1_1_web_client_1_1_controllers_1_1_test_controller.html',1,'Applications::WebClient::Controllers']]],
+  ['testdto_272',['TestDTO',['../class_applications_1_1_web_client_1_1_d_t_os_1_1_test_d_t_o.html',1,'Applications.WebClient.DTOs.TestDTO'],['../class_core_1_1_application_services_1_1_d_t_os_1_1_test_d_t_o.html',1,'Core.ApplicationServices.DTOs.TestDTO']]],
+  ['testid_273',['TestId',['../class_core_1_1_domain_1_1_entites_1_1_student_test.html#a00778f85607d36f82c6a9ce28f68d7a6',1,'Core.Domain.Entites.StudentTest.TestId()'],['../class_core_1_1_domain_1_1_entites_1_1_test_statistic.html#ad7738f2e9d11dcbd093d297f64a3e655',1,'Core.Domain.Entites.TestStatistic.TestId()']]],
+  ['testrepository_274',['TestRepository',['../class_core_1_1_infrastructure_1_1_data_access_1_1_ef_core_data_access_1_1_repositories_1_1_test_repository.html',1,'Core::Infrastructure::DataAccess::EfCoreDataAccess::Repositories']]],
+  ['tests_275',['Tests',['../namespace_tests.html',1,'Tests'],['../class_core_1_1_domain_1_1_entites_1_1_examiner.html#a3a88cc9f5826ae4fcba893a5eee7776c',1,'Core.Domain.Entites.Examiner.Tests()']]],
+  ['testscore_276',['TestScore',['../class_core_1_1_domain_1_1_entites_1_1_test.html#a43093d97b8ba0e1cbe5e9c385a4b199e',1,'Core::Domain::Entites::Test']]],
+  ['testservice_277',['TestService',['../class_core_1_1_application_services_1_1_test_service.html',1,'Core::ApplicationServices']]],
+  ['teststatistic_278',['TestStatistic',['../class_core_1_1_domain_1_1_entites_1_1_test_statistic.html',1,'Core::Domain::Entites']]],
+  ['teststatisticcontroller_279',['TestStatisticController',['../class_applications_1_1_web_client_1_1_controllers_1_1_test_statistic_controller.html',1,'Applications::WebClient::Controllers']]],
+  ['teststatisticdto_280',['TestStatisticDTO',['../class_applications_1_1_web_client_1_1_d_t_os_1_1_test_statistic_d_t_o.html',1,'Applications.WebClient.DTOs.TestStatisticDTO'],['../class_core_1_1_application_services_1_1_d_t_os_1_1_test_statistic_d_t_o.html',1,'Core.ApplicationServices.DTOs.TestStatisticDTO']]],
+  ['teststatisticrepository_281',['TestStatisticRepository',['../class_core_1_1_infrastructure_1_1_data_access_1_1_ef_core_data_access_1_1_repositories_1_1_test_statistic_repository.html',1,'Core::Infrastructure::DataAccess::EfCoreDataAccess::Repositories']]],
+  ['teststatisticservice_282',['TestStatisticService',['../class_core_1_1_application_services_1_1_test_statistic_service.html',1,'Core::ApplicationServices']]],
+  ['testtitle_283',['TestTitle',['../class_core_1_1_domain_1_1_entites_1_1_test_statistic.html#ace0b96587d25853d9d3f61e710fc9473',1,'Core::Domain::Entites::TestStatistic']]],
+  ['title_284',['Title',['../class_core_1_1_domain_1_1_entites_1_1_group.html#a7d27036324b952129a9da4d0fad17b1e',1,'Core.Domain.Entites.Group.Title()'],['../class_core_1_1_domain_1_1_entites_1_1_test.html#a56d2e5407bcb4e931237d158cd05e62a',1,'Core.Domain.Entites.Test.Title()']]],
+  ['token_285',['Token',['../class_applications_1_1_web_client_1_1_controllers_1_1_account_controller.html#a4727c58a28da278a0c59177e5fba5810',1,'Applications::WebClient::Controllers::AccountController']]],
+  ['type_286',['Type',['../class_core_1_1_domain_1_1_entites_1_1_question.html#a58e589ab75f248ac5eb7ae9939d39805',1,'Core::Domain::Entites::Question']]]
+];
